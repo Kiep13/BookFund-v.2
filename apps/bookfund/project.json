@@ -1,0 +1,70 @@
+{
+  "root": "apps/bookfund",
+  "sourceRoot": "apps/bookfund/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/bookfund",
+        "index": "apps/bookfund/src/index.html",
+        "baseHref": "/",
+        "main": "apps/bookfund/src/main.tsx",
+        "polyfills": "apps/bookfund/src/polyfills.ts",
+        "tsConfig": "apps/bookfund/tsconfig.app.json",
+        "assets": ["apps/bookfund/src/favicon.ico", "apps/bookfund/src/assets"],
+        "styles": ["apps/bookfund/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/bookfund/src/environments/environment.ts",
+              "with": "apps/bookfund/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "bookfund:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "bookfund:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/bookfund/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/bookfund"],
+      "options": {
+        "jestConfig": "apps/bookfund/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
