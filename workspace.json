@@ -1,7 +1,9 @@
 {
   "version": 2,
   "projects": {
-    "bookfund": "apps/bookfund",
-    "bookfund-e2e": "apps/bookfund-e2e"
+    "frontpages": "apps/frontpages",
+    "frontpages-e2e": "apps/frontpages-e2e",
+    "webapp": "apps/webapp",
+    "webapp-e2e": "apps/webapp-e2e"
   }
 }
