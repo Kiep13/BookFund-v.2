@@ -3,6 +3,7 @@
   "projects": {
     "frontpages": "apps/frontpages",
     "frontpages-e2e": "apps/frontpages-e2e",
+    "webapi": "apps/webapi",
     "webapp": "apps/webapp",
     "webapp-e2e": "apps/webapp-e2e"
   }

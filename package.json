@@ -22,6 +22,7 @@
     "@nrwl/eslint-plugin-nx": "13.3.11",
     "@nrwl/jest": "13.3.11",
     "@nrwl/linter": "13.3.11",
+    "@nrwl/node": "^13.4.1",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "13.3.11",
     "@nrwl/tao": "13.3.11",
