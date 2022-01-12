@@ -18,3 +18,10 @@ And then to create docker container, run second command:
 ```
   docker run --name bookfund-postgres -p 5432:5432 -d bookfund-postgres
 ```
+
+### Database
+
+To simply run migrations use command:
+```
+  npm run migrations
+```
