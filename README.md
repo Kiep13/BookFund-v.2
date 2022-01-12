@@ -9,7 +9,7 @@ A small application created using React and Spring. Handles tables from the data
 
 ### Docker
 
-To rin docker image, go to **docker** folder and run next command (your cmd should be in the same folder as dockerfile):
+To run docker image, go to **docker** folder and run next command (your cmd should be in the same folder as dockerfile):
 ```
   docker build -t bookfund-postgres .
 ```
