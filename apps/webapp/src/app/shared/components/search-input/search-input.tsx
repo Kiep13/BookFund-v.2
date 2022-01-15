@@ -7,7 +7,6 @@ export function SearchInput() {
   return (
     <TextField
       InputProps={{
-        disableUnderline: true,
         endAdornment: (
           <InputAdornment position='end'>
             <SearchTwoToneIcon/>
