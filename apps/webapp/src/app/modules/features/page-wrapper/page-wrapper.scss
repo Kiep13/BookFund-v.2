@@ -1,4 +1,8 @@
 .page-wrapper {
   height: 100vh;
   display: flex;
+
+  &__header {
+    margin-bottom: 40px;
+  }
 }

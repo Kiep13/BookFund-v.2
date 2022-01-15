@@ -1,7 +1,7 @@
-import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
-import Logo from '@features/logo';
+import Logo from '@shared/components/logo';
+import SearchInput from '@shared/components/search-input';
 
 import './header.scss';
 
@@ -9,7 +9,7 @@ export function Header() {
   return (
     <header className='header'>
       <Logo/>
-      <TextField label='Search'/>
+      <SearchInput/>
     </header>
   )
 }
