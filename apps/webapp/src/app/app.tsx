@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Dashboard from "./modules/pages/admin/dashboard";
-import Home from './modules/pages/base/home';
+import Dashboard from '@pages/admin/dashboard';
+import Home from '@pages/base/home';
 
 function App() {
   return (

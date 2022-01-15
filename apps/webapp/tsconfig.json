@@ -10,7 +10,15 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "src",
+    "paths": {
+      "@core/*": ["app/core/*"],
+      "@features/*": ["app/modules/features/*"],
+      "@mocks/*": ["app/mocks/*"],
+      "@pages/*": ["app/modules/pages/*"],
+      "@shared/*": ["app/shared/*"],
+    }
   },
   "files": [],
   "include": [],

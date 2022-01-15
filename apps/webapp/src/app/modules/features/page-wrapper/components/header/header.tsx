@@ -1,7 +1,8 @@
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
-import Logo from '../../../logo';
+import Logo from '@features/logo';
+
 import './header.scss';
 
 export function Header() {
