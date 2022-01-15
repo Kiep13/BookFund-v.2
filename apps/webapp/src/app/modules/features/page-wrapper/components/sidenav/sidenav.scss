@@ -5,18 +5,26 @@
   display: flex;
   flex-direction: column;
 
-  &__avatar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px 0;
-  }
-
   &__links-block {
     margin-top: auto !important;
   }
 
   &__icon {
     color: #2079ff;
+  }
+
+  &__link {
+    &:hover {
+      background-color: #ddeeff !important;
+    }
+  }
+
+  &__link-active {
+    background-color: #63a4ff !important;
+    background-image: linear-gradient(270deg, #ffffff 60%, #63a4ff 95%);
+
+    &:hover {
+      background-image: linear-gradient(270deg, #ddeeff 60%, #63a4ff 95%);
+    }
   }
 }
