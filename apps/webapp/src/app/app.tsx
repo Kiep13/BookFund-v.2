@@ -1,10 +1,15 @@
 import * as React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import Home from './modules/pages/admin/home/home';
+import Dashboard from "./modules/pages/admin/dashboard";
+import Home from './modules/pages/base/home';
 
-export function App() {
+function App() {
   return (
-    <Home/>
+    <Switch>
+      <Route path='/' component={Home} exact/>
+      <Route path='/dashboard' component={Dashboard}/>
+    </Switch>
   );
 }
 
