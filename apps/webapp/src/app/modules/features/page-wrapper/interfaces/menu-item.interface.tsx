@@ -3,5 +3,6 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 export interface MenuItem {
   title: string,
-  icon: OverridableComponent<SvgIconTypeMap>
+  icon: OverridableComponent<SvgIconTypeMap>,
+  url?: string
 }

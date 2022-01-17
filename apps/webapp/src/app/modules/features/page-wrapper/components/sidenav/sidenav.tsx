@@ -1,63 +1,35 @@
-import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
+import NavItem from '@features/page-wrapper/components/nav-item';
+import { GO_ADMIN_MENU_ITEM, LOG_OUT_MENU_ITEM } from '@features/page-wrapper/constants';
 import Drawer from '@mui/material/Drawer';
-import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import * as React from 'react';
 
-import AvatarBlock from "@shared/components/avatar-block";
+import AvatarBlock from '@shared/components/avatar-block';
 
 import { MenuItem } from '../../interfaces';
 import './sidenav.scss';
-
-const drawerWidth = 200;
 
 export function Sidenav(props: any) {
   return (
     <Drawer
       variant='permanent'
       sx={{
-        width: drawerWidth,
+        width: 200,
         flexShrink: 0,
         border: 0,
-        [`& .MuiDrawer-paper`]: {width: drawerWidth, boxSizing: 'border-box'},
+        [`& .MuiDrawer-paper`]: {width: 200, boxSizing: 'border-box'},
       }}
       className='sidenav'
     >
       <AvatarBlock/>
       <List className='sidenav__links-block'>
-        {props.menuItems.map(({icon: Icon, title}: MenuItem) => (
-          <ListItemButton key={title}
-                          classes={{
-                            root: 'sidenav__link',
-                            gutters: 'sidenav__link'
-                          }}>
-            <ListItemIcon>
-              <Icon className='sidenav__icon'/>
-            </ListItemIcon>
-            <ListItemText primary={title}/>
-          </ListItemButton>
+        {props.menuItems.map((menuItem: MenuItem) => (
+          <NavItem key={menuItem.title} menuItem={menuItem}/>
         ))}
       </List>
       <List className='sidenav__links-block'>
-        <ListItemButton classes={{
-                          root: 'sidenav__link'
-                        }}>
-          <ListItemIcon>
-            <DashboardTwoToneIcon className='sidenav__icon'/>
-          </ListItemIcon>
-          <ListItemText primary='Go admin'/>
-        </ListItemButton>
-        <ListItemButton classes={{
-                          root: 'sidenav__link'
-                        }}>
-          <ListItemIcon>
-            <ExitToAppTwoToneIcon className='sidenav__icon'/>
-          </ListItemIcon>
-          <ListItemText primary='Logout'/>
-        </ListItemButton>
+        <NavItem menuItem={GO_ADMIN_MENU_ITEM}/>
+        <NavItem menuItem={LOG_OUT_MENU_ITEM}/>
       </List>
     </Drawer>
   )

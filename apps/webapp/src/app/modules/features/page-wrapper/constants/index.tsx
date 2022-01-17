@@ -1,2 +1,1 @@
-export * from './admin-menu-items';
-export * from './user-menu-items';
+export * from './menu-items';
