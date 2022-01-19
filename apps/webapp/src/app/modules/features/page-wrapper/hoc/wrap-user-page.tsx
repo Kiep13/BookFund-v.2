@@ -7,7 +7,7 @@ export function wrapUserPage() {
   return (WrappedPage: typeof Component) => {
     return (props: any) => (
       <PageWrapper menuItems={USER_MENU_ITEMS}>
-        <WrappedPage {...props}/>)
+        <WrappedPage {...props}/>
       </PageWrapper>
     )
   }

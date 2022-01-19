@@ -8,9 +8,9 @@ import FolderTwoToneIcon from "@mui/icons-material/FolderTwoTone";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import PeopleOutlineTwoToneIcon from '@mui/icons-material/PeopleOutlineTwoTone';
 
-import { MenuItem } from '../interfaces';
+import { IMenuItem } from '../interfaces';
 
-export const ADMIN_MENU_ITEMS: MenuItem[] = [
+export const ADMIN_MENU_ITEMS: IMenuItem[] = [
   {
     title: 'Dashboard',
     icon: HomeTwoToneIcon,
@@ -33,7 +33,7 @@ export const ADMIN_MENU_ITEMS: MenuItem[] = [
   }
 ];
 
-export const USER_MENU_ITEMS: MenuItem[] = [
+export const USER_MENU_ITEMS: IMenuItem[] = [
   {
     title: 'Home',
     icon: HomeTwoToneIcon,
@@ -51,13 +51,13 @@ export const USER_MENU_ITEMS: MenuItem[] = [
   }
 ];
 
-export const GO_ADMIN_MENU_ITEM: MenuItem = {
+export const GO_ADMIN_MENU_ITEM: IMenuItem = {
   title: 'Go admin',
   icon: DashboardTwoToneIcon,
   url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`
 };
 
-export const LOG_OUT_MENU_ITEM: MenuItem = {
+export const LOG_OUT_MENU_ITEM: IMenuItem = {
   title: 'Log out',
   icon: ExitToAppTwoToneIcon
 }

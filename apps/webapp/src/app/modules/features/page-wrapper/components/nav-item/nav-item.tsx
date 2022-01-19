@@ -4,12 +4,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import * as React from 'react';
 
-import { MenuItem } from '@features/page-wrapper/interfaces';
+import { IMenuItem } from '@features/page-wrapper/interfaces';
 
 import './nav-item.scss';
 
 export function NavItem(props: any) {
-  const {icon: Icon, title, url}: MenuItem = props.menuItem;
+  const {icon: Icon, title, url}: IMenuItem = props.menuItem;
 
   const itemButton = <ListItemButton key={title}
                                      classes={{

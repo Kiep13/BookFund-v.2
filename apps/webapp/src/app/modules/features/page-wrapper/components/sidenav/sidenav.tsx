@@ -1,12 +1,12 @@
-import NavItem from '@features/page-wrapper/components/nav-item';
-import { GO_ADMIN_MENU_ITEM, LOG_OUT_MENU_ITEM } from '@features/page-wrapper/constants';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import * as React from 'react';
 
 import AvatarBlock from '@shared/components/avatar-block';
 
-import { MenuItem } from '../../interfaces';
+import { GO_ADMIN_MENU_ITEM, LOG_OUT_MENU_ITEM } from '../../constants';
+import { IMenuItem } from '../../interfaces';
+import NavItem from '../nav-item';
 import './sidenav.scss';
 
 export function Sidenav(props: any) {
@@ -23,7 +23,7 @@ export function Sidenav(props: any) {
     >
       <AvatarBlock/>
       <List className='sidenav__links-block'>
-        {props.menuItems.map((menuItem: MenuItem) => (
+        {props.menuItems.map((menuItem: IMenuItem) => (
           <NavItem key={menuItem.title} menuItem={menuItem}/>
         ))}
       </List>

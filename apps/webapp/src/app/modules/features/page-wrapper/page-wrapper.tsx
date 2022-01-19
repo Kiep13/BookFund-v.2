@@ -11,12 +11,16 @@ export function PageWrapper(props: any) {
     <section className='page-wrapper'>
       <CssBaseline/>
       <Sidenav menuItems={props.menuItems}/>
-      <Box component="main" sx={{flexGrow: 1, p: 3}}>
+      <Box component="main" sx={{
+        flexGrow: 1,
+        p: 3,
+        height: 'fit-content'
+      }}>
         <div className='page-wrapper__header'>
-          <Header />
+          <Header/>
         </div>
         {props.children}
       </Box>
     </section>
-  )
+  );
 }

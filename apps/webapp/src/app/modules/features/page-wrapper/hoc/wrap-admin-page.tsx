@@ -7,7 +7,7 @@ export function wrapAdminPage() {
   return (WrappedPage: typeof Component) => {
     return (props: any) => (
       <PageWrapper menuItems={ADMIN_MENU_ITEMS}>
-        <WrappedPage {...props}/>)
+        <WrappedPage {...props}/>
       </PageWrapper>
     )
   }

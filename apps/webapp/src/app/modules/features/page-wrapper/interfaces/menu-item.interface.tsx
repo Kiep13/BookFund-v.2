@@ -1,7 +1,7 @@
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-export interface MenuItem {
+export interface IMenuItem {
   title: string,
   icon: OverridableComponent<SvgIconTypeMap>,
   url?: string
