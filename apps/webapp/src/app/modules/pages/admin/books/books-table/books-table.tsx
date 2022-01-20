@@ -1,14 +1,18 @@
 import * as React from 'react';
 
-import { IAuthor } from '@core/interfaces';
+import { IBook } from '@core/interfaces';
 import DataTable from '@features/data-table';
 import { IDataColumn } from '@features/data-table/interfaces';
-import { AUTHORS_MOCK } from '@mocks/authors.mock';
+import { BOOKS_MOCK } from '@mocks/books.mock';
 
 import { COLUMNS } from '../constants';
 
-export default function AuthorsTable() {
-  const data: IAuthor[] = AUTHORS_MOCK;
+export default function BooksTable() {
+  const data: IBook[] = BOOKS_MOCK.map((book: IBook) => {
+    book.authorFullName = `${book.author?.surname || ' '} ${book.author?.name || ' '}`;
+    return book;
+  });
+
   const columns: IDataColumn[] = COLUMNS;
 
   const handleClick = () => {};
