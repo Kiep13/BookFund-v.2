@@ -1,6 +1,5 @@
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
+import { InputAdornment, TextField } from '@mui/material';
 import * as React from 'react';
 
 export function SearchInput() {

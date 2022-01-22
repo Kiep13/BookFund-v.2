@@ -1,5 +1,4 @@
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
+import { Drawer, List } from '@mui/material';
 import * as React from 'react';
 
 import AvatarBlock from '@shared/components/avatar-block';

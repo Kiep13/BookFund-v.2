@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import * as React from 'react';
 
 import { IMenuItem } from '@features/page-wrapper/interfaces';

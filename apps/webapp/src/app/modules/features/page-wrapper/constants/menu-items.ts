@@ -1,4 +1,3 @@
-import { AdminRoutePaths, BaseRoutePaths } from '@core/enums';
 import BookmarksTwoToneIcon from '@mui/icons-material/BookmarksTwoTone';
 import BookTwoToneIcon from '@mui/icons-material/BookTwoTone';
 import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
@@ -7,6 +6,8 @@ import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import FolderTwoToneIcon from "@mui/icons-material/FolderTwoTone";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import PeopleOutlineTwoToneIcon from '@mui/icons-material/PeopleOutlineTwoTone';
+
+import { AdminRoutePaths, BaseRoutePaths } from '@core/enums';
 
 import { IMenuItem } from '../interfaces';
 

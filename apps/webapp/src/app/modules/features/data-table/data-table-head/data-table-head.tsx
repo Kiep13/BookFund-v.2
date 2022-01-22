@@ -1,10 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import { Box, TableCell, TableRow, TableSortLabel, TableHead  } from '@mui/material';
 import PropTypes from 'prop-types';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import { TableHead } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
 import { AlignTypes, SortDirections } from '../enums';

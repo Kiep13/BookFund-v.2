@@ -17,5 +17,4 @@ class DataFormatterService {
   }
 }
 
-const dataFormatterService = new DataFormatterService();
-export default dataFormatterService;
+export const dataFormatterService = new DataFormatterService();

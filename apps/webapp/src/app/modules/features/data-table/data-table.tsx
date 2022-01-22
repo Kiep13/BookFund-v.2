@@ -1,16 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow  } from '@mui/material';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import IconButton from '@mui/material/IconButton';
-import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 
 import DataTableHead from './data-table-head';
