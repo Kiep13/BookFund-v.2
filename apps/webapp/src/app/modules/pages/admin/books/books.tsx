@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import * as React from 'react';
 
 import Card from '@shared/components/card';
@@ -18,7 +18,15 @@ export default function Books() {
             justifyContent: 'space-between',
             alignItems: 'center'
           }}>
-            <span>Books</span>
+            <Typography variant='h5'
+                        gutterBottom
+                        component='div'
+                        sx={{
+                          fontWeight: 100,
+                          m: 0
+                        }}>
+              Books
+            </Typography>
             <Button variant='contained'>Add new</Button>
           </Box>
         </Card>

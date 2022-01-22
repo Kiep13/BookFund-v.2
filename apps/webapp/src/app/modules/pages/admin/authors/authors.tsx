@@ -1,6 +1,8 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import * as React from 'react';
 
+import { AdminRoutePaths } from '@core/enums';
 import Card from '@shared/components/card';
 
 import AuthorsTable from './authors-table';
@@ -18,8 +20,18 @@ export default function Authors() {
             justifyContent: 'space-between',
             alignItems: 'center'
           }}>
-            <span>Authors</span>
-            <Button variant='contained'>Add new</Button>
+            <Typography variant='h5'
+                        gutterBottom
+                        component='div'
+                        sx={{
+                          fontWeight: 100,
+                          m: 0
+                        }}>
+              Authors
+            </Typography>
+            <Link to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`}>
+              <Button variant='contained'>Add new</Button>
+            </Link>
           </Box>
         </Card>
       </Box>
