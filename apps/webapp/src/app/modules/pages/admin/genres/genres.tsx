@@ -1,12 +1,17 @@
 import { Box, Button, Typography } from '@mui/material';
 import * as React from 'react';
 
+import { IGenre } from '@core/interfaces';
+import { GENRES_MOCK } from '@mocks/genres.mock';
 import Card from '@shared/components/card';
 
 import GenreCard from './genre-card';
 import GenresTreeView from './genres-tree-view';
 
 export default function Genres() {
+  const [selectedGenre, setSelectedGenre] = React.useState(GENRES_MOCK[0]);
+  const genres: IGenre[] = GENRES_MOCK;
+
   return (
     <>
       <Box sx={{
@@ -44,14 +49,14 @@ export default function Genres() {
           <Card styles={{
             height: '100%'
           }}>
-            <GenresTreeView/>
+            <GenresTreeView genres={genres} onSelectGenre={setSelectedGenre}/>
           </Card>
         </Box>
 
         <Box sx={{
           flex: 2
         }}>
-          <GenreCard/>
+          <GenreCard genre={selectedGenre}/>
         </Box>
       </Box>
     </>

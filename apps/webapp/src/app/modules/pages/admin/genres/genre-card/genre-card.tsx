@@ -2,14 +2,13 @@ import { Box, Button, Chip, Divider, Link, Typography } from '@mui/material';
 
 import { IBook, IGenre } from '@core/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
-import { GENRES_MOCK } from '@mocks/genres.mock';
 import BookPromoCard from '@shared/components/book-promo-card';
 import Card from '@shared/components/card';
 
 import * as React from "react";
 
-export default function GenreCard() {
-  const genre: IGenre = GENRES_MOCK[0];
+export default function GenreCard(props: any) {
+  const genre: IGenre = props.genre;
   const books: IBook[] = BOOKS_MOCK.slice(0, 7);
 
   return (
@@ -47,7 +46,7 @@ export default function GenreCard() {
                       fontWeight: 100,
                       m: 0
                     }}>
-          { genre.subGenres?.length } subgenres
+          { genre.subGenres && genre.subGenres?.length > 0 ? `${genre.subGenres?.length} subgenres` : `Don't have subgenres yet` }
         </Typography>
 
         <Button variant='contained'>Add new</Button>
