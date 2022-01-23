@@ -1,19 +1,17 @@
-import { Paper } from "@mui/material";
-import Box from '@mui/material/Box';
+import { Paper } from '@mui/material';
 
 import './card.scss';
 
 export default function Card(props: any) {
+  const styles = props.styles;
+
   return (
     <Paper elevation={3} sx={{
       borderRadius: 2,
+      p: 2,
+      ...(styles ? styles : {})
     }}>
-      <Box sx={{
-        p: 2,
-      }}>
-        { props.children }
-      </Box>
+      {props.children}
     </Paper>
-
   );
 }

@@ -8,6 +8,7 @@ import compose from '@shared/utils/compose';
 import Authors from './authors';
 import AuthorForm from './author-form';
 import Books from './books';
+import Genres from './genres';
 import Dashboard from './dashboard';
 
 export function App() {
@@ -17,6 +18,7 @@ export function App() {
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`} component={AuthorForm} exact/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`} component={Authors} exact/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`} component={Books}/>
+      <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`} component={Genres}/>
     </>
   );
 }
