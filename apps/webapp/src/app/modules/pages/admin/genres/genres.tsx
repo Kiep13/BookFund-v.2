@@ -1,9 +1,11 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import * as React from 'react';
 
+import { AdminRoutePaths } from '@core/enums';
 import { IGenre } from '@core/interfaces';
 import { GENRES_MOCK } from '@mocks/genres.mock';
 import Card from '@shared/components/card';
+import PageHeaderCard from '@shared/components/page-header-card';
 
 import GenreCard from './genre-card';
 import GenresTreeView from './genres-tree-view';
@@ -17,25 +19,7 @@ export default function Genres() {
       <Box sx={{
         mb: 3
       }}>
-        <Card>
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
-            <Typography variant='h5'
-                        gutterBottom
-                        component='div'
-                        sx={{
-                          fontWeight: 100,
-                          m: 0
-                        }}>
-              Genres
-            </Typography>
-            <Button variant='contained'>Add new</Button>
-          </Box>
-        </Card>
+        <PageHeaderCard title={'Genres'} url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES_NEW}`}/>
       </Box>
 
       <Box sx={{

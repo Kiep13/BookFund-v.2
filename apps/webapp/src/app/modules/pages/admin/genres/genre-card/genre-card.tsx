@@ -1,5 +1,7 @@
 import { Box, Button, Chip, Divider, Link, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
+import { AdminRoutePaths } from '@core/enums';
 import { IBook, IGenre } from '@core/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
 import BookPromoCard from '@shared/components/book-promo-card';
@@ -49,7 +51,9 @@ export default function GenreCard(props: any) {
           { genre.subGenres && genre.subGenres?.length > 0 ? `${genre.subGenres?.length} subgenres` : `Don't have subgenres yet` }
         </Typography>
 
-        <Button variant='contained'>Add new</Button>
+        <RouterLink to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES_NEW}`}>
+          <Button variant='contained'>Add new</Button>
+        </RouterLink>
       </Box>
 
       <Box>

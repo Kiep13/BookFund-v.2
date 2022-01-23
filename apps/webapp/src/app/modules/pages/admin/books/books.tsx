@@ -1,9 +1,9 @@
-import { Box, Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Box } from '@mui/material';
 import * as React from 'react';
 
 import { AdminRoutePaths } from '@core/enums';
 import Card from '@shared/components/card';
+import PageHeaderCard from '@shared/components/page-header-card';
 
 import BooksTable from './books-table';
 
@@ -13,27 +13,7 @@ export default function Books() {
       <Box sx={{
         mb: 3
       }}>
-        <Card>
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
-            <Typography variant='h5'
-                        gutterBottom
-                        component='div'
-                        sx={{
-                          fontWeight: 100,
-                          m: 0
-                        }}>
-              Books
-            </Typography>
-            <Link to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_NEW}`}>
-              <Button variant='contained'>Add new</Button>
-            </Link>
-          </Box>
-        </Card>
+        <PageHeaderCard title={'Books'} url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_NEW}`}/>
       </Box>
 
       <Box sx={{

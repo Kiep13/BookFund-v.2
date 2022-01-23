@@ -10,7 +10,7 @@ export default function AuthorSelector() {
       title: `${author.surname} ${author.name}`,
       id: author.id
     }
-  })
+  });
 
   return <AutocompleteInput options={authorsOptions} label={'Author'}/>
 }
