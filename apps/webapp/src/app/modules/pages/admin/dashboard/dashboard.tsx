@@ -4,10 +4,11 @@ import { Box } from '@mui/material';
 import { OVERALL_STATISTIC_MOCK } from '@mocks/overall-statistics.mock';
 import Card from '@shared/components/card';
 
-import DashboardHeader from './components/dashboard-header';
-import ActionPerMonthDateCard from './components/action-per-month-date-card';
-import GenresCard from './components/genres-card';
-import StatisticCard from './components/statistic-card';
+import DashboardHeader from './components/shared/dashboard-header';
+import ActionPerMonthDateCard from './components/cards/action-per-month-date-card';
+import GenresCard from './components/cards/genres-card';
+import StatisticCard from './components/shared/statistic-card';
+import PopularBookCard from './components/cards/popular-book-card';
 
 export default function Dashboard() {
   return (
@@ -42,7 +43,9 @@ export default function Dashboard() {
         <Box sx={{flex: 1}}>
           <GenresCard/>
         </Box>
-        <Box sx={{flex: 1}}><Card/></Box>
+        <Box sx={{flex: 1}}>
+          <PopularBookCard/>
+        </Box>
       </Box>
     </>
   );

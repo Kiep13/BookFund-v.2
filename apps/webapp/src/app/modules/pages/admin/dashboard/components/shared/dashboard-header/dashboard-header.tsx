@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import Card from '@shared/components/card';
 
-import { MIN_STATISTIC_DATE } from '../../constants';
+import { MIN_STATISTIC_DATE } from '../../../constants';
 
 export default function DashboardHeader() {
   const [value, setValue] = React.useState(new Date());
