@@ -2,10 +2,12 @@ import { IOverallStatistic } from '@core/interfaces';
 import { Box } from '@mui/material';
 
 import { OVERALL_STATISTIC_MOCK } from '@mocks/overall-statistics.mock';
-import StatisticCard from '@pages/admin/dashboard/statistic-card';
 import Card from '@shared/components/card';
 
-import DashboardHeader from './dashboard-header';
+import DashboardHeader from './components/dashboard-header';
+import ActionPerMonthDateCard from './components/action-per-month-date-card';
+import GenresCard from './components/genres-card';
+import StatisticCard from './components/statistic-card';
 
 export default function Dashboard() {
   return (
@@ -14,7 +16,8 @@ export default function Dashboard() {
 
       <Box sx={{
         display: 'flex',
-        gap: 2
+        gap: 2,
+        mb: 3
       }}>
         {
           OVERALL_STATISTIC_MOCK.map((overallStatistic: IOverallStatistic) => {
@@ -25,6 +28,21 @@ export default function Dashboard() {
             </Card>
           })
         }
+      </Box>
+
+      <Box sx={{
+        display: 'flex',
+        gap: 2,
+        mb: 3
+      }}>
+        <Box sx={{flex: 2.05}}>
+          <ActionPerMonthDateCard/>
+        </Box>
+
+        <Box sx={{flex: 1}}>
+          <GenresCard/>
+        </Box>
+        <Box sx={{flex: 1}}><Card/></Box>
       </Box>
     </>
   );
