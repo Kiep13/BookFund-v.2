@@ -56,11 +56,13 @@ export class createAccountTable1643225882424 implements MigrationInterface {
           {
             name: 'createdAt',
             type: 'timestamp',
+            isNullable: true,
             default: 'now()'
           },
           {
             name: 'updatedAt',
             type: 'timestamp',
+            isNullable: true,
             default: 'now()'
           }
         ]

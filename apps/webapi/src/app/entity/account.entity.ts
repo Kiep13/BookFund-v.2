@@ -6,7 +6,6 @@ import { Roles } from '../core/enums';
   name: 'account'
 })
 export class Account {
-
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'int8'
@@ -55,6 +54,7 @@ export class Account {
   @Column({
     name: 'role',
     type: 'enum',
+    enumName: 'rolesEnum',
     enum: Roles,
     default: Roles.USER
   })
@@ -63,6 +63,7 @@ export class Account {
   @Column({
     name: 'createdAt',
     type: 'timestamp',
+    nullable: true,
     insert: true
   })
   createdAt: Date;
@@ -70,6 +71,7 @@ export class Account {
   @Column({
     name: 'updatedAt',
     type: 'timestamp',
+    nullable: true,
     update: true
   })
   updatedAt: Date;
