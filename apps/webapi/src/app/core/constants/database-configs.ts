@@ -1,12 +1,13 @@
-import { Account } from '../../entity/account.entity';
+import { Account } from '@entities/account.entity';
+import { environment} from '@environments/environment';
 
 export const DATABASE_CONFIGS: any = {
   type: 'postgres',
-  database: 'bookfund',
+  database: environment.databaseName,
   synchronize: true,
   logging: false,
-  username: 'admin',
-  password: 'admin',
+  username: environment.databaseUsername,
+  password: environment.databasePassword,
   entities: [
     Account
   ]

@@ -1,7 +1,7 @@
 import {createConnection} from 'typeorm';
 
-import { DATABASE_CONFIGS } from './core/constants';
-import { Account } from './entity/account.entity';
+import { DATABASE_CONFIGS } from '@core/constants';
+import { Account } from '@entities/account.entity';
 
 createConnection(DATABASE_CONFIGS).then(async connection => {
 

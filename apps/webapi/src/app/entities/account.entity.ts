@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Roles } from '../core/enums';
+import { Roles } from '@core/enums';
 
 @Entity({
   name: 'account'

@@ -1,3 +1,3 @@
 import 'reflect-metadata';
 
-import '/app';
+import '/app/connect-to-database';

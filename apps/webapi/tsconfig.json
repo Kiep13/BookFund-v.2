@@ -11,6 +11,11 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true,
-      "baseUrl": "src"
+      "baseUrl": "src",
+       "paths": {
+         "@core/*": ["app/core/*"],
+         "@entities/*": ["app/entities/*"],
+         "@environments/*": ["environments/*"]
+       }
    }
 }
