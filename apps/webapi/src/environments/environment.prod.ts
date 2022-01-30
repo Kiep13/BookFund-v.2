@@ -3,5 +3,6 @@ export const environment = {
   port: 8090,
   databaseName: 'bookfund',
   databaseUsername: 'admin',
-  databasePassword: 'admin'
+  databasePassword: 'admin',
+  clientUrl: 'http://localhost:4200'
 };
