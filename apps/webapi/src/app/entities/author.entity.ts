@@ -1,23 +1,14 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Roles } from '@core/enums';
-
 @Entity({
-  name: 'account'
+  name: 'author'
 })
-export class Account {
+export class Author {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'int8'
   })
   id: number;
-
-  @Column({
-    name: 'email',
-    type: 'varchar',
-    unique: true
-  })
-  email: string;
 
   @Column({
     name: 'name',
@@ -39,26 +30,10 @@ export class Account {
   image: string;
 
   @Column({
-    name: 'activationLink',
-    type: 'varchar'
+    name: 'biography',
+    type: 'text'
   })
-  activationLink: string;
-
-  @Column({
-    name: 'isActivated',
-    type: 'boolean',
-    default: false
-  })
-  isActivated: boolean;
-
-  @Column({
-    name: 'role',
-    type: 'enum',
-    enumName: 'rolesEnum',
-    enum: Roles,
-    default: Roles.USER
-  })
-  role: Roles;
+  biography: string;
 
   @Column({
     name: 'createdAt',

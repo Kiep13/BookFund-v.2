@@ -1,0 +1,6 @@
+export enum ResponseStatuses {
+  STATUS_OK = 200,
+  STATUS_CREATED = 201,
+  STATUS_ACCEPTED = 202,
+  STATUS_NO_CONTENT = 204
+}

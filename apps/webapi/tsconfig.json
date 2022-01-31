@@ -13,8 +13,10 @@
       "sourceMap": true,
       "baseUrl": "src",
        "paths": {
+         "@controllers/*": ["app/controllers/*"],
          "@core/*": ["app/core/*"],
          "@entities/*": ["app/entities/*"],
+         "@routes/*": ["app/routes/*"],
          "@environments/*": ["environments/*"]
        }
    }
