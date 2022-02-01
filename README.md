@@ -23,5 +23,5 @@ And then to create docker container, run second command:
 
 To simply run migrations use command:
 ```
-  npm run migrations
+  npm run migrations:run
 ```
