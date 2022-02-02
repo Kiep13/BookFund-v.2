@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { IGenre, IOption } from '@core/interfaces';
 import { GENRES_MOCK } from '@mocks/genres.mock';
-import AutocompleteInput from '@shared/components/autocomplete-input';
+import AutocompleteInput from '@shared/components/form-components/autocomplete-input';
 import Card from '@shared/components/card';
 
 export default function GenreForm() {

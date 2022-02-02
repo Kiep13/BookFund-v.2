@@ -1,5 +1,5 @@
 import { GENRES_MOCK } from '@mocks/genres.mock';
-import AutocompleteMultiInput from '@shared/components/autocomplete-multi-input';
+import AutocompleteMultiInput from '@shared/components/form-components/autocomplete-multi-input';
 
 export default function GenresSelector() {
   const genres = GENRES_MOCK.map((genre) => {

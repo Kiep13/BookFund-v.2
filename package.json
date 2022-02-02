@@ -39,7 +39,8 @@
     "styled-component": "^2.8.0",
     "ts-node": "^10.4.0",
     "tslib": "^2.0.0",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.41",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@nrwl/cli": "13.3.11",
