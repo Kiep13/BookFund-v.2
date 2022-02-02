@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { Formik } from 'formik';
+import { FormikHelpers } from 'formik/dist/types';
 
 import { validateBigText, validateName } from '@core/validators';
 import ImageUpload from '@features/image-upload';
@@ -19,7 +20,7 @@ export default function AuthorForm() {
     return errors;
   }
 
-  const submitForm = (values: IAuthorForm, {setSubmitting}: any) => {
+  const submitForm = (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
     console.log(values);
     setSubmitting(true);
   }
@@ -70,7 +71,6 @@ export default function AuthorForm() {
                          helperText={errors.name && touched.name && errors.name}
                          sx={{flex: 1}}
               />
-
 
               <TextField label='Surname' sx={{
                 flex: 1
