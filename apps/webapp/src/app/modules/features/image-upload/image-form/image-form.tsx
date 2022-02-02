@@ -26,11 +26,8 @@ export default function ImageForm(props: any) {
         </label>
       </Box>
 
-      <Box
-        display='div'
-        sx={{
+      <Box sx={{
           flex: 1,
-
         }}>
         or put
       </Box>
