@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
 import { MAX_NAME_LENGTH, MAX_TEXT_LENGTH, NAME_REGEXP } from '@core/constants';
+import { IMAGE_UPLOAD_VALIDATION_ELEMENT } from '@features/image-upload/constants';
 
 import { VALIDATION_ERROR_MESSAGES } from './validation-error-messages';
 
@@ -15,6 +16,7 @@ export const VALIDATION_SCHEMA = yup.object().shape({
     .min(2, 'Surname must be at least 2 characters')
     .max(MAX_NAME_LENGTH, `Surname must be at most ${MAX_NAME_LENGTH} characters`)
     .matches(NAME_REGEXP, VALIDATION_ERROR_MESSAGES.surnameMatches),
+  imageUrl: IMAGE_UPLOAD_VALIDATION_ELEMENT,
   biography: yup.string()
     .required('This field can not be empty')
     .min(2, 'Biography must be at least 2 characters')

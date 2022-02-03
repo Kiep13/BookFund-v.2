@@ -1,36 +1,26 @@
 import * as React from 'react';
 
-import ImageForm from './image-form';
-import ImagePromo from './image-promo';
+import ImageForm from './components/image-form';
+import ImagePromo from './components/image-promo';
+import { IProps } from './props.interface';
 import './image-upload.scss' ;
 
-export default function ImageUpload(props: any) {
-  const alt: string = props.alt;
-
-  const initialState = {
-    file: undefined,
-    url: ''
-  }
-
-  const [file, setFile] = React.useState(initialState.file);
-  const [url, setUrl] = React.useState(initialState.url);
-
-  const handleChangeUrl = (event: any) => {
-    setUrl(event.target.value);
-  };
-
-  const handleChangeFile = (event: any) => {
-    setFile(event.target.files[0]);
-  };
+export default function ImageUpload(props: IProps) {
+  const {alt, form, imageUrlFieldName, imageFileFieldName} = props;
+  const {values, errors} = form;
 
   const clearValue = () => {
-    setUrl(initialState.url);
-    setFile(initialState.file);
+    form.setFieldValue(imageUrlFieldName, '');
+    form.setFieldValue(imageFileFieldName, undefined);
   }
 
-  const form = <ImageForm handleChangeFile={handleChangeFile} handleChangeUrl={handleChangeUrl}/>;
+  const isPromoAvailable = (Boolean(values[imageUrlFieldName]) || Boolean(values[imageFileFieldName])) &&
+    !Boolean(errors[imageFileFieldName]) && !Boolean(errors[imageUrlFieldName]);
 
   return (
-    !url && !file ? form : <ImagePromo alt={alt} image={url || URL.createObjectURL(file)} clearImage={clearValue}/>
+    isPromoAvailable ?
+      <ImagePromo alt={alt} image={values[imageUrlFieldName] || URL.createObjectURL(values[imageFileFieldName])}
+                  clearImage={clearValue}/>
+      : <ImageForm form={form} imageUrlFieldName={imageUrlFieldName} imageFileFieldName={imageFileFieldName}/>
   );
 }

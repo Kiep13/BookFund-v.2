@@ -71,7 +71,7 @@ export default function DataTable(props: any) {
                       >
                         {
                           columns.map((cell: IDataColumn) => {
-                            return <TableCell component='td' align={cell.align}>
+                            return <TableCell component='td' align={cell.align} key={cell.id}>
                               {dataFormatterService.formatData(row[cell.name || ''], cell.type)}
                             </TableCell>;
                           })

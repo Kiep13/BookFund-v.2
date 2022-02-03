@@ -60,7 +60,7 @@ export default function BookForm() {
         <Box sx={{
           mb: 3
         }}>
-          <ImageUpload/>
+          {/*<ImageUpload alt={'Book cover'}/>*/}
         </Box>
 
         <TextField

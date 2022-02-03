@@ -38,7 +38,7 @@ export default function AuthorForm() {
 
 
         <Box sx={STYLES.imageUploadWrapper}>
-          <ImageUpload/>
+          <ImageUpload alt={`Author's photo`} form={formik} imageUrlFieldName={'imageUrl'} imageFileFieldName={'imageFile'}/>
         </Box>
 
         <Input id={'biography'} label={'Biography'} fieldName={'biography'} form={formik} multiline maxRows={10}
