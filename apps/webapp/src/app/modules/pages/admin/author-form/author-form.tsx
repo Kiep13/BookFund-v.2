@@ -5,13 +5,16 @@ import { FormikHelpers } from 'formik/dist/types';
 import ImageUpload from '@features/image-upload';
 import Card from '@shared/components/card';
 import Input from '@shared/components/form-components/input';
+import { apiService } from '@shared/services';
 
 import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';
 import { IAuthorForm } from './interfaces';
 
 export default function AuthorForm() {
-  const handleSubmit = (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
-    console.log(values);
+  const handleSubmit = async (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
+    //проверять здесь есть ли у меня file, отправлять его предварительно а затем удалять если сохранять
+
+    await apiService.addAuthor(values);
     setSubmitting(false);
   }
 

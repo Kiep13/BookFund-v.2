@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { ApiRoutesModifiers } from '@core/enums';
-import authorController from '@controllers/author.controller';
+import { authorController } from '@controllers/author.controller';
 
 const router = new Router();
 
