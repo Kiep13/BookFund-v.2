@@ -4,5 +4,7 @@ export const environment = {
   databaseName: 'bookfund',
   databaseUsername: 'admin',
   databasePassword: 'admin',
-  clientUrl: 'http://localhost:4200'
+  clientUrl: 'http://localhost:4200',
+  selfUrl: 'http://localhost:8090',
+  imagesFolder: 'assets/images'
 };

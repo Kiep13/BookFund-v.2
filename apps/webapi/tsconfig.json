@@ -17,6 +17,7 @@
          "@core/*": ["app/core/*"],
          "@entities/*": ["app/entities/*"],
          "@routes/*": ["app/routes/*"],
+         "@services/*": ["app/services/*"],
          "@environments/*": ["environments/*"]
        }
    }

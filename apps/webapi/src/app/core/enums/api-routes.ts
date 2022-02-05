@@ -1,7 +1,9 @@
 export enum ApiRoutes {
-  AUTHOR = 'author'
+  AUTHOR = 'author',
+  IMAGE = 'image'
 }
 
 export enum ApiRoutesModifiers {
-  NEW = 'new'
+  NEW = 'new',
+  SAVE = 'save'
 }
