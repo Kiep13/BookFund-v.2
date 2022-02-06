@@ -1,7 +1,9 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
+import { AdminRoutePaths } from '@core/enums';
 import ImageUpload from '@features/image-upload';
 import Card from '@shared/components/card';
 import Input from '@shared/components/form-components/input';
@@ -11,11 +13,23 @@ import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';
 import { IAuthorForm } from './interfaces';
 
 export default function AuthorForm() {
+  const history = useHistory();
+
   const handleSubmit = async (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
-    //проверять здесь есть ли у меня file, отправлять его предварительно а затем удалять если сохранять
+    if(values.imageFile) {
+      const formData = new FormData();
+      formData.append('image', values.imageFile);
+
+      values.imageUrl = await(await apiService.saveImage(formData));
+    }
 
     await apiService.addAuthor(values);
+    navigateToAuthorsPage();
     setSubmitting(false);
+  }
+
+  const navigateToAuthorsPage = () => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`);
   }
 
   const formik = useFormik({
@@ -48,7 +62,7 @@ export default function AuthorForm() {
                styles={STYLES.biographyInput}/>
 
         <Box sx={STYLES.formButtons}>
-          <Button variant='outlined' sx={STYLES.cancelButton}>Cancel</Button>
+          <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToAuthorsPage}>Cancel</Button>
           <Button variant='contained' type='submit'
                   disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>Save</Button>
         </Box>

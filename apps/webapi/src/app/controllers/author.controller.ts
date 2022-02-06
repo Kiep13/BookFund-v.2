@@ -14,7 +14,7 @@ class AuthorController {
     author.biography = request.body.biography;
 
     if(request.body.imageUrl) {
-      author.image = request.body.image;
+      author.image = request.body.imageUrl;
     }
 
     await connection.manager.save(author);
