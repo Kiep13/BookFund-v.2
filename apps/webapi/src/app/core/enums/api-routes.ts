@@ -1,6 +1,7 @@
 export enum ApiRoutes {
   AUTHOR = 'author',
-  IMAGE = 'image'
+  IMAGE = 'image',
+  GENRE = 'genre'
 }
 
 export enum ApiRoutesModifiers {

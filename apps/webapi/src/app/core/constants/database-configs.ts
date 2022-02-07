@@ -1,5 +1,6 @@
 import { Account } from '@entities/account.entity';
 import { Author } from '@entities/author.entity';
+import { Genre } from '@entities/genre.entity';
 import { environment} from '@environments/environment';
 
 export const DATABASE_CONFIGS: any = {
@@ -10,6 +11,6 @@ export const DATABASE_CONFIGS: any = {
   username: environment.databaseUsername,
   password: environment.databasePassword,
   entities: [
-    Account, Author
+    Account, Author, Genre
   ]
 }
