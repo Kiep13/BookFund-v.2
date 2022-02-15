@@ -1,41 +1,22 @@
-import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useEffect } from 'react';
+import * as React from 'react';
 
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
+import { IProps } from './props.interface';
 
-export default function AutocompleteInput(props: any) {
+export default function AutocompleteInput(props: IProps) {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState(props.options || []);
-  const loading = open && options.length === 0;
+  const [loading, setLoading] = React.useState(props.loading || false);
 
-  React.useEffect(() => {
-    let active = true;
+  useEffect(() => {
+    setOptions(props.options);
+    setLoading(props.loading);
+  }, [props]);
 
-    if (!loading) {
-      return undefined;
-    }
-
-    (async () => {
-      await sleep(1e3); // For demo purposes.
-
-      if (active) {
-        // @ts-ignore
-        setOptions([...props.options]);
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-
-  React.useEffect(() => {
+ useEffect(() => {
     if (!open) {
       setOptions([]);
     }

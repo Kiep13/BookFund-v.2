@@ -5,6 +5,7 @@ import { AUTHORS_MOCK } from '@mocks/authors.mock';
 import AutocompleteInput from '@shared/components/form-components/autocomplete-input';
 
 export default function AuthorSelector() {
+  const loading = false;
   const authorsOptions: IOption[] = AUTHORS_MOCK.map((author: IAuthor) => {
     return {
       title: `${author.surname} ${author.name}`,
@@ -12,5 +13,5 @@ export default function AuthorSelector() {
     }
   });
 
-  return <AutocompleteInput options={authorsOptions} label={'Author'}/>
+  return <AutocompleteInput options={authorsOptions} label={'Author'} loading={loading}/>
 }

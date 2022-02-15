@@ -6,5 +6,6 @@ export enum ApiRoutes {
 
 export enum ApiRoutesModifiers {
   NEW = 'new',
-  SAVE = 'save'
+  SAVE = 'save',
+  LIST = 'list'
 }
