@@ -93,7 +93,9 @@ export default function GenreCard(props: any) {
         }}>
           {
             books.map((book: IBook) => {
-              return <Box sx={{
+              return <Box
+                key={book.id}
+                sx={{
                 display: 'inline-flex',
                 p: 1
               }}>
