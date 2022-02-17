@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { ILike } from 'typeorm';
 
 import { connection } from '@core/connection';
 import { ResponseStatuses, SortDirections } from '@core/enums';
@@ -19,12 +20,17 @@ class GenreController {
   }
 
   public async getGenres(request: Request, response: Response, next: Function): Response {
+    const requestParams = request.query;
+
     const genres = await connection.getRepository(Genre).find({
       select: ['id', 'name'],
       order: {
         name: SortDirections.ASC
       },
-      take: 50
+      take: +requestParams.pageSize,
+      where: {
+        name: ILike(`%${requestParams.searchTerm || ''}%`)
+      }
     });
 
     return response.status(ResponseStatuses.STATUS_OK).json(genres);

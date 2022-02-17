@@ -5,8 +5,10 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import PropTypes from 'prop-types';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 
+import { PageSizes } from '@core/enums';
+
 import DataTableHead from './data-table-head';
-import { AlignTypes, RowsPerPageOptions, SortDirections } from './enums';
+import { AlignTypes, SortDirections } from './enums';
 import { IDataColumn } from './interfaces';
 import { dataFormatterService } from './services';
 
@@ -17,9 +19,9 @@ export default function DataTable(props: any) {
   const [order, setOrder] = React.useState(SortDirections.Asc);
   const [orderBy, setOrderBy] = React.useState(columns[0].id);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(RowsPerPageOptions.Ten);
+  const [rowsPerPage, setRowsPerPage] = React.useState(PageSizes.Ten);
 
-  const rowsPerPageOptions = Object.values(RowsPerPageOptions).map(value => +value).filter((value) => value);
+  const rowsPerPageOptions = Object.values(PageSizes).map(value => +value).filter((value) => value);
 
   const handleRequestSort = (event: any, property: any) => {
     const isAsc = orderBy === property && order === SortDirections.Asc;

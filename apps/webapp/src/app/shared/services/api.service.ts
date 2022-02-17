@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
+import queryString from 'query-string';
 
 import { environment } from '@environments/environment';
-import { IGenre } from '@core/interfaces';
+import { IGenre, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/author-form/interfaces';
 import { IGenreForm } from '@pages/admin/genre-form/interfaces';
 
@@ -19,8 +20,10 @@ class ApiService {
     return await axios.post(`${environment.backEndUrl}/v1/genre/new`, genre);
   }
 
-  public async getGenres(): Promise<IGenre[]> {
-    return await axios.get(`${environment.backEndUrl}/v1/genre/list`)
+  public async getGenres(searchOptions: ISearchOptions): Promise<IGenre[]> {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get(`${environment.backEndUrl}/v1/genre/list/?${requestParams}`)
       .then((response: AxiosResponse) => response.data);
   }
 }

@@ -45,7 +45,7 @@ export default function GenreForm() {
       <Input id={'name'} label={'Name'} fieldName={'name'} form={formik} styles={STYLES.nameInput}/>
 
         <Box sx={STYLES.parentInputWrapper}>
-          <GenreAutocomplete/>
+          <GenreAutocomplete form={formik} fieldName={'parentGenre'}/>
         </Box>
 
 

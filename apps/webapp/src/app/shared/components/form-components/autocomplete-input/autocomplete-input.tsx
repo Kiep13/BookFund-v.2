@@ -1,6 +1,5 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect } from 'react';
 import * as React from 'react';
 
@@ -11,12 +10,15 @@ export default function AutocompleteInput(props: IProps) {
   const [options, setOptions] = React.useState(props.options || []);
   const [loading, setLoading] = React.useState(props.loading || false);
 
+  const {fieldName, form} = props;
+  const {values, handleChange, handleBlur} = form;
+
   useEffect(() => {
     setOptions(props.options);
     setLoading(props.loading);
   }, [props]);
 
- useEffect(() => {
+  useEffect(() => {
     if (!open) {
       setOptions([]);
     }
@@ -37,17 +39,12 @@ export default function AutocompleteInput(props: IProps) {
       loading={loading}
       renderInput={(params) => (
         <TextField
-          {...params}
+          name={fieldName}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values[fieldName]}
           label={props.label}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {loading ? <CircularProgress color='inherit' size={20} /> : null}
-                {params.InputProps.endAdornment}
-              </React.Fragment>
-            ),
-          }}
+          {...params}
         />
       )}
     />

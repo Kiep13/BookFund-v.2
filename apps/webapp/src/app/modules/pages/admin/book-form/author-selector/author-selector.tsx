@@ -13,5 +13,6 @@ export default function AuthorSelector() {
     }
   });
 
-  return <AutocompleteInput options={authorsOptions} label={'Author'} loading={loading}/>
+  // return <AutocompleteInput options={authorsOptions} label={'Author'} loading={loading}/>
+  return <span>Here will be Author autocomplete soon</span>
 }

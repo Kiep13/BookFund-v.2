@@ -1,12 +1,16 @@
+import { PageSizes } from "@core/enums";
 import { useEffect } from 'react';
 import * as React from 'react';
 
-import { IGenre, IOption } from '@core/interfaces';
+import { IGenre, IOption, ISearchOptions } from '@core/interfaces';
 import AutocompleteInput from '@shared/components/form-components/autocomplete-input';
 import { apiService } from '@shared/services';
 
-export function GenreAutocomplete() {
+import { IProps } from './props.interface';
+
+export function GenreAutocomplete(props: IProps) {
   const initialOptions: IOption[] = [];
+  const { form, fieldName } = props;
 
   const [options, setOptions] = React.useState(initialOptions);
   const [loading, setLoading] = React.useState(false);
@@ -14,7 +18,12 @@ export function GenreAutocomplete() {
   useEffect(() => {
     async function getGenres() {
       setLoading(loading);
-      const genres = await apiService.getGenres();
+
+      const searchOptions: ISearchOptions = {
+        pageSize: PageSizes.Fifty,
+        searchTerm: ''
+      }
+      const genres = await apiService.getGenres(searchOptions);
 
       const genreOptions = genres.map((genre: IGenre) => {
         return {
@@ -31,6 +40,6 @@ export function GenreAutocomplete() {
   }, []);
 
   return (
-    <AutocompleteInput options={options} label={'Genre'} loading={loading}/>
+    <AutocompleteInput options={options} label={'Genre'} loading={loading} form={form} fieldName={fieldName}/>
   );
 }
