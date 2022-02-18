@@ -9,10 +9,12 @@ import { apiService } from '@shared/services';
 import { IProps } from './props.interface';
 
 export function GenreAutocomplete(props: IProps) {
+
   const initialOptions: IOption[] = [];
   const { form, fieldName } = props;
 
   const [options, setOptions] = React.useState(initialOptions);
+  const [searchTerm, setSearchTerm] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export function GenreAutocomplete(props: IProps) {
 
       const searchOptions: ISearchOptions = {
         pageSize: PageSizes.Fifty,
-        searchTerm: ''
+        searchTerm: searchTerm
       }
       const genres = await apiService.getGenres(searchOptions);
 
@@ -37,9 +39,11 @@ export function GenreAutocomplete(props: IProps) {
     }
 
     getGenres();
-  }, []);
+  }, [searchTerm]);
 
   return (
-    <AutocompleteInput options={options} label={'Genre'} loading={loading} form={form} fieldName={fieldName}/>
+    <AutocompleteInput options={options} label={'Genre'}
+                       loading={loading} form={form}
+                       fieldName={fieldName} handleTyping={setSearchTerm}/>
   );
 }

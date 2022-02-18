@@ -24,7 +24,7 @@ export default function Dashboard() {
           OVERALL_STATISTIC_MOCK.map((overallStatistic: IOverallStatistic) => {
             return <Card styles={{
               flex: 1
-            }}>
+            }} key={overallStatistic.total}>
               <StatisticCard {...overallStatistic}/>
             </Card>
           })

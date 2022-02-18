@@ -7,5 +7,6 @@ export interface IProps {
   options: IOption[],
   loading: boolean;
   form: FormikProps<any>,
-  fieldName: string
+  fieldName: string,
+  handleTyping: Function
 }

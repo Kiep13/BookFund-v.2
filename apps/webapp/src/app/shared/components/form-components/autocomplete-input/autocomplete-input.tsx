@@ -1,7 +1,9 @@
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect } from 'react';
+import Autocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
+import { HTMLAttributes, SyntheticEvent, useEffect } from 'react';
 import * as React from 'react';
+
+import { IOption } from '@core/interfaces';
 
 import { IProps } from './props.interface';
 
@@ -11,7 +13,7 @@ export default function AutocompleteInput(props: IProps) {
   const [loading, setLoading] = React.useState(props.loading || false);
 
   const {fieldName, form} = props;
-  const {values, handleChange, handleBlur} = form;
+  const {values, handleBlur, touched, errors } = form;
 
   useEffect(() => {
     setOptions(props.options);
@@ -23,6 +25,19 @@ export default function AutocompleteInput(props: IProps) {
       setOptions([]);
     }
   }, [open]);
+
+  const handleTyping = (event: SyntheticEvent) => {
+    const { value } = event.target as HTMLTextAreaElement;
+    props.handleTyping(value);
+  }
+
+  const handleSelecting = (event: SyntheticEvent, value: IOption | null) => {
+    form.setFieldValue(fieldName, value?.id);
+
+    if(!value) {
+      props.handleTyping('');
+    }
+  }
 
   return (
     <Autocomplete
@@ -37,13 +52,22 @@ export default function AutocompleteInput(props: IProps) {
       getOptionLabel={(option: any) => option.title}
       options={options}
       loading={loading}
-      renderInput={(params) => (
+      onChange={handleSelecting}
+      renderOption={(props: HTMLAttributes<HTMLElement>, option: IOption) => {
+        return (
+          <li {...props} key={option.id}>
+            {option.title}
+          </li>
+        );
+      }}
+      renderInput={(params: AutocompleteRenderInputParams ) => (
         <TextField
           name={fieldName}
-          onChange={handleChange}
+          onChange={handleTyping}
           onBlur={handleBlur}
           value={values[fieldName]}
           label={props.label}
+          helperText={errors[fieldName] && touched[fieldName] && errors[fieldName]}
           {...params}
         />
       )}
