@@ -1,5 +1,5 @@
 import { PageSizes } from "@core/enums";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 
 import { IGenre, IOption, ISearchOptions } from '@core/interfaces';
@@ -9,13 +9,13 @@ import { apiService } from '@shared/services';
 import { DELAY } from '../../constants';
 import { IProps } from './props.interface';
 
-export function GenreAutocomplete(props: IProps) {
+export const GenreAutocomplete = (props: IProps) => {
   let timer: ReturnType<typeof setTimeout>;
   const initialOptions: IOption[] = [];
   const { form, fieldName } = props;
 
-  const [options, setOptions] = React.useState(initialOptions);
-  const [loading, setLoading] = React.useState(false);
+  const [options, setOptions] = useState(initialOptions);
+  const [loading, setLoading] = useState(false);
 
   const getGenres = async(searchTerm: string) => {
     setLoading(true);

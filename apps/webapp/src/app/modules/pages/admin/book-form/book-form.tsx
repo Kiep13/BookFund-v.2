@@ -3,63 +3,37 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import ImageUpload from '@features/image-upload';
 import Card from '@shared/components/card';
 
-import AuthorSelector from './author-selector';
-import GenresSelector from './genres-selector';
+import AuthorSelector from './compnents/author-selector';
+import GenresSelector from './compnents/genres-selector';
+import { STYLES } from './constants';
 
 export default function BookForm() {
   return <Card>
-    <Box sx={{
-      maxWidth: 600,
-      m: 'auto',
-      minHeight: 'calc(100vh - 170px)',
-      height: 'fit-content'
-    }}>
+    <Box sx={STYLES.page}>
       <Typography variant='h5'
                   gutterBottom
                   component='div'
-                  sx={{
-                    fontWeight: 100,
-                    textAlign: 'center',
-                    mb: 5
-                  }}>
+                  sx={STYLES.pageHeader}>
         Add new book
       </Typography>
 
       <form>
-        <TextField label='Title' sx={{
-          width: '100%',
-          mb: 3
-        }}/>
+        <TextField label='Title' sx={STYLES.titleInput}/>
 
-        <Box sx={{
-          mb: 3
-        }}>
+        <Box sx={STYLES.authorWrapper}>
           <AuthorSelector/>
         </Box>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: 3,
-          mb: 3
-        }}>
-          <TextField label='Amount pages' sx={{
-            flex: 1
-          }}/>
-          <TextField label='Year' sx={{
-            flex: 1
-          }}/>
+        <Box sx={STYLES.rowWrapper}>
+          <TextField label='Amount pages' sx={STYLES.amountPagesInput}/>
+          <TextField label='Year' sx={STYLES.yearInput}/>
         </Box>
 
-        <Box sx={{
-          mb: 3
-        }}>
+        <Box sx={STYLES.genresWrapper}>
           <GenresSelector/>
         </Box>
 
-        <Box sx={{
-          mb: 3
-        }}>
+        <Box sx={STYLES.imageWrapper}>
           {/*<ImageUpload alt={'Book cover'}/>*/}
         </Box>
 
@@ -67,18 +41,11 @@ export default function BookForm() {
           label='Description'
           multiline
           maxRows={10}
-          sx={{
-            mb: 3,
-            width: '100%'
-          }}
+          sx={STYLES.descriptionInput}
         />
 
-        <Box sx={{
-          mb: 3,
-          display: 'flex',
-          justifyContent: 'flex-end'
-        }}>
-          <Button variant='outlined' sx={{mr: 2}}>Cancel</Button>
+        <Box sx={STYLES.formButtons}>
+          <Button variant='outlined' sx={STYLES.cancelButton}>Cancel</Button>
           <Button variant='contained'>Save</Button>
         </Box>
 
