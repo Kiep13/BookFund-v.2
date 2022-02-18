@@ -6,44 +6,54 @@ import { IGenre, IOption, ISearchOptions } from '@core/interfaces';
 import AutocompleteInput from '@shared/components/form-components/autocomplete-input';
 import { apiService } from '@shared/services';
 
+import { DELAY } from '../../constants';
 import { IProps } from './props.interface';
 
 export function GenreAutocomplete(props: IProps) {
-
+  let timer: ReturnType<typeof setTimeout>;
   const initialOptions: IOption[] = [];
   const { form, fieldName } = props;
 
   const [options, setOptions] = React.useState(initialOptions);
-  const [searchTerm, setSearchTerm] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
-  useEffect(() => {
-    async function getGenres() {
-      setLoading(loading);
+  const getGenres = async(searchTerm: string) => {
+    setLoading(true);
 
-      const searchOptions: ISearchOptions = {
-        pageSize: PageSizes.Fifty,
-        searchTerm: searchTerm
-      }
-      const genres = await apiService.getGenres(searchOptions);
-
-      const genreOptions = genres.map((genre: IGenre) => {
-        return {
-          id: genre.id,
-          title: genre.name
-        }
-      });
-
-      setOptions(genreOptions);
-      setLoading(false);
+    const searchOptions: ISearchOptions = {
+      pageSize: PageSizes.Fifty,
+      searchTerm: searchTerm
     }
+    const genres = await apiService.getGenres(searchOptions);
 
-    getGenres();
-  }, [searchTerm]);
+    const genreOptions = genres.map((genre: IGenre) => {
+      return {
+        id: genre.id,
+        title: genre.name
+      }
+    });
+
+    setOptions(genreOptions);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    const searchTerm = '';
+
+    getGenres(searchTerm);
+  }, []);
+
+  const handleTyping = (searchTerm: string) => {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      getGenres(searchTerm);
+    }, DELAY);
+  }
 
   return (
     <AutocompleteInput options={options} label={'Genre'}
                        loading={loading} form={form}
-                       fieldName={fieldName} handleTyping={setSearchTerm}/>
+                       fieldName={fieldName} handleTyping={handleTyping}/>
   );
 }
