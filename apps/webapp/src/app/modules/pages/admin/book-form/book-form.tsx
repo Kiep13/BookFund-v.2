@@ -8,8 +8,8 @@ import ImageUpload from '@features/image-upload';
 import Input from '@shared/components/form-components/input';
 import Card from '@shared/components/card';
 
-import { AuthorAutocomplete } from './compnents/author-autocomplete';
-import { GenresMultiAutocomplete } from './compnents/genres-multi-autocomplete';
+import { AuthorAutocomplete } from './components/author-autocomplete';
+import { GenresMultiAutocomplete } from './components/genres-multi-autocomplete';
 import { STYLES, FORM_INITIAL_VALUE, VALIDATION_SCHEMA } from './constants';
 import { IBookForm } from './interfaces';
 
