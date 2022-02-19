@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { IAuthor, IOption } from '@core/interfaces';
 import { AUTHORS_MOCK } from '@mocks/authors.mock';
-import AutocompleteInput from '@shared/components/form-components/autocomplete-input';
+import { AutocompleteInput } from '@shared/components/form-components/autocomplete-input';
 
 export default function AuthorSelector() {
   const loading = false;

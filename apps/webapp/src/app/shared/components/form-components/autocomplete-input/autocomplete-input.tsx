@@ -7,7 +7,7 @@ import { IOption } from '@core/interfaces';
 
 import { IProps } from './props.interface';
 
-export default function AutocompleteInput(props: IProps) {
+export const AutocompleteInput = (props: IProps) => {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState(props.options || []);
   const [loading, setLoading] = React.useState(props.loading || false);
