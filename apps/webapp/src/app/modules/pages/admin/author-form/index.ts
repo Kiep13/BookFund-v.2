@@ -1,3 +1,1 @@
-import AuthorForm from './author-form';
-
-export default AuthorForm;
+export * from './author-form';

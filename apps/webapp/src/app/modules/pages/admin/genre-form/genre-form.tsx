@@ -13,7 +13,7 @@ import { GenreAutocomplete } from './components/genre-autocomplete';
 import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';
 import { IGenreForm } from './interfaces';
 
-export default function GenreForm() {
+export const GenreForm = () => {
   const history = useHistory();
 
   const handleSubmit = async (values: IGenreForm, {setSubmitting}: FormikHelpers<IGenreForm>) => {
@@ -42,7 +42,7 @@ export default function GenreForm() {
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
-      <Input id={'name'} label={'Name'} fieldName={'name'} form={formik} styles={STYLES.nameInput}/>
+        <Input id={'name'} label={'Name'} fieldName={'name'} form={formik} styles={STYLES.nameInput}/>
 
         <Box sx={STYLES.parentInputWrapper}>
           <GenreAutocomplete form={formik} fieldName={'parentGenre'}/>
@@ -51,8 +51,12 @@ export default function GenreForm() {
 
         <Box sx={STYLES.formButtons}>
           <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToGenresPage}>Cancel</Button>
-          <Button variant='contained' type='submit'
-                  disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>Save</Button>
+          <Button
+            variant='contained'
+            type='submit'
+            disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>
+            Save
+          </Button>
         </Box>
 
       </form>

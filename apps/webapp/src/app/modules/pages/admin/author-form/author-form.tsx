@@ -12,7 +12,7 @@ import { apiService } from '@shared/services';
 import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';
 import { IAuthorForm } from './interfaces';
 
-export default function AuthorForm() {
+export const AuthorForm = () => {
   const history = useHistory();
 
   const handleSubmit = async (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
@@ -58,13 +58,23 @@ export default function AuthorForm() {
           <ImageUpload alt={`Author's photo`} form={formik} imageUrlFieldName={'imageUrl'} imageFileFieldName={'imageFile'}/>
         </Box>
 
-        <Input id={'biography'} label={'Biography'} fieldName={'biography'} form={formik} multiline maxRows={10}
-               styles={STYLES.biographyInput}/>
+        <Input
+          id={'biography'}
+          label={'Biography'}
+          fieldName={'biography'}
+          form={formik}
+          multiline
+          maxRows={10}
+          styles={STYLES.biographyInput}/>
 
         <Box sx={STYLES.formButtons}>
           <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToAuthorsPage}>Cancel</Button>
-          <Button variant='contained' type='submit'
-                  disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>Save</Button>
+          <Button
+            variant='contained'
+            type='submit'
+            disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>
+            Save
+          </Button>
         </Box>
 
       </form>

@@ -2,20 +2,19 @@ import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
 import { PageSizes } from '@core/enums';
-import { IGenre, IOption, ISearchOptions } from '@core/interfaces';
+import { IAuthor, IOption, ISearchOptions } from '@core/interfaces';
 import { AutocompleteInput } from '@shared/components/form-components/autocomplete-input';
 import { apiService } from '@shared/services';
 
 import { DELAY } from '../../constants';
 import { IProps } from './props.interface';
 
-export const GenreAutocomplete = ({form, fieldName}: IProps) => {
-
+export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [options, setOptions] = useState<IOption[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const getGenres = useCallback(
+  const getAuthors = useCallback(
     debounce(async () => {
       setLoading(true);
 
@@ -23,29 +22,29 @@ export const GenreAutocomplete = ({form, fieldName}: IProps) => {
         pageSize: PageSizes.Fifty,
         searchTerm: searchTerm
       }
-      const genres = await apiService.getGenres(searchOptions);
+      const authors = await apiService.getAuthors(searchOptions);
 
-      const genreOptions = genres.map((genre: IGenre) => {
+      const authorOptions = authors.map((author: IAuthor) => {
         return {
-          id: genre.id,
-          title: genre.name
+          id: author.id,
+          title: `${author.surname} ${author.name}`
         }
       });
 
-      setOptions(genreOptions);
+      setOptions(authorOptions);
       setLoading(false);
     }, DELAY),
     []
   );
 
   useEffect(() => {
-    getGenres();
+    getAuthors();
   }, [searchTerm]);
 
   return (
     <AutocompleteInput
       options={options}
-      label={'Genre'}
+      label={'Author'}
       loading={loading}
       form={form}
       fieldName={fieldName}

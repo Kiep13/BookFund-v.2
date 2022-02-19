@@ -1,13 +1,35 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+import { FormikHelpers } from 'formik/dist/types';
+import { useHistory } from 'react-router-dom';
 
+import { AdminRoutePaths } from '@core/enums';
 import ImageUpload from '@features/image-upload';
+import Input from '@shared/components/form-components/input';
 import Card from '@shared/components/card';
 
-import AuthorSelector from './compnents/author-selector';
+import { AuthorAutocomplete } from './compnents/author-autocomplete';
 import GenresSelector from './compnents/genres-selector';
-import { STYLES } from './constants';
+import { STYLES, FORM_INITIAL_VALUE, VALIDATION_SCHEMA } from './constants';
+import { IBookForm } from './interfaces';
 
-export default function BookForm() {
+export const BookForm = () => {
+  const history = useHistory();
+
+  const handleSubmit = (values: IBookForm, {setSubmitting}: FormikHelpers<IBookForm>) => {
+    console.log(values);
+  }
+
+  const formik = useFormik({
+    initialValues: FORM_INITIAL_VALUE,
+    validationSchema: VALIDATION_SCHEMA,
+    onSubmit: handleSubmit
+  });
+
+  const navigateToBooksPage = () => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`);
+  }
+
   return <Card>
     <Box sx={STYLES.page}>
       <Typography variant='h5'
@@ -17,16 +39,27 @@ export default function BookForm() {
         Add new book
       </Typography>
 
-      <form>
-        <TextField label='Title' sx={STYLES.titleInput}/>
+      <form onSubmit={formik.handleSubmit}>
+        <Input id={'title'} label={'Title'} fieldName={'title'} form={formik} styles={STYLES.titleInput}/>
 
         <Box sx={STYLES.authorWrapper}>
-          <AuthorSelector/>
+          <AuthorAutocomplete form={formik} fieldName={'author'}/>
         </Box>
 
         <Box sx={STYLES.rowWrapper}>
-          <TextField label='Amount pages' sx={STYLES.amountPagesInput}/>
-          <TextField label='Year' sx={STYLES.yearInput}/>
+          <Input
+            id={'amountPages'}
+            label={'Amount of pages'}
+            fieldName={'amountPages'}
+            form={formik}
+            styles={STYLES.amountPagesInput}/>
+
+          <Input
+            id={'year'}
+            label={'Year'}
+            fieldName={'year'}
+            form={formik}
+            styles={STYLES.yearInput}/>
         </Box>
 
         <Box sx={STYLES.genresWrapper}>
@@ -34,19 +67,30 @@ export default function BookForm() {
         </Box>
 
         <Box sx={STYLES.imageWrapper}>
-          {/*<ImageUpload alt={'Book cover'}/>*/}
+          <ImageUpload
+            alt={`Book's cover`}
+            form={formik}
+            imageUrlFieldName={'imageUrl'}
+            imageFileFieldName={'imageFile'}/>
         </Box>
 
-        <TextField
-          label='Description'
+        <Input
+          id={'description'}
+          label={'Description'}
+          fieldName={'description'}
+          form={formik}
           multiline
           maxRows={10}
-          sx={STYLES.descriptionInput}
-        />
+          styles={STYLES.descriptionInput}/>
 
         <Box sx={STYLES.formButtons}>
           <Button variant='outlined' sx={STYLES.cancelButton}>Cancel</Button>
-          <Button variant='contained'>Save</Button>
+          <Button
+            variant='contained'
+            type='submit'
+            disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>
+            Save
+          </Button>
         </Box>
 
       </form>

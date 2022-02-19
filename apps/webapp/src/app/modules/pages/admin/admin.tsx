@@ -1,16 +1,15 @@
 import { Route } from 'react-router-dom';
-import * as React from 'react';
 
 import { AdminRoutePaths } from '@core/enums';
 import { wrapAdminPage } from '@features/page-wrapper';
 import compose from '@shared/utils/compose';
 
 import Authors from './authors';
-import AuthorForm from './author-form';
+import { AuthorForm } from './author-form';
 import Books from './books';
-import BookForm from './book-form';
+import { BookForm } from './book-form';
 import Genres from './genres';
-import GenreForm from './genre-form';
+import { GenreForm } from './genre-form';
 import Dashboard from './dashboard';
 
 export function App() {
