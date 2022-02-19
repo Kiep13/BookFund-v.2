@@ -9,7 +9,7 @@ import Input from '@shared/components/form-components/input';
 import Card from '@shared/components/card';
 
 import { AuthorAutocomplete } from './compnents/author-autocomplete';
-import GenresSelector from './compnents/genres-selector';
+import { GenresMultiAutocomplete } from './compnents/genres-multi-autocomplete';
 import { STYLES, FORM_INITIAL_VALUE, VALIDATION_SCHEMA } from './constants';
 import { IBookForm } from './interfaces';
 
@@ -63,7 +63,7 @@ export const BookForm = () => {
         </Box>
 
         <Box sx={STYLES.genresWrapper}>
-          <GenresSelector/>
+          <GenresMultiAutocomplete form={formik} fieldName={'genres'}/>
         </Box>
 
         <Box sx={STYLES.imageWrapper}>
@@ -84,7 +84,7 @@ export const BookForm = () => {
           styles={STYLES.descriptionInput}/>
 
         <Box sx={STYLES.formButtons}>
-          <Button variant='outlined' sx={STYLES.cancelButton}>Cancel</Button>
+          <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToBooksPage}>Cancel</Button>
           <Button
             variant='contained'
             type='submit'

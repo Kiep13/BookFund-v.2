@@ -1,3 +1,1 @@
-import AutocompleteMultiInput from './autocomplete-multi-input';
-
-export default AutocompleteMultiInput;
+export * from './autocomplete-multi-input';

@@ -6,10 +6,10 @@ import { IMAGE_UPLOAD_VALIDATION_ELEMENT } from '@features/image-upload/constant
 const currentYear = (new Date()).getFullYear();
 
 export const VALIDATION_SCHEMA = yup.object().shape({
-  name: yup.string()
+  title: yup.string()
     .required('This field can not be empty')
     .min(1, 'Title must be at least 1 characters')
-    .max(MAX_NAME_LENGTH, `Name must be at most ${MAX_NAME_LENGTH} characters`),
+    .max(MAX_NAME_LENGTH, `Title must be at most ${MAX_NAME_LENGTH} characters`),
   author: yup.number()
     .required('This field can not be empty'),
   amountPages: yup.number()

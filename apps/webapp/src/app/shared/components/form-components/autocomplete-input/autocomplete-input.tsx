@@ -1,16 +1,15 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete, { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
-import { HTMLAttributes, SyntheticEvent, useEffect } from 'react';
-import * as React from 'react';
+import { HTMLAttributes, SyntheticEvent, useEffect, useState } from 'react';
 
 import { IOption } from '@core/interfaces';
 
 import { IProps } from './props.interface';
 
 export const AutocompleteInput = (props: IProps) => {
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState(props.options || []);
-  const [loading, setLoading] = React.useState(props.loading || false);
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState(props.options || []);
+  const [loading, setLoading] = useState(props.loading || false);
 
   const {fieldName, form} = props;
   const {values, handleBlur, touched, errors } = form;
@@ -19,12 +18,6 @@ export const AutocompleteInput = (props: IProps) => {
     setOptions(props.options);
     setLoading(props.loading);
   }, [props]);
-
-  useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
 
   const handleTyping = (event: SyntheticEvent) => {
     const { value } = event.target as HTMLTextAreaElement;
@@ -48,7 +41,7 @@ export const AutocompleteInput = (props: IProps) => {
       onClose={() => {
         setOpen(false);
       }}
-      isOptionEqualToValue={(option: any, value) => option.title === value.title}
+      isOptionEqualToValue={(option: any, value) => option.id === value.id}
       getOptionLabel={(option: any) => option.title}
       options={options}
       loading={loading}
