@@ -3,11 +3,11 @@ import { ILike } from 'typeorm';
 
 import { connection } from '@core/connection';
 import { ResponseStatuses, SortDirections } from '@core/enums';
-import { Genre } from '@entities/genre.entity';
+import { GenreEntity } from '@entities/genre.entity';
 
 class GenreController {
   public async createGenre(request: Request, response: Response, next: Function): Response {
-    const genre: Genre = new Genre();
+    const genre: GenreEntity = new GenreEntity();
 
     genre.name = request.body.name;
 
@@ -22,7 +22,7 @@ class GenreController {
   public async getGenres(request: Request, response: Response, next: Function): Response {
     const requestParams = request.query;
 
-    const genres = await connection.getRepository(Genre).find({
+    const genres = await connection.getRepository(GenreEntity).find({
       select: ['id', 'name'],
       order: {
         name: SortDirections.ASC

@@ -5,7 +5,7 @@ import { Roles } from '@core/enums';
 @Entity({
   name: 'account'
 })
-export class Account {
+export class AccountEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'int8'

@@ -6,6 +6,7 @@ import * as fileUpload from 'express-fileupload';
 import { ApiRoutes } from '@core/enums';
 import { environment } from '@environments/environment';
 import authorRoutes from '@routes/author.routes';
+import bookRoutes from '@routes/book.routes';
 import genreRoutes from '@routes/genre.routes';
 import imageRoutes from '@routes/image.routes';
 
@@ -23,7 +24,8 @@ apiServer.use(cookieParser());
 apiServer.use(express.static(`../${environment.imagesFolder}`));
 
 apiServer.use(`/v1/${ApiRoutes.AUTHOR}`, authorRoutes);
+apiServer.use(`/v1/${ApiRoutes.BOOK}`, bookRoutes);
 apiServer.use(`/v1/${ApiRoutes.GENRE}`, genreRoutes);
-apiServer.use(`/v1/${ApiRoutes.IMAGE}`, imageRoutes)
+apiServer.use(`/v1/${ApiRoutes.IMAGE}`, imageRoutes);
 
 export default apiServer;

@@ -1,9 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { BookEntity } from '@entities/book.entity';
 
 @Entity({
   name: 'genre'
 })
-export class Genre {
+export class GenreEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'int8'
@@ -16,14 +18,17 @@ export class Genre {
   })
   name: string;
 
-  @ManyToOne(() => Genre, genre => genre.subGenres)
+  @ManyToOne(() => GenreEntity, genre => genre.subGenres)
   @JoinColumn({
     name: 'parentId'
   })
-  parentGenre: Genre;
+  parentGenre: GenreEntity;
 
-  @OneToMany(() => Genre, genre => genre.parentGenre)
-  subGenres: Genre[];
+  @OneToMany(() => GenreEntity, genre => genre.parentGenre)
+  subGenres: GenreEntity[];
+
+  @ManyToMany(() => BookEntity, book => book.genres)
+  books: BookEntity[];
 
   @Column({
     name: 'createdAt',

@@ -20,7 +20,8 @@ export const VALIDATION_SCHEMA = yup.object().shape({
     .required('This field can not be empty')
     .min(1950, 'Year must be at least 1')
     .max(currentYear, `Year must be at most ${currentYear}`),
-  imageUrl: IMAGE_UPLOAD_VALIDATION_ELEMENT,
+  imageUrl: IMAGE_UPLOAD_VALIDATION_ELEMENT
+    .required('This field can not be empty'),
   description: yup.string()
     .required('This field can not be empty')
     .min(2, 'Biography must be at least 2 characters')

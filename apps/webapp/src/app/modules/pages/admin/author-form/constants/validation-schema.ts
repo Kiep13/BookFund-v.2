@@ -16,7 +16,8 @@ export const VALIDATION_SCHEMA = yup.object().shape({
     .min(2, 'Surname must be at least 2 characters')
     .max(MAX_NAME_LENGTH, `Surname must be at most ${MAX_NAME_LENGTH} characters`)
     .matches(NAME_REGEXP, VALIDATION_ERROR_MESSAGES.surnameMatches),
-  imageUrl: IMAGE_UPLOAD_VALIDATION_ELEMENT,
+  imageUrl: IMAGE_UPLOAD_VALIDATION_ELEMENT
+    .required('This field can not be empty'),
   biography: yup.string()
     .required('This field can not be empty')
     .min(2, 'Biography must be at least 2 characters')
