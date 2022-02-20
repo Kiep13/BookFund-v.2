@@ -1,3 +1,1 @@
-import Admin from './admin';
-
-export default Admin;
+export * from './admin';

@@ -1,3 +1,1 @@
-import PageHeaderCard from './page-header-card';
-
-export default PageHeaderCard;
+export * from './page-header-card';

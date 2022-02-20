@@ -5,8 +5,8 @@ import { FormikHelpers } from 'formik/dist/types';
 
 import { AdminRoutePaths } from '@core/enums';
 import { ImageUpload } from '@features/image-upload';
-import Card from '@shared/components/card';
-import Input from '@shared/components/form-components/input';
+import { Card } from '@shared/components/card';
+import { Input } from '@shared/components/form-components/input';
 import { apiService } from '@shared/services';
 
 import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';

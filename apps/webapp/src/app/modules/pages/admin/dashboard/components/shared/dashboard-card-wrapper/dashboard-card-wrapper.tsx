@@ -1,7 +1,6 @@
-import React from 'react';
 import { Typography } from '@mui/material';
 
-import Card from '@shared/components/card';
+import { Card } from '@shared/components/card';
 
 import { STYLES } from './constants';
 

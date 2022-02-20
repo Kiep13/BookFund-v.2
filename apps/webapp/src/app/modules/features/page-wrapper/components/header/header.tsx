@@ -1,5 +1,5 @@
-import Logo from '@shared/components/logo';
-import SearchInput from '@shared/components/search-input';
+import { Logo } from '@shared/components/logo';
+import { SearchInput } from '@shared/components/search-input';
 
 import './header.scss';
 

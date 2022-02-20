@@ -1,8 +1,6 @@
-import * as React from 'react';
-
 import './logo.scss';
 
-export function Logo() {
+export const Logo = () => {
   return (
     <div className='logo'>
       <img alt='bookfund' src='../../../../assets/book.png' className='logo__image'/>

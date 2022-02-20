@@ -4,8 +4,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { AdminRoutePaths } from '@core/enums';
 import { IBook, IGenre } from '@core/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
-import BookPromoCard from '@shared/components/book-promo-card';
-import Card from '@shared/components/card';
+import { BookPromoCard } from '@shared/components/book-promo-card';
+import { Card } from '@shared/components/card';
 
 import { STYLES } from './constants';
 

@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import { IBook } from '@core/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
-import BookPromoCard from '@shared/components/book-promo-card';
+import { BookPromoCard } from '@shared/components/book-promo-card';
 
 import { DashboardCardWrapper } from '../../shared/dashboard-card-wrapper';
 import { STYLES } from './constants';

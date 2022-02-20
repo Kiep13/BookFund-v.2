@@ -1,14 +1,13 @@
 import { Paper } from '@mui/material';
 
-import './card.scss';
+import { STYLES } from './constants';
 
-export default function Card(props: any) {
+export const Card = (props: any) => {
   const styles = props.styles;
 
   return (
     <Paper elevation={3} sx={{
-      borderRadius: 2,
-      p: 2,
+      ...STYLES.wrapper,
       ...(styles ? styles : {})
     }}>
       {props.children}

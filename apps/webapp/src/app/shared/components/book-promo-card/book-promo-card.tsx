@@ -1,35 +1,27 @@
-import * as React from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Link, Typography } from '@mui/material';
 
-import { IBook } from '@core/interfaces';
-import TextWithHint from '@shared/components/text-with-hint';
+import { TextWithHint } from '@shared/components/text-with-hint';
 
-export default function BookPromoCard(props: any) {
-  const book: IBook = props.book;
+import { STYLES } from './constants';
+import { IProps } from './props.interface';
+
+export const BookPromoCard = ({ book } : IProps) => {
   book.authorFullName = `${book.author?.surname || ''} ${book.author?.name}`;
 
   return (
-    <Card sx={{
-      width: 170,
-      borderRadius: 2,
-    }}>
+    <Card sx={STYLES.wrapper}>
       <CardActionArea>
         <CardMedia
-          component="img"
+          component='img'
           height={250}
           image={book.image}
           alt={book.title}
         />
         <CardContent>
-          <Typography gutterBottom variant='h6' component='div' sx={{
-            fontWeight: 100,
-
-          }}>
+          <Typography gutterBottom variant='h6' component='div' sx={STYLES.title}>
             <TextWithHint text={ book.title } />
           </Typography>
-          <Link href="#" sx={{
-            textDecoration: 'none'
-          }}>{ book.authorFullName }</Link>
+          <Link href="#" sx={STYLES.authorLink}>{ book.authorFullName }</Link>
         </CardContent>
       </CardActionArea>
     </Card>

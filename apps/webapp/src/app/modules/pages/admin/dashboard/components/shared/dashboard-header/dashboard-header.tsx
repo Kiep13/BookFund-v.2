@@ -3,15 +3,15 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import moment from 'moment';
-import * as React from 'react';
+import { useState } from 'react';
 
-import Card from '@shared/components/card';
+import { Card } from '@shared/components/card';
 
 import { MIN_STATISTIC_DATE } from '../../../constants';
 import { STYLES } from './constants';
 
 export const DashboardHeader = () => {
-  const [value, setValue] = React.useState(new Date());
+  const [value, setValue] = useState(new Date());
 
   const maxDate = moment(new Date()).endOf('month').endOf('day').toDate();
 

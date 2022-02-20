@@ -1,12 +1,12 @@
 import compose from '@shared/utils/compose';
 import { wrapUserPage } from '@features/page-wrapper';
 
-function Home() {
+const HomePage = () => {
   return (
     <span>Home page works</span>
   );
 }
 
-export default compose(
+export const Home = compose(
   wrapUserPage()
-)(Home);
+)(HomePage);

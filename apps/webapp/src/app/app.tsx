@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { AdminRoutePaths, BaseRoutePaths } from '@core/enums';
-import Admin from '@pages/admin';
-import Home from '@pages/base/home';
+import { Admin } from '@pages/admin';
+import { Home } from '@pages/base/home';
 
 function App() {
   return (

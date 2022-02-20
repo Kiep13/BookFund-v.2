@@ -1,7 +1,9 @@
 import './text-with-hint.scss';
 
-export function TextWithHint(props: any) {
+import { IProps } from './props.interface';
+
+export const TextWithHint = ({ text } : IProps) => {
   return (
-    <div className={'text-with-hint'} title={props.text}>{ props.text }</div>
+    <div className={'text-with-hint'} title={text}>{ text }</div>
   );
 }

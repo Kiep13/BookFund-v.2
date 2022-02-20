@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { AdminRoutePaths } from '@core/enums';
-import Input from '@shared/components/form-components/input';
-import Card from '@shared/components/card';
+import { Input } from '@shared/components/form-components/input';
+import { Card } from '@shared/components/card';
 import { apiService } from '@shared/services';
 
 import { GenreAutocomplete } from './components/genre-autocomplete';

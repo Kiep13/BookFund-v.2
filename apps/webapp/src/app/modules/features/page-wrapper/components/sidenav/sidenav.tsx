@@ -2,7 +2,7 @@ import { AdminRoutePaths } from "@core/enums";
 import { Drawer, List } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 
-import AvatarBlock from '@shared/components/avatar-block';
+import { AvatarBlock } from '@shared/components/avatar-block';
 
 import { GO_ADMIN_MENU_ITEM, GO_USER_MENU_ITEM, LOG_OUT_MENU_ITEM, STYLES_SIDENAV } from '../../constants';
 import { IMenuItem } from '../../interfaces';

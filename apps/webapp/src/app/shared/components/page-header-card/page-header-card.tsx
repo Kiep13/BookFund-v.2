@@ -1,27 +1,20 @@
-import * as React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import Card from '@shared/components/card';
+import { Card } from '@shared/components/card';
 
-export default function PageHeaderCard(props: any) {
-  const { title, url } = props;
+import { STYLES } from './constants';
+import { IProps } from './props.interface';
 
+export const PageHeaderCard = ({ title, url }: IProps) => {
   return (
     <Card>
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <Typography variant='h5'
-                    gutterBottom
-                    component='div'
-                    sx={{
-                      fontWeight: 100,
-                      m: 0
-                    }}>
+      <Box sx={STYLES.wrapper}>
+        <Typography
+          variant='h5'
+          gutterBottom
+          component='div'
+          sx={STYLES.title}>
           { title }
         </Typography>
         <Link to={url}>

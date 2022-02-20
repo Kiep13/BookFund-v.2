@@ -1,3 +1,1 @@
-import AvatarBlock from './avatar-block';
-
-export default AvatarBlock;
+export * from './avatar-block';

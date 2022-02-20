@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 
-import Input from '@shared/components/form-components/input';
+import { Input } from '@shared/components/form-components/input';
 
 import { STYLES_IMAGE_FORM } from '../../constants';
 import { IProps } from './props.interface';

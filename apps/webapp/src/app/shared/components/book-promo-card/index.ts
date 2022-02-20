@@ -1,3 +1,1 @@
-import BookPromoCard from './book-promo-card';
-
-export default BookPromoCard;
+export * from './book-promo-card';

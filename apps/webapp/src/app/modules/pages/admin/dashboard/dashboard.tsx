@@ -2,7 +2,7 @@ import { IOverallStatistic } from '@core/interfaces';
 import { Box } from '@mui/material';
 
 import { OVERALL_STATISTIC_MOCK } from '@mocks/overall-statistics.mock';
-import Card from '@shared/components/card';
+import { Card } from '@shared/components/card';
 
 import { DashboardHeader } from './components/shared/dashboard-header';
 import { ActionPerMonthDateCard } from './components/cards/action-per-month-date-card';

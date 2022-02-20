@@ -12,7 +12,7 @@ import { Genres } from './genres';
 import { GenreForm } from './genre-form';
 import { Dashboard } from './dashboard';
 
-export function App() {
+const AdminPage = () => {
   return (
     <>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`} component={Dashboard}/>
@@ -26,6 +26,6 @@ export function App() {
   );
 }
 
-export default compose(
+export const Admin = compose(
   wrapAdminPage()
-)(App);
+)(AdminPage);

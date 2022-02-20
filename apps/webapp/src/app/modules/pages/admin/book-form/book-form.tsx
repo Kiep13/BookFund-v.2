@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 import { AdminRoutePaths } from '@core/enums';
 import { ImageUpload } from '@features/image-upload';
-import Input from '@shared/components/form-components/input';
-import Card from '@shared/components/card';
+import { Input } from '@shared/components/form-components/input';
+import { Card } from '@shared/components/card';
 import { apiService } from '@shared/services';
 
 import { AuthorAutocomplete } from './components/author-autocomplete';
