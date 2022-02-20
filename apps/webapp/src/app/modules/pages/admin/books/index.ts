@@ -1,3 +1,1 @@
-import Books from './books';
-
-export default Books;
+export * from './books';

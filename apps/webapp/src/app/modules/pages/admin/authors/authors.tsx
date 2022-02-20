@@ -1,24 +1,22 @@
 import { Box } from '@mui/material';
-import * as React from 'react';
 
 import { AdminRoutePaths } from '@core/enums';
 import Card from '@shared/components/card';
 import PageHeaderCard from '@shared/components/page-header-card';
 
-import AuthorsTable from './authors-table';
+import { AuthorsTable } from './components/authors-table';
+import { STYLES } from './constants';
 
-export default function Authors() {
+export const Authors = () => {
   return (
     <>
-      <Box sx={{
-        mb: 3
-      }}>
-        <PageHeaderCard title={'Authors'} url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`}/>
+      <Box sx={STYLES.box}>
+        <PageHeaderCard
+          title={'Authors'}
+          url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`}/>
       </Box>
 
-      <Box sx={{
-        mb: 1
-      }}>
+      <Box sx={STYLES.box}>
         <Card>
           <AuthorsTable/>
         </Card>

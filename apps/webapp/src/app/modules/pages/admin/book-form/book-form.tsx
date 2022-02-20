@@ -42,15 +42,21 @@ export const BookForm = () => {
 
   return <Card>
     <Box sx={STYLES.page}>
-      <Typography variant='h5'
-                  gutterBottom
-                  component='div'
-                  sx={STYLES.pageHeader}>
+      <Typography
+        variant='h5'
+        gutterBottom
+        component='div'
+        sx={STYLES.pageHeader}>
         Add new book
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
-        <Input id={'title'} label={'Title'} fieldName={'title'} form={formik} styles={STYLES.titleInput}/>
+        <Input
+          id={'title'}
+          label={'Title'}
+          fieldName={'title'}
+          form={formik}
+          styles={STYLES.titleInput}/>
 
         <Box sx={STYLES.authorWrapper}>
           <AuthorAutocomplete form={formik} fieldName={'author'}/>
@@ -94,7 +100,13 @@ export const BookForm = () => {
           styles={STYLES.descriptionInput}/>
 
         <Box sx={STYLES.formButtons}>
-          <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToBooksPage}>Cancel</Button>
+          <Button
+            variant='outlined'
+            sx={STYLES.cancelButton}
+            onClick={navigateToBooksPage}>
+            Cancel
+          </Button>
+
           <Button
             variant='contained'
             type='submit'

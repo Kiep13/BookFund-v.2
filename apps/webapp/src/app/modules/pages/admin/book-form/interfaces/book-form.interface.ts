@@ -1,4 +1,4 @@
-import { IGenre } from '@core/interfaces';
+import { IAuthor, IGenre } from '@core/interfaces';
 
 export interface IBookForm {
   title: string,
@@ -6,7 +6,7 @@ export interface IBookForm {
   year: number,
   genres: IGenre[],
   description: string,
-  author?: number,
+  author?: IAuthor,
   imageUrl?: string,
   imageFile?: File
 }

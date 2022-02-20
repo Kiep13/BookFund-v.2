@@ -1,3 +1,1 @@
-import DashboardHeader from './dashboard-header';
-
-export default DashboardHeader;
+export * from './dashboard-header';

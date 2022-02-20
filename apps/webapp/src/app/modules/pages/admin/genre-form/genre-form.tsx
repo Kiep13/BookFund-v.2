@@ -2,7 +2,6 @@ import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
-import * as React from 'react';
 
 import { AdminRoutePaths } from '@core/enums';
 import Input from '@shared/components/form-components/input';
@@ -34,15 +33,21 @@ export const GenreForm = () => {
 
   return <Card>
     <Box sx={STYLES.page}>
-      <Typography variant='h5'
-                  gutterBottom
-                  component='div'
-                  sx={STYLES.pageHeader}>
+      <Typography
+        variant='h5'
+        gutterBottom
+        component='div'
+        sx={STYLES.pageHeader}>
         Add new genre
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
-        <Input id={'name'} label={'Name'} fieldName={'name'} form={formik} styles={STYLES.nameInput}/>
+        <Input
+          id={'name'}
+          label={'Name'}
+          fieldName={'name'}
+          form={formik}
+          styles={STYLES.nameInput}/>
 
         <Box sx={STYLES.parentInputWrapper}>
           <GenreAutocomplete form={formik} fieldName={'parentGenre'}/>
@@ -50,7 +55,13 @@ export const GenreForm = () => {
 
 
         <Box sx={STYLES.formButtons}>
-          <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToGenresPage}>Cancel</Button>
+          <Button
+            variant='outlined'
+            sx={STYLES.cancelButton}
+            onClick={navigateToGenresPage}>
+            Cancel
+          </Button>
+
           <Button
             variant='contained'
             type='submit'

@@ -1,3 +1,1 @@
-import PopularBookCard from './popular-book-card';
-
-export default PopularBookCard;
+export * from './popular-book-card';

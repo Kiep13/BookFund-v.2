@@ -25,7 +25,7 @@ export const AutocompleteInput = (props: IProps) => {
   }
 
   const handleSelecting = (event: SyntheticEvent, value: IOption | null) => {
-    form.setFieldValue(fieldName, value?.id);
+    form.setFieldValue(fieldName, value);
 
     if(!value) {
       props.handleTyping('');

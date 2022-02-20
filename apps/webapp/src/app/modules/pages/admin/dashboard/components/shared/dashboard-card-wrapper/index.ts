@@ -1,3 +1,1 @@
-import DashboardCardWrapper from './dashboard-card-wrapper';
-
-export default DashboardCardWrapper;
+export * from './dashboard-card-wrapper';

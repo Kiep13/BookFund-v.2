@@ -4,13 +4,13 @@ import { AdminRoutePaths } from '@core/enums';
 import { wrapAdminPage } from '@features/page-wrapper';
 import compose from '@shared/utils/compose';
 
-import Authors from './authors';
+import { Authors } from './authors';
 import { AuthorForm } from './author-form';
-import Books from './books';
+import { Books } from './books';
 import { BookForm } from './book-form';
-import Genres from './genres';
+import { Genres } from './genres';
 import { GenreForm } from './genre-form';
-import Dashboard from './dashboard';
+import { Dashboard } from './dashboard';
 
 export function App() {
   return (

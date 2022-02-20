@@ -8,26 +8,20 @@ import * as React from 'react';
 import Card from '@shared/components/card';
 
 import { MIN_STATISTIC_DATE } from '../../../constants';
+import { STYLES } from './constants';
 
-export default function DashboardHeader() {
+export const DashboardHeader = () => {
   const [value, setValue] = React.useState(new Date());
 
   const maxDate = moment(new Date()).endOf('month').endOf('day').toDate();
 
   return (
-    <Card styles={{
-      mb: 2,
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }}>
-      <Typography variant='h5'
-                  gutterBottom
-                  component='div'
-                  sx={{
-                    fontWeight: 100,
-                    m: 0
-                  }}>
+    <Card styles={STYLES.wrapper}>
+      <Typography
+        variant='h5'
+        gutterBottom
+        component='div'
+        sx={STYLES.title}>
         Overall statistic
       </Typography>
 

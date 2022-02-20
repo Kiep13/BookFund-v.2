@@ -45,7 +45,7 @@ export const GenreAutocomplete = ({form, fieldName}: IProps) => {
   return (
     <AutocompleteInput
       options={options}
-      label={'Genre'}
+      label={'Parent genre'}
       loading={loading}
       form={form}
       fieldName={fieldName}

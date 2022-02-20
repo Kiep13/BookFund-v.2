@@ -1,12 +1,13 @@
-import * as React from 'react';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import { IGenre } from '@core/interfaces';
 
-export default function GenresTreeView(props: any) {
-  const { genres, onSelectGenre } = props;
+import { STYLES } from './constants';
+import { IProps } from './props.interface';
+
+export const GenresTreeView = ({ genres, onSelectGenre }: IProps) => {
 
   const buildTreeNode = (genre: IGenre) => {
     return <TreeItem key={genre.id} nodeId={genre.id.toString()} label={genre.name} onClick={() => onSelectGenre(genre)}>
@@ -19,10 +20,7 @@ export default function GenresTreeView(props: any) {
       aria-label="file system navigator"
       defaultCollapseIcon={<ExpandMoreIcon/>}
       defaultExpandIcon={<ChevronRightIcon/>}
-      sx={{
-        height: '100%',
-        overflowY: 'auto'
-      }}>
+      sx={STYLES.treeView}>
       {
           genres.map(buildTreeNode)
       }

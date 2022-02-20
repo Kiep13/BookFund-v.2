@@ -55,13 +55,13 @@ export const USER_MENU_ITEMS: IMenuItem[] = [
 
 export const GO_ADMIN_MENU_ITEM: IMenuItem = {
   title: 'Go admin',
-  icon: KeyboardReturnTwoTone,
+  icon: DashboardTwoToneIcon,
   url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`
 };
 
 export const GO_USER_MENU_ITEM: IMenuItem = {
   title: 'Go user',
-  icon: DashboardTwoToneIcon,
+  icon: KeyboardReturnTwoTone,
   url: `${BaseRoutePaths.HOME}`
 };
 

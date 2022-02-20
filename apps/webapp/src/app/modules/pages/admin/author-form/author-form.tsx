@@ -40,22 +40,38 @@ export const AuthorForm = () => {
 
   return (<Card>
     <Box sx={STYLES.page}>
-      <Typography variant='h5'
-                  gutterBottom
-                  sx={STYLES.pageHeader}>
+      <Typography
+        variant='h5'
+        gutterBottom
+        sx={STYLES.pageHeader}>
         Add new author
       </Typography>
 
       <form onSubmit={formik.handleSubmit}>
 
         <Box sx={STYLES.nameInputsWrapper}>
-          <Input id={'name'} label={'Name'} fieldName={'name'} form={formik} styles={STYLES.nameInput}/>
-          <Input id={'surname'} label={'Surname'} fieldName={'surname'} form={formik} styles={STYLES.nameInput}/>
+          <Input
+            id={'name'}
+            label={'Name'}
+            fieldName={'name'}
+            form={formik}
+            styles={STYLES.nameInput}/>
+
+          <Input
+            id={'surname'}
+            label={'Surname'}
+            fieldName={'surname'}
+            form={formik}
+            styles={STYLES.nameInput}/>
         </Box>
 
 
         <Box sx={STYLES.imageUploadWrapper}>
-          <ImageUpload alt={`Author's photo`} form={formik} imageUrlFieldName={'imageUrl'} imageFileFieldName={'imageFile'}/>
+          <ImageUpload
+            alt={`Author's photo`}
+            form={formik}
+            imageUrlFieldName={'imageUrl'}
+            imageFileFieldName={'imageFile'}/>
         </Box>
 
         <Input
@@ -68,7 +84,13 @@ export const AuthorForm = () => {
           styles={STYLES.biographyInput}/>
 
         <Box sx={STYLES.formButtons}>
-          <Button variant='outlined' sx={STYLES.cancelButton} onClick={navigateToAuthorsPage}>Cancel</Button>
+          <Button
+            variant='outlined'
+            sx={STYLES.cancelButton}
+            onClick={navigateToAuthorsPage}>
+            Cancel
+          </Button>
+
           <Button
             variant='contained'
             type='submit'
