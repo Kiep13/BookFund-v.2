@@ -1,3 +1,1 @@
-import ImagePromo from './image-promo';
-
-export default ImagePromo;
+export * from './image-promo';

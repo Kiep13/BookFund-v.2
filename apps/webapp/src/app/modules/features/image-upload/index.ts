@@ -1,3 +1,1 @@
-import ImageUpload from './image-upload';
-
-export default ImageUpload;
+export * from './image-upload';

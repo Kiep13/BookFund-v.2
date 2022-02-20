@@ -4,8 +4,7 @@ import { STYLES_IMAGE_PROMO } from '../../constants';
 import { IProps } from './props.interface';
 import './image-promo.scss';
 
-export default function ImagePromo(props: IProps) {
-  const {image, alt, clearImage} = props;
+export const ImagePromo = ({image, alt, clearImage}: IProps) => {
 
   return (
     <Box sx={STYLES_IMAGE_PROMO.promoWrapper}>

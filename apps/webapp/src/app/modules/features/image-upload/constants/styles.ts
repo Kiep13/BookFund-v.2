@@ -27,5 +27,5 @@ export const STYLES_IMAGE_PROMO = {
   promoWrapper: {
     display: 'block',
     textAlign: 'center',
-  }
+  },
 }

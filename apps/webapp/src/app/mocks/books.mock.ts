@@ -73,7 +73,7 @@ export const BOOKS_MOCK: IBook[] = [
     id: 8,
     amountPages: 291,
     avgRate: 4.0,
-    image: 'https://avatars.mds.yandex.net/i?id=2a0000017e69348e2e329d3e3d41d896d03f-1407503-fast-images&n=13',
+    image: 'https://www.ukazka.ru/img/g/uk908301.jpg',
     title: 'Акулы в дни спасателей',
     year: 2021,
     author: AUTHORS_MOCK[8],

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IBook } from '@core/interfaces';
-import DataTable from '@features/data-table';
+import { DataTable } from '@features/data-table';
 import { IDataColumn } from '@features/data-table/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
 

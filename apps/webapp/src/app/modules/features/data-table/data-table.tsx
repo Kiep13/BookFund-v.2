@@ -1,25 +1,27 @@
-import * as React from 'react';
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow  } from '@mui/material';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import PropTypes from 'prop-types';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
+import { useState } from 'react';
 
 import { PageSizes } from '@core/enums';
 
-import DataTableHead from './data-table-head';
+import { DataTableHead } from './components/data-table-head';
+import { STYLES } from './constants';
 import { AlignTypes, SortDirections } from './enums';
 import { IDataColumn } from './interfaces';
 import { dataFormatterService } from './services';
+import { IProps } from './props.interface';
 
-export default function DataTable(props: any) {
-  const data = props.data;
+export const DataTable = (props: IProps) => {
   const columns = props.columns;
 
-  const [order, setOrder] = React.useState(SortDirections.Asc);
-  const [orderBy, setOrderBy] = React.useState(columns[0].id);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(PageSizes.Ten);
+  const [order, setOrder] = useState(SortDirections.Asc);
+  const [orderBy, setOrderBy] = useState(columns[0].id);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+
+  const data = props.data;
 
   const rowsPerPageOptions = Object.values(PageSizes).map(value => +value).filter((value) => value);
 
@@ -27,29 +29,32 @@ export default function DataTable(props: any) {
     const isAsc = orderBy === property && order === SortDirections.Asc;
     setOrder(isAsc ? SortDirections.Desc : SortDirections.Asc);
     setOrderBy(property);
+    props.onHandleSortRequest();
   };
 
   const handleClick = (event: any, name: string) => {
-
+    props.onHandleClick();
   };
 
   const handleChangePage = (event: any, newPage: any) => {
     setPage(newPage);
+    props.onHandlePageChange();
   };
 
   const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    props.onHandleRowsPerPageChanged();
   };
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   return (
-    <Box sx={{width: '100%'}}>
-      <Paper sx={{width: '100%', mb: 2}}>
+    <Box sx={STYLES.tableBox}>
+      <Paper sx={STYLES.tablePaper}>
         <TableContainer>
           <Table
-            sx={{minWidth: 750}}
+            sx={STYLES.table}
             aria-labelledby='tableTitle'
             size='medium'
           >
@@ -79,13 +84,13 @@ export default function DataTable(props: any) {
                           })
                         }
                         <TableCell component='td' align={AlignTypes.Right}>
-                          <IconButton aria-label='View' sx={{p: 0.5}}>
+                          <IconButton aria-label='View' sx={STYLES.iconButton}>
                             <VisibilityTwoToneIcon/>
                           </IconButton>
-                          <IconButton aria-label='Edit' sx={{p: 0.5}}>
+                          <IconButton aria-label='Edit' sx={STYLES.iconButton}>
                             <EditTwoToneIcon/>
                           </IconButton>
-                          <IconButton aria-label='Delete' sx={{p: 0.5}}>
+                          <IconButton aria-label='Delete' sx={STYLES.iconButton}>
                             <DeleteTwoToneIcon/>
                           </IconButton>
                         </TableCell>
@@ -117,13 +122,3 @@ export default function DataTable(props: any) {
     </Box>
   );
 }
-
-DataTable.propTypes = {
-  columns: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired,
-  count: PropTypes.number.isRequired,
-  onHandleClick: PropTypes.func.isRequired,
-  onHandleSortRequest: PropTypes.func.isRequired,
-  onHandleRowsPerPageChanged: PropTypes.func.isRequired,
-  onHandlePageChange: PropTypes.func.isRequired,
-};

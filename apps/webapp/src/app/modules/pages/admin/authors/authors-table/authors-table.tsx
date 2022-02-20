@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IAuthor } from '@core/interfaces';
-import DataTable from '@features/data-table';
+import { DataTable } from '@features/data-table';
 import { IDataColumn } from '@features/data-table/interfaces';
 import { AUTHORS_MOCK } from '@mocks/authors.mock';
 

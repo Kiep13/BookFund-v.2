@@ -1,11 +1,8 @@
-import * as React from 'react';
-
-import ImageForm from './components/image-form';
-import ImagePromo from './components/image-promo';
+import { ImageForm } from './components/image-form';
+import { ImagePromo } from './components/image-promo';
 import { IProps } from './props.interface';
-import './image-upload.scss' ;
 
-export default function ImageUpload(props: IProps) {
+export const ImageUpload = (props: IProps) => {
   const {alt, form, imageUrlFieldName, imageFileFieldName} = props;
   const {values, errors} = form;
 
@@ -14,8 +11,8 @@ export default function ImageUpload(props: IProps) {
     form.setFieldValue(imageFileFieldName, undefined);
   }
 
-  const isPromoAvailable = (Boolean(values[imageUrlFieldName]) || Boolean(values[imageFileFieldName])) &&
-    !Boolean(errors[imageFileFieldName]) && !Boolean(errors[imageUrlFieldName]);
+  const isPromoAvailable = (Boolean(values[imageUrlFieldName]) && !Boolean(errors[imageFileFieldName]))
+                            || (Boolean(values[imageFileFieldName]) && !Boolean(errors[imageFileFieldName]));
 
   return (
     isPromoAvailable ?
