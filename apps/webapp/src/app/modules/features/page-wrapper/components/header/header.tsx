@@ -1,11 +1,9 @@
-import * as React from 'react';
-
 import Logo from '@shared/components/logo';
 import SearchInput from '@shared/components/search-input';
 
 import './header.scss';
 
-export function Header() {
+export const Header = () => {
   return (
     <header className='header'>
       <Logo/>

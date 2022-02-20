@@ -5,6 +5,7 @@ import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import FolderTwoToneIcon from "@mui/icons-material/FolderTwoTone";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import KeyboardReturnTwoTone from '@mui/icons-material/KeyboardReturnTwoTone';
 import PeopleOutlineTwoToneIcon from '@mui/icons-material/PeopleOutlineTwoTone';
 
 import { AdminRoutePaths, BaseRoutePaths } from '@core/enums';
@@ -54,8 +55,14 @@ export const USER_MENU_ITEMS: IMenuItem[] = [
 
 export const GO_ADMIN_MENU_ITEM: IMenuItem = {
   title: 'Go admin',
-  icon: DashboardTwoToneIcon,
+  icon: KeyboardReturnTwoTone,
   url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`
+};
+
+export const GO_USER_MENU_ITEM: IMenuItem = {
+  title: 'Go user',
+  icon: DashboardTwoToneIcon,
+  url: `${BaseRoutePaths.HOME}`
 };
 
 export const LOG_OUT_MENU_ITEM: IMenuItem = {

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import * as React from 'react';
 
 import { IMenuItem } from '@features/page-wrapper/interfaces';
 
+import { IProps} from './props.interface';
 import './nav-item.scss';
 
-export function NavItem(props: any) {
-  const {icon: Icon, title, url}: IMenuItem = props.menuItem;
+export const NavItem = ({menuItem}: IProps) => {
+  const {icon: Icon, title, url}: IMenuItem = menuItem;
 
   const itemButton = <ListItemButton key={title}
                                      classes={{

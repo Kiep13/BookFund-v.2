@@ -1,23 +1,23 @@
+import { AdminRoutePaths } from "@core/enums";
 import { Drawer, List } from '@mui/material';
-import * as React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import AvatarBlock from '@shared/components/avatar-block';
 
-import { GO_ADMIN_MENU_ITEM, LOG_OUT_MENU_ITEM } from '../../constants';
+import { GO_ADMIN_MENU_ITEM, GO_USER_MENU_ITEM, LOG_OUT_MENU_ITEM, STYLES_SIDENAV } from '../../constants';
 import { IMenuItem } from '../../interfaces';
-import NavItem from '../nav-item';
+import { NavItem } from '../nav-item';
+import { IProps } from './props.interface';
 import './sidenav.scss';
 
-export function Sidenav(props: any) {
+export const Sidenav = (props: IProps) => {
+  const location = useLocation();
+  const isAdminOpened = location.pathname.includes(AdminRoutePaths.ADMIN);
+
   return (
     <Drawer
       variant='permanent'
-      sx={{
-        width: 200,
-        flexShrink: 0,
-        border: 0,
-        [`& .MuiDrawer-paper`]: {width: 200, boxSizing: 'border-box'},
-      }}
+      sx={STYLES_SIDENAV.drawer}
       className='sidenav'
     >
       <AvatarBlock/>
@@ -27,7 +27,7 @@ export function Sidenav(props: any) {
         ))}
       </List>
       <List className='sidenav__links-block'>
-        <NavItem menuItem={GO_ADMIN_MENU_ITEM}/>
+        <NavItem menuItem={isAdminOpened ? GO_USER_MENU_ITEM : GO_ADMIN_MENU_ITEM}/>
         <NavItem menuItem={LOG_OUT_MENU_ITEM}/>
       </List>
     </Drawer>
