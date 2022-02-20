@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import { environment } from '@environments/environment';
 import { IAuthor, IGenre, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/author-form/interfaces';
+import { IBookForm } from '@pages/admin/book-form/interfaces';
 import { IGenreForm } from '@pages/admin/genre-form/interfaces';
 
 class ApiService {
@@ -32,6 +33,10 @@ class ApiService {
 
     return await axios.get(`${environment.backEndUrl}/v1/genre/list/?${requestParams}`)
       .then((response: AxiosResponse) => response.data);
+  }
+
+  public async addBook(book: IBookForm): Promise<void> {
+    return await axios.post(`${environment.backEndUrl}/v1/book/new`, book);
   }
 }
 

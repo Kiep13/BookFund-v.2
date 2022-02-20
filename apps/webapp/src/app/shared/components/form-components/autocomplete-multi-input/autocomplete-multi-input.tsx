@@ -27,8 +27,7 @@ export const AutocompleteMultiInput = (props: IProps) => {
   const handleSelecting = (event: SyntheticEvent, value: IOption[]) => {
     setValue(value);
 
-    const valueIds = value.map((value: IOption) => value.id);
-    form.setFieldValue(fieldName, valueIds);
+    form.setFieldValue(fieldName, value);
 
     props.handleTyping('');
   }

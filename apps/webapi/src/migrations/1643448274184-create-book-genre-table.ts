@@ -16,18 +16,6 @@ export class createBookGenreTable1643448274184 implements MigrationInterface {
             type: 'int8',
             isNullable: false
           },
-          {
-            name: 'createdAt',
-            type: 'timestamp',
-            isNullable: true,
-            default: 'now()'
-          },
-          {
-            name: 'updatedAt',
-            type: 'timestamp',
-            isNullable: true,
-            default: 'now()'
-          }
         ]
       }), true);
 
