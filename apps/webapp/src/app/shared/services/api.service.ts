@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import queryString from 'query-string';
 
 import { environment } from '@environments/environment';
-import { IAuthor, IGenre, ISearchOptions } from '@core/interfaces';
+import { IAuthor, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/author-form/interfaces';
 import { IBookForm } from '@pages/admin/book-form/interfaces';
 import { IGenreForm } from '@pages/admin/genre-form/interfaces';
@@ -17,7 +17,7 @@ class ApiService {
     return await axios.post(`${environment.backEndUrl}/v1/author/new`, author);
   }
 
-  public async getAuthors(searchOptions: ISearchOptions): Promise<IAuthor[]> {
+  public async getAuthors(searchOptions: ISearchOptions): Promise<IListApiView<IAuthor>> {
     const requestParams = queryString.stringify(searchOptions);
 
     return await axios.get(`${environment.backEndUrl}/v1/author/list/?${requestParams}`)

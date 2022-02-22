@@ -22,9 +22,9 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
         pageSize: PageSizes.Fifty,
         searchTerm: searchTerm
       }
-      const authors = await apiService.getAuthors(searchOptions);
+      const response = await apiService.getAuthors(searchOptions);
 
-      const authorOptions = authors.map((author: IAuthor) => {
+      const authorOptions = response.data.map((author: IAuthor) => {
         return {
           id: author.id,
           title: `${author.surname} ${author.name}`

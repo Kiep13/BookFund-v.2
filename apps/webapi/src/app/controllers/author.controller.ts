@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { ILike } from 'typeorm';
 
 import { ResponseStatuses, SortDirections } from '@core/enums';
+import { IListApiView } from '@core/interfaces';
 import { connection } from '@core/connection';
 import { AuthorEntity } from '@entities/author.entity';
 
@@ -25,8 +26,8 @@ class AuthorController {
   public async getAuthors(request: Request, response: Response, next: Function): Response {
     const requestParams = request.query;
 
-    const authors = await connection.getRepository(AuthorEntity).find({
-      select: ['id', 'surname', 'name' ],
+    const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
+      select: ['id', 'surname', 'name', 'createdAt', 'updatedAt'],
       order: {
         surname: SortDirections.ASC,
         name: SortDirections.ASC,
@@ -38,7 +39,12 @@ class AuthorController {
       ]
     });
 
-    return response.status(ResponseStatuses.STATUS_OK).json(authors);
+    const result: IListApiView<AuthorEntity> = {
+      data: authors,
+      count: count
+    }
+
+    return response.status(ResponseStatuses.STATUS_OK).json(result);
   }
 }
 

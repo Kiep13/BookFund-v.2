@@ -1,7 +1,9 @@
 import { Box, TableCell, TableRow, TableSortLabel, TableHead  } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
-import { AlignTypes, SortDirections } from '../../enums';
+import { SortDirections } from '@core/enums';
+
+import { AlignTypes  } from '../../enums';
 import { IDataColumn } from '../../interfaces';
 import { IProps } from './props.interface';
 

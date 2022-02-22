@@ -4,20 +4,19 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 import { useState } from 'react';
 
-import { PageSizes } from '@core/enums';
+import { PageSizes, SortDirections } from '@core/enums';
+import { ISortOptions } from '@core/interfaces';
 
 import { DataTableHead } from './components/data-table-head';
 import { STYLES } from './constants';
-import { AlignTypes, SortDirections } from './enums';
+import { AlignTypes } from './enums';
 import { IDataColumn } from './interfaces';
 import { dataFormatterService } from './services';
 import { IProps } from './props.interface';
 
 export const DataTable = (props: IProps) => {
-  const columns = props.columns;
+  const { columns, sortOptions } = props;
 
-  const [order, setOrder] = useState(SortDirections.Asc);
-  const [orderBy, setOrderBy] = useState(columns[0].id);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
 
@@ -26,10 +25,14 @@ export const DataTable = (props: IProps) => {
   const rowsPerPageOptions = Object.values(PageSizes).map(value => +value).filter((value) => value);
 
   const handleRequestSort = (event: any, property: any) => {
-    const isAsc = orderBy === property && order === SortDirections.Asc;
-    setOrder(isAsc ? SortDirections.Desc : SortDirections.Asc);
-    setOrderBy(property);
-    props.onHandleSortRequest();
+    const isAsc = sortOptions.orderBy === property && sortOptions.order === SortDirections.Asc;
+
+    const newSortOptions: ISortOptions = {
+      order: isAsc ? SortDirections.Desc : SortDirections.Asc,
+      orderBy: property
+    }
+
+    props.onHandleSortRequest(newSortOptions);
   };
 
   const handleClick = (event: any, name: string) => {
@@ -60,8 +63,8 @@ export const DataTable = (props: IProps) => {
           >
             <DataTableHead
               columns={columns}
-              order={order}
-              orderBy={orderBy}
+              order={sortOptions.order}
+              orderBy={sortOptions.orderBy}
               onRequestSort={handleRequestSort}
             />
             <TableBody>
@@ -74,7 +77,7 @@ export const DataTable = (props: IProps) => {
                         onClick={(event) => handleClick(event, row.name)}
                         role='tr'
                         tabIndex={-1}
-                        key={row.name}
+                        key={row.id}
                       >
                         {
                           columns.map((cell: IDataColumn) => {
