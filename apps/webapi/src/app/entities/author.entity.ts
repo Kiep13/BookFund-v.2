@@ -41,6 +41,14 @@ export class AuthorEntity {
   books: BookEntity[];
 
   @Column({
+    select: false,
+    nullable: true,
+    insert: false,
+    update: false
+  })
+  public fullName: string;
+
+  @Column({
     name: 'createdAt',
     type: 'timestamp',
     nullable: true,

@@ -27,7 +27,7 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
       const authorOptions = response.data.map((author: IAuthor) => {
         return {
           id: author.id,
-          title: `${author.surname} ${author.name}`
+          title: author.fullName || ''
         }
       });
 

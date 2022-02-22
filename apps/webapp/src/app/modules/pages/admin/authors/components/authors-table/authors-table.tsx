@@ -27,14 +27,10 @@ export const AuthorsTable = () => {
     const searchOptions: ISearchOptions = {
       pageSize: rowsPerPage,
       page: page,
-      order: sortOptions.order,
+      order: sortOptions.order.toUpperCase(),
       orderBy: sortOptions.orderBy,
     }
     const response = await apiService.getAuthors(searchOptions);
-
-    response.data.map((author: IAuthor) => {
-      author.fullName = `${author.surname || ''} ${author.name || ''}`;
-    });
 
     setData(response.data);
     setCount(response.count);

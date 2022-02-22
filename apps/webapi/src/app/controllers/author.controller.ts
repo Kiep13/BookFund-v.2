@@ -29,14 +29,22 @@ class AuthorController {
     const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
       select: ['id', 'surname', 'name', 'createdAt', 'updatedAt'],
       order: {
-        surname: SortDirections.ASC,
-        name: SortDirections.ASC,
+        ...(requestParams.orderBy && requestParams.orderBy !== 'fullName' ? {
+          [requestParams.orderBy]: requestParams.order || SortDirections.ASC
+        }: {
+          surname: requestParams.order || SortDirections.ASC,
+          name: requestParams.order || SortDirections.ASC,
+        })
       },
       take: +requestParams.pageSize,
       where: [
         { surname: ILike(`%${requestParams.searchTerm || ''}%`) },
         { name: ILike(`%${requestParams.searchTerm || ''}%`) },
       ]
+    });
+
+    authors.map((author: AuthorEntity) => {
+      author.fullName = `${author.name || ''} ${author.surname || ''}`
     });
 
     const result: IListApiView<AuthorEntity> = {
