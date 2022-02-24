@@ -9,7 +9,8 @@
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "migrations:run": "cd ./apps/webapi/src && ts-node --transpile-only ../../../node_modules/typeorm/cli.js migration:run",
     "migrations:create": "cd ./apps/webapi/src && typeorm migration:create -n",
-    "migrations:revert": "cd ./apps/webapi/src && typeorm migration:revert"
+    "migrations:revert": "cd ./apps/webapi/src && typeorm migration:revert",
+    "seed:run": "cd ./apps/webapi/src && ts-node ../../../node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "ts-node": "^10.4.0",
     "tslib": "^2.0.0",
     "typeorm": "^0.2.41",
+    "typeorm-seeding": "^1.6.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {
