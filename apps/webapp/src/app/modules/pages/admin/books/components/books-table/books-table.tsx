@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { SortDirections } from '@core/enums';
+import { PageSizes, SortDirections } from '@core/enums';
 import { IBook, ISortOptions } from '@core/interfaces';
 import { DataTable } from '@features/data-table';
 import { IDataColumn } from '@features/data-table/interfaces';
@@ -13,6 +13,8 @@ export const BooksTable = () => {
     order: SortDirections.Asc,
     orderBy: COLUMNS[0].id
   });
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
 
   const data: IBook[] = BOOKS_MOCK.map((book: IBook) => {
     book.authorFullName = `${book.author?.surname || ' '} ${book.author?.name || ' '}`;
@@ -35,6 +37,8 @@ export const BooksTable = () => {
       data={data}
       count={data.length}
       sortOptions={sortOptions}
+      page={page}
+      rowsPerPage={rowsPerPage}
       onHandleClick={handleClick}
       onHandleRowsPerPageChanged={handleRowsPerPageChanged}
       onHandlePageChange={handlePageChange}

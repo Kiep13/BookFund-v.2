@@ -43,9 +43,14 @@ export const AuthorsTable = () => {
 
   const handleClick = () => {};
 
-  const handleRowsPerPageChanged = () => {};
+  const handleRowsPerPageChanged = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage);
+    setPage(0);
+  };
 
-  const handlePageChange = () => {};
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   const handleSortRequest = (newSortOptions: ISortOptions) => {
     setSortOptions(newSortOptions);
@@ -57,6 +62,8 @@ export const AuthorsTable = () => {
       data={data}
       count={count}
       sortOptions={sortOptions}
+      page={page}
+      rowsPerPage={rowsPerPage}
       onHandleClick={handleClick}
       onHandleRowsPerPageChanged={handleRowsPerPageChanged}
       onHandlePageChange={handlePageChange}

@@ -37,6 +37,7 @@ class AuthorController {
         })
       },
       take: +requestParams.pageSize,
+      skip: (+requestParams.pageSize * +requestParams.page),
       where: [
         { surname: ILike(`%${requestParams.searchTerm || ''}%`) },
         { name: ILike(`%${requestParams.searchTerm || ''}%`) },
