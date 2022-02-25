@@ -25,3 +25,7 @@ To simply run migrations use command:
 ```
   npm run migrations:run
 ```
+To add seed data:
+```
+  npm run seed:run
+```
