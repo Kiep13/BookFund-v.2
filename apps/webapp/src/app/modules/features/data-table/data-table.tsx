@@ -1,4 +1,15 @@
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow  } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  LinearProgress,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow
+} from '@mui/material';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
@@ -14,7 +25,7 @@ import { dataFormatterService } from './services';
 import { IProps } from './props.interface';
 
 export const DataTable = (props: IProps) => {
-  const { columns, sortOptions, page, rowsPerPage, data, count } = props;
+  const { columns, sortOptions, page, rowsPerPage, data, count, loading } = props;
 
   const rowsPerPageOptions = Object.values(PageSizes).map(value => +value).filter((value) => value);
 
@@ -61,7 +72,18 @@ export const DataTable = (props: IProps) => {
             />
             <TableBody>
               {
-                data.map((row: any) => {
+                loading && (
+                  <TableRow>
+                    <TableCell colSpan={6} sx={{
+                      padding: 0
+                    }}>
+                      <LinearProgress />
+                    </TableCell>
+                  </TableRow>
+                )
+              }
+              {
+                 data.map((row: any) => {
                     return (
                       <TableRow
                         hover

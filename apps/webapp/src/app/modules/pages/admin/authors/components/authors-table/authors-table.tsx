@@ -66,6 +66,7 @@ export const AuthorsTable = () => {
       page={page}
       rowsPerPage={rowsPerPage}
       onHandleClick={handleClick}
+      loading={loading}
       onHandleRowsPerPageChanged={handleRowsPerPageChanged}
       onHandlePageChange={handlePageChange}
       onHandleSortRequest={handleSortRequest}

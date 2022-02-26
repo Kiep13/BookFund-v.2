@@ -15,6 +15,7 @@ export const BooksTable = () => {
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const data: IBook[] = BOOKS_MOCK.map((book: IBook) => {
     book.authorFullName = `${book.author?.surname || ' '} ${book.author?.name || ' '}`;
@@ -40,6 +41,7 @@ export const BooksTable = () => {
       page={page}
       rowsPerPage={rowsPerPage}
       onHandleClick={handleClick}
+      loading={loading}
       onHandleRowsPerPageChanged={handleRowsPerPageChanged}
       onHandlePageChange={handlePageChange}
       onHandleSortRequest={handleSortRequest}

@@ -5,13 +5,14 @@ import { IDataColumn } from './interfaces';
 
 export interface IProps {
   columns: IDataColumn[],
-  data: any[],
   count: number,
-  sortOptions: ISortOptions;
+  data: any[],
+  loading: boolean;
+  onHandleClick: Function,
+  onHandlePageChange: Function,
+  onHandleRowsPerPageChanged: Function
+  onHandleSortRequest: Function,
   page: number;
   rowsPerPage: PageSizes;
-  onHandleClick: Function,
-  onHandleSortRequest: Function,
-  onHandleRowsPerPageChanged: Function
-  onHandlePageChange: Function,
+  sortOptions: ISortOptions;
 }
