@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { PageSizes, SortDirections } from '@core/enums';
-import { IAuthor, ISearchOptions, ISortOptions } from '@core/interfaces';
+import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { apiService } from '@shared/services';
 import { DataTable } from '@features/data-table';
 import { IDataColumn } from '@features/data-table/interfaces';
@@ -41,7 +41,8 @@ export const AuthorsTable = () => {
     getAuthors();
   }, [sortOptions, page, rowsPerPage])
 
-  const handleClick = () => {};
+  const handleClick = (tableItemAction: ITableItemAction) => {
+  };
 
   const handleRowsPerPageChanged = (newRowsPerPage: number) => {
     setRowsPerPage(newRowsPerPage);

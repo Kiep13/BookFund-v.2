@@ -6,3 +6,4 @@ export * from './option.interface';
 export * from './overall-statistics.interface';
 export * from './search-options.interface';
 export * from './sort-options.interace';
+export * from './table-item-action.interface';

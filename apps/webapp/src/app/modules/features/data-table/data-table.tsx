@@ -3,8 +3,8 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 
-import { PageSizes, SortDirections } from '@core/enums';
-import { ISortOptions } from '@core/interfaces';
+import { PageSizes, SortDirections, TableActions } from '@core/enums';
+import { ISortOptions, ITableItemAction } from '@core/interfaces';
 
 import { DataTableHead } from './components/data-table-head';
 import { STYLES } from './constants';
@@ -29,8 +29,9 @@ export const DataTable = (props: IProps) => {
     props.onHandleSortRequest(newSortOptions);
   };
 
-  const handleClick = (event: any, name: string) => {
-    props.onHandleClick();
+  const handleClick = (actionType: TableActions, id: number) => {
+    const tableItemAction: ITableItemAction = { id, actionType };
+    props.onHandleClick(tableItemAction);
   };
 
   const handleChangePage = (event: any, newPage: number) => {
@@ -64,7 +65,6 @@ export const DataTable = (props: IProps) => {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.name)}
                         role='tr'
                         tabIndex={-1}
                         key={row.id}
@@ -77,13 +77,22 @@ export const DataTable = (props: IProps) => {
                           })
                         }
                         <TableCell component='td' align={AlignTypes.Right}>
-                          <IconButton aria-label='View' sx={STYLES.iconButton}>
+                          <IconButton
+                            aria-label='View'
+                            sx={STYLES.iconButton}
+                            onClick={() => {handleClick(TableActions.VIEW, row.id)}}>
                             <VisibilityTwoToneIcon/>
                           </IconButton>
-                          <IconButton aria-label='Edit' sx={STYLES.iconButton}>
+                          <IconButton
+                            aria-label='Edit'
+                            sx={STYLES.iconButton}
+                            onClick={() => {handleClick(TableActions.EDIT, row.id)}}>
                             <EditTwoToneIcon/>
                           </IconButton>
-                          <IconButton aria-label='Delete' sx={STYLES.iconButton}>
+                          <IconButton
+                            aria-label='Delete'
+                            sx={STYLES.iconButton}
+                            onClick={() => {handleClick(TableActions.DELETE, row.id)}}>
                             <DeleteTwoToneIcon/>
                           </IconButton>
                         </TableCell>
