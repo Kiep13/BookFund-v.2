@@ -74,9 +74,7 @@ export const DataTable = (props: IProps) => {
               {
                 loading && (
                   <TableRow>
-                    <TableCell colSpan={6} sx={{
-                      padding: 0
-                    }}>
+                    <TableCell colSpan={columns.length + 1} sx={STYLES.loadingProgressBar}>
                       <LinearProgress />
                     </TableCell>
                   </TableRow>
@@ -127,7 +125,9 @@ export const DataTable = (props: IProps) => {
                     height: 53 * rowsPerPage,
                   }}
                 >
-                  <TableCell colSpan={6}/>
+                  <TableCell colSpan={6} sx={STYLES.noItems}>
+                    Don't have items to display
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>

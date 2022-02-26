@@ -17,6 +17,15 @@ class ApiService {
     return await axios.post(`${environment.backEndUrl}/v1/author/new`, author);
   }
 
+  public async updateAuthor(id: number, author: IAuthorForm): Promise<void> {
+    return await axios.put(`${environment.backEndUrl}/v1/author/update/${id}`, author);
+  }
+
+  public async getAuthor(id: number): Promise<IAuthor> {
+    return await axios.get(`${environment.backEndUrl}/v1/author/${id}`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
   public async getAuthors(searchOptions: ISearchOptions): Promise<IListApiView<IAuthor>> {
     const requestParams = queryString.stringify(searchOptions);
 

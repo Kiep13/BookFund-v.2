@@ -9,6 +9,14 @@ export const STYLES = {
   table: {
     minWidth: 750
   },
+  loadingProgressBar: {
+    p: 0
+  },
+  noItems: {
+    textAlign: 'center',
+    fontSize: '28px',
+    fontWeight: 200,
+  },
   iconButton: {
     p: 0.5
   }

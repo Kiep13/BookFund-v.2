@@ -1,5 +1,7 @@
 export * from './author.interface';
 export * from './book.interface';
+export * from './form-page-params.interface';
+export * from './form-page-state.interface';
 export * from './genre.interface';
 export * from './list-api-view.interface';
 export * from './option.interface';

@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { PageSizes, SortDirections, TableActions } from '@core/enums';
+import { AdminRoutePaths, PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
-import { apiService } from '@shared/services';
 import { DataTable } from '@features/data-table';
 import { IDataColumn } from '@features/data-table/interfaces';
+import { apiService } from '@shared/services';
 
 import { COLUMNS } from '../../constants';
 
 export const AuthorsTable = () => {
+  const history = useHistory();
+
   const [data, setData] = useState<IAuthor[]>([]);
   const [count, setCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -41,6 +44,12 @@ export const AuthorsTable = () => {
     getAuthors();
   }, [sortOptions, page, rowsPerPage]);
 
+  const navigateToEditForm = (id: number): void => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`, {
+      editMode: true,
+    });
+  }
+
   const deleteAuthor = async (id: number) => {
     await apiService.deleteAuthor(id);
 
@@ -52,24 +61,27 @@ export const AuthorsTable = () => {
     getAuthors();
   }
 
-  const handleClick = (tableItemAction: ITableItemAction) => {
+  const handleClick = (tableItemAction: ITableItemAction): void => {
     switch(tableItemAction.actionType) {
+      case TableActions.EDIT: {
+        navigateToEditForm(tableItemAction.id);
+      } break;
       case TableActions.DELETE: {
         deleteAuthor(tableItemAction.id)
       } break;
     }
   };
 
-  const handleRowsPerPageChanged = (newRowsPerPage: number) => {
+  const handleRowsPerPageChanged = (newRowsPerPage: number): void => {
     setRowsPerPage(newRowsPerPage);
     setPage(0);
   };
 
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = (newPage: number): void => {
     setPage(newPage);
   };
 
-  const handleSortRequest = (newSortOptions: ISortOptions) => {
+  const handleSortRequest = (newSortOptions: ISortOptions): void => {
     setSortOptions(newSortOptions);
   };
 

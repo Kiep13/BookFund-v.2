@@ -5,22 +5,33 @@ import { ResponseStatuses, SortDirections } from '@core/enums';
 import { IListApiView } from '@core/interfaces';
 import { connection } from '@core/connection';
 import { AuthorEntity } from '@entities/author.entity';
+import { authorService } from '@services/author.service';
 
 class AuthorController {
   public async createAuthor(request: Request, response: Response, next: Function): Response {
-    const author: AuthorEntity = new AuthorEntity();
-
-    author.name = request.body.name;
-    author.surname = request.body.surname;
-    author.image = request.body.imageUrl;
-    author.biography = request.body.biography;
-
-    if(request.body.imageUrl) {
-      author.image = request.body.imageUrl;
-    }
+    const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
 
     await connection.manager.save(author);
     return response.status(ResponseStatuses.STATUS_CREATED).json(author);
+  }
+
+  public async updateAuthor(request: Request, response: Response, next: Function): Response {
+    const authorId = +request.params.id;
+    const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
+
+    console.log(authorId, author);
+
+    await connection.manager.update(AuthorEntity, authorId, author);
+    return response.status(ResponseStatuses.STATUS_OK).json(author);
+  }
+
+  public async getAuthor(request: Request, response: Response, next: Function): Response {
+    const authorId = +request.params.id;
+    const author = await connection.manager.findOne(AuthorEntity, authorId);
+
+    return response.status(ResponseStatuses.STATUS_OK).json(author);
+
+    return response.status(ResponseStatuses.STATUS_NO_CONTENT);
   }
 
   public async getAuthors(request: Request, response: Response, next: Function): Response {
