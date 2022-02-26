@@ -1,7 +1,8 @@
+import { IAuthorForm } from '@core/interfaces';
 import { AuthorEntity } from '@entities/author.entity';
 
 class AuthorService {
-  public buildAuthorFromBody(requestBody: any): AuthorEntity {
+  public buildAuthorFromBody(requestBody: IAuthorForm): AuthorEntity {
     const author: AuthorEntity = new AuthorEntity();
 
     author.name = requestBody.name;

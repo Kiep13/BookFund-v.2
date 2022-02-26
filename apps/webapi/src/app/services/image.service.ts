@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
 
@@ -13,6 +14,14 @@ class ImageService {
 
     await file.mv(filePath);
     return fileName;
+  }
+
+  public async deleteImage(fileUrl: string): Promise<void> {
+    const fileParts = fileUrl.split('/');
+    const fileName = fileParts[fileParts.length - 1];
+
+    const filePath = `${path.resolve(__dirname, '..', '..', environment.imagesFolder, fileName)}`;
+    await fs.unlinkSync(filePath);
   }
 }
 

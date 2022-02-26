@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { ILike } from 'typeorm';
 
-import { ResponseStatuses, SortDirections } from '@core/enums';
+import { ApiRoutes, ResponseStatuses, SortDirections } from '@core/enums';
 import { IListApiView } from '@core/interfaces';
 import { connection } from '@core/connection';
+import { environment } from '@environments/environment';
 import { AuthorEntity } from '@entities/author.entity';
 import { authorService } from '@services/author.service';
+import { imageService } from '@services/image.service';
 
 class AuthorController {
   public async createAuthor(request: Request, response: Response, next: Function): Response {
@@ -17,9 +19,13 @@ class AuthorController {
 
   public async updateAuthor(request: Request, response: Response, next: Function): Response {
     const authorId = +request.params.id;
-    const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
 
-    console.log(authorId, author);
+    const currentAuthor = await connection.manager.findOne(AuthorEntity, authorId);
+    if(currentAuthor.image !== request.body.imageUrl && currentAuthor.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
+      await imageService.deleteImage(currentAuthor.image);
+    }
+
+    const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
 
     await connection.manager.update(AuthorEntity, authorId, author);
     return response.status(ResponseStatuses.STATUS_OK).json(author);
@@ -30,8 +36,6 @@ class AuthorController {
     const author = await connection.manager.findOne(AuthorEntity, authorId);
 
     return response.status(ResponseStatuses.STATUS_OK).json(author);
-
-    return response.status(ResponseStatuses.STATUS_NO_CONTENT);
   }
 
   public async getAuthors(request: Request, response: Response, next: Function): Response {
