@@ -24,6 +24,10 @@ class ApiService {
       .then((response: AxiosResponse) => response.data);
   }
 
+  public async deleteAuthor(id: number): Promise<void> {
+    return axios.delete(`${environment.backEndUrl}/v1/author/delete/${id}`)
+  }
+
   public async addGenre(genre: IGenreForm): Promise<void> {
     return await axios.post(`${environment.backEndUrl}/v1/genre/new`, genre);
   }

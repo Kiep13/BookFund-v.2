@@ -7,5 +7,6 @@ const router = new Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, authorController.getAuthors);
 router.post(`/${ApiRoutesModifiers.NEW}`, authorController.createAuthor);
+router.delete(`/${ApiRoutesModifiers.DELETE}/:id`, authorController.deleteAuthor)
 
 export default router;

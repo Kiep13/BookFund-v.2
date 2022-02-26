@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { PageSizes, SortDirections } from '@core/enums';
+import { PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { apiService } from '@shared/services';
 import { DataTable } from '@features/data-table';
@@ -39,9 +39,25 @@ export const AuthorsTable = () => {
 
   useEffect(() => {
     getAuthors();
-  }, [sortOptions, page, rowsPerPage])
+  }, [sortOptions, page, rowsPerPage]);
+
+  const deleteAuthor = async (id: number) => {
+    await apiService.deleteAuthor(id);
+
+    if(page !== 0 && data.length === 1) {
+      setPage(page - 1);
+      return;
+    }
+
+    getAuthors();
+  }
 
   const handleClick = (tableItemAction: ITableItemAction) => {
+    switch(tableItemAction.actionType) {
+      case TableActions.DELETE: {
+        deleteAuthor(tableItemAction.id)
+      } break;
+    }
   };
 
   const handleRowsPerPageChanged = (newRowsPerPage: number) => {

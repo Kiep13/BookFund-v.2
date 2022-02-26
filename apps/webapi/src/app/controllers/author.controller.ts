@@ -55,6 +55,14 @@ class AuthorController {
 
     return response.status(ResponseStatuses.STATUS_OK).json(result);
   }
+
+  public async deleteAuthor(request: Request, response: Response, next: Function): Response {
+    const authorId = +request.params.id;
+
+    await connection.manager.delete(AuthorEntity, authorId);
+
+    return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+  }
 }
 
 export const authorController = new AuthorController();
