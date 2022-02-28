@@ -1,1 +1,1 @@
-export * from './alerts-block';
+export * from './alertsBlock';
