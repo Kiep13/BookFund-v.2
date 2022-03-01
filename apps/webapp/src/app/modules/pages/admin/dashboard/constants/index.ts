@@ -1,2 +1,2 @@
-export * from './min-statistic-date';
+export * from './minStatisticDate';
 export * from './styles';

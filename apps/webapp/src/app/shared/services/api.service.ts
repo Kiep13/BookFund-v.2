@@ -3,9 +3,9 @@ import queryString from 'query-string';
 
 import { environment } from '@environments/environment';
 import { IAuthor, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
-import { IAuthorForm } from '@pages/admin/author-form/interfaces';
-import { IBookForm } from '@pages/admin/book-form/interfaces';
-import { IGenreForm } from '@pages/admin/genre-form/interfaces';
+import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
+import { IBookForm } from '@pages/admin/bookForm/interfaces';
+import { IGenreForm } from '@pages/admin/genreForm/interfaces';
 
 class ApiService {
   public async saveImage(formData: FormData): Promise<string> {

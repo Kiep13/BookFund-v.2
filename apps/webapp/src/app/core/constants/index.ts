@@ -1,3 +1,3 @@
-export * from './line-chart-options';
-export * from './validation-constants';
-export * from './validation-regexp';
+export * from './lineСhartOptions';
+export * from './validationСonstants';
+export * from './validationRegexp';

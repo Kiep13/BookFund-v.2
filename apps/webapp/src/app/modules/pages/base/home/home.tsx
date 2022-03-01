@@ -1,5 +1,5 @@
 import compose from '@shared/utils/compose';
-import { wrapUserPage } from '@features/page-wrapper';
+import { wrapUserPage } from '@features/pageWrapper';
 
 const HomePage = () => {
   return (

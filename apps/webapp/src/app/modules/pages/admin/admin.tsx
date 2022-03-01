@@ -1,15 +1,15 @@
 import { Route } from 'react-router-dom';
 
 import { AdminRoutePaths } from '@core/enums';
-import { wrapAdminPage } from '@features/page-wrapper';
+import { wrapAdminPage } from '@features/pageWrapper';
 import compose from '@shared/utils/compose';
 
 import { Authors } from './authors';
-import { AuthorForm } from './author-form';
+import { AuthorForm } from './authorForm';
 import { Books } from './books';
-import { BookForm } from './book-form';
+import { BookForm } from './bookForm';
 import { Genres } from './genres';
-import { GenreForm } from './genre-form';
+import { GenreForm } from './genreForm';
 import { Dashboard } from './dashboard';
 
 const AdminPage = () => {
