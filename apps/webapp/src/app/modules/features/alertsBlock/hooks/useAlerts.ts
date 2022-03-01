@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addAlert as addAlertAction, removeAlert as removeAlertAction } from '@store/subStates/alertsStore';
 
 import { DELAY } from '../constants';
 import { AlertTypes } from '../enums';
 import { IAlert } from '../interfaces';
 
 export const useAlerts = () => {
-  //импортировать алерт с редакса
-
-  const [alerts,setAlerts] = useState<IAlert[]>([]);
+  const dispatch = useDispatch();
 
   const addInfo = (message: string): void => {
     addAlert(message, AlertTypes.INFO);
@@ -26,8 +26,7 @@ export const useAlerts = () => {
   }
 
   const removeAlert = (id: number): void  => {
-    const newAlerts = alerts.filter((alert: IAlert) => alert.id !== id);
-    setAlerts(newAlerts);
+    dispatch(removeAlertAction(id));
   }
 
   const addAlert = (message: string, type: AlertTypes): void => {
@@ -39,12 +38,7 @@ export const useAlerts = () => {
       closable: false
     }
 
-    console.log(alerts);
-
-    setAlerts([
-      ...alerts,
-      newAlert
-    ]);
+    dispatch(addAlertAction(newAlert));
 
     const timeout = setTimeout(() => {
       removeAlert(newAlert.id);
@@ -52,5 +46,10 @@ export const useAlerts = () => {
     }, newAlert.delay);
   }
 
-  return {alerts, addSuccess};
+  return {
+    addInfo,
+    addSuccess,
+    addWarning,
+    addError
+  };
 }
