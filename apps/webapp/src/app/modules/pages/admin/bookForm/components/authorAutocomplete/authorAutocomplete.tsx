@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { PageSizes } from '@core/enums';
 import { IAuthor, IOption, ISearchOptions } from '@core/interfaces';
 import { AutocompleteInput } from '@shared/components/formСomponents/autocompleteInput';
-import { apiService } from '@shared/services';
+import { useApi } from '@shared/hooks';
 
 import { DELAY } from '../../constants';
 import { IProps } from './props.interface';
@@ -13,6 +13,7 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [options, setOptions] = useState<IOption[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const api = useApi();
 
   const getAuthors = useCallback(
     debounce(async () => {
@@ -22,7 +23,7 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
         pageSize: PageSizes.Fifty,
         searchTerm: searchTerm
       }
-      const response = await apiService.getAuthors(searchOptions);
+      const response = await api.getAuthors(searchOptions);
 
       const authorOptions = response.data.map((author: IAuthor) => {
         return {

@@ -6,7 +6,7 @@ import { FormikHelpers } from 'formik/dist/types';
 import { AdminRoutePaths } from '@core/enums';
 import { Input } from '@shared/components/formСomponents/input';
 import { Card } from '@shared/components/card';
-import { apiService } from '@shared/services';
+import { useApi } from '@shared/hooks';
 
 import { GenreAutocomplete } from './components/genreAutocomplete';
 import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';
@@ -14,9 +14,10 @@ import { IGenreForm } from './interfaces';
 
 export const GenreForm = () => {
   const history = useHistory();
+  const api = useApi();
 
   const handleSubmit = async (values: IGenreForm, {setSubmitting}: FormikHelpers<IGenreForm>) => {
-    await apiService.addGenre(values);
+    await api.addGenre(values);
     navigateToGenresPage();
     setSubmitting(false);
   }

@@ -21,7 +21,7 @@ import { DataTableHead } from './components/dataTableHead';
 import { STYLES } from './constants';
 import { AlignTypes } from './enums';
 import { IDataColumn } from './interfaces';
-import { dataFormatterService } from './services';
+import { formatData } from './utils';
 import { IProps } from './props.interface';
 
 export const DataTable = (props: IProps) => {
@@ -92,7 +92,7 @@ export const DataTable = (props: IProps) => {
                         {
                           columns.map((cell: IDataColumn) => {
                             return <TableCell component='td' align={cell.align} key={cell.id}>
-                              {dataFormatterService.formatData(row[cell.name || ''], cell.type)}
+                              {formatData(row[cell.name || ''], cell.type)}
                             </TableCell>;
                           })
                         }

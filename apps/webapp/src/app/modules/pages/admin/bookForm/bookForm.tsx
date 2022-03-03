@@ -7,7 +7,7 @@ import { AdminRoutePaths } from '@core/enums';
 import { ImageUpload } from '@features/imageUpload';
 import { Input } from '@shared/components/formСomponents/input';
 import { Card } from '@shared/components/card';
-import { apiService } from '@shared/services';
+import { useApi } from '@shared/hooks';
 
 import { AuthorAutocomplete } from './components/authorAutocomplete';
 import { GenresMultiAutocomplete } from './components/genresMultiAutocomplete';
@@ -16,16 +16,17 @@ import { IBookForm } from './interfaces';
 
 export const BookForm = () => {
   const history = useHistory();
+  const api = useApi();
 
   const handleSubmit = async (values: IBookForm, {setSubmitting}: FormikHelpers<IBookForm>) => {
     if(values.imageFile) {
       const formData = new FormData();
       formData.append('image', values.imageFile);
 
-      values.imageUrl = await(await apiService.saveImage(formData));
+      values.imageUrl = await(await api.saveImage(formData));
     }
 
-    await apiService.addBook(values);
+    await api.addBook(values);
     navigateToBooksPage();
     setSubmitting(false);
   }

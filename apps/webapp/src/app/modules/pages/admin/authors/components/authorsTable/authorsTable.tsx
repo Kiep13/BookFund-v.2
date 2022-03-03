@@ -5,12 +5,13 @@ import { AdminRoutePaths, PageSizes, SortDirections, TableActions } from '@core/
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
-import { apiService } from '@shared/services';
+import { useApi } from '@shared/hooks';
 
 import { COLUMNS } from '../../constants';
 
 export const AuthorsTable = () => {
   const history = useHistory();
+  const api = useApi();
 
   const [data, setData] = useState<IAuthor[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -33,7 +34,7 @@ export const AuthorsTable = () => {
       order: sortOptions.order.toUpperCase(),
       orderBy: sortOptions.orderBy,
     }
-    const response = await apiService.getAuthors(searchOptions);
+    const response = await api.getAuthors(searchOptions);
 
     setData(response.data);
     setCount(response.count);
@@ -51,7 +52,7 @@ export const AuthorsTable = () => {
   }
 
   const deleteAuthor = async (id: number) => {
-    await apiService.deleteAuthor(id);
+    await api.deleteAuthor(id);
 
     if(page !== 0 && data.length === 1) {
       setPage(page - 1);

@@ -9,7 +9,7 @@ import { IFormPageParams, IFormPageState } from '@core/interfaces';
 import { ImageUpload } from '@features/imageUpload';
 import { Card } from '@shared/components/card';
 import { Input } from '@shared/components/formСomponents/input';
-import { apiService } from '@shared/services';
+import { useApi } from '@shared/hooks';
 
 import { FORM_INITIAL_VALUE, STYLES, TITLE_ADD, TITLE_EDIT, VALIDATION_SCHEMA } from './constants';
 import { IAuthorForm } from './interfaces';
@@ -18,6 +18,7 @@ export const AuthorForm = () => {
   const history = useHistory();
   const location = useLocation();
   const params = useParams();
+  const api = useApi();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [editMode, setEditMode] = useState<boolean>(Boolean((location.state as IFormPageState).editMode) || false);
@@ -27,14 +28,14 @@ export const AuthorForm = () => {
       const formData = new FormData();
       formData.append('image', values.imageFile);
 
-      values.imageUrl = await(await apiService.saveImage(formData));
+      values.imageUrl = await(await api.saveImage(formData));
     }
 
     if(editMode) {
       const authorId = (params as IFormPageParams).id;
-      await apiService.updateAuthor(authorId, values);
+      await api.updateAuthor(authorId, values);
     } else {
-      await apiService.addAuthor(values);
+      await api.addAuthor(values);
     }
 
     navigateToAuthorsPage();
@@ -55,7 +56,7 @@ export const AuthorForm = () => {
     if(editMode) {
       const authorId = (params as IFormPageParams).id;
 
-      const author = await apiService.getAuthor(authorId);
+      const author = await api.getAuthor(authorId);
       await formik.setValues({
         ...author,
         biography: author.biography || '',

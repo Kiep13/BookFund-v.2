@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { PageSizes } from '@core/enums';
 import { IGenre, IOption, ISearchOptions } from '@core/interfaces';
 import { AutocompleteMultiInput } from '@shared/components/formСomponents/autocompleteMultiInput';
-import { apiService } from '@shared/services';
+import { useApi } from '@shared/hooks';
 
 import { DELAY } from '../../constants';
 import { IProps } from './props.interface';
@@ -13,6 +13,7 @@ export const GenresMultiAutocomplete = ({form, fieldName}: IProps) => {
   const [ loading, setLoading ] = useState<boolean>(true);
   const [ options, setOptions ] = useState<IOption[]>([]);
   const [ searchTerm, setSearchTerm ] = useState<string>('');
+  const api = useApi();
 
   const getGenres = useCallback(
     debounce(async () => {
@@ -22,7 +23,7 @@ export const GenresMultiAutocomplete = ({form, fieldName}: IProps) => {
         pageSize: PageSizes.Fifty,
         searchTerm: searchTerm
       }
-      const genres = await apiService.getGenres(searchOptions);
+      const genres = await api.getGenres(searchOptions);
 
       const genreOptions = genres.map((genre: IGenre) => {
         return {
