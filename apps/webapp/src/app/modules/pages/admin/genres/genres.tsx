@@ -5,10 +5,10 @@ import { AdminRoutePaths } from '@core/enums';
 import { IGenre } from '@core/interfaces';
 import { GENRES_MOCK } from '@mocks/genres.mock';
 import { Card } from '@shared/components/card';
-import { PageHeaderCard } from '@shared/components/page-header-card';
+import { PageHeaderCard } from '@shared/components/pageHeaderCard';
 
-import { GenreCard } from './components/genre-card';
-import { GenresTreeView } from './components/genres-tree-view';
+import { GenreCard } from './components/genreСard';
+import { GenresTreeView } from './components/genresTreeView';
 import { STYLES } from './constants';
 
 export const Genres = () => {

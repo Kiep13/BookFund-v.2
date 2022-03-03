@@ -1,14 +1,14 @@
 import { IOverallStatistic } from '@core/interfaces';
 import { Box } from '@mui/material';
 
-import { OVERALL_STATISTIC_MOCK } from '@mocks/overall-statistics.mock';
+import { OVERALL_STATISTIC_MOCK } from '@mocks/overallStatistics.mock';
 import { Card } from '@shared/components/card';
 
-import { DashboardHeader } from './components/shared/dashboard-header';
-import { ActionPerMonthDateCard } from './components/cards/action-per-month-date-card';
-import { GenresCard } from './components/cards/genres-card';
-import { StatisticCard } from './components/cards/statistic-card';
-import { PopularBookCard } from './components/cards/popular-book-card';
+import { DashboardHeader } from './components/shared/dashboardHeader';
+import { ActionPerMonthDateCard } from './components/cards/actionPerMonthDateCard';
+import { GenresCard } from './components/cards/genresCard';
+import { StatisticCard } from './components/cards/statisticСard';
+import { PopularBookCard } from './components/cards/popularBookCard';
 import { STYLES } from './constants';
 
 export const Dashboard = () => {
