@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { addAlert as addAlertAction, removeAlert as removeAlertAction } from '@store/subStates/alertsStore';
+import * as alertStore from '@store/reducers/alertsStore';
 
 import { DELAY } from '../constants';
 import { AlertTypes } from '../enums';
@@ -26,7 +26,7 @@ export const useAlerts = () => {
   }
 
   const removeAlert = (id: number): void  => {
-    dispatch(removeAlertAction(id));
+    dispatch(alertStore.removeAlert(id));
   }
 
   const addAlert = (message: string, type: AlertTypes): void => {
@@ -38,7 +38,7 @@ export const useAlerts = () => {
       closable: false
     }
 
-    dispatch(addAlertAction(newAlert));
+    dispatch(alertStore.addAlert(newAlert));
 
     const timeout = setTimeout(() => {
       removeAlert(newAlert.id);

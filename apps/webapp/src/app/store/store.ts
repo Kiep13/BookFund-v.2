@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import alertReducer from './subStates/alertsStore';
+import alertReducer from './reducers/alertsStore';
 
 export default configureStore({
   reducer: {
