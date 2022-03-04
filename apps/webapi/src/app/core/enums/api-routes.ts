@@ -10,5 +10,6 @@ export enum ApiRoutesModifiers {
   UPDATE = 'update',
   SAVE = 'save',
   LIST = 'list',
+  TREE = 'tree',
   DELETE = 'delete'
 }

@@ -1,10 +1,19 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  Tree,
+  TreeChildren, TreeParent
+} from 'typeorm';
 
 import { BookEntity } from '@entities/book.entity';
 
 @Entity({
   name: 'genre'
 })
+@Tree('nested-set')
 export class GenreEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
@@ -18,13 +27,11 @@ export class GenreEntity {
   })
   name: string;
 
-  @ManyToOne(() => GenreEntity, genre => genre.subGenres)
-  @JoinColumn({
-    name: 'parentId'
-  })
-  parentGenre: GenreEntity;
+  @JoinColumn()
+  @TreeParent()
+  parent: GenreEntity;
 
-  @OneToMany(() => GenreEntity, genre => genre.parentGenre)
+  @TreeChildren()
   subGenres: GenreEntity[];
 
   @ManyToMany(() => BookEntity, book => book.genres)

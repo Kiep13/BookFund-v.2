@@ -12,7 +12,7 @@ class GenreController {
     genre.name = request.body.name;
 
     if (request.body.parentGenre) {
-      genre.parentGenre = request.body.parentGenre;
+      genre.parent = request.body.parentGenre;
     }
 
     await connection.manager.save(genre);
@@ -34,6 +34,11 @@ class GenreController {
     });
 
     return response.status(ResponseStatuses.STATUS_OK).json(genres);
+  }
+
+  public async getGenresTree(request: Request, response: Response, next: Function): Response {
+    const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
+    return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
   }
 }
 
