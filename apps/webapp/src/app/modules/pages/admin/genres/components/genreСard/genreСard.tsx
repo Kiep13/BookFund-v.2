@@ -5,7 +5,6 @@ import { AdminRoutePaths } from '@core/enums';
 import { IBook, IGenre } from '@core/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
 import { BookPromoCard } from '@shared/components/bookPromoCard';
-import { Card } from '@shared/components/card';
 
 import { STYLES } from './constants';
 
@@ -14,7 +13,7 @@ export const GenreCard = (props: any) => {
   const books: IBook[] = BOOKS_MOCK.slice(0, 7);
 
   return (
-    <Card styles={STYLES.wrapper}>
+    <Box>
       <Typography
         variant='h5'
         gutterBottom
@@ -78,6 +77,6 @@ export const GenreCard = (props: any) => {
           }
         </Box>
       </Box>
-    </Card>
+    </Box>
   )
 }

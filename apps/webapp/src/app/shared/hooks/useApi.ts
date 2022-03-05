@@ -74,10 +74,10 @@ export const useApi = () => {
     const requestParams = queryString.stringify(searchOptions);
 
     return await axios.get(`${environment.backEndUrl}/v1/genre/list/?${requestParams}`)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+  }
+
+  const getGenresTree = async (): Promise<AxiosResponse<IGenre[]>> => {
+    return await axios.get(`${environment.backEndUrl}/v1/genre/tree/`);
   }
 
   const addBook = async (book: IBookForm): Promise<void> => {
@@ -97,6 +97,7 @@ export const useApi = () => {
     deleteAuthor,
     addGenre,
     getGenres,
+    getGenresTree,
     addBook
   }
 }

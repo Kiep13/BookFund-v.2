@@ -15,5 +15,14 @@ export const STYLES = {
   },
   infoCardColumn: {
     flex: 2
+  },
+  infoCard: {
+    height: '100%'
+  },
+  spinner: {
+    display: 'flex',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }

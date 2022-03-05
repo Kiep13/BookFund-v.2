@@ -1,7 +1,4 @@
 export const STYLES = {
-  wrapper: {
-    height: '100%'
-  },
   genreNameTitle: {
     fontWeight: 100,
     m: 0
