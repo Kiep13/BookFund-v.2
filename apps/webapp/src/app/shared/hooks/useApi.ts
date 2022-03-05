@@ -85,7 +85,7 @@ export const useApi = () => {
   }
 
   const deleteGenre = async (id: number): Promise<void> => {
-    return axios.delete(`${environment.backEndUrl}/v1/author/delete/${id}`);
+    return axios.delete(`${environment.backEndUrl}/v1/genre/delete/${id}`);
   }
 
   const addBook = async (book: IBookForm): Promise<void> => {

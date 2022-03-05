@@ -17,6 +17,8 @@
          "@controllers/*": ["app/controllers/*"],
          "@core/*": ["app/core/*"],
          "@entities/*": ["app/entities/*"],
+         "@exceptions/*": ["app/exceptions/*"],
+         "@middlewares/*": ["app/middlewares/*"],
          "@routes/*": ["app/routes/*"],
          "@services/*": ["app/services/*"],
          "@environments/*": ["environments/*"]
