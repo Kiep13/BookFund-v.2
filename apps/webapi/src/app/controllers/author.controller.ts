@@ -11,72 +11,92 @@ import { imageService } from '@services/image.service';
 
 class AuthorController {
   public async createAuthor(request: Request, response: Response, next: Function): Response {
-    const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
+    try {
+      const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
 
-    await connection.manager.save(author);
-    return response.status(ResponseStatuses.STATUS_CREATED).json(author);
+      await connection.manager.save(author);
+      return response.status(ResponseStatuses.STATUS_CREATED).json(author);
+    } catch (error) {
+      next(error)
+    }
   }
 
   public async updateAuthor(request: Request, response: Response, next: Function): Response {
-    const authorId = +request.params.id;
+    try {
+      const authorId = +request.params.id;
 
-    const currentAuthor = await connection.manager.findOne(AuthorEntity, authorId);
-    if(currentAuthor.image !== request.body.imageUrl && currentAuthor.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
-      await imageService.deleteImage(currentAuthor.image);
+      const currentAuthor = await connection.manager.findOne(AuthorEntity, authorId);
+      if (currentAuthor.image !== request.body.imageUrl && currentAuthor.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
+        await imageService.deleteImage(currentAuthor.image);
+      }
+
+      const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
+
+      await connection.manager.update(AuthorEntity, authorId, author);
+      return response.status(ResponseStatuses.STATUS_OK).json(author);
+    } catch (error) {
+      next(error)
     }
-
-    const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
-
-    await connection.manager.update(AuthorEntity, authorId, author);
-    return response.status(ResponseStatuses.STATUS_OK).json(author);
   }
 
   public async getAuthor(request: Request, response: Response, next: Function): Response {
-    const authorId = +request.params.id;
-    const author = await connection.manager.findOne(AuthorEntity, authorId);
+    try {
+      const authorId = +request.params.id;
+      const author = await connection.manager.findOne(AuthorEntity, authorId);
 
-    return response.status(ResponseStatuses.STATUS_OK).json(author);
+      return response.status(ResponseStatuses.STATUS_OK).json(author);
+    } catch (error) {
+      next(error)
+    }
   }
 
   public async getAuthors(request: Request, response: Response, next: Function): Response {
-    const requestParams = request.query;
+    try {
+      const requestParams = request.query;
 
-    const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
-      select: ['id', 'surname', 'name', 'createdAt', 'updatedAt'],
-      order: {
-        ...(requestParams.orderBy && requestParams.orderBy !== 'fullName' ? {
-          [requestParams.orderBy]: requestParams.order || SortDirections.ASC
-        }: {
-          surname: requestParams.order || SortDirections.ASC,
-          name: requestParams.order || SortDirections.ASC,
-        })
-      },
-      take: +requestParams.pageSize,
-      skip: (+requestParams.pageSize * +requestParams.page),
-      where: [
-        { surname: ILike(`%${requestParams.searchTerm || ''}%`) },
-        { name: ILike(`%${requestParams.searchTerm || ''}%`) },
-      ]
-    });
+      const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
+        select: ['id', 'surname', 'name', 'createdAt', 'updatedAt'],
+        order: {
+          ...(requestParams.orderBy && requestParams.orderBy !== 'fullName' ? {
+            [requestParams.orderBy]: requestParams.order || SortDirections.ASC
+          } : {
+            surname: requestParams.order || SortDirections.ASC,
+            name: requestParams.order || SortDirections.ASC,
+          })
+        },
+        take: +requestParams.pageSize,
+        skip: (+requestParams.pageSize * +requestParams.page),
+        where: [
+          {surname: ILike(`%${requestParams.searchTerm || ''}%`)},
+          {name: ILike(`%${requestParams.searchTerm || ''}%`)},
+        ]
+      });
 
-    authors.map((author: AuthorEntity) => {
-      author.fullName = `${author.name || ''} ${author.surname || ''}`
-    });
+      authors.map((author: AuthorEntity) => {
+        author.fullName = `${author.name || ''} ${author.surname || ''}`
+      });
 
-    const result: IListApiView<AuthorEntity> = {
-      data: authors,
-      count: count
+      const result: IListApiView<AuthorEntity> = {
+        data: authors,
+        count: count
+      }
+
+      return response.status(ResponseStatuses.STATUS_OK).json(result);
+    } catch (error) {
+      next(error)
     }
-
-    return response.status(ResponseStatuses.STATUS_OK).json(result);
   }
 
   public async deleteAuthor(request: Request, response: Response, next: Function): Response {
-    const authorId = +request.params.id;
+    try {
+      const authorId = +request.params.id;
 
-    await connection.manager.delete(AuthorEntity, authorId);
+      await connection.manager.delete(AuthorEntity, authorId);
 
-    return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

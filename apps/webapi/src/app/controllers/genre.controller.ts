@@ -4,59 +4,87 @@ import { ILike } from 'typeorm';
 import { connection } from '@core/connection';
 import { ResponseStatuses, SortDirections } from '@core/enums';
 import { GenreEntity } from '@entities/genre.entity';
+import { genreService } from '@services/genre.service';
 
 class GenreController {
   public async createGenre(request: Request, response: Response, next: Function): Response {
-    const genre: GenreEntity = new GenreEntity();
+    try {
+      const genre: GenreEntity = genreService.buildGenreFromBody(request.body);
 
-    genre.name = request.body.name;
-
-    if (request.body.parentGenre) {
-      genre.parent = request.body.parentGenre;
+      await connection.manager.save(genre);
+      return response.status(ResponseStatuses.STATUS_CREATED).json(genre);
+    } catch (error) {
+      next(error)
     }
+  }
 
-    await connection.manager.save(genre);
-    return response.status(ResponseStatuses.STATUS_CREATED).json(genre);
+  public async updateGenre(request: Request, response: Response, next: Function): Response {
+    try {
+      const genreId = +request.params.id;
+
+      const genre = genreService.buildGenreFromBody(request.body);
+
+      await connection.manager.update(GenreEntity, genreId, genre);
+      return response.status(ResponseStatuses.STATUS_OK).json(genre);
+    } catch (error) {
+      next(error)
+    }
   }
 
   public async getGenre(request: Request, response: Response, next: Function): Response {
-    const genreId = +request.params.id;
-    const genre = await connection.manager.findOne(GenreEntity, genreId, {
-      relations: ['subGenres', 'books', 'books.author']
-    });
+    try {
+      const genreId = +request.params.id;
+      const genre = await connection.manager.findOne(GenreEntity, genreId, {
+        relations: ['subGenres', 'books', 'books.author']
+      });
 
-    return response.status(ResponseStatuses.STATUS_OK).json(genre);
+      return response.status(ResponseStatuses.STATUS_OK).json(genre);
+    } catch (error) {
+      next(error)
+    }
   }
 
   public async getGenres(request: Request, response: Response, next: Function): Response {
-    const requestParams = request.query;
+    try {
+      const requestParams = request.query;
 
-    const genres = await connection.getRepository(GenreEntity).find({
-      select: ['id', 'name'],
-      order: {
-        name: SortDirections.ASC
-      },
-      take: +requestParams.pageSize,
-      where: {
-        name: ILike(`%${requestParams.searchTerm || ''}%`)
-      }
-    });
+      const genres = await connection.getRepository(GenreEntity).find({
+        select: ['id', 'name'],
+        order: {
+          name: SortDirections.ASC
+        },
+        take: +requestParams.pageSize,
+        where: {
+          name: ILike(`%${requestParams.searchTerm || ''}%`)
+        }
+      });
 
-    return response.status(ResponseStatuses.STATUS_OK).json(genres);
+      return response.status(ResponseStatuses.STATUS_OK).json(genres);
+    } catch (error) {
+      next(error)
+    }
   }
 
   public async getGenresTree(request: Request, response: Response, next: Function): Response {
-    const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
-    return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
+    try {
+      const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
+      return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
+    } catch (error) {
+      next(error)
+    }
   }
 
   public async deleteGenre(request: Request, response: Response, next: Function): Response {
-    const genreId = +request.params.id;
+    try {
+      const genreId = +request.params.id;
 
-    const genre = await connection.manager.findOne(GenreEntity, genreId);
-    await connection.manager.remove(genre);
+      const genre = await connection.manager.findOne(GenreEntity, genreId);
+      await connection.manager.remove(genre);
 
-    return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

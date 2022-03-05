@@ -6,21 +6,25 @@ import { BookEntity } from "@entities/book.entity";
 
 class BookController {
   public async createBook(request: Request, response: Response, next: Function): Response {
-    const book: BookEntity = new BookEntity();
+    try {
+      const book: BookEntity = new BookEntity();
 
-    book.title = request.body.title;
-    book.amountPages = request.body.amountPages;
-    book.year = request.body.year;
-    book.author = request.body.author;
-    book.genres = request.body.genres;
-    book.description = request.body.description;
+      book.title = request.body.title;
+      book.amountPages = request.body.amountPages;
+      book.year = request.body.year;
+      book.author = request.body.author;
+      book.genres = request.body.genres;
+      book.description = request.body.description;
 
-    if(request.body.imageUrl) {
-      book.image = request.body.imageUrl;
+      if (request.body.imageUrl) {
+        book.image = request.body.imageUrl;
+      }
+
+      await connection.manager.save(book);
+      return response.status(ResponseStatuses.STATUS_CREATED).json(book);
+    } catch (error) {
+      next(error)
     }
-
-    await connection.manager.save(book);
-    return response.status(ResponseStatuses.STATUS_CREATED).json(book);
   }
 }
 
