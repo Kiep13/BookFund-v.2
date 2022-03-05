@@ -53,7 +53,8 @@ class GenreController {
   public async deleteGenre(request: Request, response: Response, next: Function): Response {
     const genreId = +request.params.id;
 
-    await connection.manager.delete(GenreEntity, genreId);
+    const genre = await connection.manager.findOne(GenreEntity, genreId);
+    await connection.manager.remove(genre);
 
     return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
   }

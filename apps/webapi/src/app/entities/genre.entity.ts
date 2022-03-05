@@ -34,7 +34,9 @@ export class GenreEntity {
   @TreeChildren()
   subGenres: GenreEntity[];
 
-  @ManyToMany(() => BookEntity, book => book.genres)
+  @ManyToMany(() => BookEntity, book => book.genres, {
+    cascade: true
+  })
   books: BookEntity[];
 
   @Column({
