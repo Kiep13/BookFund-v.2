@@ -49,6 +49,14 @@ class GenreController {
     const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
     return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
   }
+
+  public async deleteGenre(request: Request, response: Response, next: Function): Response {
+    const genreId = +request.params.id;
+
+    await connection.manager.delete(GenreEntity, genreId);
+
+    return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+  }
 }
 
 export const genreController = new GenreController();

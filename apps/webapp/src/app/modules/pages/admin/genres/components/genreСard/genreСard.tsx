@@ -4,13 +4,13 @@ import { Box, Button, Chip, Divider, IconButton, Link, Typography } from '@mui/m
 import { Link as RouterLink } from 'react-router-dom';
 
 import { AdminRoutePaths } from '@core/enums';
-import { IBook, IGenre } from '@core/interfaces';
+import { IBook } from '@core/interfaces';
 import { BookPromoCard } from '@shared/components/bookPromoCard';
 
 import { STYLES } from './constants';
+import { IProps } from './props.interface';
 
-export const GenreCard = (props: any) => {
-  const genre: IGenre = props.genre;
+export const GenreCard = ({ genre, onEditClick, onDeleteClick }: IProps) => {
 
   return (
     <Box>
@@ -29,12 +29,14 @@ export const GenreCard = (props: any) => {
         <Box>
           <IconButton
             aria-label='Edit'
-            sx={STYLES.iconButton}>
+            sx={STYLES.iconButton}
+            onClick={() => onEditClick()}>
             <EditTwoToneIcon/>
           </IconButton>
           <IconButton
             aria-label='Delete'
-            sx={STYLES.iconButton}>
+            sx={STYLES.iconButton}
+            onClick={() => onDeleteClick()}>
             <DeleteTwoToneIcon/>
           </IconButton>
         </Box>

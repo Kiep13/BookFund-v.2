@@ -6,23 +6,24 @@ import { API_TOOLTIP_ERROR } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
 import { IGenre } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
+import { GENRES_MOCK } from '@mocks/genres.mock';
 import { StatefulCard, State } from '@features/statefulCard';
 import { Card } from '@shared/components/card';
 import { PageHeaderCard } from '@shared/components/pageHeaderCard';
 import { useApi } from '@shared/hooks';
 
-import { NO_GENRES_MESSAGE, STYLES } from './constants';
+import { NO_GENRES_MESSAGE, STYLES, SUCCESSFULLY_DELETED } from './constants';
 import { GenresTreeView } from './components/genresTreeView';
 import { GenreCard } from './components/genreСard';
 
 export const Genres = () => {
-  const [selectedGenre, setSelectedGenre] = useState<IGenre>();
+  const [selectedGenre, setSelectedGenre] = useState<IGenre>(GENRES_MOCK[0]);
   const [genres, setGenres] = useState<IGenre[]>([]);
   const [treeState, setTreeState] = useState<State>(State.LOADING);
   const [infoState, setInfoState] = useState<State>(State.LOADING);
 
   const api = useApi();
-  const { addError } = useAlerts();
+  const { addSuccess, addError } = useAlerts();
 
   const loadGenres = async () => {
     await api.getGenresTree()
@@ -68,6 +69,25 @@ export const Genres = () => {
     loadGenres();
   }, []);
 
+  const handleGenreEdit = () => {
+
+  }
+
+  const handleGenreDelete = async () => {
+    await api.deleteGenre(selectedGenre.id)
+      .then(() => {
+        addSuccess(SUCCESSFULLY_DELETED);
+
+        setTreeState(State.LOADING);
+        setInfoState(State.LOADING);
+
+        loadGenres();
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      });
+  }
+
   return (
     <>
       <Box sx={STYLES.header}>
@@ -88,7 +108,10 @@ export const Genres = () => {
         <Box sx={STYLES.infoCardColumn}>
           <Card styles={STYLES.infoCard}>
             <StatefulCard state={infoState} noContentMessage={NO_GENRES_MESSAGE}>
-                <GenreCard genre={selectedGenre}/>
+                <GenreCard
+                  genre={selectedGenre}
+                  onEditClick={handleGenreEdit}
+                  onDeleteClick={handleGenreDelete}/>
             </StatefulCard>
           </Card>
         </Box>

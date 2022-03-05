@@ -84,6 +84,10 @@ export const useApi = () => {
     return await axios.get(`${environment.backEndUrl}/v1/genre/tree/`);
   }
 
+  const deleteGenre = async (id: number): Promise<void> => {
+    return axios.delete(`${environment.backEndUrl}/v1/author/delete/${id}`);
+  }
+
   const addBook = async (book: IBookForm): Promise<void> => {
     return await axios.post(`${environment.backEndUrl}/v1/book/new`, book)
       .then((response: AxiosResponse) => response.data)
@@ -103,6 +107,7 @@ export const useApi = () => {
     getGenre,
     getGenres,
     getGenresTree,
+    deleteGenre,
     addBook
   }
 }

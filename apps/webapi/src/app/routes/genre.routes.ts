@@ -8,6 +8,7 @@ const router = new Router();
 router.get(`/${ApiRoutesModifiers.LIST}`, genreController.getGenres);
 router.get(`/${ApiRoutesModifiers.TREE}`, genreController.getGenresTree);
 router.post(`/${ApiRoutesModifiers.NEW}`, genreController.createGenre);
+router.delete(`/${ApiRoutesModifiers.DELETE}/:id`, genreController.deleteGenre);
 router.get(`/:id`, genreController.getGenre);
 
 export default router;

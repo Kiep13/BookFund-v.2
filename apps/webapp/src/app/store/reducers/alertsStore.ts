@@ -14,12 +14,15 @@ export const alertsSlice = createSlice({
         ...state.value,
         action.payload
       ];
-
-      console.log(state);
     },
     removeAlert: (state: IAlertStore, action: PayloadAction<number>) => {
       const id = action.payload;
-      state.value.filter((alert: IAlert) => alert.id !== id);
+      const index = state.value.findIndex((alert: IAlert) => alert.id === id);
+
+      state.value = [
+        ...state.value.slice(0, index),
+        ...state.value.slice(index + 1, state.value.length)
+      ]
     }
   },
 });

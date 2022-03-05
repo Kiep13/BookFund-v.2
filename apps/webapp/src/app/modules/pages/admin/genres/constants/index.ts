@@ -1,2 +1,2 @@
-export * from './noContentMessages';
+export * from './messages';
 export * from './styles';
