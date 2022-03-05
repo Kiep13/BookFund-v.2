@@ -19,6 +19,15 @@ class GenreController {
     return response.status(ResponseStatuses.STATUS_CREATED).json(genre);
   }
 
+  public async getGenre(request: Request, response: Response, next: Function): Response {
+    const genreId = +request.params.id;
+    const genre = await connection.manager.findOne(GenreEntity, genreId, {
+      relations: ['subGenres', 'books']
+    });
+
+    return response.status(ResponseStatuses.STATUS_OK).json(genre);
+  }
+
   public async getGenres(request: Request, response: Response, next: Function): Response {
     const requestParams = request.query;
 
