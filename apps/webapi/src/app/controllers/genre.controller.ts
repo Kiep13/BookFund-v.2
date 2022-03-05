@@ -35,7 +35,7 @@ class GenreController {
     try {
       const genreId = +request.params.id;
       const genre = await connection.manager.findOne(GenreEntity, genreId, {
-        relations: ['subGenres', 'books', 'books.author']
+        relations: ['subGenres', 'books', 'books.author', 'parent']
       });
 
       return response.status(ResponseStatuses.STATUS_OK).json(genre);

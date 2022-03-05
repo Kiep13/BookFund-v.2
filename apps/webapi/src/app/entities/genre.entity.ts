@@ -13,7 +13,7 @@ import { BookEntity } from '@entities/book.entity';
 @Entity({
   name: 'genre'
 })
-@Tree('nested-set')
+@Tree('materialized-path')
 export class GenreEntity {
   @PrimaryGeneratedColumn({
     name: 'id',

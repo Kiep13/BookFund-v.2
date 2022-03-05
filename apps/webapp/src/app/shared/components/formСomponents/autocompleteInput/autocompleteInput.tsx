@@ -7,12 +7,17 @@ import { IOption } from '@core/interfaces';
 import { IProps } from './props.interface';
 
 export const AutocompleteInput = (props: IProps) => {
-  const [open, setOpen] = useState(false);
-  const [options, setOptions] = useState(props.options || []);
-  const [loading, setLoading] = useState(props.loading || false);
-
   const {fieldName, form} = props;
-  const {values, handleBlur, touched, errors } = form;
+  const {values, handleBlur, touched, errors} = form;
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [options, setOptions] = useState<IOption[]>(props.options || []);
+  const [loading, setLoading] = useState<boolean>(props.loading || false);
+
+  const inputValue = values[fieldName] ? {
+    id: values[fieldName]?.id,
+    title: values[fieldName]?.name || values[fieldName]?.title
+  } : null;
 
   useEffect(() => {
     setOptions(props.options);
@@ -41,11 +46,12 @@ export const AutocompleteInput = (props: IProps) => {
       onClose={() => {
         setOpen(false);
       }}
-      isOptionEqualToValue={(option: any, value) => option.id === value.id}
-      getOptionLabel={(option: any) => option.title}
+      isOptionEqualToValue={(option: IOption, value) => option.id === value.id}
+      getOptionLabel={(option: IOption) => option?.title || ''}
       options={options}
       loading={loading}
       onChange={handleSelecting}
+      value={inputValue}
       renderOption={(props: HTMLAttributes<HTMLElement>, option: IOption) => {
         return (
           <li {...props} key={option.id}>

@@ -61,23 +61,27 @@ export const useApi = () => {
         addError(API_TOOLTIP_ERROR);
       });
   }
-
-  const getGenre = async (id: number): Promise<AxiosResponse<IGenre>> => {
-    return await axios.get(`${environment.backEndUrl}/v1/genre/${id}`);
+  const addGenre = async (genre: IGenreForm): Promise<void> => {
+    return await axios.post(`${environment.backEndUrl}/v1/genre/new`, genre);
   }
 
-  const addGenre = async (genre: IGenreForm): Promise<void> => {
-    return await axios.post(`${environment.backEndUrl}/v1/genre/new`, genre)
+  const updateGenre = async (id: number, author: IGenreForm): Promise<void> => {
+    return await axios.put(`${environment.backEndUrl}/v1/genre/update/${id}`, author);
+  }
+
+  const getGenre = async (id: number): Promise<IGenre> => {
+    return await axios.get(`${environment.backEndUrl}/v1/genre/${id}`)
       .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
   }
 
   const getGenres = async (searchOptions: ISearchOptions): Promise<IGenre[]> => {
     const requestParams = queryString.stringify(searchOptions);
 
     return await axios.get(`${environment.backEndUrl}/v1/genre/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      });
   }
 
   const getGenresTree = async (): Promise<AxiosResponse<IGenre[]>> => {
@@ -104,6 +108,7 @@ export const useApi = () => {
     getAuthors,
     deleteAuthor,
     addGenre,
+    updateGenre,
     getGenre,
     getGenres,
     getGenresTree,

@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
@@ -22,6 +23,7 @@ export const Genres = () => {
   const [treeState, setTreeState] = useState<State>(State.LOADING);
   const [infoState, setInfoState] = useState<State>(State.LOADING);
 
+  const history = useHistory();
   const api = useApi();
   const { addSuccess, addError } = useAlerts();
 
@@ -46,7 +48,6 @@ export const Genres = () => {
 
   const loadSelectedGenre = async (id: number) => {
     await api.getGenre(id)
-      .then((response: AxiosResponse<IGenre>) => response.data)
       .then((response: IGenre) => {
         setSelectedGenre(response);
         setInfoState(State.CONTENT);
@@ -70,7 +71,7 @@ export const Genres = () => {
   }, []);
 
   const handleGenreEdit = () => {
-
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_EDIT}/${selectedGenre.id}`);
   }
 
   const handleGenreDelete = async () => {
@@ -91,7 +92,7 @@ export const Genres = () => {
   return (
     <>
       <Box sx={STYLES.header}>
-        <PageHeaderCard title={'Genres'} url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES_NEW}`}/>
+        <PageHeaderCard title={'Genres'} url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`}/>
       </Box>
 
       <Box sx={STYLES.contentWrapper}>

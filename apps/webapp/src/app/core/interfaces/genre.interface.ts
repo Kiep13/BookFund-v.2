@@ -4,8 +4,8 @@ export interface IGenre {
   id: number,
   name: string,
   amountBooks?: number,
-  parentGenreId?: number,
-  parentGenre?: IGenre,
+  parentId?: number,
+  parent?: IGenre,
   subGenres?: IGenre[],
   books?: IBook[],
 }

@@ -1,25 +1,61 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
+import { API_TOOLTIP_ERROR } from '@core/constants';
+import { IFormPageParams, IGenre } from '@core/interfaces';
 import { AdminRoutePaths } from '@core/enums';
+import { useAlerts } from '@features/alertsBlock/hooks';
+import { State, StatefulCard } from '@features/statefulCard';
 import { Input } from '@shared/components/formСomponents/input';
 import { Card } from '@shared/components/card';
 import { useApi } from '@shared/hooks';
 
 import { GenreAutocomplete } from './components/genreAutocomplete';
-import { FORM_INITIAL_VALUE, STYLES, VALIDATION_SCHEMA } from './constants';
+import {
+  FORM_INITIAL_VALUE,
+  STYLES, SUCCESSFULLY_ADDED,
+  SUCCESSFULLY_UPDATED,
+  TITLE_ADD,
+  TITLE_EDIT,
+  VALIDATION_SCHEMA
+} from './constants';
 import { IGenreForm } from './interfaces';
 
 export const GenreForm = () => {
   const history = useHistory();
+  const params = useParams();
+
+  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [editMode, setEditMode] = useState<boolean>(false);
+
   const api = useApi();
+  const { addSuccess, addError } = useAlerts();
+
+  const callSubmitAction = (values: IGenreForm) => {
+    const genreId = (params as IFormPageParams).id;
+    return editMode ?
+      api.updateGenre(genreId, values).then(() => {
+        return addSuccess(SUCCESSFULLY_UPDATED);
+      }) :
+      api.addGenre(values).then(() => {
+        return addSuccess(SUCCESSFULLY_ADDED);
+      });
+  }
 
   const handleSubmit = async (values: IGenreForm, {setSubmitting}: FormikHelpers<IGenreForm>) => {
-    await api.addGenre(values);
-    navigateToGenresPage();
-    setSubmitting(false);
+    await callSubmitAction(values)
+      .then(() => {
+        navigateToGenresPage();
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      })
+      .then(() => {
+        setSubmitting(false);
+      });
   }
 
   const formik = useFormik({
@@ -32,47 +68,74 @@ export const GenreForm = () => {
     history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`);
   }
 
+  const initForm = async () => {
+    const genreId = (params as IFormPageParams).id;
+
+    if(!genreId) {
+      setPageState(State.CONTENT);
+      return;
+    }
+
+    setEditMode(true);
+    await api.getGenre(genreId)
+      .then((genre: IGenre) => {
+        formik.setValues({
+          ...genre
+        });
+
+        setPageState(State.CONTENT);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+        setPageState(State.ERROR);
+      });
+  }
+
+  useEffect(() => {
+    initForm();
+  }, [])
+
   return <Card>
     <Box sx={STYLES.page}>
-      <Typography
-        variant='h5'
-        gutterBottom
-        component='div'
-        sx={STYLES.pageHeader}>
-        Add new genre
-      </Typography>
+      <StatefulCard state={pageState}>
+        <Typography
+          variant='h5'
+          gutterBottom
+          component='div'
+          sx={STYLES.pageHeader}>
+          { editMode ? TITLE_EDIT : TITLE_ADD}
+        </Typography>
 
-      <form onSubmit={formik.handleSubmit}>
-        <Input
-          id={'name'}
-          label={'Name'}
-          fieldName={'name'}
-          form={formik}
-          styles={STYLES.nameInput}/>
+        <form onSubmit={formik.handleSubmit}>
+          <Input
+            id={'name'}
+            label={'Name'}
+            fieldName={'name'}
+            form={formik}
+            styles={STYLES.nameInput}/>
 
-        <Box sx={STYLES.parentInputWrapper}>
-          <GenreAutocomplete form={formik} fieldName={'parentGenre'}/>
-        </Box>
+          <Box sx={STYLES.parentInputWrapper}>
+            <GenreAutocomplete form={formik} fieldName={'parent'}/>
+          </Box>
 
+          <Box sx={STYLES.formButtons}>
+            <Button
+              variant='outlined'
+              sx={STYLES.cancelButton}
+              onClick={navigateToGenresPage}>
+              Cancel
+            </Button>
 
-        <Box sx={STYLES.formButtons}>
-          <Button
-            variant='outlined'
-            sx={STYLES.cancelButton}
-            onClick={navigateToGenresPage}>
-            Cancel
-          </Button>
+            <Button
+              variant='contained'
+              type='submit'
+              disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>
+              Save
+            </Button>
+          </Box>
 
-          <Button
-            variant='contained'
-            type='submit'
-            disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>
-            Save
-          </Button>
-        </Box>
-
-      </form>
+        </form>
+      </StatefulCard>
     </Box>
-
   </Card>
 }

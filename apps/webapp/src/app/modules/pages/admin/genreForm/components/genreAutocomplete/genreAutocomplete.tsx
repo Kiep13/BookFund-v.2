@@ -9,7 +9,8 @@ import { useApi } from '@shared/hooks';
 import { DELAY } from '../../constants';
 import { IProps } from './props.interface';
 
-export const GenreAutocomplete = ({form, fieldName}: IProps) => {
+export const GenreAutocomplete = (props: IProps) => {
+  const { form, fieldName } = props;
   const api = useApi();
 
   const [searchTerm, setSearchTerm] = useState<string>('');

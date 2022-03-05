@@ -21,7 +21,7 @@ export const AuthorForm = () => {
   const api = useApi();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [editMode, setEditMode] = useState<boolean>(Boolean((location.state as IFormPageState).editMode) || false);
+  const [editMode] = useState<boolean>(Boolean((location.state as IFormPageState).editMode) || false);
 
   const handleSubmit = async (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
     if(values.imageFile) {

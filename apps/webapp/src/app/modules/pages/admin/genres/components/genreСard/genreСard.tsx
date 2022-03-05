@@ -52,7 +52,7 @@ export const GenreCard = ({ genre, onEditClick, onDeleteClick }: IProps) => {
           { genre.subGenres && genre.subGenres?.length > 0 ? `${genre.subGenres?.length} subgenres` : `Don't have subgenres yet` }
         </Typography>
 
-        <RouterLink to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES_NEW}`}>
+        <RouterLink to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`}>
           <Button variant='contained'>Add new</Button>
         </RouterLink>
       </Box>
