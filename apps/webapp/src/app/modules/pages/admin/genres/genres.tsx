@@ -1,24 +1,25 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
-import { AdminRoutePaths } from '@core/enums';
 import { API_TOOLTIP_ERROR } from '@core/constants';
+import { AdminRoutePaths } from '@core/enums';
 import { IGenre } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
+import { StatefulCard, State } from '@features/statefulCard';
 import { Card } from '@shared/components/card';
 import { PageHeaderCard } from '@shared/components/pageHeaderCard';
 import { useApi } from '@shared/hooks';
 
-import { GenreCard } from './components/genreСard';
+import { NO_GENRES_MESSAGE, STYLES } from './constants';
 import { GenresTreeView } from './components/genresTreeView';
-import { STYLES } from './constants';
+import { GenreCard } from './components/genreСard';
 
 export const Genres = () => {
   const [selectedGenre, setSelectedGenre] = useState<IGenre>();
   const [genres, setGenres] = useState<IGenre[]>([]);
-  const [loadingTree, setLoadingTree] = useState<boolean>(true);
-  const [loadingCard, setLoadingCard] = useState<boolean>(true);
+  const [treeState, setTreeState] = useState<State>(State.LOADING);
+  const [infoState, setInfoState] = useState<State>(State.LOADING);
 
   const api = useApi();
   const { addError } = useAlerts();
@@ -31,13 +32,15 @@ export const Genres = () => {
 
         if(response.length) {
           loadSelectedGenre(response[0].id);
+
+          setTreeState(State.CONTENT);
+          return;
         }
 
-        setLoadingTree(false);
+        setTreeState(State.NO_CONTENT);
+        setInfoState(State.NO_CONTENT);
       })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+      .catch(handleError);
   }
 
   const loadSelectedGenre = async (id: number) => {
@@ -45,25 +48,25 @@ export const Genres = () => {
       .then((response: AxiosResponse<IGenre>) => response.data)
       .then((response: IGenre) => {
         setSelectedGenre(response);
-        setLoadingCard(false);
+        setInfoState(State.CONTENT);
       })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+      .catch(handleError);
+  }
+
+  const handleError = () => {
+    addError(API_TOOLTIP_ERROR);
+    setTreeState(State.ERROR);
+    setInfoState(State.ERROR);
   }
 
   const handleGenreSelection = (genre: IGenre) => {
-    setLoadingCard(true);
+    setInfoState(State.LOADING);
     loadSelectedGenre(genre.id);
   }
 
   useEffect(() => {
     loadGenres();
   }, []);
-
-  const loadingSpinner = (<Box sx={STYLES.spinner}>
-    <CircularProgress size={80}/>
-  </Box>);
 
   return (
     <>
@@ -74,23 +77,19 @@ export const Genres = () => {
       <Box sx={STYLES.contentWrapper}>
         <Box sx={STYLES.treeCardColumn}>
           <Card styles={STYLES.treeCard}>
-            {
-              loadingTree ?
-                loadingSpinner :
-                <GenresTreeView
-                  genres={genres}
-                  onSelectGenre={handleGenreSelection}/>
-            }
+            <StatefulCard state={treeState} noContentMessage={NO_GENRES_MESSAGE}>
+              <GenresTreeView
+                genres={genres}
+                onSelectGenre={handleGenreSelection}/>
+            </StatefulCard>
           </Card>
         </Box>
 
         <Box sx={STYLES.infoCardColumn}>
           <Card styles={STYLES.infoCard}>
-            {
-              loadingCard ?
-                loadingSpinner :
+            <StatefulCard state={infoState} noContentMessage={NO_GENRES_MESSAGE}>
                 <GenreCard genre={selectedGenre}/>
-            }
+            </StatefulCard>
           </Card>
         </Box>
       </Box>
