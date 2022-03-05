@@ -28,6 +28,11 @@ export const Genres = () => {
       .then((response: AxiosResponse<IGenre[]>) => response.data)
       .then((response: IGenre[]) => {
         setGenres(response);
+
+        if(response.length) {
+          loadSelectedGenre(response[0].id);
+        }
+
         setLoadingTree(false);
       })
       .catch(() => {
@@ -35,9 +40,26 @@ export const Genres = () => {
       });
   }
 
+  const loadSelectedGenre = async (id: number) => {
+    await api.getGenre(id)
+      .then((response: AxiosResponse<IGenre>) => response.data)
+      .then((response: IGenre) => {
+        setSelectedGenre(response);
+        setLoadingCard(false);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      });
+  }
+
+  const handleGenreSelection = (genre: IGenre) => {
+    setLoadingCard(true);
+    loadSelectedGenre(genre.id);
+  }
+
   useEffect(() => {
     loadGenres();
-  });
+  }, []);
 
   const loadingSpinner = (<Box sx={STYLES.spinner}>
     <CircularProgress size={80}/>
@@ -57,7 +79,7 @@ export const Genres = () => {
                 loadingSpinner :
                 <GenresTreeView
                   genres={genres}
-                  onSelectGenre={setSelectedGenre}/>
+                  onSelectGenre={handleGenreSelection}/>
             }
           </Card>
         </Box>

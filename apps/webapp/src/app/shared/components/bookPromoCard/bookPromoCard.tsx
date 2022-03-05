@@ -6,7 +6,7 @@ import { STYLES } from './constants';
 import { IProps } from './props.interface';
 
 export const BookPromoCard = ({ book } : IProps) => {
-  book.authorFullName = `${book.author?.surname || ''} ${book.author?.name}`;
+  book.authorFullName = `${book.author?.name} ${book.author?.surname}`;
 
   return (
     <Card sx={STYLES.wrapper}>

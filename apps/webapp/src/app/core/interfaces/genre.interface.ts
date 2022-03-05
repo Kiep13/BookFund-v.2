@@ -1,3 +1,5 @@
+import { IBook } from '@core/interfaces';
+
 export interface IGenre {
   id: number,
   name: string,
@@ -5,4 +7,5 @@ export interface IGenre {
   parentGenreId?: number,
   parentGenre?: IGenre,
   subGenres?: IGenre[],
+  books?: IBook[],
 }

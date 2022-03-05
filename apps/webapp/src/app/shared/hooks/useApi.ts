@@ -62,6 +62,10 @@ export const useApi = () => {
       });
   }
 
+  const getGenre = async (id: number): Promise<AxiosResponse<IGenre>> => {
+    return await axios.get(`${environment.backEndUrl}/v1/genre/${id}`);
+  }
+
   const addGenre = async (genre: IGenreForm): Promise<void> => {
     return await axios.post(`${environment.backEndUrl}/v1/genre/new`, genre)
       .then((response: AxiosResponse) => response.data)
@@ -96,6 +100,7 @@ export const useApi = () => {
     getAuthors,
     deleteAuthor,
     addGenre,
+    getGenre,
     getGenres,
     getGenresTree,
     addBook

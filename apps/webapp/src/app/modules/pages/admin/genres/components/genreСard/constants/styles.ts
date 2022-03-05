@@ -1,4 +1,8 @@
 export const STYLES = {
+  genreHeading: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
   genreNameTitle: {
     fontWeight: 100,
     m: 0
@@ -41,5 +45,9 @@ export const STYLES = {
   linkedBook: {
     display: 'inline-flex',
     p: 1
+  },
+  iconButton: {
+    p: 0.5,
+    height: 'fit-content'
   }
 }
