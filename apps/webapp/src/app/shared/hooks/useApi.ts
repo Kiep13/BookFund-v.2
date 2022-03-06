@@ -20,28 +20,17 @@ export const useApi = () => {
       });
   }
 
-  const addAuthor = async (author: IAuthorForm): Promise<void> => {
-    return await axios.post<void>(`${environment.backEndUrl}/v1/author/new`, author)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+  const addAuthor = async (author: IAuthorForm): Promise<AxiosResponse<void>> => {
+    return await axios.post<void>(`${environment.backEndUrl}/v1/author/new`, author);
   }
 
-  const updateAuthor = async (id: number, author: IAuthorForm): Promise<void> => {
-    return await axios.put(`${environment.backEndUrl}/v1/author/update/${id}`, author)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+  const updateAuthor = async (id: number, author: IAuthorForm): Promise<AxiosResponse<void>> => {
+    return await axios.put(`${environment.backEndUrl}/v1/author/update/${id}`, author);
   }
 
   const getAuthor = async (id: number): Promise<IAuthor>  => {
     return await axios.get(`${environment.backEndUrl}/v1/author/${id}`)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+      .then((response: AxiosResponse<IAuthor>) => response.data);
   }
 
   const getAuthors = async (searchOptions: ISearchOptions): Promise<IListApiView<IAuthor>> => {
@@ -54,12 +43,8 @@ export const useApi = () => {
       });
   }
 
-  const deleteAuthor = async (id: number): Promise<void> => {
-    return axios.delete(`${environment.backEndUrl}/v1/author/delete/${id}`)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+  const deleteAuthor = async (id: number): Promise<AxiosResponse<void>> => {
+    return axios.delete(`${environment.backEndUrl}/v1/author/delete/${id}`);
   }
   const addGenre = async (genre: IGenreForm): Promise<void> => {
     return await axios.post(`${environment.backEndUrl}/v1/genre/new`, genre);

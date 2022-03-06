@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToMany,
   PrimaryGeneratedColumn,
   Tree,
@@ -27,8 +26,9 @@ export class GenreEntity {
   })
   name: string;
 
-  @JoinColumn()
-  @TreeParent()
+  @TreeParent({
+    onDelete: 'SET NULL'
+  })
   parent: GenreEntity;
 
   @TreeChildren()

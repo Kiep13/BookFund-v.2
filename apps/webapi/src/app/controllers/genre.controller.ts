@@ -79,6 +79,7 @@ class GenreController {
       const genreId = +request.params.id;
 
       const genre = await connection.manager.findOne(GenreEntity, genreId);
+      await connection.getTreeRepository(GenreEntity).findDescendants(genre);
       await connection.manager.remove(genre);
 
       return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});

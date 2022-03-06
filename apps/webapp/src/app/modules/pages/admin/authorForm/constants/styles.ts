@@ -11,11 +11,6 @@ export const STYLES = {
     textAlign: 'center',
     mb: 5
   },
-  loadingWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   nameInputsWrapper: {
     display: 'flex',
     flexDirection: 'row',

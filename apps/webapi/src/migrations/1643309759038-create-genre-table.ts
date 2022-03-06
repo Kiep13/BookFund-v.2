@@ -42,7 +42,7 @@ export class createGenreTable1643309759038 implements MigrationInterface {
         columnNames: ['parentId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'genre',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       }));
 
       await queryRunner.createIndex('genre', new TableIndex({

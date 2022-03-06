@@ -91,7 +91,8 @@ class AuthorController {
     try {
       const authorId = +request.params.id;
 
-      await connection.manager.delete(AuthorEntity, authorId);
+      const author = await connection.manager.findOne(AuthorEntity, authorId);
+      await connection.manager.remove(author);
 
       return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
     } catch (error) {

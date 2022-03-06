@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { API_TOOLTIP_ERROR } from '@core/constants';
 import { AdminRoutePaths, PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
+import { useAlerts } from '@features/alertsBlock/hooks';
 import { useApi } from '@shared/hooks';
 
-import { COLUMNS } from '../../constants';
+import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const AuthorsTable = () => {
   const history = useHistory();
   const api = useApi();
+  const { addSuccess, addError } = useAlerts();
 
   const [data, setData] = useState<IAuthor[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -52,14 +55,20 @@ export const AuthorsTable = () => {
   }
 
   const deleteAuthor = async (id: number) => {
-    await api.deleteAuthor(id);
+    api.deleteAuthor(id)
+      .then(() => {
+        addSuccess(SUCCESSFULLY_DELETED)
 
-    if(page !== 0 && data.length === 1) {
-      setPage(page - 1);
-      return;
-    }
+        if(page !== 0 && data.length === 1) {
+          setPage(page - 1);
+          return;
+        }
 
-    getAuthors();
+        getAuthors();
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      })
   }
 
   const handleClick = (tableItemAction: ITableItemAction): void => {

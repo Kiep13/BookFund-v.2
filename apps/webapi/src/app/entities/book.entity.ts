@@ -45,7 +45,8 @@ export class BookEntity {
   description: string;
 
   @ManyToOne(() => AuthorEntity, author => author.books, {
-    cascade: true
+    cascade: true,
+    onDelete: 'CASCADE'
   })
   @JoinColumn({
     name: 'authorId'
