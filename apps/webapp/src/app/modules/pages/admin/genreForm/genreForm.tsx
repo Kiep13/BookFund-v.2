@@ -1,11 +1,11 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
-import { IFormPageParams, IGenre } from '@core/interfaces';
+import { IFormPageParams, IGenre, IGenreFormPageState } from '@core/interfaces';
 import { AdminRoutePaths } from '@core/enums';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { State, StatefulCard } from '@features/statefulCard';
@@ -26,6 +26,7 @@ import { IGenreForm } from './interfaces';
 
 export const GenreForm = () => {
   const history = useHistory();
+  const location = useLocation();
   const params = useParams();
 
   const [pageState, setPageState] = useState<State>(State.LOADING);
@@ -72,6 +73,11 @@ export const GenreForm = () => {
     const genreId = (params as IFormPageParams).id;
 
     if(!genreId) {
+      const predefinedParent = (location.state as IGenreFormPageState)?.parent;
+      if(predefinedParent) {
+        formik.setFieldValue('parent', predefinedParent);
+      }
+
       setPageState(State.CONTENT);
       return;
     }
@@ -93,6 +99,7 @@ export const GenreForm = () => {
 
   useEffect(() => {
     initForm();
+    return;
   }, [])
 
   return <Card>

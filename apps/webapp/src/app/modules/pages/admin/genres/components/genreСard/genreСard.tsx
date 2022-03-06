@@ -1,16 +1,14 @@
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import { Box, Button, Chip, Divider, IconButton, Link, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
 
-import { AdminRoutePaths } from '@core/enums';
 import { IBook } from '@core/interfaces';
 import { BookPromoCard } from '@shared/components/bookPromoCard';
 
 import { STYLES } from './constants';
 import { IProps } from './props.interface';
 
-export const GenreCard = ({ genre, onEditClick, onDeleteClick }: IProps) => {
+export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick}: IProps) => {
 
   return (
     <Box>
@@ -21,7 +19,7 @@ export const GenreCard = ({ genre, onEditClick, onDeleteClick }: IProps) => {
             gutterBottom
             component='div'
             sx={STYLES.genreNameTitle}>
-            { genre.name }
+            {genre.name}
           </Typography>
 
           <Link href="#" sx={STYLES.booksLink}>{genre.books?.length || 0} books</Link>
@@ -49,22 +47,20 @@ export const GenreCard = ({ genre, onEditClick, onDeleteClick }: IProps) => {
                     gutterBottom
                     component='div'
                     sx={STYLES.subgenresMessage}>
-          { genre.subGenres && genre.subGenres?.length > 0 ? `${genre.subGenres?.length} subgenres` : `Don't have subgenres yet` }
+          {genre.subGenres && genre.subGenres?.length > 0 ? `${genre.subGenres?.length} subgenres` : `Don't have subgenres yet`}
         </Typography>
 
-        <RouterLink to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`}>
-          <Button variant='contained'>Add new</Button>
-        </RouterLink>
+        <Button variant='contained' onClick={() => onAddSubgenreClick()}>Add new</Button>
       </Box>
 
       <Box>
         {
           genre.subGenres?.map((subgenre) => {
             return <Chip
-                      key={subgenre.id}
-                      label={subgenre.name}
-                      variant='outlined'
-                      sx={STYLES.genreChip}/>
+              key={subgenre.id}
+              label={subgenre.name}
+              variant='outlined'
+              sx={STYLES.genreChip}/>
           })
         }
 

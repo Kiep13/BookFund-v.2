@@ -18,14 +18,14 @@ import { GenresTreeView } from './components/genresTreeView';
 import { GenreCard } from './components/genreСard';
 
 export const Genres = () => {
+  const history = useHistory();
+  const api = useApi();
+  const { addSuccess, addError } = useAlerts();
+
   const [selectedGenre, setSelectedGenre] = useState<IGenre>(GENRES_MOCK[0]);
   const [genres, setGenres] = useState<IGenre[]>([]);
   const [treeState, setTreeState] = useState<State>(State.LOADING);
   const [infoState, setInfoState] = useState<State>(State.LOADING);
-
-  const history = useHistory();
-  const api = useApi();
-  const { addSuccess, addError } = useAlerts();
 
   const loadGenres = async () => {
     await api.getGenresTree()
@@ -64,6 +64,15 @@ export const Genres = () => {
   const handleGenreSelection = (genre: IGenre) => {
     setInfoState(State.LOADING);
     loadSelectedGenre(genre.id);
+  }
+
+  const handleAddSubgenre = () => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`, {
+      parent: {
+        id: selectedGenre.id,
+        name: selectedGenre.name
+      },
+    });
   }
 
   useEffect(() => {
@@ -111,6 +120,7 @@ export const Genres = () => {
             <StatefulCard state={infoState} noContentMessage={NO_GENRES_MESSAGE}>
                 <GenreCard
                   genre={selectedGenre}
+                  onAddSubgenreClick={handleAddSubgenre}
                   onEditClick={handleGenreEdit}
                   onDeleteClick={handleGenreDelete}/>
             </StatefulCard>
