@@ -16,12 +16,12 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
   const api = useApi();
 
   const getAuthors = useCallback(
-    debounce(async () => {
+    debounce(async (search: string) => {
       setLoading(true);
 
       const searchOptions: ISearchOptions = {
         pageSize: PageSizes.Fifty,
-        searchTerm: searchTerm
+        searchTerm: search
       }
       const response = await api.getAuthors(searchOptions);
 
@@ -39,7 +39,7 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
   );
 
   useEffect(() => {
-    getAuthors();
+    getAuthors(searchTerm);
   }, [searchTerm]);
 
   return (

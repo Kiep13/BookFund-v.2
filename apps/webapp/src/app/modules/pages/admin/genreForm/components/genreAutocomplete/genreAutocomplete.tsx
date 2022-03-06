@@ -18,12 +18,12 @@ export const GenreAutocomplete = (props: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const getGenres = useCallback(
-    debounce(async () => {
+    debounce(async (search: string) => {
       setLoading(true);
 
       const searchOptions: ISearchOptions = {
         pageSize: PageSizes.Fifty,
-        searchTerm: searchTerm
+        searchTerm: search
       }
       const genres = await api.getGenres(searchOptions);
 
@@ -41,7 +41,7 @@ export const GenreAutocomplete = (props: IProps) => {
   );
 
   useEffect(() => {
-    getGenres();
+    getGenres(searchTerm);
   }, [searchTerm]);
 
   return (

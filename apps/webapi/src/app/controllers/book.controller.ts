@@ -24,14 +24,24 @@ class BookController {
     try {
       const bookId = +request.params.id;
 
-      const currentBook = await connection.manager.findOne(BookEntity, bookId);
+      const currentBook = await connection.manager.findOne(BookEntity, bookId, {
+        relations: ['genres']
+      });
       if (currentBook.image !== request.body.imageUrl && currentBook.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
         await imageService.deleteImage(currentBook.image);
       }
 
+      await connection.manager.createQueryBuilder(BookEntity, 'book')
+        .relation(BookEntity, 'genres')
+        .of(currentBook)
+        .addAndRemove(request.body.genres, currentBook.genres);
+
       const book: BookEntity = bookService.buildBookFromBody(request.body);
+      delete book.genres;
 
       await connection.manager.update(BookEntity, bookId, book);
+
+      return response.status(ResponseStatuses.STATUS_OK).json(book);
     } catch (error) {
       next(error)
     }

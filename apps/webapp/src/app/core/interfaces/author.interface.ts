@@ -8,5 +8,6 @@ export interface IAuthor {
   createdAt?: Date,
   fullName?: string,
   image?: string,
-  updatedAt?: Date
+  updatedAt?: Date,
+  title?: string
 }

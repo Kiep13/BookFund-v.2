@@ -89,7 +89,7 @@ export const BookForm = () => {
     setEditMode(true);
     api.getBook(bookId)
       .then((book: IBook) => {
-        book.author.name = `${book.author?.name} ${book.author?.surname}`;
+        book.author.title = `${book.author?.name} ${book.author?.surname}`;
 
         formik.setValues({
           ...book,

@@ -16,12 +16,12 @@ export const GenresMultiAutocomplete = ({form, fieldName}: IProps) => {
   const api = useApi();
 
   const getGenres = useCallback(
-    debounce(async () => {
+    debounce(async (search: string) => {
       setLoading(true);
 
       const searchOptions: ISearchOptions = {
         pageSize: PageSizes.Fifty,
-        searchTerm: searchTerm
+        searchTerm: search
       }
       const genres = await api.getGenres(searchOptions);
 
@@ -39,7 +39,7 @@ export const GenresMultiAutocomplete = ({form, fieldName}: IProps) => {
   );
 
   useEffect(() => {
-    getGenres();
+    getGenres(searchTerm);
   }, [searchTerm]);
 
   return <AutocompleteMultiInput

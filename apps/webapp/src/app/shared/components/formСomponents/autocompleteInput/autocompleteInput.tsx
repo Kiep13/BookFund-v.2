@@ -16,7 +16,7 @@ export const AutocompleteInput = (props: IProps) => {
 
   const inputValue = values[fieldName] ? {
     id: values[fieldName]?.id,
-    title: values[fieldName]?.name || values[fieldName]?.title
+    title: values[fieldName]?.title || values[fieldName]?.name
   } : null;
 
   useEffect(() => {

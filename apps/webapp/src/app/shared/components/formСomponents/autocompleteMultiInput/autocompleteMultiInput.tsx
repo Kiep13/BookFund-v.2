@@ -7,20 +7,18 @@ import { IOption } from '@core/interfaces';
 import { IProps } from './props.interface';
 
 export const AutocompleteMultiInput = (props: IProps) => {
-  const [value, setValue] = useState<IOption[]>([]);
-  const [options, setOptions] = useState<IOption[]>(props.options || []);
-  const [loading, setLoading] = useState<boolean>(props.loading || false);
-
   const {fieldName, form} = props;
   const {values, handleBlur, touched, errors } = form;
 
-  const inputValue = values[fieldName].length ? values[fieldName].map(
+  const [value, setValue] = useState<IOption[]>(values[fieldName].length ? values[fieldName].map(
     (valueItem: any): IOption => {
       return {
         id: valueItem.id,
         title: valueItem.name || valueItem.title
       }
-    }) : [];
+    }) : []);
+  const [options, setOptions] = useState<IOption[]>(props.options || []);
+  const [loading, setLoading] = useState<boolean>(props.loading || false);
 
   useEffect(() => {
     setOptions(props.options);
@@ -29,6 +27,7 @@ export const AutocompleteMultiInput = (props: IProps) => {
 
   const handleTyping = (event: SyntheticEvent) => {
     const { value } = event.target as HTMLTextAreaElement;
+
     props.handleTyping(value);
   }
 
@@ -43,15 +42,15 @@ export const AutocompleteMultiInput = (props: IProps) => {
   return (
     <Autocomplete
       multiple
+      value={value}
       onChange={handleSelecting}
       options={options}
       loading={loading}
-      value={inputValue}
       isOptionEqualToValue={(option: IOption, value: IOption) => option.id === value.id}
       getOptionLabel={(option: IOption) => option.title}
       renderTags={(tagValue: IOption[], getTagProps) =>
         tagValue.map((option: IOption, index: number) => (
-          <Chip label={option.title}{...getTagProps({ index })}/>
+          <Chip label={option.title} {...getTagProps({ index })}/>
         ))
       }
       renderOption={(props: HTMLAttributes<HTMLElement>, option: IOption) => {
