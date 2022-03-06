@@ -9,7 +9,7 @@ import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
 import { useApi } from '@shared/hooks';
 
-import { COLUMNS } from '../../constants';
+import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const BooksTable = () => {
   const history = useHistory();
@@ -65,7 +65,20 @@ export const BooksTable = () => {
   }
 
   const deleteBook = async (id: number) => {
+    api.deleteBook(id)
+      .then(() => {
+        addSuccess(SUCCESSFULLY_DELETED);
 
+        if(page !== 0 && data.length === 1) {
+          setPage(page - 1);
+          return;
+        }
+
+        getBooks();
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      })
   }
 
   const handleClick = (tableItemAction: ITableItemAction) => {

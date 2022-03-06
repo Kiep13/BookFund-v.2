@@ -64,6 +64,19 @@ class BookController {
       next(error)
     }
   }
+
+  public async deleteBook(request: Request, response: Response, next: Function): Response {
+    try {
+      const bookId = +request.params.id;
+
+      const book = await connection.manager.findOne(BookEntity, bookId);
+      await connection.manager.remove(book);
+
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const bookController = new BookController();
