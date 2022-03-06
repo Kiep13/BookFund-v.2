@@ -125,7 +125,7 @@ export const DataTable = (props: IProps) => {
                     height: 53 * rowsPerPage,
                   }}
                 >
-                  <TableCell colSpan={6} sx={STYLES.noItems}>
+                  <TableCell colSpan={columns.length + 1} sx={STYLES.noItems}>
                     Don't have items to display
                   </TableCell>
                 </TableRow>

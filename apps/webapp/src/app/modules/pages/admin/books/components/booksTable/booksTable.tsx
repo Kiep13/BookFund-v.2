@@ -1,42 +1,102 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { PageSizes, SortDirections } from '@core/enums';
-import { IBook, ISortOptions } from '@core/interfaces';
+import { API_TOOLTIP_ERROR } from '@core/constants';
+import { PageSizes, SortDirections, TableActions } from '@core/enums';
+import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
+import { useAlerts } from '@features/alertsBlock/hooks';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
-import { BOOKS_MOCK } from '@mocks/books.mock';
+import { useApi } from '@shared/hooks';
 
 import { COLUMNS } from '../../constants';
 
 export const BooksTable = () => {
+  const history = useHistory();
+  const api = useApi();
+  const { addSuccess, addError } = useAlerts();
+
+  const [data, setData] = useState<IBook[]>([]);
+  const [count, setCount] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
   const [sortOptions, setSortOptions] = useState<ISortOptions>({
     order: SortDirections.Asc,
     orderBy: COLUMNS[0].id
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const data: IBook[] = BOOKS_MOCK.map((book: IBook) => {
-    book.authorFullName = `${book.author?.surname || ' '} ${book.author?.name || ' '}`;
-    return book;
-  });
 
   const columns: IDataColumn[] = COLUMNS;
 
-  const handleClick = () => {};
+  const getBooks = async () => {
+    setLoading(true);
 
-  const handleRowsPerPageChanged = () => {};
+    const searchOptions: ISearchOptions = {
+      pageSize: rowsPerPage,
+      page: page,
+      order: sortOptions.order.toUpperCase(),
+      orderBy: sortOptions.orderBy,
+    }
 
-  const handlePageChange = () => {};
+    await api.getBooks(searchOptions)
+      .then((response: IListApiView<IBook>) => {
+        setCount(response.count);
+        setData(response.data.map((book: IBook) => {
+          return {
+            ...book,
+            authorFullName: `${book.author?.surname || ' '} ${book.author?.name || ' '}`
+          }
+        }));
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      })
+      .then(() => {
+        setLoading(false);
+      });
+  }
 
-  const handleSortRequest = () => {};
+  useEffect(() => {
+    getBooks();
+  }, [sortOptions, page, rowsPerPage]);
+
+  const navigateToEditForm = (id: number): void => {
+
+  }
+
+  const deleteBook = async (id: number) => {
+
+  }
+
+  const handleClick = (tableItemAction: ITableItemAction) => {
+    switch(tableItemAction.actionType) {
+      case TableActions.EDIT: {
+        navigateToEditForm(tableItemAction.id);
+      } break;
+      case TableActions.DELETE: {
+        deleteBook(tableItemAction.id);
+      } break;
+    }
+  };
+
+  const handleRowsPerPageChanged = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage);
+    setPage(0);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleSortRequest = (newSortOptions: ISortOptions) => {
+    setSortOptions(newSortOptions);
+  };
 
   return (
     <DataTable
       columns={columns}
       data={data}
-      count={data.length}
+      count={count}
       sortOptions={sortOptions}
       page={page}
       rowsPerPage={rowsPerPage}

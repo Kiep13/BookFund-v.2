@@ -4,7 +4,7 @@ import queryString from 'query-string';
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { environment } from '@environments/environment';
-import { IAuthor, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
+import { IAuthor, IBook, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
 import { IBookForm } from '@pages/admin/bookForm/interfaces';
 import { IGenreForm } from '@pages/admin/genreForm/interfaces';
@@ -85,6 +85,13 @@ export const useApi = () => {
       });
   }
 
+  const getBooks = async (searchOptions: ISearchOptions): Promise<IListApiView<IBook>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IBook[]>(`${environment.backEndUrl}/v1/book/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     saveImage,
     addAuthor,
@@ -98,6 +105,7 @@ export const useApi = () => {
     getGenres,
     getGenresTree,
     deleteGenre,
-    addBook
+    addBook,
+    getBooks
   }
 }
