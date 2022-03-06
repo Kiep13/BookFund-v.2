@@ -10,7 +10,7 @@ export const VALIDATION_SCHEMA = yup.object().shape({
     .required('This field can not be empty')
     .min(1, 'Title must be at least 1 characters')
     .max(MAX_NAME_LENGTH, `Title must be at most ${MAX_NAME_LENGTH} characters`),
-  author: yup.number()
+  author: yup.object()
     .required('This field can not be empty'),
   amountPages: yup.number()
     .required('This field can not be empty')

@@ -58,7 +58,7 @@ export const AuthorForm = () => {
         navigateToAuthorsPage();
       })
       .catch(() => {
-        addError(API_TOOLTIP_ERROR)
+        addError(API_TOOLTIP_ERROR);
       })
       .then(() => {
         setSubmitting(false);
@@ -75,7 +75,7 @@ export const AuthorForm = () => {
     onSubmit: handleSubmit
   });
 
-  const setEditFormValues = async () => {
+  const initForm = async () => {
     const authorId = (params as IFormPageParams).id;
 
     if (!authorId) {
@@ -101,19 +101,18 @@ export const AuthorForm = () => {
   }
 
   useEffect(() => {
-    setEditFormValues();
+    initForm();
   }, []);
 
   return (<Card>
     <Box sx={STYLES.page}>
-      <Typography
-        variant='h5'
-        gutterBottom
-        sx={STYLES.pageHeader}>
-        {editMode ? TITLE_EDIT : TITLE_ADD}
-      </Typography>
-
       <StatefulCard state={pageState}>
+        <Typography
+          variant='h5'
+          gutterBottom
+          sx={STYLES.pageHeader}>
+          {editMode ? TITLE_EDIT : TITLE_ADD}
+        </Typography>
         <form onSubmit={formik.handleSubmit}>
 
           <Box sx={STYLES.nameInputsWrapper}>

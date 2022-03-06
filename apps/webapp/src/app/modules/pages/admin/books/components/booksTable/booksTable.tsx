@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
-import { PageSizes, SortDirections, TableActions } from '@core/enums';
+import { AdminRoutePaths, PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { DataTable } from '@features/dataTable';
@@ -61,7 +61,7 @@ export const BooksTable = () => {
   }, [sortOptions, page, rowsPerPage]);
 
   const navigateToEditForm = (id: number): void => {
-
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/${id}`);
   }
 
   const deleteBook = async (id: number) => {

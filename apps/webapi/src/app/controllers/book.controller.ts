@@ -1,28 +1,53 @@
 import { Request, Response } from 'express';
 
 import { IListApiView } from '@core/interfaces';
-import { ResponseStatuses, SortDirections } from '@core/enums';
+import { ApiRoutes, ResponseStatuses, SortDirections } from '@core/enums';
 import { connection } from '@core/connection';
-import { BookEntity } from "@entities/book.entity";
+import { environment } from '@environments/environment';
+import { BookEntity } from '@entities/book.entity';
+import { bookService } from '@services/book.service';
+import { imageService } from '@services/image.service';
 
 class BookController {
   public async createBook(request: Request, response: Response, next: Function): Response {
     try {
-      const book: BookEntity = new BookEntity();
-
-      book.title = request.body.title;
-      book.amountPages = request.body.amountPages;
-      book.year = request.body.year;
-      book.author = request.body.author;
-      book.genres = request.body.genres;
-      book.description = request.body.description;
-
-      if (request.body.imageUrl) {
-        book.image = request.body.imageUrl;
-      }
+      const book: BookEntity = bookService.buildBookFromBody(request.body);
 
       await connection.manager.save(book);
       return response.status(ResponseStatuses.STATUS_CREATED).json(book);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async updateBook(request: Request, response: Response, next: Function): Response {
+    try {
+      const bookId = +request.params.id;
+
+      const currentBook = await connection.manager.findOne(BookEntity, bookId);
+      if (currentBook.image !== request.body.imageUrl && currentBook.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
+        await imageService.deleteImage(currentBook.image);
+      }
+
+      const book: BookEntity = bookService.buildBookFromBody(request.body);
+
+      await connection.manager.update(BookEntity, bookId, book);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async getBook(request: Request, response: Response, next: Function): Response {
+    try {
+      const bookId = +request.params.id;
+      const book = await connection.manager.getRepository(BookEntity).findOne({
+        relations: ['author', 'genres'],
+        where: {
+          id: bookId
+        }
+      });
+
+      return response.status(ResponseStatuses.STATUS_OK).json(book);
     } catch (error) {
       next(error)
     }

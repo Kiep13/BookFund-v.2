@@ -49,9 +49,7 @@ export const AuthorsTable = () => {
   }, [sortOptions, page, rowsPerPage]);
 
   const navigateToEditForm = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`, {
-      editMode: true,
-    });
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`);
   }
 
   const deleteAuthor = async (id: number) => {

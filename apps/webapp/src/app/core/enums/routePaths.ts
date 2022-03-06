@@ -9,6 +9,7 @@ export enum AdminRoutePaths {
   DASHBOARD = '/dashboard',
   BOOKS = '/books',
   BOOKS_NEW = '/books/new',
+  BOOKS_EDIT = '/books/edit',
   AUTHORS = '/authors',
   AUTHOR_NEW = '/authors/new',
   AUTHOR_EDIT = '/authors/edit',

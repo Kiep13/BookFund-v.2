@@ -14,6 +14,14 @@ export const AutocompleteMultiInput = (props: IProps) => {
   const {fieldName, form} = props;
   const {values, handleBlur, touched, errors } = form;
 
+  const inputValue = values[fieldName].length ? values[fieldName].map(
+    (valueItem: any): IOption => {
+      return {
+        id: valueItem.id,
+        title: valueItem.name || valueItem.title
+      }
+    }) : [];
+
   useEffect(() => {
     setOptions(props.options);
     setLoading(props.loading);
@@ -35,14 +43,14 @@ export const AutocompleteMultiInput = (props: IProps) => {
   return (
     <Autocomplete
       multiple
-      value={value}
       onChange={handleSelecting}
       options={options}
       loading={loading}
-      isOptionEqualToValue={(option: any, value) => option.id === value.id}
+      value={inputValue}
+      isOptionEqualToValue={(option: IOption, value: IOption) => option.id === value.id}
       getOptionLabel={(option: IOption) => option.title}
-      renderTags={(tagValue, getTagProps) =>
-        tagValue.map((option: IOption, index) => (
+      renderTags={(tagValue: IOption[], getTagProps) =>
+        tagValue.map((option: IOption, index: number) => (
           <Chip label={option.title}{...getTagProps({ index })}/>
         ))
       }

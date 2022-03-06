@@ -8,10 +8,7 @@ class AuthorService {
     author.name = requestBody.name;
     author.surname = requestBody.surname;
     author.biography = requestBody.biography;
-
-    if(requestBody.imageUrl) {
-      author.image = requestBody.imageUrl;
-    }
+    author.image = requestBody.imageUrl;
 
     return author;
   }

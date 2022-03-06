@@ -79,11 +79,16 @@ export const useApi = () => {
   }
 
   const addBook = async (book: IBookForm): Promise<void> => {
-    return await axios.post(`${environment.backEndUrl}/v1/book/new`, book)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+    return await axios.post(`${environment.backEndUrl}/v1/book/new`, book);
+  }
+
+  const updateBook = async (id: number, author: IBookForm): Promise<AxiosResponse<void>> => {
+    return await axios.put(`${environment.backEndUrl}/v1/book/update/${id}`, author);
+  }
+
+  const getBook = async (id: number): Promise<IBook>  => {
+    return await axios.get(`${environment.backEndUrl}/v1/book/${id}`)
+      .then((response: AxiosResponse<IBook>) => response.data);
   }
 
   const getBooks = async (searchOptions: ISearchOptions): Promise<IListApiView<IBook>> => {
@@ -111,6 +116,8 @@ export const useApi = () => {
     getGenresTree,
     deleteGenre,
     addBook,
+    updateBook,
+    getBook,
     getBooks,
     deleteBook
   }
