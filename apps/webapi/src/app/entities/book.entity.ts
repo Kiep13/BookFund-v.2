@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { AuthorEntity } from '@entities/author.entity';
+import { CollectionEntity } from '@entities/collection.entity';
 import { GenreEntity } from '@entities/genre.entity';
 
 @Entity({
@@ -58,6 +59,11 @@ export class BookEntity {
     name: 'book_genre'
   })
   genres: GenreEntity[];
+
+  @ManyToMany(() => CollectionEntity, collection => collection.books, {
+    cascade: true
+  })
+  collections: CollectionEntity[];
 
   @Column({
     name: 'createdAt',

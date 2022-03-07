@@ -2,7 +2,8 @@ export enum ApiRoutes {
   AUTHOR = 'author',
   IMAGE = 'image',
   BOOK = 'book',
-  GENRE = 'genre'
+  GENRE = 'genre',
+  COLLECTION = 'collection'
 }
 
 export enum ApiRoutesModifiers {
