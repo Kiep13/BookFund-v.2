@@ -8,5 +8,6 @@ export interface IProps {
   loading: boolean;
   form: FormikProps<any>,
   fieldName: string,
-  handleTyping: Function
+  handleTyping: Function,
+  handleSelecting?: Function
 }

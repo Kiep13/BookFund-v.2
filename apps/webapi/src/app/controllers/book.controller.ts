@@ -86,7 +86,7 @@ class BookController {
           )
         })
         .take(+requestParams.pageSize)
-        .skip(+requestParams.pageSize * +requestParams.page)
+        .skip(+requestParams.pageSize * (+requestParams.page || 0))
         .getManyAndCount();
 
       const result: IListApiView<BookEntity> = {

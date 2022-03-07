@@ -3,7 +3,8 @@ import { IBook } from '@core/interfaces';
 export interface ICollectionForm {
   title: string,
   description: string,
-  books: IBook[]
+  books: IBook[],
   imageUrl?: string,
-  imageFile?: File
+  imageFile?: File,
+  bookAutocomplete?: IBook
 }

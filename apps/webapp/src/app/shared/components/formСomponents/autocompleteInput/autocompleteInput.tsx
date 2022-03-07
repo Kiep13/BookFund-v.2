@@ -7,17 +7,16 @@ import { IOption } from '@core/interfaces';
 import { IProps } from './props.interface';
 
 export const AutocompleteInput = (props: IProps) => {
-  const {fieldName, form} = props;
-  const {values, handleBlur, touched, errors} = form;
+  const { fieldName, form } = props;
+  const { values, handleBlur, touched, errors } = form;
 
   const [open, setOpen] = useState<boolean>(false);
   const [options, setOptions] = useState<IOption[]>(props.options || []);
   const [loading, setLoading] = useState<boolean>(props.loading || false);
-
-  const inputValue = values[fieldName] ? {
+  const [inputValue, setInputValue] = useState<IOption | null>(values[fieldName] ? {
     id: values[fieldName]?.id,
     title: values[fieldName]?.title || values[fieldName]?.name
-  } : null;
+  } : null);
 
   useEffect(() => {
     setOptions(props.options);
@@ -31,6 +30,7 @@ export const AutocompleteInput = (props: IProps) => {
 
   const handleSelecting = (event: SyntheticEvent, value: IOption | null) => {
     form.setFieldValue(fieldName, value);
+    props.handleSelecting && props.handleSelecting(value);
 
     if(!value) {
       props.handleTyping('');

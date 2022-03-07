@@ -21,6 +21,10 @@ export const STYLES = {
     mb: 3,
     width: '100%'
   },
+  bookSelection: {
+    mb: 3,
+    width: '100%'
+  },
   formButtons: {
     mb: 3,
     display: 'flex',
@@ -28,5 +32,14 @@ export const STYLES = {
   },
   cancelButton: {
     mr: 2
+  }
+}
+
+export const STYLES_BOOK_SELECTOR = {
+  autocomplete: {
+    mb: 3
+  },
+  booksTable: {
+    mb: 3
   }
 }
