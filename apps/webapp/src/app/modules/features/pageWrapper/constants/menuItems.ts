@@ -1,5 +1,6 @@
 import BookmarksTwoToneIcon from '@mui/icons-material/BookmarksTwoTone';
 import BookTwoToneIcon from '@mui/icons-material/BookTwoTone';
+import BurstModeTwoToneIcon from '@mui/icons-material/BurstModeTwoTone';
 import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
 import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
 import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
@@ -32,6 +33,11 @@ export const ADMIN_MENU_ITEMS: IMenuItem[] = [
     title: 'Genres',
     icon: BookmarksTwoToneIcon,
     url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`
+  },
+  {
+    title: 'Collections',
+    icon: BurstModeTwoToneIcon,
+    url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`
   }
 ];
 
