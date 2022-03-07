@@ -7,6 +7,7 @@ import { environment } from '@environments/environment';
 import { IAuthor, IBook, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
 import { IBookForm } from '@pages/admin/bookForm/interfaces';
+import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
 import { IGenreForm } from '@pages/admin/genreForm/interfaces';
 
 export const useApi = () => {
@@ -102,6 +103,10 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/book/delete/${id}`);
   }
 
+  const addCollection = async (collection: ICollectionForm): Promise<AxiosResponse<void>> => {
+    return await axios.post<void>(`${environment.backEndUrl}/v1/collection/new`, collection);
+  }
+
   return {
     saveImage,
     addAuthor,
@@ -119,6 +124,7 @@ export const useApi = () => {
     updateBook,
     getBook,
     getBooks,
-    deleteBook
+    deleteBook,
+    addCollection
   }
 }

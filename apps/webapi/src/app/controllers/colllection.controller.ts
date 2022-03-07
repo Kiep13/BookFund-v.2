@@ -10,7 +10,7 @@ class CollectionController {
       const collection: CollectionEntity = new CollectionEntity();
 
       collection.title = request.body.title;
-      collection.image = request.body.image;
+      collection.image = request.body.imageUrl;
       collection.description = request.body.description;
       collection.books = request.body.books;
 

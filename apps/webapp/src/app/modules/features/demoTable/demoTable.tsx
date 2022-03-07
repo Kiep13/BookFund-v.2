@@ -58,7 +58,7 @@ export const DemoTable = ({data, columns, onDeleteClick}: IProps) => {
                     <IconButton
                       aria-label='Delete'
                       sx={STYLES.iconButton}
-                      onClick={() => onDeleteClick}>
+                      onClick={() => onDeleteClick(row.id)}>
                       <DeleteTwoToneIcon/>
                     </IconButton>
                   </TableCell>
@@ -66,7 +66,7 @@ export const DemoTable = ({data, columns, onDeleteClick}: IProps) => {
               );
             })}
           {isDataEmpty && (
-            <TableRow style={{height: 100}}>
+            <TableRow style={STYLES.tableRow}>
               <TableCell colSpan={columns.length + 1} sx={STYLES.noItems}>
                 Don't have items to display
               </TableCell>

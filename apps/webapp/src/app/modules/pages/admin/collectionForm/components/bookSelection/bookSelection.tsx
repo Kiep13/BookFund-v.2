@@ -1,20 +1,31 @@
-import { DemoTable } from '@features/demoTable';
 import { Box } from '@mui/material';
 
 import { IBook } from '@core/interfaces';
+import { useAlerts } from '@features/alertsBlock/hooks';
+import { DemoTable } from '@features/demoTable';
 
-import { COLUMNS, STYLES_BOOK_SELECTOR } from '../../constants';
+import { COLUMNS, ERROR_BOOK_ALREADY_SELECTED, STYLES_BOOK_SELECTOR } from '../../constants';
 import { BookAutocomplete } from '../bookAutocomplete';
 import { IProps } from './props.interface';
 
 export const BookSelection = ({ form, autocompleteFieldName, dataFieldName }: IProps) => {
+  const { addError } = useAlerts();
+
   const handleBookSelect = (book: IBook) => {
+    const isExists = form.values[dataFieldName].map((item: IBook) => +item.id).includes(+book.id);
+    if(isExists) {
+      addError(ERROR_BOOK_ALREADY_SELECTED);
+      return;
+    }
+
     form.values[dataFieldName].push(book);
     form.validateForm();
   }
 
-  const handleDeleteSelectedBook = () => {
+  const handleDeleteSelectedBook = (id: number) => {
+    const filteredBookArray = form.values[dataFieldName].filter((book: IBook) => +book.id !== +id);
 
+    form.setFieldValue(dataFieldName, filteredBookArray);
   }
 
   return (

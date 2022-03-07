@@ -4,24 +4,45 @@ import { FormikHelpers } from 'formik/dist/types';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { API_TOOLTIP_ERROR } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
+import { useAlerts } from '@features/alertsBlock/hooks';
 import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
 import { Card } from '@shared/components/card';
 import { Input } from '@shared/components/formСomponents/input';
+import { useApi } from '@shared/hooks';
 
 import { BookSelection } from './components/bookSelection';
-import { FORM_INITIAL_VALUE, STYLES, TITLE_ADD, TITLE_EDIT, VALIDATION_SCHEMA } from './constants';
+import { FORM_INITIAL_VALUE, STYLES, SUCCESSFULLY_ADDED, TITLE_ADD, TITLE_EDIT, VALIDATION_SCHEMA } from './constants';
 
 export const CollectionForm = () => {
   const history = useHistory();
+  const api = useApi();
+  const {addSuccess, addError} = useAlerts();
 
   const [pageState, setPageState] = useState<State>(State.CONTENT);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const handleSubmit = async (values: ICollectionForm, {setSubmitting}: FormikHelpers<ICollectionForm>) => {
+    try {
+      if (values.imageFile) {
+        const formData = new FormData();
+        formData.append('image', values.imageFile);
 
+        values.imageUrl = await (await api.saveImage(formData));
+      }
+
+      await api.addCollection(values);
+      addSuccess(SUCCESSFULLY_ADDED);
+      navigateToCollectionsPage();
+    } catch (e) {
+      console.log(e);
+      addError(API_TOOLTIP_ERROR);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const formik = useFormik({
