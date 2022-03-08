@@ -1,16 +1,16 @@
 import { Box, TablePagination, TextField } from '@mui/material';
 import { debounce } from 'lodash';
-import { useCallback, useState, useEffect, SyntheticEvent } from 'react';
+import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
 import { API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@core/constants';
-import { PageSizes } from '@core/enums';
+import { CardActions, PageSizes } from '@core/enums';
 import { ICardAction, ICardItemAction, ICollection, IListApiView, ISearchOptions } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { State, StatefulCard } from '@features/statefulCard';
 import { CollectionCard } from '@shared/components/colllectionCard';
 import { useApi } from '@shared/hooks';
 
-import { DELAY, NO_MATCHING_COLLECTIONS, STYLES } from '../../constants';
+import { DELAY, NO_MATCHING_COLLECTIONS, STYLES, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const CollectionsContent = () => {
   const [state, setState] = useState<State>(State.LOADING);
@@ -63,8 +63,30 @@ export const CollectionsContent = () => {
     setPage(newPage);
   };
 
-  const handleCardAction = (cardAction: ICardItemAction) => {
+  const deleteCollection = (id: number) => {
+    api.deleteCollection(id)
+      .then(() => {
+        addSuccess(SUCCESSFULLY_DELETED);
 
+        if(page !== 0 && data.length === 1) {
+          setPage(page - 1);
+          return;
+        }
+
+        setState(State.LOADING);
+        getCollections(searchTerm);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+      });
+  }
+
+  const handleCardAction = (cardAction: ICardItemAction) => {
+    switch (cardAction.actionType) {
+      case CardActions.DELETE: {
+        deleteCollection(cardAction.id);
+      } break;
+    }
   }
 
   const handleTyping = (event: SyntheticEvent) => {

@@ -51,6 +51,19 @@ class CollectionController {
       next(error)
     }
   }
+
+  public async deleteCollection(request: Request, response: Response, next: Function): Response {
+    try {
+      const collectionId = +request.params.id;
+
+      const collection = await connection.manager.findOne(CollectionEntity, collectionId);
+      await connection.manager.remove(collection);
+
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const collectionController = new CollectionController();

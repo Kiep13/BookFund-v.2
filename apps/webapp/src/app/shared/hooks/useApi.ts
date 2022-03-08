@@ -114,6 +114,10 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const deleteCollection = async (id: number): Promise<AxiosResponse<void>> => {
+    return axios.delete<void>(`${environment.backEndUrl}/v1/collection/delete/${id}`);
+  }
+
   return {
     saveImage,
     addAuthor,
@@ -133,6 +137,7 @@ export const useApi = () => {
     getBooks,
     deleteBook,
     addCollection,
-    getCollections
+    getCollections,
+    deleteCollection
   }
 }
