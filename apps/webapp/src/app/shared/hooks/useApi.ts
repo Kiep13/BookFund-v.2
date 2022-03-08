@@ -4,7 +4,7 @@ import queryString from 'query-string';
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { environment } from '@environments/environment';
-import { IAuthor, IBook, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
+import { IAuthor, IBook, ICollection, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
 import { IBookForm } from '@pages/admin/bookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
@@ -107,6 +107,13 @@ export const useApi = () => {
     return await axios.post<void>(`${environment.backEndUrl}/v1/collection/new`, collection);
   }
 
+  const getCollections = async (searchOptions: ISearchOptions): Promise<IListApiView<ICollection>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<ICollection[]>(`${environment.backEndUrl}/v1/collection/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     saveImage,
     addAuthor,
@@ -125,6 +132,7 @@ export const useApi = () => {
     getBook,
     getBooks,
     deleteBook,
-    addCollection
+    addCollection,
+    getCollections
   }
 }

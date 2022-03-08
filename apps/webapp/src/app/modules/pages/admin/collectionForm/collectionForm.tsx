@@ -38,7 +38,6 @@ export const CollectionForm = () => {
       addSuccess(SUCCESSFULLY_ADDED);
       navigateToCollectionsPage();
     } catch (e) {
-      console.log(e);
       addError(API_TOOLTIP_ERROR);
     } finally {
       setSubmitting(false);
@@ -73,6 +72,13 @@ export const CollectionForm = () => {
             fieldName={'title'}
             form={formik}
             styles={STYLES.titleInput}/>
+
+          <Input
+            id={'subtitle'}
+            label={'Subtitle'}
+            fieldName={'subtitle'}
+            form={formik}
+            styles={STYLES.subtitleInput}/>
 
           <Box sx={STYLES.imageWrapper}>
             <ImageUpload

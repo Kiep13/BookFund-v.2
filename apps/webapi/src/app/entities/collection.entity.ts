@@ -19,6 +19,12 @@ export class CollectionEntity {
   title: string;
 
   @Column({
+    name: 'subtitle',
+    type: 'varchar'
+  })
+  subtitle: string;
+
+  @Column({
     name: 'image',
     type: 'varchar',
     nullable: true

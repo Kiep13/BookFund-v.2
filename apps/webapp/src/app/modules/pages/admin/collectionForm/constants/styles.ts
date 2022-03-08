@@ -14,6 +14,10 @@ export const STYLES = {
     width: '100%',
     mb: 3
   },
+  subtitleInput: {
+    width: '100%',
+    mb: 3
+  },
   imageWrapper: {
     mb: 3
   },

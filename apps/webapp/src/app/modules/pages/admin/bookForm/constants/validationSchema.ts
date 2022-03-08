@@ -23,6 +23,6 @@ export const VALIDATION_SCHEMA = yup.object().shape({
   imageUrl: IMAGE_UPLOAD_VALIDATION_ELEMENT,
   description: yup.string()
     .required('This field can not be empty')
-    .min(2, 'Biography must be at least 2 characters')
-    .max(MAX_TEXT_LENGTH, `Biography must be at most ${MAX_TEXT_LENGTH} characters`)
+    .min(2, 'Description must be at least 2 characters')
+    .max(MAX_TEXT_LENGTH, `Description must be at most ${MAX_TEXT_LENGTH} characters`)
 });
