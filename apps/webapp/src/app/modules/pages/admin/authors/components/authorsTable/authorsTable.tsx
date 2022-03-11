@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
-import { API_TOOLTIP_ERROR } from '@core/constants';
-import { AdminRoutePaths, PageSizes, SortDirections, TableActions } from '@core/enums';
+import { PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
+import { useAlerts } from '@features/alertsBlock/hooks';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
-import { useAlerts } from '@features/alertsBlock/hooks';
-import { useApi } from '@shared/hooks';
+import { useApi, useAuthorActions } from '@shared/hooks';
 
 import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const AuthorsTable = () => {
-  const history = useHistory();
   const api = useApi();
-  const { addSuccess, addError } = useAlerts();
+  const { addSuccess } = useAlerts();
+  const authorActions = useAuthorActions();
 
   const [data, setData] = useState<IAuthor[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -48,31 +46,26 @@ export const AuthorsTable = () => {
     getAuthors();
   }, [sortOptions, page, rowsPerPage]);
 
-  const navigateToEditForm = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`);
-  }
-
   const deleteAuthor = async (id: number) => {
-    api.deleteAuthor(id)
-      .then(() => {
-        addSuccess(SUCCESSFULLY_DELETED)
+    authorActions.deleteAuthor(id, () => {
+      addSuccess(SUCCESSFULLY_DELETED)
 
-        if(page !== 0 && data.length === 1) {
-          setPage(page - 1);
-          return;
-        }
+      if(page !== 0 && data.length === 1) {
+        setPage(page - 1);
+        return;
+      }
 
-        getAuthors();
-      })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      })
+      getAuthors();
+    });
   }
 
   const handleClick = (tableItemAction: ITableItemAction): void => {
     switch(tableItemAction.actionType) {
+      case TableActions.VIEW: {
+        authorActions.navigateToAuthorPage(tableItemAction.id);
+      } break;
       case TableActions.EDIT: {
-        navigateToEditForm(tableItemAction.id);
+        authorActions.navigateToEditForm(tableItemAction.id);
       } break;
       case TableActions.DELETE: {
         deleteAuthor(tableItemAction.id)

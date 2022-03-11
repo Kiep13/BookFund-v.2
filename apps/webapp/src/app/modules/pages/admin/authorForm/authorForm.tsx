@@ -1,18 +1,17 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
-import { AdminRoutePaths } from '@core/enums';
 import { IAuthor, IFormPageParams } from '@core/interfaces';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { Card } from '@shared/components/card';
 import { Input } from '@shared/components/formСomponents/input';
-import { useApi } from '@shared/hooks';
+import { useApi, useAuthorActions } from '@shared/hooks';
 
 import {
   FORM_INITIAL_VALUE,
@@ -25,10 +24,10 @@ import {
 import { IAuthorForm } from './interfaces';
 
 export const AuthorForm = () => {
-  const history = useHistory();
   const params = useParams();
   const api = useApi();
   const {addSuccess, addError} = useAlerts();
+  const authorActions = useAuthorActions();
 
   const [pageState, setPageState] = useState<State>(State.LOADING);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -55,7 +54,7 @@ export const AuthorForm = () => {
 
     callSubmitAction(values)
       .then(() => {
-        navigateToAuthorsPage();
+        authorActions.navigateToAuthorsPage();
       })
       .catch(() => {
         addError(API_TOOLTIP_ERROR);
@@ -63,10 +62,6 @@ export const AuthorForm = () => {
       .then(() => {
         setSubmitting(false);
       });
-  }
-
-  const navigateToAuthorsPage = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`);
   }
 
   const formik = useFormik({
@@ -153,7 +148,7 @@ export const AuthorForm = () => {
             <Button
               variant='outlined'
               sx={STYLES.cancelButton}
-              onClick={navigateToAuthorsPage}>
+              onClick={authorActions.navigateToAuthorsPage}>
               Cancel
             </Button>
 

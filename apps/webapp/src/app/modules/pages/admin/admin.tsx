@@ -4,6 +4,7 @@ import { AdminRoutePaths } from '@core/enums';
 import { wrapAdminPage } from '@features/pageWrapper';
 import compose from '@shared/utils/compose';
 
+import { Author } from './author';
 import { Authors } from './authors';
 import { AuthorForm } from './authorForm';
 import { Books } from './books';
@@ -18,6 +19,7 @@ const AdminPage = () => {
   return (
     <>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`} component={Dashboard}/>
+      <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR}/:id`} component={Author}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`} component={AuthorForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/:id`} component={AuthorForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`} component={Authors} exact/>
