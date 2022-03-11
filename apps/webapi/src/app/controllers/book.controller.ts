@@ -12,6 +12,7 @@ class BookController {
   public async createBook(request: Request, response: Response, next: Function): Response {
     try {
       const book: BookEntity = bookService.buildBookFromBody(request.body);
+      book.genres = request.body.genres;
 
       await connection.manager.save(book);
       return response.status(ResponseStatuses.STATUS_CREATED).json(book);

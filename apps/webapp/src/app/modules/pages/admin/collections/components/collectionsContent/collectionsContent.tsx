@@ -1,9 +1,10 @@
 import { Box, TablePagination, TextField } from '@mui/material';
 import { debounce } from 'lodash';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@core/constants';
-import { CardActions, PageSizes } from '@core/enums';
+import { AdminRoutePaths, CardActions, PageSizes } from '@core/enums';
 import { ICardAction, ICardItemAction, ICollection, IListApiView, ISearchOptions } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { State, StatefulCard } from '@features/statefulCard';
@@ -20,6 +21,7 @@ export const CollectionsContent = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
 
+  const history = useHistory();
   const api = useApi();
   const { addError, addSuccess} = useAlerts();
 
@@ -81,8 +83,15 @@ export const CollectionsContent = () => {
       });
   }
 
+  const navigateToEditForm = (id: number): void => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/${id}`);
+  }
+
   const handleCardAction = (cardAction: ICardItemAction) => {
     switch (cardAction.actionType) {
+      case CardActions.EDIT: {
+        navigateToEditForm(cardAction.id);
+      } break;
       case CardActions.DELETE: {
         deleteCollection(cardAction.id);
       } break;

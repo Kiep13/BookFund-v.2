@@ -1,10 +1,11 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { FormikHelpers } from 'formik/dist/types';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
+import { IBook, ICollection, IFormPageParams } from '@core/interfaces';
 import { AdminRoutePaths } from '@core/enums';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
@@ -15,15 +16,36 @@ import { Input } from '@shared/components/formСomponents/input';
 import { useApi } from '@shared/hooks';
 
 import { BookSelection } from './components/bookSelection';
-import { FORM_INITIAL_VALUE, STYLES, SUCCESSFULLY_ADDED, TITLE_ADD, TITLE_EDIT, VALIDATION_SCHEMA } from './constants';
+import {
+  FORM_INITIAL_VALUE,
+  STYLES,
+  SUCCESSFULLY_ADDED,
+  SUCCESSFULLY_UPDATED,
+  TITLE_ADD,
+  TITLE_EDIT,
+  VALIDATION_SCHEMA
+} from './constants';
 
 export const CollectionForm = () => {
   const history = useHistory();
+  const params = useParams();
   const api = useApi();
   const {addSuccess, addError} = useAlerts();
 
   const [pageState, setPageState] = useState<State>(State.CONTENT);
   const [editMode, setEditMode] = useState<boolean>(false);
+
+  const callSubmitAction = (values: ICollectionForm) => {
+    const collectionId = (params as IFormPageParams).id;
+
+    return editMode ?
+      api.updateCollection(collectionId, values).then(() => {
+        addSuccess(SUCCESSFULLY_UPDATED);
+      }) :
+      api.addCollection(values).then(() => {
+        addSuccess(SUCCESSFULLY_ADDED);
+      })
+  }
 
   const handleSubmit = async (values: ICollectionForm, {setSubmitting}: FormikHelpers<ICollectionForm>) => {
     try {
@@ -34,8 +56,7 @@ export const CollectionForm = () => {
         values.imageUrl = await (await api.saveImage(formData));
       }
 
-      await api.addCollection(values);
-      addSuccess(SUCCESSFULLY_ADDED);
+      await callSubmitAction(values);
       navigateToCollectionsPage();
     } catch (e) {
       addError(API_TOOLTIP_ERROR);
@@ -53,6 +74,40 @@ export const CollectionForm = () => {
   const navigateToCollectionsPage = () => {
     history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`);
   }
+
+  const initForm = () => {
+    const collectionId = (params as IFormPageParams).id;
+
+    if(!collectionId) {
+      setPageState(State.CONTENT);
+      return;
+    }
+
+    setEditMode(true);
+    api.getCollection(collectionId)
+      .then((collection: ICollection) => {
+        collection.books.forEach((book: IBook) => {
+          book.authorFullName = `${book.author.name} ${book.author.surname}`;
+        });
+
+        formik.setValues({
+          ...collection,
+          description: collection.description,
+          imageUrl: collection.image,
+          books: collection.books || []
+        });
+
+        setPageState(State.CONTENT);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+        setPageState(State.ERROR);
+      })
+  }
+
+  useEffect(() => {
+    initForm();
+  }, []);
 
   return <Card>
     <Box sx={STYLES.page}>
