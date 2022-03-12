@@ -92,7 +92,7 @@ export const DataTable = (props: IProps) => {
                         {
                           columns.map((cell: IDataColumn) => {
                             return <TableCell component='td' align={cell.align} key={cell.id}>
-                              {formatData(row[cell.name || ''], cell.type)}
+                              { formatData(row[cell.name || ''], cell.type) }
                             </TableCell>;
                           })
                         }

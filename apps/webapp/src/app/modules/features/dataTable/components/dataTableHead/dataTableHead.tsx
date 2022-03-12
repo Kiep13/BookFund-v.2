@@ -3,6 +3,7 @@ import { visuallyHidden } from '@mui/utils';
 
 import { SortDirections } from '@core/enums';
 
+import { STYLES } from '../../constants';
 import { AlignTypes  } from '../../enums';
 import { IDataColumn } from '../../interfaces';
 import { IProps } from './props.interface';
@@ -22,7 +23,7 @@ export const DataTableHead = (props: IProps) => {
             key={column.id}
             align={column.align}
             sortDirection={orderBy === column.id ? order : false}
-          >
+            width={column.width}>
             <TableSortLabel
               active={orderBy === column.id}
               direction={orderBy === column.id ? order : SortDirections.Asc}
@@ -37,7 +38,7 @@ export const DataTableHead = (props: IProps) => {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell align={AlignTypes.Right}>
+        <TableCell align={AlignTypes.Right} width={STYLES.actionsColumn.width} sx={STYLES.actionsColumn}>
           <TableSortLabel>Action</TableSortLabel>
         </TableCell>
       </TableRow>

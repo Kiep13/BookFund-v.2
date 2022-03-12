@@ -7,6 +7,7 @@ export const COLUMNS: IDataColumn[] = [
     numeric: false,
     label: 'Name',
     name: 'fullName',
+    width: '30%',
     align: AlignTypes.Left,
     type: CellTypes.String,
   },

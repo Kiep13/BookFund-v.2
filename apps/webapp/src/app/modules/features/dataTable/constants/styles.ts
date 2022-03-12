@@ -19,5 +19,9 @@ export const STYLES = {
   },
   iconButton: {
     p: 0.5
+  },
+  actionsColumn: {
+    width: 135,
+    minWidth: 135
   }
 }

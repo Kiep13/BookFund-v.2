@@ -7,5 +7,6 @@ export interface IDataColumn {
   numeric: boolean,
   label: string,
   align: IAlignType,
-  type: CellTypes
+  type: CellTypes,
+  width?: string
 }
