@@ -1,7 +1,7 @@
 import { Box, Chip, Typography } from '@mui/material';
 import { Image } from 'mui-image';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
@@ -18,6 +18,7 @@ export const Book = () => {
   const [pageState, setPageState] = useState<State>(State.LOADING);
   const [book, setBook] = useState<IBook>();
 
+  const history = useHistory();
   const params = useParams();
 
   const api = useApi();
@@ -57,10 +58,9 @@ export const Book = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={bookActions.navigateToBooksPage}
+        handleBackClick={() => history.goBack()}
         handleEditClick={navigateToEditPage}
         handleDeleteClick={deleteBook}/>
-
 
       <Card>
         <Box sx={STYLES.page}>

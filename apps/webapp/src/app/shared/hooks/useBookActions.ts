@@ -10,8 +10,12 @@ export const useBookActions = () => {
   const alerts = useAlerts();
   const api = useApi();
 
+  const getBookPageUrl = (id: number): string => {
+    return `${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/${id}`;
+  }
+
   const navigateToBookPage = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/${id}`);
+    history.push(getBookPageUrl(id));
   }
 
   const navigateToBooksPage = (): void => {
@@ -31,6 +35,7 @@ export const useBookActions = () => {
   }
 
   return {
+    getBookPageUrl,
     navigateToBookPage,
     navigateToBooksPage,
     navigateToEditForm,

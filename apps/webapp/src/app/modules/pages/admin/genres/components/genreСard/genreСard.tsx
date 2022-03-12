@@ -1,14 +1,17 @@
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import { Box, Button, Chip, Divider, IconButton, Link, Typography } from '@mui/material';
+import { Box, Button, Chip, Divider, IconButton, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { IBook } from '@core/interfaces';
 import { BookPromoCard } from '@shared/components/bookPromoCard';
+import { useBookActions } from '@shared/hooks';
 
 import { STYLES } from './constants';
 import { IProps } from './props.interface';
 
 export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick}: IProps) => {
+  const bookActions = useBookActions();
 
   return (
     <Box>
@@ -22,7 +25,7 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
             {genre.name}
           </Typography>
 
-          <Link href="#" sx={STYLES.booksLink}>{genre.books?.length || 0} books</Link>
+          <span style={STYLES.booksLink}>{genre.books?.length || 0} books</span>
         </Box>
         <Box>
           <IconButton
@@ -82,11 +85,14 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
             genre.books && genre.books.length > 0 ?
               (genre.books.slice(0, 10) || []).map((book: IBook) => {
                 return (
-                  <Box
-                    key={book.id}
-                    sx={STYLES.linkedBook}>
-                    <BookPromoCard key={book.id} book={book}/>
-                  </Box>
+                  <Link to={bookActions.getBookPageUrl(book.id)}>
+                    <Box
+                      key={book.id}
+                      sx={STYLES.linkedBook}>
+                      <BookPromoCard key={book.id} book={book}/>
+                    </Box>
+                  </Link>
+
                 )
               }) :
               `Don't have assigned books`

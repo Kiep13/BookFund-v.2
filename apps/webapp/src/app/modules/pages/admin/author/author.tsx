@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Image } from 'mui-image';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { PageSizes } from '@core/enums';
@@ -12,7 +12,7 @@ import { Card } from '@shared/components/card';
 import { EntityPageHeader } from '@shared/components/entityPageHeader';
 import { HorizontalBookCard } from '@shared/components/horizontalBookCard';
 import { State, StatefulCard } from '@features/statefulCard';
-import { useApi, useAuthorActions } from '@shared/hooks';
+import { useApi, useAuthorActions, useBookActions } from '@shared/hooks';
 
 import { IMAGE_PROPERTIES, PAGE_TITLE, STYLES, SUCCESSFULLY_DELETED } from './constants';
 
@@ -24,11 +24,13 @@ export const Author = () => {
   const [page, setPage] = useState<number>(0);
   const [loadingBooks, setLoadingBooks] = useState<boolean>(true);
 
+  const history = useHistory();
   const params = useParams();
 
   const api = useApi();
   const alerts = useAlerts();
   const authorsActions = useAuthorActions();
+  const bookActions = useBookActions();
 
   const navigateToEditPage = () => {
     author && authorsActions.navigateToEditForm(author?.id);
@@ -92,7 +94,7 @@ export const Author = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={authorsActions.navigateToAuthorsPage}
+        handleBackClick={() => history.goBack()}
         handleEditClick={navigateToEditPage}
         handleDeleteClick={deleteAuthor}/>
 
@@ -111,10 +113,10 @@ export const Author = () => {
 
               <Box sx={STYLES.info}>
                 <Typography variant='h3' gutterBottom component='div'>
-                  { author?.name } { author?.surname }
+                  {author?.name} {author?.surname}
                 </Typography>
 
-                <Box sx={STYLES.booksCount}>{ count } { count !== 1 ? `books` : `book`} </Box>
+                <Box sx={STYLES.booksCount}>{count} {count !== 1 ? `books` : `book`} </Box>
 
                 {
                   author?.biography?.split('\n').map((text: string, index: number) => {
@@ -124,9 +126,11 @@ export const Author = () => {
 
                 {
                   books.map((book: IBook) => {
-                    return <Box sx={STYLES.bookBox} key={book.id}>
-                      <HorizontalBookCard book={book}/>
-                    </Box>
+                    return <Link to={bookActions.getBookPageUrl(book.id)}>
+                      <Box sx={STYLES.bookBox} key={book.id}>
+                        <HorizontalBookCard book={book}/>
+                      </Box>
+                    </Link>
                   })
                 }
 
