@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { ILike } from 'typeorm';
 
 import { IListApiView } from '@core/interfaces';
 import { ApiRoutes, ResponseStatuses, SortDirections } from '@core/enums';
@@ -72,7 +73,16 @@ class BookController {
         `book.${requestParams.orderBy}` : requestParams.orderBy;
 
       const [books, count] = await connection.createQueryBuilder(BookEntity, 'book')
-        .select(['book.id', 'book.title', 'book.amountPages', 'book.year', 'book.createdAt', 'book.updatedAt'])
+        .select([
+          'book.id',
+          'book.title',
+          'book.amountPages',
+          'book.year',
+          'book.image',
+          'book.description',
+          'book.createdAt',
+          'book.updatedAt'
+        ])
         .leftJoinAndSelect('book.author', 'author')
         .orderBy({
           ...(
@@ -88,6 +98,13 @@ class BookController {
         })
         .take(+requestParams.pageSize)
         .skip(+requestParams.pageSize * (+requestParams.page || 0))
+        .where({
+          title: ILike(`%${requestParams.searchTerm || ''}%`),
+          ...( requestParams.keyId ? {
+            author: {
+              id: +requestParams.keyId
+          }} : {})
+        })
         .getManyAndCount();
 
       const result: IListApiView<BookEntity> = {

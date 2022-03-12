@@ -33,4 +33,14 @@ export const STYLES = {
   authorInfo: {
     flex: 2
   },
+  booksCount: {
+    color: '#2079ff'
+  },
+  bookBox: {
+    mb: 2
+  },
+  loadMoreButton: {
+    width: '100%',
+    height: 50
+  }
 }
