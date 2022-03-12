@@ -3,6 +3,7 @@ import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 import { IMenuItem } from '@features/pageWrapper/interfaces';
 
+import { STYLES_NAV_LINK } from '../../constants';
 import { IProps} from './props.interface';
 import './navItem.scss';
 
@@ -10,10 +11,7 @@ export const NavItem = ({menuItem}: IProps) => {
   const {icon: Icon, title, url}: IMenuItem = menuItem;
 
   const itemButton = <ListItemButton key={title}
-                                     classes={{
-                                       root: 'nav-item',
-                                       gutters: 'nav-item'
-                                     }}>
+                                     sx={STYLES_NAV_LINK.navItem}>
     <ListItemIcon>
       <Icon className='nav-item__icon'/>
     </ListItemIcon>
@@ -23,7 +21,7 @@ export const NavItem = ({menuItem}: IProps) => {
   if(url) {
     return (
       <NavLink to={url}
-               className={(isActive) => isActive ? 'nav-item__active' : 'nav-item__link'}
+               style={(isActive) => isActive ? STYLES_NAV_LINK.navLinkActive : STYLES_NAV_LINK.navLink}
                exact>
         {itemButton}
       </NavLink>

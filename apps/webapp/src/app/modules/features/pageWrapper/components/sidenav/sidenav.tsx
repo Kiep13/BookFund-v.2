@@ -8,7 +8,6 @@ import { GO_ADMIN_MENU_ITEM, GO_USER_MENU_ITEM, LOG_OUT_MENU_ITEM, STYLES_SIDENA
 import { IMenuItem } from '../../interfaces';
 import { NavItem } from '../navItem';
 import { IProps } from './props.interface';
-import './sidenav.scss';
 
 export const Sidenav = (props: IProps) => {
   const location = useLocation();
@@ -18,15 +17,14 @@ export const Sidenav = (props: IProps) => {
     <Drawer
       variant='permanent'
       sx={STYLES_SIDENAV.drawer}
-      className='sidenav'
     >
       <AvatarBlock/>
-      <List className='sidenav__links-block'>
+      <List sx={STYLES_SIDENAV.linksBlock}>
         {props.menuItems.map((menuItem: IMenuItem) => (
           <NavItem key={menuItem.title} menuItem={menuItem}/>
         ))}
       </List>
-      <List className='sidenav__links-block'>
+      <List sx={STYLES_SIDENAV.linksBlock}>
         <NavItem menuItem={isAdminOpened ? GO_USER_MENU_ITEM : GO_ADMIN_MENU_ITEM}/>
         <NavItem menuItem={LOG_OUT_MENU_ITEM}/>
       </List>
