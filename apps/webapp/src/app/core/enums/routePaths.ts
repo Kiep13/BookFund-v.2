@@ -7,6 +7,7 @@ export enum BaseRoutePaths {
 export enum AdminRoutePaths {
   ADMIN = '/admin',
   DASHBOARD = '/dashboard',
+  BOOK = '/book',
   BOOKS = '/books',
   BOOKS_NEW = '/books/new',
   BOOKS_EDIT = '/books/edit',

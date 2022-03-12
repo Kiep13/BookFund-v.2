@@ -7,6 +7,7 @@ import compose from '@shared/utils/compose';
 import { Author } from './author';
 import { Authors } from './authors';
 import { AuthorForm } from './authorForm';
+import { Book } from './book';
 import { Books } from './books';
 import { BookForm } from './bookForm';
 import { Collections } from './collections';
@@ -23,6 +24,7 @@ const AdminPage = () => {
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`} component={AuthorForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/:id`} component={AuthorForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`} component={Authors} exact/>
+      <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/:id`} component={Book}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_NEW}`} component={BookForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/:id`} component={BookForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`} component={Books} exact/>

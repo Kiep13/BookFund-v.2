@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
-import { AdminRoutePaths, PageSizes, SortDirections, TableActions } from '@core/enums';
+import { PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
-import { useApi } from '@shared/hooks';
+import { useApi, useBookActions } from '@shared/hooks';
 
 import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const BooksTable = () => {
-  const history = useHistory();
   const api = useApi();
-  const { addSuccess, addError } = useAlerts();
+  const alerts = useAlerts();
+  const bookActions = useBookActions();
 
   const [data, setData] = useState<IBook[]>([]);
   const [count, setCount] = useState<number>(0);
@@ -50,7 +49,7 @@ export const BooksTable = () => {
         }));
       })
       .catch(() => {
-        addError(API_TOOLTIP_ERROR);
+        alerts.addError(API_TOOLTIP_ERROR);
       })
       .then(() => {
         setLoading(false);
@@ -61,31 +60,26 @@ export const BooksTable = () => {
     getBooks();
   }, [sortOptions, page, rowsPerPage]);
 
-  const navigateToEditForm = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/${id}`);
-  }
-
   const deleteBook = async (id: number) => {
-    api.deleteBook(id)
-      .then(() => {
-        addSuccess(SUCCESSFULLY_DELETED);
+    bookActions.deleteBook(id, () => {
+      alerts.addSuccess(SUCCESSFULLY_DELETED);
 
-        if(page !== 0 && data.length === 1) {
-          setPage(page - 1);
-          return;
-        }
+      if(page !== 0 && data.length === 1) {
+        setPage(page - 1);
+        return;
+      }
 
-        getBooks();
-      })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      })
+      getBooks();
+    });
   }
 
   const handleClick = (tableItemAction: ITableItemAction) => {
     switch(tableItemAction.actionType) {
+      case TableActions.VIEW: {
+        bookActions.navigateToBookPage(tableItemAction.id);
+      } break;
       case TableActions.EDIT: {
-        navigateToEditForm(tableItemAction.id);
+        bookActions.navigateToEditForm(tableItemAction.id);
       } break;
       case TableActions.DELETE: {
         deleteBook(tableItemAction.id);

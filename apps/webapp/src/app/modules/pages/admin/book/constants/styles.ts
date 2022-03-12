@@ -18,14 +18,22 @@ export const STYLES = {
   info: {
     flex: 2
   },
-  booksCount: {
-    color: '#2079ff'
+  descriptionBlock: {
+    mb: 1
   },
-  bookBox: {
-    mb: 2
+  attributeLabel: {
+    color: '#888888',
+    display: 'inline-flex',
+    mr: 1
   },
-  loadMoreButton: {
-    width: '100%',
-    height: 50
+  attributeValue: {
+    display: 'inline-flex'
+  },
+  link: {
+    color: '#1965e0'
+  },
+  chip: {
+    m: 1,
+    ml: 0
   }
 }

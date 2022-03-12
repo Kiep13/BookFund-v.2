@@ -5,25 +5,25 @@ import { AdminRoutePaths } from '@core/enums';
 import { useAlerts } from '@features/alertsBlock';
 import { useApi } from '@shared/hooks';
 
-export const useAuthorActions = () => {
+export const useBookActions = () => {
   const history = useHistory();
   const alerts = useAlerts();
   const api = useApi();
 
-  const navigateToAuthorPage = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR}/${id}`);
+  const navigateToBookPage = (id: number): void => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/${id}`);
   }
 
-  const navigateToAuthorsPage = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`);
+  const navigateToBooksPage = (): void => {
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`);
   }
 
   const navigateToEditForm = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`);
+    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/${id}`);
   }
 
-  const deleteAuthor = (id: number, successFallback: () => void) => {
-    api.deleteAuthor(id)
+  const deleteBook = (id: number, successFallback: () => void) => {
+    api.deleteBook(id)
       .then(successFallback)
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
@@ -31,9 +31,9 @@ export const useAuthorActions = () => {
   }
 
   return {
-    navigateToAuthorPage,
-    navigateToAuthorsPage,
+    navigateToBookPage,
+    navigateToBooksPage,
     navigateToEditForm,
-    deleteAuthor
+    deleteBook
   }
 }

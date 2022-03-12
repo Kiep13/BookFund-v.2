@@ -2,17 +2,16 @@ import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { FormikHelpers } from 'formik/dist/types';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
-import { AdminRoutePaths } from '@core/enums';
 import { IBook, IFormPageParams } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
 import { Input } from '@shared/components/formСomponents/input';
 import { Card } from '@shared/components/card';
-import { useApi } from '@shared/hooks';
+import { useApi, useBookActions } from '@shared/hooks';
 
 import { AuthorAutocomplete } from './components/authorAutocomplete';
 import { GenresMultiAutocomplete } from './components/genresMultiAutocomplete';
@@ -28,10 +27,10 @@ import {
 import { IBookForm } from './interfaces';
 
 export const BookForm = () => {
-  const history = useHistory();
   const params = useParams();
   const api = useApi();
-  const {addSuccess, addError} = useAlerts();
+  const alerts = useAlerts();
+  const bookActions = useBookActions();
 
   const [pageState, setPageState] = useState<State>(State.LOADING);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -41,10 +40,10 @@ export const BookForm = () => {
 
     return editMode ?
       api.updateBook(bookId, values).then(() => {
-        addSuccess(SUCCESSFULLY_UPDATED);
+        alerts.addSuccess(SUCCESSFULLY_UPDATED);
       }) :
       api.addBook(values).then(() => {
-        addSuccess(SUCCESSFULLY_ADDED);
+        alerts.addSuccess(SUCCESSFULLY_ADDED);
       });
   }
 
@@ -58,10 +57,10 @@ export const BookForm = () => {
 
     await callSubmitAction(values)
       .then(() => {
-        navigateToBooksPage();
+        bookActions.navigateToBooksPage();
       })
       .catch(() => {
-        addError(API_TOOLTIP_ERROR);
+        alerts.addError(API_TOOLTIP_ERROR);
       })
       .then(() => {
         setSubmitting(false);
@@ -73,10 +72,6 @@ export const BookForm = () => {
     validationSchema: VALIDATION_SCHEMA,
     onSubmit: handleSubmit
   });
-
-  const navigateToBooksPage = () => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`);
-  }
 
   const initForm = () => {
     const bookId = (params as IFormPageParams).id;
@@ -101,7 +96,7 @@ export const BookForm = () => {
         setPageState(State.CONTENT);
       })
       .catch(() => {
-        addError(API_TOOLTIP_ERROR);
+        alerts.addError(API_TOOLTIP_ERROR);
         setPageState(State.ERROR);
       })
   }
@@ -174,7 +169,7 @@ export const BookForm = () => {
             <Button
               variant='outlined'
               sx={STYLES.cancelButton}
-              onClick={navigateToBooksPage}>
+              onClick={bookActions.navigateToBooksPage}>
               Cancel
             </Button>
 

@@ -8,10 +8,10 @@ import { API_TOOLTIP_ERROR } from '@core/constants';
 import { PageSizes } from '@core/enums';
 import { IAuthor, IBook, IFormPageParams, IListApiView, ISearchOptions } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock';
-import { State, StatefulCard } from '@features/statefulCard';
 import { Card } from '@shared/components/card';
 import { EntityPageHeader } from '@shared/components/entityPageHeader';
 import { HorizontalBookCard } from '@shared/components/horizontalBookCard';
+import { State, StatefulCard } from '@features/statefulCard';
 import { useApi, useAuthorActions } from '@shared/hooks';
 
 import { IMAGE_PROPERTIES, PAGE_TITLE, STYLES, SUCCESSFULLY_DELETED } from './constants';
@@ -107,11 +107,11 @@ export const Author = () => {
                 fit={IMAGE_PROPERTIES.fit}
                 errorIcon={IMAGE_PROPERTIES.errorIcon}
                 bgColor={IMAGE_PROPERTIES.backgroundColor}
-                sx={STYLES.authorImage}/>
+                sx={STYLES.image}/>
 
-              <Box sx={STYLES.authorInfo}>
+              <Box sx={STYLES.info}>
                 <Typography variant='h3' gutterBottom component='div'>
-                  {author?.name} {author?.surname}
+                  { author?.name } { author?.surname }
                 </Typography>
 
                 <Box sx={STYLES.booksCount}>{ count } { count !== 1 ? `books` : `book`} </Box>
