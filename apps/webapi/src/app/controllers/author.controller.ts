@@ -56,6 +56,7 @@ class AuthorController {
 
       const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
         select: ['id', 'surname', 'name', 'createdAt', 'updatedAt'],
+        relations: ['books'],
         order: {
           ...(requestParams.orderBy && requestParams.orderBy !== 'fullName' ? {
             [requestParams.orderBy]: requestParams.order || SortDirections.ASC
@@ -73,6 +74,8 @@ class AuthorController {
       });
 
       authors.map((author: AuthorEntity) => {
+        author.amountBooks = author.books.length;
+        delete author.books;
         author.fullName = `${author.name || ''} ${author.surname || ''}`
       });
 

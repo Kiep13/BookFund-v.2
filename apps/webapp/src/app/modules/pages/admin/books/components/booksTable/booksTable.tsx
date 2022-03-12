@@ -44,6 +44,7 @@ export const BooksTable = () => {
         setData(response.data.map((book: IBook) => {
           return {
             ...book,
+            avgRate: +book.avgRate.toFixed(1),
             authorFullName: `${book.author?.surname || ' '} ${book.author?.name || ' '}`
           }
         }));

@@ -44,6 +44,11 @@ export class createBookTable1643311401294 implements MigrationInterface {
             isNullable: false
           },
           {
+            name: 'avgRate',
+            type: 'float',
+            default: 0.0
+          },
+          {
             name: 'createdAt',
             type: 'timestamp',
             isNullable: true,

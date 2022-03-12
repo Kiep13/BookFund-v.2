@@ -40,7 +40,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Average rate',
     name: 'avgRate',
     align: AlignTypes.Right,
-    type: CellTypes.Number,
+    type: CellTypes.Float,
   },
   {
     id: 'createdAt',

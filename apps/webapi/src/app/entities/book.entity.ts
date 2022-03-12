@@ -45,6 +45,14 @@ export class BookEntity {
   })
   description: string;
 
+  @Column({
+    name: 'avgRate',
+    type: 'float',
+    default: 0.0,
+    nullable: true
+  })
+  avgRate: number;
+
   @ManyToOne(() => AuthorEntity, author => author.books, {
     cascade: true,
     onDelete: 'CASCADE'

@@ -49,6 +49,14 @@ export class AuthorEntity {
   public fullName: string;
 
   @Column({
+    select: false,
+    nullable: true,
+    insert: false,
+    update: false
+  })
+  public amountBooks: number;
+
+  @Column({
     name: 'createdAt',
     type: 'timestamp',
     nullable: true,

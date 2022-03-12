@@ -18,7 +18,7 @@ export const HorizontalBookCard = ({ book }: IProps) => {
             { book.title }
           </Typography>
 
-          <Rating value={3.4} readOnly/>
+          <Rating value={book.avgRate} precision={0.1} readOnly/>
 
           <Box sx={STYLES.description}>
             { book.description }

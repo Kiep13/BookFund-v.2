@@ -19,14 +19,6 @@ export const COLUMNS: IDataColumn[] = [
     type: CellTypes.Number,
   },
   {
-    id: 'avgRate',
-    numeric: true,
-    label: 'Average rate',
-    name: 'avgRate',
-    align: AlignTypes.Right,
-    type: CellTypes.Number,
-  },
-  {
     id: 'createdAt',
     numeric: false,
     label: 'Created date',

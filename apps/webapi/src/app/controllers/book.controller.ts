@@ -80,6 +80,7 @@ class BookController {
           'book.year',
           'book.image',
           'book.description',
+          'book.avgRate',
           'book.createdAt',
           'book.updatedAt'
         ])
