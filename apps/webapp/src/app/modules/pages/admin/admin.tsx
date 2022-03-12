@@ -10,6 +10,7 @@ import { AuthorForm } from './authorForm';
 import { Book } from './book';
 import { Books } from './books';
 import { BookForm } from './bookForm';
+import { Collection } from './collection';
 import { Collections } from './collections';
 import { CollectionForm } from './collectionForm';
 import { Genres } from './genres';
@@ -31,6 +32,7 @@ const AdminPage = () => {
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`} component={GenreForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_EDIT}/:id`} component={GenreForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`} component={Genres} exact/>
+      <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION}/:id`} component={Collection} exact/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`} component={Collections} exact/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`} component={CollectionForm}/>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/:id`} component={CollectionForm}/>

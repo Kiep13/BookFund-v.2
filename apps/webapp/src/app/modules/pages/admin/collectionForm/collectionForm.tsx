@@ -2,18 +2,17 @@ import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { FormikHelpers } from 'formik/dist/types';
 import { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { IBook, ICollection, IFormPageParams } from '@core/interfaces';
-import { AdminRoutePaths } from '@core/enums';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
-import { useAlerts } from '@features/alertsBlock/hooks';
+import { useAlerts } from '@features/alertsBlock';
 import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
 import { Card } from '@shared/components/card';
 import { Input } from '@shared/components/formСomponents/input';
-import { useApi } from '@shared/hooks';
+import { useApi, useCollectionActions } from '@shared/hooks';
 
 import { BookSelection } from './components/bookSelection';
 import {
@@ -27,10 +26,10 @@ import {
 } from './constants';
 
 export const CollectionForm = () => {
-  const history = useHistory();
   const params = useParams();
   const api = useApi();
-  const {addSuccess, addError} = useAlerts();
+  const alerts = useAlerts();
+  const collectionActions = useCollectionActions();
 
   const [pageState, setPageState] = useState<State>(State.CONTENT);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -40,10 +39,10 @@ export const CollectionForm = () => {
 
     return editMode ?
       api.updateCollection(collectionId, values).then(() => {
-        addSuccess(SUCCESSFULLY_UPDATED);
+        alerts.addSuccess(SUCCESSFULLY_UPDATED);
       }) :
       api.addCollection(values).then(() => {
-        addSuccess(SUCCESSFULLY_ADDED);
+        alerts.addSuccess(SUCCESSFULLY_ADDED);
       })
   }
 
@@ -57,9 +56,9 @@ export const CollectionForm = () => {
       }
 
       await callSubmitAction(values);
-      navigateToCollectionsPage();
+      collectionActions.navigateToCollectionsPage();
     } catch (e) {
-      addError(API_TOOLTIP_ERROR);
+      alerts.addError(API_TOOLTIP_ERROR);
     } finally {
       setSubmitting(false);
     }
@@ -70,10 +69,6 @@ export const CollectionForm = () => {
     validationSchema: VALIDATION_SCHEMA,
     onSubmit: handleSubmit
   });
-
-  const navigateToCollectionsPage = () => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`);
-  }
 
   const initForm = () => {
     const collectionId = (params as IFormPageParams).id;
@@ -100,7 +95,7 @@ export const CollectionForm = () => {
         setPageState(State.CONTENT);
       })
       .catch(() => {
-        addError(API_TOOLTIP_ERROR);
+        alerts.addError(API_TOOLTIP_ERROR);
         setPageState(State.ERROR);
       })
   }
@@ -164,7 +159,7 @@ export const CollectionForm = () => {
             <Button
               variant='outlined'
               sx={STYLES.cancelButton}
-              onClick={navigateToCollectionsPage}>
+              onClick={collectionActions.navigateToCollectionsPage}>
               Cancel
             </Button>
 

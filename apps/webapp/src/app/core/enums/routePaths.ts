@@ -18,7 +18,8 @@ export enum AdminRoutePaths {
   GENRES = '/genres',
   GENRE_NEW = '/genres/new',
   GENRE_EDIT = '/genres/edit',
+  COLLECTION = '/collection',
   COLLECTIONS = '/collections',
-  COLLECTION_NEW = '/collection/new',
-  COLLECTION_EDIT = '/collection/edit'
+  COLLECTION_NEW = '/collections/new',
+  COLLECTION_EDIT = '/collections/edit'
 }

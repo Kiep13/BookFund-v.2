@@ -1,7 +1,8 @@
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
+import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 
 import { CardActions } from '@core/enums';
 import { ICardAction } from '@core/interfaces';
@@ -16,6 +17,12 @@ export const SHARE_CARD_ACTION: ICardAction = {
   ariLabel: 'Share',
   actionType: CardActions.SHARE,
   icon: ShareTwoToneIcon
+}
+
+export const VIEW_CARD_ACTION: ICardAction = {
+  ariLabel: 'View',
+  actionType: CardActions.VIEW,
+  icon: VisibilityTwoToneIcon
 }
 
 export const EDIT_CARD_ACTION: ICardAction = {
