@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 import { IMenuItem } from '@features/pageWrapper/interfaces';
@@ -22,7 +22,11 @@ export const NavItem = ({menuItem}: IProps) => {
 
   if(url) {
     return (
-      <Link to={url} className='nav-item__link'>{itemButton}</Link>
+      <NavLink to={url}
+               className={(isActive) => isActive ? 'nav-item__active' : 'nav-item__link'}
+               exact>
+        {itemButton}
+      </NavLink>
     )
   }
 
