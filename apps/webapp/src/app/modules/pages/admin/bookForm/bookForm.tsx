@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { IBook, IFormPageParams } from '@core/interfaces';
-import { useAlerts } from '@features/alertsBlock/hooks';
+import { useAlerts } from '@features/alertsBlock';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
 import { Input } from '@shared/components/formСomponents/input';
@@ -48,23 +48,21 @@ export const BookForm = () => {
   }
 
   const handleSubmit = async (values: IBookForm, {setSubmitting}: FormikHelpers<IBookForm>) => {
-    if(values.imageFile) {
-      const formData = new FormData();
-      formData.append('image', values.imageFile);
+    try {
+      if(values.imageFile) {
+        const formData = new FormData();
+        formData.append('image', values.imageFile);
 
-      values.imageUrl = await(await api.saveImage(formData));
+        values.imageUrl = await(await api.saveImage(formData));
+      }
+
+      await callSubmitAction(values);
+      bookActions.navigateToBooksPage();
+    } catch(e) {
+      alerts.addError(API_TOOLTIP_ERROR);
+    } finally {
+      setSubmitting(false);
     }
-
-    await callSubmitAction(values)
-      .then(() => {
-        bookActions.navigateToBooksPage();
-      })
-      .catch(() => {
-        alerts.addError(API_TOOLTIP_ERROR);
-      })
-      .then(() => {
-        setSubmitting(false);
-      });
   }
 
   const formik = useFormik({

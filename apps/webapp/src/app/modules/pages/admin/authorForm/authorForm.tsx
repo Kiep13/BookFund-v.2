@@ -8,7 +8,7 @@ import { API_TOOLTIP_ERROR } from '@core/constants';
 import { IAuthor, IFormPageParams } from '@core/interfaces';
 import { ImageUpload } from '@features/imageUpload';
 import { State, StatefulCard } from '@features/statefulCard';
-import { useAlerts } from '@features/alertsBlock/hooks';
+import { useAlerts } from '@features/alertsBlock';
 import { Card } from '@shared/components/card';
 import { Input } from '@shared/components/formСomponents/input';
 import { useApi, useAuthorActions } from '@shared/hooks';
@@ -26,7 +26,7 @@ import { IAuthorForm } from './interfaces';
 export const AuthorForm = () => {
   const params = useParams();
   const api = useApi();
-  const {addSuccess, addError} = useAlerts();
+  const alerts = useAlerts();
   const authorActions = useAuthorActions();
 
   const [pageState, setPageState] = useState<State>(State.LOADING);
@@ -37,31 +37,29 @@ export const AuthorForm = () => {
 
     return editMode ?
       api.updateAuthor(authorId, values).then(() => {
-        addSuccess(SUCCESSFULLY_UPDATED)
+        alerts.addSuccess(SUCCESSFULLY_UPDATED)
       }) :
       api.addAuthor(values).then(() => {
-        addSuccess(SUCCESSFULLY_ADDED)
+        alerts.addSuccess(SUCCESSFULLY_ADDED)
       });
   }
 
   const handleSubmit = async (values: IAuthorForm, {setSubmitting}: FormikHelpers<IAuthorForm>) => {
-    if (values.imageFile) {
-      const formData = new FormData();
-      formData.append('image', values.imageFile);
+    try {
+      if (values.imageFile) {
+        const formData = new FormData();
+        formData.append('image', values.imageFile);
 
-      values.imageUrl = await (await api.saveImage(formData));
+        values.imageUrl = await (await api.saveImage(formData));
+      }
+
+      await callSubmitAction(values);
+      authorActions.navigateToAuthorsPage();
+    } catch(e) {
+      alerts.addError(API_TOOLTIP_ERROR);
+    } finally {
+      setSubmitting(false);
     }
-
-    callSubmitAction(values)
-      .then(() => {
-        authorActions.navigateToAuthorsPage();
-      })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      })
-      .then(() => {
-        setSubmitting(false);
-      });
   }
 
   const formik = useFormik({
@@ -90,7 +88,7 @@ export const AuthorForm = () => {
         setPageState(State.CONTENT)
       })
       .catch(() => {
-        addError(API_TOOLTIP_ERROR);
+        alerts.addError(API_TOOLTIP_ERROR);
         setPageState(State.ERROR);
       });
   }

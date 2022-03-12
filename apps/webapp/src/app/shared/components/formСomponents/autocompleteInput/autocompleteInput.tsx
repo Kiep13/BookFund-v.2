@@ -30,6 +30,7 @@ export const AutocompleteInput = (props: IProps) => {
 
   const handleSelecting = (event: SyntheticEvent, value: IOption | null) => {
     form.setFieldValue(fieldName, value);
+    setInputValue(value);
     props.handleSelecting && props.handleSelecting(value);
 
     if(!value) {
