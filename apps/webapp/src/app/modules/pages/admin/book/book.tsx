@@ -103,6 +103,7 @@ export const Book = () => {
                 {
                   book?.genres?.map((genre: IGenre) => {
                     return <Chip label={genre.name}
+                                 key={genre.id}
                                  color='primary'
                                  variant='outlined'
                                  sx={STYLES.chip}/>
