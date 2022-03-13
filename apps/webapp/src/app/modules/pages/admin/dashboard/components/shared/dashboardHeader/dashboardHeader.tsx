@@ -28,6 +28,7 @@ export const DashboardHeader = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           views={['year', 'month']}
+          openTo={'month'}
           label='Statistic period'
           minDate={MIN_STATISTIC_DATE}
           maxDate={maxDate}

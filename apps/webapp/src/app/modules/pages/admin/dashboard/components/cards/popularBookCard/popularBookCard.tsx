@@ -4,14 +4,15 @@ import { IBook } from '@core/interfaces';
 import { BOOKS_MOCK } from '@mocks/books.mock';
 import { BookPromoCard } from '@shared/components/bookPromoCard';
 
-import { DashboardCardWrapper } from '../../shared/dashboardСardWrapper';
+import { POPULAR_BOOK_CARD_TITLE } from '../../../constants';
+import { DashboardCardWrapper } from '../../shared';
 import { STYLES } from './constants';
 
 export const PopularBookCard = () => {
   const book: IBook = BOOKS_MOCK[0];
 
   return (
-    <DashboardCardWrapper title={'Wost popular book'}>
+    <DashboardCardWrapper title={POPULAR_BOOK_CARD_TITLE}>
       <Box sx={STYLES.boxWrapper}>
         <BookPromoCard book={book}/>
       </Box>

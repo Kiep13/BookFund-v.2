@@ -35,3 +35,31 @@ export const LINE_CHART_DATA_MOCK = {
     },
   ],
 };
+
+export const COMMENTS_LINE_CHART_DATA = {
+  labels: LINE_CHART_LABELS_MOCK,
+  datasets: [
+    {
+      label: 'Medium',
+      data: [296, 759, 1086, 1425, 1630, 516, 1423, 896, 1104, 1160, 1399, 1007, 862, 1995, 1681, 499, 815, 1699, 189, 1960, 323, 966, 1705, 703, 1165, 1443, 2000, 143,1648, 600],
+      borderColor: '#ffe263',
+      backgroundColor: '#fff6ad',
+      lineTension: 0.7
+    },
+    {
+      label: 'Positive',
+      data: [1899, 616, 1286, 917, 1670, 1593, 1851, 718, 1709, 863, 1095, 497, 2021, 1659, 193, 409, 190, 1577, 1814, 229, 1942, 449, 1941, 1181, 196, 546, 2013, 930, 1823, 1920],
+
+      borderColor: '#32CD32',
+      backgroundColor: '#b4ffb4',
+      lineTension: 0.7
+    },
+    {
+      label: 'Negative',
+      data: [24, 151, 244, 441, 273, 82, 418, 195, 453, 30, 56, 230, 216, 495, 99, 455, 175, 185, 438, 231, 192, 368, 488, 96, 424, 494, 167, 403, 307, 181],
+      borderColor: '#ff5c5c',
+      backgroundColor: '#ffcbcb',
+      lineTension: 0.7
+    },
+  ],
+};

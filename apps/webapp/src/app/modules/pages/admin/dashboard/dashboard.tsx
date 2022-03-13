@@ -5,10 +5,14 @@ import { OVERALL_STATISTIC_MOCK } from '@mocks/overallStatistics.mock';
 import { Card } from '@shared/components/card';
 
 import { DashboardHeader } from './components/shared/dashboardHeader';
-import { ActionPerMonthDateCard } from './components/cards/actionPerMonthDateCard';
-import { GenresCard } from './components/cards/genresCard';
-import { StatisticCard } from './components/cards/statisticСard';
-import { PopularBookCard } from './components/cards/popularBookCard';
+import {
+  ActionPerMonthDateCard,
+  CommentsCard,
+  GenresCard,
+  SocialAuthCard,
+  StatisticCard,
+  PopularBookCard
+} from './components/cards';
 import { STYLES } from './constants';
 
 export const Dashboard = () => {
@@ -27,16 +31,26 @@ export const Dashboard = () => {
       </Box>
 
       <Box sx={STYLES.cardRow}>
-        <Box sx={STYLES.actionsStatisticCard}>
-          <ActionPerMonthDateCard/>
-        </Box>
-
         <Box sx={STYLES.genresCard}>
           <GenresCard/>
         </Box>
 
+        <Box sx={STYLES.actionsStatisticCard}>
+          <ActionPerMonthDateCard/>
+        </Box>
+
         <Box sx={STYLES.popularBookCard}>
           <PopularBookCard/>
+        </Box>
+      </Box>
+
+      <Box sx={STYLES.cardRow}>
+        <Box sx={STYLES.socialAuthCard}>
+          <SocialAuthCard/>
+        </Box>
+
+        <Box sx={STYLES.commentsCard}>
+          <CommentsCard/>
         </Box>
       </Box>
     </>

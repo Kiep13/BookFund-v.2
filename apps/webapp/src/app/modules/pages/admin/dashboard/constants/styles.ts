@@ -20,5 +20,11 @@ export const STYLES = {
   },
   popularBookCard: {
     flex: 1
+  },
+  commentsCard: {
+    flex: 2
+  },
+  socialAuthCard: {
+    flex: 2
   }
 }
