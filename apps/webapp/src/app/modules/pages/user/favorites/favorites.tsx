@@ -2,11 +2,9 @@ import { wrapUserPage } from '@features/pageWrapper';
 import { compose } from '@shared/utils';
 
 const Page = () => {
-  return (
-    <span>Home page works</span>
-  );
+  return <>Favorites page works</>
 }
 
-export const Home = compose(
+export const Favorites = compose(
   wrapUserPage()
 )(Page);

@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 
 import { AdminRoutePaths } from '@core/enums';
 import { wrapAdminPage } from '@features/pageWrapper';
-import compose from '@shared/utils/compose';
+import { compose } from '@shared/utils';
 
 import { Author } from './author';
 import { Authors } from './authors';
@@ -17,7 +17,7 @@ import { Genres } from './genres';
 import { GenreForm } from './genreForm';
 import { Dashboard } from './dashboard';
 
-const AdminPage = () => {
+const Page = () => {
   return (
     <>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`} component={Dashboard}/>
@@ -42,4 +42,4 @@ const AdminPage = () => {
 
 export const Admin = compose(
   wrapAdminPage()
-)(AdminPage);
+)(Page);
