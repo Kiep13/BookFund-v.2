@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import { AdminRoutePaths, BaseRoutePaths } from '@core/enums';
 import { AlertsBlock } from '@features/alertsBlock';
-import { ConfirmationPopup } from '@features/confirmationPopup';
 import { Admin } from '@pages/admin';
 import { Home } from '@pages/base/home';
 import { Articles } from '@pages/user/articles';
@@ -14,7 +13,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <AlertsBlock/>
-      <ConfirmationPopup/>
       <Switch>
         <Route path={BaseRoutePaths.HOME} component={Home} exact/>
         <Route path={BaseRoutePaths.FAVORITES} component={Favorites}/>

@@ -6,39 +6,29 @@ import {
   DialogContentText,
   DialogTitle
 } from '@mui/material';
-import { useSelector } from 'react-redux';
 
-import { getConfirmationPopup } from '@store/reducers';
+import { IProps } from './props.interface';
 
-import { useConfirmationPopup } from './hooks';
-
-export const ConfirmationPopup = () => {
-  const confirmationPopup = useSelector(getConfirmationPopup);
-  const confirmationPopupActions = useConfirmationPopup();
-
-  const handleConfirmation = () => {
-    confirmationPopupActions.closePopup();
-  }
-
+export const ConfirmationPopup = ({info, isOpened, handleConfirm, handleClose}: IProps) => {
   return (
     <Dialog
-      open={confirmationPopup.isOpened || false}
-      onClose={confirmationPopupActions.closePopup}
+      open={isOpened}
+      onClose={() => handleClose()}
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
     >
       <DialogTitle>
-        { confirmationPopup.title }
+        { info.title }
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          { confirmationPopup.text }
+          { info.text }
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={confirmationPopupActions.closePopup}>Cancel</Button>
-        <Button onClick={handleConfirmation} autoFocus>
-          { confirmationPopup.confirmationButtonLabel }
+        <Button onClick={() => handleClose()}>Cancel</Button>
+        <Button onClick={() => handleConfirm()} autoFocus>
+          { info.confirmationButtonLabel }
         </Button>
       </DialogActions>
     </Dialog>

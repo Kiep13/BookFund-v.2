@@ -6,9 +6,10 @@ import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } f
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
+import { ConfirmationPopup } from '@features/confirmationPopup';
 import { useApi, useBookActions } from '@shared/hooks';
 
-import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
+import { COLUMNS, DELETE_CONFIRMATION_POPUP, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const BooksTable = () => {
   const api = useApi();
@@ -24,6 +25,8 @@ export const BooksTable = () => {
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number>();
 
   const columns: IDataColumn[] = COLUMNS;
 
@@ -60,7 +63,7 @@ export const BooksTable = () => {
     getBooks();
   }, [sortOptions, page, rowsPerPage]);
 
-  const deleteBook = async (id: number) => {
+  const handleDeleteConfirmation = async (id: number) => {
     bookActions.deleteBook(id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
 
@@ -71,6 +74,8 @@ export const BooksTable = () => {
 
       getBooks();
     });
+
+    setIsModalOpened(false)
   }
 
   const handleClick = (tableItemAction: ITableItemAction) => {
@@ -82,7 +87,8 @@ export const BooksTable = () => {
         bookActions.navigateToEditForm(tableItemAction.id);
       } break;
       case TableActions.DELETE: {
-        deleteBook(tableItemAction.id);
+        setSelectedId(tableItemAction.id);
+        setIsModalOpened(true);
       } break;
     }
   };
@@ -101,18 +107,27 @@ export const BooksTable = () => {
   };
 
   return (
-    <DataTable
-      columns={columns}
-      data={data}
-      count={count}
-      sortOptions={sortOptions}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      onHandleClick={handleClick}
-      loading={loading}
-      onHandleRowsPerPageChanged={handleRowsPerPageChanged}
-      onHandlePageChange={handlePageChange}
-      onHandleSortRequest={handleSortRequest}
-    />
+    <>
+      <ConfirmationPopup
+        info={DELETE_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => selectedId && handleDeleteConfirmation(selectedId)}
+        handleClose={() => setIsModalOpened(false)}
+      />
+
+      <DataTable
+        columns={columns}
+        data={data}
+        count={count}
+        sortOptions={sortOptions}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onHandleClick={handleClick}
+        loading={loading}
+        onHandleRowsPerPageChanged={handleRowsPerPageChanged}
+        onHandlePageChange={handlePageChange}
+        onHandleSortRequest={handleSortRequest}
+      />
+    </>
   );
 }
