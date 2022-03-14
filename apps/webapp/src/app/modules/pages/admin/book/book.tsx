@@ -3,10 +3,11 @@ import { Image } from 'mui-image';
 import { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 
-import { API_TOOLTIP_ERROR } from '@core/constants';
+import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
 import { IBook, IFormPageParams, IGenre } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock';
+import { ConfirmationPopup } from '@features/confirmationPopup';
 import { Card } from '@shared/components/card';
 import { EntityPageHeader } from '@shared/components/entityPageHeader';
 import { State, StatefulCard } from '@features/statefulCard';
@@ -17,6 +18,8 @@ import { IMAGE_PROPERTIES, PAGE_TITLE, SUCCESSFULLY_DELETED, STYLES } from './co
 export const Book = () => {
   const [pageState, setPageState] = useState<State>(State.LOADING);
   const [book, setBook] = useState<IBook>();
+
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   const history = useHistory();
   const params = useParams();
@@ -29,11 +32,13 @@ export const Book = () => {
     book && bookActions.navigateToEditForm(book?.id);
   }
 
-  const deleteBook = (): void => {
+  const handleConfirmDeletion = (): void => {
     book && bookActions.deleteBook(book.id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
       bookActions.navigateToBooksPage();
     });
+
+    setIsModalOpened(false);
   }
 
   const loadBook = (): void => {
@@ -60,7 +65,7 @@ export const Book = () => {
         title={PAGE_TITLE}
         handleBackClick={() => history.goBack()}
         handleEditClick={navigateToEditPage}
-        handleDeleteClick={deleteBook}/>
+        handleDeleteClick={() => setIsModalOpened(true)}/>
 
       <Card>
         <Box sx={STYLES.page}>
@@ -103,6 +108,7 @@ export const Book = () => {
                 {
                   book?.genres?.map((genre: IGenre) => {
                     return <Chip label={genre.name}
+                                 key={genre.id}
                                  color='primary'
                                  variant='outlined'
                                  sx={STYLES.chip}/>
@@ -119,6 +125,13 @@ export const Book = () => {
           </StatefulCard>
         </Box>
       </Card>
+
+      <ConfirmationPopup
+        info={DELETE_BOOK_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => handleConfirmDeletion()}
+        handleClose={() => setIsModalOpened(false)}
+      />
     </>
   )
 }

@@ -1,21 +1,24 @@
 import { Image } from 'mui-image';
+import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { API_TOOLTIP_ERROR } from '@core/constants';
+import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@core/constants';
 import { IBook, ICollection, IFormPageParams } from '@core/interfaces';
 import { State, StatefulCard } from '@features/statefulCard';
 import { useAlerts } from '@features/alertsBlock';
+import { ConfirmationPopup } from '@features/confirmationPopup';
 import { HorizontalBookCard } from '@shared/components/horizontalBookCard';
 import { EntityPageHeader } from '@shared/components/entityPageHeader';
 import { useApi, useBookActions, useCollectionActions } from '@shared/hooks';
 
 import { IMAGE_PROPERTIES, SUCCESSFULLY_DELETED, STYLES, PAGE_TITLE } from './constants';
-import { Box, Typography } from '@mui/material';
 
 export const Collection = () => {
   const [pageState, setPageState] = useState<State>(State.LOADING);
   const [collection, setCollection] = useState<ICollection>();
+
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   const history = useHistory();
   const params = useParams();
@@ -28,11 +31,13 @@ export const Collection = () => {
     collection && collectionActions.navigateToEditForm(collection.id);
   }
 
-  const deleteCollection = () => {
+  const handleConfirmDeletion = () => {
     collection && collectionActions.deleteCollection(collection.id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
       collectionActions.navigateToCollectionsPage();
     });
+
+    setIsModalOpened(false);
   }
 
   const loadCollection = () => {
@@ -59,7 +64,7 @@ export const Collection = () => {
         title={PAGE_TITLE}
         handleBackClick={() => history.goBack()}
         handleEditClick={navigateToEditPage}
-        handleDeleteClick={deleteCollection}/>
+        handleDeleteClick={() => setIsModalOpened(true)}/>
 
       <Box sx={STYLES.page}>
         <StatefulCard state={pageState}>
@@ -99,6 +104,13 @@ export const Collection = () => {
           </Box>
         </StatefulCard>
       </Box>
+
+      <ConfirmationPopup
+        info={DELETE_COLLECTION_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => handleConfirmDeletion()}
+        handleClose={() => setIsModalOpened(false)}
+      />
     </>
   )
 }
