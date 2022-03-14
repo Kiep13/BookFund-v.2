@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { DELETE_AUTHOR_CONFIRMATION_POPUP } from '@core/constants';
 import { PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
+import { ConfirmationPopup } from '@features/confirmationPopup';
 import { DataTable } from '@features/dataTable';
 import { IDataColumn } from '@features/dataTable/interfaces';
 import { useApi, useAuthorActions } from '@shared/hooks';
@@ -23,6 +25,9 @@ export const AuthorsTable = () => {
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number>();
 
   const columns: IDataColumn[] = COLUMNS;
 
@@ -46,7 +51,7 @@ export const AuthorsTable = () => {
     getAuthors();
   }, [sortOptions, page, rowsPerPage]);
 
-  const deleteAuthor = async (id: number) => {
+  const handleDeleteConfirmation = async (id: number) => {
     authorActions.deleteAuthor(id, () => {
       addSuccess(SUCCESSFULLY_DELETED)
 
@@ -57,6 +62,8 @@ export const AuthorsTable = () => {
 
       getAuthors();
     });
+
+    setIsModalOpened(false);
   }
 
   const handleClick = (tableItemAction: ITableItemAction): void => {
@@ -68,7 +75,8 @@ export const AuthorsTable = () => {
         authorActions.navigateToEditForm(tableItemAction.id);
       } break;
       case TableActions.DELETE: {
-        deleteAuthor(tableItemAction.id)
+        setSelectedId(tableItemAction.id);
+        setIsModalOpened(true);
       } break;
     }
   };
@@ -87,18 +95,27 @@ export const AuthorsTable = () => {
   };
 
   return (
-    <DataTable
-      columns={columns}
-      data={data}
-      count={count}
-      sortOptions={sortOptions}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      onHandleClick={handleClick}
-      loading={loading}
-      onHandleRowsPerPageChanged={handleRowsPerPageChanged}
-      onHandlePageChange={handlePageChange}
-      onHandleSortRequest={handleSortRequest}
-    />
+    <>
+      <DataTable
+        columns={columns}
+        data={data}
+        count={count}
+        sortOptions={sortOptions}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onHandleClick={handleClick}
+        loading={loading}
+        onHandleRowsPerPageChanged={handleRowsPerPageChanged}
+        onHandlePageChange={handlePageChange}
+        onHandleSortRequest={handleSortRequest}
+      />
+
+      <ConfirmationPopup
+        info={DELETE_AUTHOR_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => selectedId && handleDeleteConfirmation(selectedId)}
+        handleClose={() => setIsModalOpened(false)}
+      />
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { API_TOOLTIP_ERROR } from '@core/constants';
+import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@core/constants';
 import { PageSizes, SortDirections, TableActions } from '@core/enums';
 import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock/hooks';
@@ -9,7 +9,7 @@ import { IDataColumn } from '@features/dataTable/interfaces';
 import { ConfirmationPopup } from '@features/confirmationPopup';
 import { useApi, useBookActions } from '@shared/hooks';
 
-import { COLUMNS, DELETE_CONFIRMATION_POPUP, SUCCESSFULLY_DELETED } from '../../constants';
+import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const BooksTable = () => {
   const api = useApi();
@@ -25,6 +25,7 @@ export const BooksTable = () => {
   });
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number>();
 
@@ -108,13 +109,6 @@ export const BooksTable = () => {
 
   return (
     <>
-      <ConfirmationPopup
-        info={DELETE_CONFIRMATION_POPUP}
-        isOpened={isModalOpened}
-        handleConfirm={() => selectedId && handleDeleteConfirmation(selectedId)}
-        handleClose={() => setIsModalOpened(false)}
-      />
-
       <DataTable
         columns={columns}
         data={data}
@@ -127,6 +121,13 @@ export const BooksTable = () => {
         onHandleRowsPerPageChanged={handleRowsPerPageChanged}
         onHandlePageChange={handlePageChange}
         onHandleSortRequest={handleSortRequest}
+      />
+
+      <ConfirmationPopup
+        info={DELETE_BOOK_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => selectedId && handleDeleteConfirmation(selectedId)}
+        handleClose={() => setIsModalOpened(false)}
       />
     </>
   );

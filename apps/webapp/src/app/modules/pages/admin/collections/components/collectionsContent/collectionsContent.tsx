@@ -2,7 +2,12 @@ import { Box, TablePagination, TextField } from '@mui/material';
 import { debounce } from 'lodash';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
-import { API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION, VIEW_CARD_ACTION } from '@core/constants';
+import {
+  API_TOOLTIP_ERROR,
+  DELETE_CARD_ACTION, DELETE_COLLECTION_CONFIRMATION_POPUP,
+  EDIT_CARD_ACTION,
+  VIEW_CARD_ACTION
+} from '@core/constants';
 import { CardActions, PageSizes } from '@core/enums';
 import { ICardAction, ICardItemAction, ICollection, IListApiView, ISearchOptions } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock';
@@ -11,6 +16,7 @@ import { CollectionCard } from '@shared/components/colllectionCard';
 import { useApi, useCollectionActions } from '@shared/hooks';
 
 import { DELAY, NO_MATCHING_COLLECTIONS, STYLES, SUCCESSFULLY_DELETED } from '../../constants';
+import { ConfirmationPopup } from "@features/confirmationPopup";
 
 export const CollectionsContent = () => {
   const [state, setState] = useState<State>(State.LOADING);
@@ -19,6 +25,9 @@ export const CollectionsContent = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number>();
 
   const api = useApi();
   const alerts = useAlerts();
@@ -64,7 +73,7 @@ export const CollectionsContent = () => {
     setPage(newPage);
   };
 
-  const deleteCollection = (id: number) => {
+  const handleDeleteConfirmation = (id: number) => {
     collectionActions.deleteCollection(id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
 
@@ -76,6 +85,8 @@ export const CollectionsContent = () => {
       setState(State.LOADING);
       getCollections(searchTerm);
     });
+
+    setIsModalOpened(false);
   }
 
   const handleCardAction = (cardAction: ICardItemAction) => {
@@ -87,7 +98,8 @@ export const CollectionsContent = () => {
         collectionActions.navigateToEditForm(cardAction.id);
       } break;
       case CardActions.DELETE: {
-        deleteCollection(cardAction.id);
+        setSelectedId(cardAction.id);
+        setIsModalOpened(true);
       } break;
     }
   }
@@ -134,6 +146,13 @@ export const CollectionsContent = () => {
         </Box>
 
       </StatefulCard>
+
+      <ConfirmationPopup
+        info={DELETE_COLLECTION_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => selectedId && handleDeleteConfirmation(selectedId)}
+        handleClose={() => setIsModalOpened(false)}
+      />
     </>
   )
 }

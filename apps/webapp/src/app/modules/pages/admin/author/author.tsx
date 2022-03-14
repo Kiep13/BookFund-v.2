@@ -4,11 +4,12 @@ import { Image } from 'mui-image';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { API_TOOLTIP_ERROR } from '@core/constants';
+import { API_TOOLTIP_ERROR, DELETE_AUTHOR_CONFIRMATION_POPUP } from '@core/constants';
 import { PageSizes } from '@core/enums';
 import { IAuthor, IBook, IFormPageParams, IListApiView, ISearchOptions } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock';
 import { Card } from '@shared/components/card';
+import { ConfirmationPopup } from '@features/confirmationPopup';
 import { EntityPageHeader } from '@shared/components/entityPageHeader';
 import { HorizontalBookCard } from '@shared/components/horizontalBookCard';
 import { State, StatefulCard } from '@features/statefulCard';
@@ -24,6 +25,8 @@ export const Author = () => {
   const [page, setPage] = useState<number>(0);
   const [loadingBooks, setLoadingBooks] = useState<boolean>(true);
 
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+
   const history = useHistory();
   const params = useParams();
 
@@ -36,11 +39,13 @@ export const Author = () => {
     author && authorsActions.navigateToEditForm(author?.id);
   }
 
-  const deleteAuthor = (): void => {
+  const handleConfirmDeletion = (): void => {
     author && authorsActions.deleteAuthor(author.id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
       authorsActions.navigateToAuthorsPage();
     });
+
+    setIsModalOpened(false);
   }
 
   const loadAuthor = (): void => {
@@ -96,7 +101,7 @@ export const Author = () => {
         title={PAGE_TITLE}
         handleBackClick={() => history.goBack()}
         handleEditClick={navigateToEditPage}
-        handleDeleteClick={deleteAuthor}/>
+        handleDeleteClick={() => setIsModalOpened(true)}/>
 
       <Card>
         <Box sx={STYLES.page}>
@@ -150,6 +155,13 @@ export const Author = () => {
           </StatefulCard>
         </Box>
       </Card>
+
+      <ConfirmationPopup
+        info={DELETE_AUTHOR_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => handleConfirmDeletion()}
+        handleClose={() => setIsModalOpened(false)}
+      />
     </>
   )
 }
