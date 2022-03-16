@@ -4,6 +4,10 @@ export enum BaseRoutePaths {
   ARTICLES = '/articles'
 }
 
+export enum AuthRoutePaths{
+  LOGIN = '/login'
+}
+
 export enum AdminRoutePaths {
   ADMIN = '/admin',
   DASHBOARD = '/dashboard',
