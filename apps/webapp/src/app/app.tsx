@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import { CssBaseline  }from '@mui/material';
 
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@core/enums';
 import { Login } from '@pages/auth';
@@ -13,6 +14,7 @@ import store from '@store/store';
 const App = () => {
   return (
     <Provider store={store}>
+      <CssBaseline/>
       <AlertsBlock/>
       <Switch>
         <Route path={BaseRoutePaths.HOME} component={Home} exact/>

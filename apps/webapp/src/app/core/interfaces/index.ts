@@ -1,3 +1,4 @@
+export * from './account.interface';
 export * from './author.interface';
 export * from './book.interface';
 export * from './cardAction.interface';
