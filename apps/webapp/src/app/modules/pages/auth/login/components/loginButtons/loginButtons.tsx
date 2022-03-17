@@ -1,9 +1,12 @@
 import { Box, Button } from '@mui/material';
 
+import { getProvidersUrls } from '@shared/utils';
 import { PROVIDER_COLOR, PROVIDER_NAME, PROVIDER_ICON, STYLES_LOGIN_BUTTONS } from '../../constants';
 import { Providers } from '../../enums';
 
 export const LoginButtons = () => {
+  const providersUrls = getProvidersUrls();
+
   return (
     <Box sx={STYLES_LOGIN_BUTTONS.wrapper}>
 
@@ -15,19 +18,20 @@ export const LoginButtons = () => {
             <Box
               key={provider}
               sx={STYLES_LOGIN_BUTTONS.buttonWrapper}>
-              <Button
-                sx={{
-                  ...STYLES_LOGIN_BUTTONS.button,
-                  color: PROVIDER_COLOR[provider],
-                  border: `1px solid ${PROVIDER_COLOR[provider]}`
-                }}
-              >
-                <Icon/>
-                {PROVIDER_NAME[provider]}
-              </Button>
+              <a href={providersUrls[provider]}>
+                <Button
+                  sx={{
+                    ...STYLES_LOGIN_BUTTONS.button,
+                    color: PROVIDER_COLOR[provider],
+                    border: `1px solid ${PROVIDER_COLOR[provider]}`
+                  }}
+                >
+                  <Icon/>
+                  {PROVIDER_NAME[provider]}
+                </Button>
+              </a>
             </Box>
           )
-
         })
       }
     </Box>

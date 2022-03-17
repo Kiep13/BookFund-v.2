@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
 import { Box, Button } from '@mui/material';
+import { useSelector } from 'react-redux';
+import {Link} from 'react-router-dom';
 
+import { AuthRoutePaths } from '@core/enums';
 import { Logo } from '@shared/components/logo';
 import { SearchInput } from '@shared/components/searchInput';
 import { getIsAuthorized } from '@store/reducers';
@@ -17,7 +19,9 @@ export const Header = () => {
       <Box sx={STYLES_HEADER.rightBlock}>
         <SearchInput/>
         {
-          !isAuthorized && <Button variant='outlined' sx={STYLES_HEADER.loginButton}>Login</Button>
+          !isAuthorized && <Link to={AuthRoutePaths.LOGIN}>
+            <Button variant='outlined' sx={STYLES_HEADER.loginButton}>Login</Button>
+          </Link>
         }
       </Box>
 
