@@ -37,17 +37,7 @@ export class createAccountTable1643225882424 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: 'activationLink',
-            type: 'varchar',
-            isNullable: false
-          },
-          {
-            name: 'isActivated',
-            type: 'boolean',
-            default: 'false'
-          },
-          {
-            name: 'role',
+             name: 'role',
             type: 'enum',
             enum: [Roles.USER, Roles.MODERATOR, Roles.ADMIN],
             enumName: 'rolesEnum',

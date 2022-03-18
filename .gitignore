@@ -40,4 +40,5 @@ Thumbs.db
 
 /apps/webapi/src/assets/images
 /dist/assets/images
+apps/webapi/src/environments/*
 apps/webapp/src/environments/*

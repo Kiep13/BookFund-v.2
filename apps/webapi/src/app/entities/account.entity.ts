@@ -39,19 +39,6 @@ export class AccountEntity {
   image: string;
 
   @Column({
-    name: 'activationLink',
-    type: 'varchar'
-  })
-  activationLink: string;
-
-  @Column({
-    name: 'isActivated',
-    type: 'boolean',
-    default: false
-  })
-  isActivated: boolean;
-
-  @Column({
     name: 'role',
     type: 'enum',
     enumName: 'rolesEnum',
