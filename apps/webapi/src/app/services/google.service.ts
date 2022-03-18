@@ -1,12 +1,12 @@
 import axios from 'axios';
 import * as queryString from 'query-string';
 
+import { connection } from '@core/connection';
 import { ApiRoutes, AuthProviders } from '@core/enums';
 import { IGoogleAuthTokens, IGoogleUser, ITokens } from '@core/interfaces';
-import { connection } from '@core/connection';
-import { tokenService } from '@services/token.service';
 import { AccountEntity } from '@entities/account.entity';
 import { environment } from '@environments/environment';
+import { tokenService } from '@services/token.service';
 
 class GoogleService {
   public async login(code: string): Promise<ITokens> {
@@ -14,7 +14,8 @@ class GoogleService {
     const user: IGoogleUser = await this.getUser(access_token, id_token);
 
     const candidate = await connection.manager.getRepository(AccountEntity).findOne({
-      email: user.email
+      email: user.email,
+      provider: AuthProviders.GOOGLE
     });
 
     const account = candidate ? await this.synchronize(candidate.id, user) : await this.register(user);
@@ -67,6 +68,7 @@ class GoogleService {
     accountEntity.name = user.given_name;
     accountEntity.surname = user.family_name;
     accountEntity.image = user.picture;
+    accountEntity.provider = AuthProviders.GOOGLE;
 
     return connection.manager.save(accountEntity);
   }

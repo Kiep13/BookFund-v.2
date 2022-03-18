@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Roles } from '@core/enums';
+import { AuthProviders, Roles } from '@core/enums';
 
 @Entity({
   name: 'account'
@@ -37,6 +37,14 @@ export class AccountEntity {
     nullable: true
   })
   image: string;
+
+  @Column({
+    name: 'provider',
+    type: 'enum',
+    enumName: 'providersEnum',
+    enum: AuthProviders
+  })
+  provider: AuthProviders;
 
   @Column({
     name: 'role',
