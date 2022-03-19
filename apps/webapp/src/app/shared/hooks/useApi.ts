@@ -4,7 +4,7 @@ import queryString from 'query-string';
 import { API_TOOLTIP_ERROR } from '@core/constants';
 import { useAlerts } from '@features/alertsBlock/hooks';
 import { environment } from '@environments/environment';
-import { IAuthor, IBook, ICollection, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
+import { IAuthor, IAuthResponse, IBook, ICollection, IGenre, IListApiView, ISearchOptions } from '@core/interfaces';
 import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
 import { IBookForm } from '@pages/admin/bookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
@@ -13,13 +13,17 @@ import { IGenreForm } from '@pages/admin/genreForm/interfaces';
 export const useApi = () => {
   const { addError } = useAlerts();
 
-  const login = async (provider: string, code: string): Promise<any> => {
+  const login = async (provider: string, code: string): Promise<IAuthResponse> => {
     return await axios.get(`${environment.backEndUrl}/v1/auth/${provider}`, {
       params: {
         code
       }
     })
       .then((response: AxiosResponse) => response.data);
+  }
+
+  const logout = async (): Promise<void> => {
+    return await axios.get(`${environment.backEndUrl}/v1/auth/logout`);
   }
 
   const saveImage = async (formData: FormData): Promise<string> => {
@@ -138,6 +142,7 @@ export const useApi = () => {
 
   return {
     login,
+    logout,
     saveImage,
     addAuthor,
     updateAuthor,

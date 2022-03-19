@@ -54,6 +54,16 @@ class AuthController {
       next(error);
     }
   }
+
+  public async logout(request, response, next): Response {
+    try {
+      response.clearCookie(REFRESH_TOKEN_COOKIE_NAME);
+
+      return response.status(ResponseStatuses.STATUS_OK).json();
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const authController = new AuthController();
