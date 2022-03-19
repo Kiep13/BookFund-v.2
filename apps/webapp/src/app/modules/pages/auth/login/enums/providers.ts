@@ -1,5 +1,5 @@
 export enum Providers {
   GOOGLE = 'google',
-  LINKEDIN = 'linkedin',
+  GITHUB = 'github',
   FACEBOOK = 'facebook'
 }

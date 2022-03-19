@@ -7,5 +7,6 @@ const router = new Router();
 
 router.get(`/${AuthProviders.GOOGLE}`, authController.signInViaGoogle);
 router.get(`/${AuthProviders.FACEBOOK}`, authController.signInViaFacebook);
+router.get(`/${AuthProviders.GITHUB}`, authController.singInViaGitHub);
 
 export default router;

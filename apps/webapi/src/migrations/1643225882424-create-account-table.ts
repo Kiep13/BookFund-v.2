@@ -39,7 +39,7 @@ export class createAccountTable1643225882424 implements MigrationInterface {
           {
             name: 'provider',
             type: 'enum',
-            enum: [AuthProviders.GOOGLE, AuthProviders.LINKEDIN, AuthProviders.FACEBOOK],
+            enum: [AuthProviders.GOOGLE, AuthProviders.GITHUB, AuthProviders.FACEBOOK],
             enumName: 'providersEnum',
             isNullable: false
           },

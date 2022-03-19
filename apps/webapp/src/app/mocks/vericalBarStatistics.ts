@@ -8,19 +8,13 @@ export const VERTICAL_BAR_STATISTICS = {
       backgroundColor: '#facb4d',
     },
     {
-      label: 'Linkedin',
+      label: 'GitHub',
       data: [1].map(() => 123),
       borderColor: '#3cb500',
       backgroundColor: '#81ef70',
     },
     {
-      label: 'GitHub',
-      data: [1].map(() => 174),
-      borderColor: '#bd2c00',
-      backgroundColor: '#ff8b69',
-    },
-    {
-      label: 'VK',
+      label: 'Facebook',
       data: [1].map(() => 51),
       borderColor: '#0077ff',
       backgroundColor: '#3690ff',
