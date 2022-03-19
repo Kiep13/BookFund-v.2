@@ -2,14 +2,14 @@ import axios from 'axios';
 import * as queryString from 'query-string';
 
 import { connection } from '@core/connection';
-import { ApiRoutes, AuthProviders } from '@core/enums';
-import { IGoogleAuthTokens, IGoogleUser, ITokens } from '@core/interfaces';
+import { AuthProviders } from '@core/enums';
+import { IAuthResponse, IGoogleAuthTokens, IGoogleUser } from '@core/interfaces';
 import { AccountEntity } from '@entities/account.entity';
 import { environment } from '@environments/environment';
 import { tokenService } from '@services/token.service';
 
 class GoogleService {
-  public async login(code: string): Promise<ITokens> {
+  public async login(code: string): Promise<IAuthResponse> {
     const {id_token, access_token}: IGoogleAuthTokens = await this.getGoogleTokens(code);
     const user: IGoogleUser = await this.getUser(access_token, id_token);
 
@@ -20,13 +20,18 @@ class GoogleService {
 
     const account = candidate ? await this.synchronize(candidate.id, user) : await this.register(user);
 
-    return tokenService.generateTokens({
+    const tokens = tokenService.generateTokens({
       email: account.email,
       name: account.name,
       surname: account.surname,
       image: account.image,
       role: account.role
     });
+
+    return {
+      account,
+      ...tokens
+    }
   }
 
   private getGoogleTokens(code: string): Promise<IGoogleAuthTokens> {
@@ -34,7 +39,7 @@ class GoogleService {
       code,
       client_id: environment.googleClientId,
       client_secret: environment.googleClientSecret,
-      redirect_uri: `${environment.selfUrl}/v1/${ApiRoutes.AUTH}/${AuthProviders.GOOGLE}`,
+      redirect_uri: `${environment.clientUrl}/auth/${AuthProviders.GOOGLE}`,
       grant_type: 'authorization_code'
     };
 
@@ -43,10 +48,7 @@ class GoogleService {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     })
-      .then((response) => response.data)
-      .catch((error) => {
-        throw new Error(error.message);
-      });
+      .then((response) => response.data);
   }
 
   private getUser(accessToken: string, idToken: string): Promise<IGoogleUser> {
@@ -55,10 +57,7 @@ class GoogleService {
         Authorization: `Bearer ${idToken}`,
       }
     })
-      .then((response) => response.data)
-      .catch((error) => {
-        throw new Error(error.message);
-      });
+      .then((response) => response.data);
   }
 
   private register(user: IGoogleUser): Promise<AccountEntity> {

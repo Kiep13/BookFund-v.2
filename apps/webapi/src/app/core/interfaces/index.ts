@@ -1,4 +1,5 @@
 export * from './account.interface';
+export * from './auth-response.interface';
 export * from './author-form.interface';
 export * from './book-form.interface';
 export * from './collection-form.interface';

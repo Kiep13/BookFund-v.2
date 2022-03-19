@@ -13,6 +13,15 @@ import { IGenreForm } from '@pages/admin/genreForm/interfaces';
 export const useApi = () => {
   const { addError } = useAlerts();
 
+  const login = async (provider: string, code: string): Promise<any> => {
+    return await axios.get(`${environment.backEndUrl}/v1/auth/${provider}`, {
+      params: {
+        code
+      }
+    })
+      .then((response: AxiosResponse) => response.data);
+  }
+
   const saveImage = async (formData: FormData): Promise<string> => {
     return await axios.post<string>(`${environment.backEndUrl}/v1/image/save`, formData)
       .then((response: AxiosResponse) => response.data)
@@ -128,6 +137,7 @@ export const useApi = () => {
   }
 
   return {
+    login,
     saveImage,
     addAuthor,
     updateAuthor,

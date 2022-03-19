@@ -5,6 +5,7 @@ export enum BaseRoutePaths {
 }
 
 export enum AuthRoutePaths{
+  AUTHORIZING = '/auth',
   LOGIN = '/login'
 }
 

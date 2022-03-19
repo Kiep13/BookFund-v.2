@@ -1,5 +1,4 @@
-import { Alert } from '@mui/lab';
-import { Box } from '@mui/material';
+import { Alert, Box } from '@mui/material'
 import { useSelector } from 'react-redux';
 
 import { getAlerts } from '@store/reducers/alertsStore';
