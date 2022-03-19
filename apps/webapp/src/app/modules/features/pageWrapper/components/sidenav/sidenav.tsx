@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { AdminRoutePaths } from '@core/enums';
 import { AvatarBlock } from '@shared/components/avatarBlock';
-import { getUser } from '@store/reducers';
+import { getIsAdmin, getUser } from '@store/reducers';
 
 import { GO_ADMIN_MENU_ITEM, GO_USER_MENU_ITEM, LOG_OUT_MENU_ITEM, STYLES_SIDENAV } from '../../constants';
 import { IMenuItem } from '../../interfaces';
@@ -15,6 +15,7 @@ export const Sidenav = (props: IProps) => {
   const location = useLocation();
   const isAdminOpened = location.pathname.includes(AdminRoutePaths.ADMIN);
   const account = useSelector(getUser);
+  const isAdmin = useSelector(getIsAdmin);
 
   return (
     <Drawer
@@ -28,7 +29,10 @@ export const Sidenav = (props: IProps) => {
         ))}
       </List>
       <List sx={STYLES_SIDENAV.linksBlock}>
-        <NavItem menuItem={isAdminOpened ? GO_USER_MENU_ITEM : GO_ADMIN_MENU_ITEM}/>
+        {
+          isAdmin &&
+          <NavItem menuItem={isAdminOpened ? GO_USER_MENU_ITEM : GO_ADMIN_MENU_ITEM}/>
+        }
         <NavItem menuItem={LOG_OUT_MENU_ITEM}/>
       </List>
     </Drawer>

@@ -3,6 +3,8 @@ export * from './auth-response.interface';
 export * from './author-form.interface';
 export * from './book-form.interface';
 export * from './collection-form.interface';
+export * from './facebook-auth-tokens';
+export * from './facebook-user.interface';
 export * from './genre-form.interface';
 export * from './google-auth-tokens.interface';
 export * from './google-user.interface';
