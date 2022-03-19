@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Roles } from '@core/enums';
 import { IAccount } from '@core/interfaces';
-import { IAuthStore } from '@store/interfaces';
+import { IAuthStore, IStore } from '@store/interfaces';
 
 import { AUTH_STORE_INITIAL_STATE } from '../constants';
 
@@ -25,25 +25,25 @@ export const authSlice = createSlice({
   }
 });
 
-export const getUser = (store: IAuthStore) => store.value.user;
-export const getIsAuthorized = (store: IAuthStore) => store.value?.isAuthorized;
-export const getIsModerator = (store: IAuthStore) => {
-  const { isAuthorized } = store.value;
+export const getUser = (store: IStore) => store.auth.value.user;
+export const getIsAuthorized = (store: IStore) => store.auth.value?.isAuthorized;
+export const getIsModerator = (store: IStore) => {
+  const { isAuthorized } = store.auth.value;
 
   if(!isAuthorized) {
     return false;
   }
 
-  return store.value.user?.role === Roles.MODERATOR;
+  return store.auth.value.user?.role === Roles.MODERATOR;
 }
-export const getIsAdmin = (store: IAuthStore) => {
-  const { isAuthorized } = store.value;
+export const getIsAdmin = (store: IStore) => {
+  const { isAuthorized } = store.auth.value;
 
   if(!isAuthorized) {
     return false;
   }
 
-  return store.value.user?.role === Roles.MODERATOR || store.value.user?.role === Roles.ADMIN;
+  return store.auth.value.user?.role === Roles.MODERATOR || store.auth.value.user?.role === Roles.ADMIN;
 }
 
 export const { login, logout } = authSlice.actions;

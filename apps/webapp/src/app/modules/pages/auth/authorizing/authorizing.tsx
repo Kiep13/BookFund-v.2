@@ -28,6 +28,7 @@ export const Authorizing = () => {
     login(provider, code)
       .then((authResponse: IAuthResponse) => {
         dispatch(setAuthData(authResponse.account));
+        
         addSuccess('Successfully authorized');
         history.push(BaseRoutePaths.HOME);
       })
