@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 
-import { useAlerts } from '@components/alertsBlock/hooks';
 import { DemoTable } from '@components/demoTable';
+import { useAlerts } from '@utils/hooks';
 import { IBook } from '@utils/interfaces';
 
 import { COLUMNS, ERROR_BOOK_ALREADY_SELECTED, STYLES_BOOK_SELECTOR } from '../../constants';

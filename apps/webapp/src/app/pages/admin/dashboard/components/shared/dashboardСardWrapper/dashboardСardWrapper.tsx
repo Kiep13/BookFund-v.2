@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 
 import { STYLES } from './constants';
 

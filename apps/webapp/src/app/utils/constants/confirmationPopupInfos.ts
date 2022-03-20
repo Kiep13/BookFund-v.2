@@ -1,4 +1,4 @@
-import { IConfirmationPopup } from '@components/confirmationPopup';
+import { IConfirmationPopup } from '@utils/interfaces';
 
 export const DELETE_BOOK_CONFIRMATION_POPUP: IConfirmationPopup = {
   title: 'Delete book',

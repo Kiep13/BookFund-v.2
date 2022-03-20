@@ -3,7 +3,7 @@ import { Card, CardActionArea, CardContent, CardMedia, Link, Typography } from '
 import { TextWithHint } from '@components/textWithHint';
 
 import { STYLES } from './constants';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const BookPromoCard = ({ book } : IProps) => {
   book.authorFullName = `${book.author?.name} ${book.author?.surname}`;

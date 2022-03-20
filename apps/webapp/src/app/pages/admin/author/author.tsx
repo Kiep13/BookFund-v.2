@@ -4,16 +4,15 @@ import { Image } from 'mui-image';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { useAlerts } from '@components/alertsBlock';
-import { Card } from '@components/card';
-import { ConfirmationPopup } from '@components/confirmationPopup';
+import { Card } from '@components/Card';
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { EntityPageHeader } from '@components/entityPageHeader';
 import { HorizontalBookCard } from '@components/horizontalBookCard';
 import { State, StatefulCard } from '@components/statefulCard';
 import { API_TOOLTIP_ERROR, DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes } from '@utils/enums';
 import { IAuthor, IBook, IFormPageParams, IListApiView, ISearchOptions } from '@utils/interfaces';
-import { useApi, useAuthorActions, useBookActions } from '@utils/hooks';
+import { useAlerts, useApi, useAuthorActions, useBookActions } from '@utils/hooks';
 
 import { IMAGE_PROPERTIES, PAGE_TITLE, STYLES, SUCCESSFULLY_DELETED } from './constants';
 

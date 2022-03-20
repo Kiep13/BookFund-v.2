@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { useAlerts } from '@components/alertsBlock/hooks';
 import { DataTable } from '@components/dataTable';
 import { IDataColumn } from '@components/dataTable/interfaces';
-import { ConfirmationPopup } from '@components/confirmationPopup';
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes, SortDirections, TableActions } from '@utils/enums';
 import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@utils/interfaces';
-import { useApi, useBookActions } from '@utils/hooks';
+import { useApi, useAlerts, useBookActions } from '@utils/hooks';
 
 import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 

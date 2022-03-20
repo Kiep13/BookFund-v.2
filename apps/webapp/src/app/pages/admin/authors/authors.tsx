@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 import { PageHeaderCard } from '@components/pageHeaderCard';
 import { AdminRoutePaths } from '@utils/enums';
 

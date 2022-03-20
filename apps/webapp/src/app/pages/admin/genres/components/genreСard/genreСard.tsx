@@ -4,8 +4,8 @@ import { Box, Button, Chip, Divider, IconButton, Typography } from '@mui/materia
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import { ConfirmationPopup } from '@components/confirmationPopup';
-import { BookPromoCard } from '@components/bookPromoCard';
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
+import { BookPromoCard } from '@components/BookPromoCard';
 import { IBook } from '@utils/interfaces';
 import { DELETE_GENRE_CONFIRMATION_POPUP } from '@utils/constants';
 import { useBookActions } from '@utils/hooks';

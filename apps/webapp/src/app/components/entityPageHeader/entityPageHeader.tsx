@@ -3,7 +3,7 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import KeyboardBackspaceTwoToneIcon from '@mui/icons-material/KeyboardBackspaceTwoTone';
 import { Box, IconButton, Typography } from '@mui/material';
 
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 
 import { STYLES } from './constants';
 import { IProps } from './props.interface';

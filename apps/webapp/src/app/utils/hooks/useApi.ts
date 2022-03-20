@@ -1,13 +1,13 @@
 import { AxiosResponse } from 'axios';
 import queryString from 'query-string';
 
-import { useAlerts } from '@components/alertsBlock/hooks';
 import { environment } from '@environments/environment';
 import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
 import { IBookForm } from '@pages/admin/bookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
 import { IGenreForm } from '@pages/admin/genreForm/interfaces';
 import { axios, API_TOOLTIP_ERROR } from '@utils/constants';
+import { useAlerts } from '@utils/hooks';
 import { IAuthor, IAuthResponse, IBook, ICollection, IGenre, IListApiView, ISearchOptions } from '@utils/interfaces';
 
 export const useApi = () => {

@@ -4,14 +4,13 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
-import { useAlerts } from '@components/alertsBlock/hooks';
 import { State, StatefulCard } from '@components/statefulCard';
 import { Input } from '@components/formСomponents/input';
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IFormPageParams, IGenre, IGenreFormPageState } from '@utils/interfaces';
 import { AdminRoutePaths } from '@utils/enums';
-import { useApi } from '@utils/hooks';
+import { useAlerts, useApi } from '@utils/hooks';
 
 import { GenreAutocomplete } from './components/genreAutocomplete';
 import {

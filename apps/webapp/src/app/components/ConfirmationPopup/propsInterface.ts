@@ -1,4 +1,4 @@
-import { IConfirmationPopup } from './interfaces';
+import { IConfirmationPopup } from '@utils/interfaces';
 
 export interface IProps {
   info: IConfirmationPopup

@@ -1,9 +1,8 @@
 import { useHistory } from 'react-router-dom';
 
-import { useAlerts } from '@components/alertsBlock';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { AdminRoutePaths } from '@utils/enums';
-import { useApi } from '@utils/hooks';
+import { useAlerts, useApi } from '@utils/hooks';
 
 export const useCollectionActions = () => {
   const history = useHistory();

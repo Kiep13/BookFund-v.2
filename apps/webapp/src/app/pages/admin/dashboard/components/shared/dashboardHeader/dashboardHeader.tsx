@@ -5,7 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import moment from 'moment';
 import { useState } from 'react';
 
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 
 import { MIN_STATISTIC_DATE } from '../../../constants';
 import { STYLES } from './constants';

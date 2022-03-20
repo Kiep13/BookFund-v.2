@@ -3,9 +3,9 @@ import { v4 as uuid } from 'uuid';
 
 import * as alertStore from '@store/reducers/alertsStore';
 
-import { DELAY } from '../constants';
-import { AlertTypes } from '../enums';
-import { IAlert } from '../interfaces';
+import { DELAY } from '@utils/constants';
+import { AlertTypes } from '@utils/enums';
+import { IAlert } from '@utils/interfaces';
 
 export const useAlerts = () => {
   const dispatch = useDispatch();

@@ -8,7 +8,7 @@ import { IconButton } from '@mui/material';
 import { ICardAction, ICardItemAction } from '@utils/interfaces';
 
 import { STYLES } from './constants';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const CollectionCard = ({ collection, isActionsAvailable, actions, onActionClick }: IProps) => {
   return (

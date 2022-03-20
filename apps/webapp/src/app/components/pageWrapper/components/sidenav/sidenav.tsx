@@ -2,12 +2,11 @@ import { Box, Drawer, List } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { AvatarBlock } from '@components/avatarBlock';
-import { useAlerts } from '@components/alertsBlock/hooks';
+import { AvatarBlock } from '@components/AvatarBlock';
 import { getIsAdmin, getUser } from '@store/reducers';
 import { API_LOGOUT_ERROR } from '@utils/constants';
 import { AdminRoutePaths } from '@utils/enums';
-import { useApi, useAuthHandlers } from '@utils/hooks';
+import { useAlerts, useApi, useAuthHandlers } from '@utils/hooks';
 
 import {
   API_LOGOUT_SUCCESS,

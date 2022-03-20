@@ -7,7 +7,7 @@ import {
   DialogTitle
 } from '@mui/material';
 
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const ConfirmationPopup = ({info, isOpened, handleConfirm, handleClose}: IProps) => {
   return (

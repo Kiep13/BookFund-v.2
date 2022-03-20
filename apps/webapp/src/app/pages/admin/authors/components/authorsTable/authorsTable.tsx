@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { useAlerts } from '@components/alertsBlock';
-import { ConfirmationPopup } from '@components/confirmationPopup';
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { DataTable } from '@components/dataTable';
 import { IDataColumn } from '@components/dataTable/interfaces';
 import { DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes, SortDirections, TableActions } from '@utils/enums';
 import { IAuthor, ISearchOptions, ISortOptions, ITableItemAction } from '@utils/interfaces';
-import { useApi, useAuthorActions } from '@utils/hooks';
+import { useAlerts, useApi, useAuthorActions } from '@utils/hooks';
 
 import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';
 

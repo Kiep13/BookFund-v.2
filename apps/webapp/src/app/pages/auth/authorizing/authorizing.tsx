@@ -3,12 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
-import { useAlerts } from '@components/alertsBlock';
 import { login as setAuthData } from '@store/reducers/authSlice';
 import { axios, API_LOGIN_ERROR } from '@utils/constants';
 import { AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { IAuthResponse } from '@utils/interfaces';
-import { useApi, useAuthHandlers } from '@utils/hooks';
+import { useAlerts, useApi, useAuthHandlers } from '@utils/hooks';
 
 import { IPageParams } from './interfaces';
 import { API_SESSION_EXPIRED_ERROR, STYLES, SUCCESSFULLY_AUTHORIZED } from './constants';

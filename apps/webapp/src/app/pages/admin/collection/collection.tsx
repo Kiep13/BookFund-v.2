@@ -3,14 +3,13 @@ import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { State, StatefulCard } from '@components/statefulCard';
-import { useAlerts } from '@components/alertsBlock';
-import { ConfirmationPopup } from '@components/confirmationPopup';
 import { HorizontalBookCard } from '@components/horizontalBookCard';
 import { EntityPageHeader } from '@components/entityPageHeader';
 import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
 import { IBook, ICollection, IFormPageParams } from '@utils/interfaces';
-import { useApi, useBookActions, useCollectionActions } from '@utils/hooks';
+import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 
 import { IMAGE_PROPERTIES, SUCCESSFULLY_DELETED, STYLES, PAGE_TITLE } from './constants';
 

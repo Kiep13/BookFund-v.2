@@ -6,12 +6,11 @@ import { FormikHelpers } from 'formik/dist/types';
 
 import { ImageUpload } from '@components/imageUpload';
 import { State, StatefulCard } from '@components/statefulCard';
-import { useAlerts } from '@components/alertsBlock';
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 import { Input } from '@components/formСomponents/input';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IAuthor, IFormPageParams } from '@utils/interfaces';
-import { useApi, useAuthorActions } from '@utils/hooks';
+import { useAlerts, useApi, useAuthorActions } from '@utils/hooks';
 
 import {
   FORM_INITIAL_VALUE,

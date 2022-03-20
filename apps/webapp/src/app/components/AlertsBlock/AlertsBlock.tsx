@@ -2,9 +2,9 @@ import { Alert, Box } from '@mui/material'
 import { useSelector } from 'react-redux';
 
 import { getAlerts } from '@store/reducers/alertsStore';
+import { IAlert } from '@utils/interfaces';
 
 import { STYLES } from './constants';
-import { IAlert } from './interfaces';
 
 export const AlertsBlock = () => {
   const alerts = useSelector(getAlerts);

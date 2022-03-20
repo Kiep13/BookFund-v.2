@@ -2,11 +2,10 @@ import { Box, TablePagination, TextField } from '@mui/material';
 import { debounce } from 'lodash';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
-import { useAlerts } from '@components/alertsBlock';
-import { ConfirmationPopup } from '@components/confirmationPopup';
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
+import { CollectionCard } from '@components/ColllectionCard';
 import { State, StatefulCard } from '@components/statefulCard';
-import { CollectionCard } from '@components/colllectionCard';
-import { useApi, useCollectionActions } from '@utils/hooks';
+import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 
 import {
   API_TOOLTIP_ERROR,

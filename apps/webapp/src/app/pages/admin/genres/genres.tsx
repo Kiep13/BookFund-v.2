@@ -3,15 +3,14 @@ import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { useAlerts } from '@components/alertsBlock/hooks';
 import { GENRES_MOCK } from '@mocks/genres.mock';
 import { StatefulCard, State } from '@components/statefulCard';
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 import { PageHeaderCard } from '@components/pageHeaderCard';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { AdminRoutePaths } from '@utils/enums';
 import { IGenre } from '@utils/interfaces';
-import { useApi } from '@utils/hooks';
+import { useAlerts, useApi } from '@utils/hooks';
 
 import { NO_GENRES_MESSAGE, STYLES, SUCCESSFULLY_DELETED } from './constants';
 import { GenresTreeView } from './components/genresTreeView';

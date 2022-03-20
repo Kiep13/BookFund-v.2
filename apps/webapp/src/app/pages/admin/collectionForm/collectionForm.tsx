@@ -6,12 +6,11 @@ import { useParams } from 'react-router-dom';
 
 import { ImageUpload } from '@components/imageUpload';
 import { State, StatefulCard } from '@components/statefulCard';
-import { useAlerts } from '@components/alertsBlock';
-import { Card } from '@components/card';
+import { Card } from '@components/Card';
 import { Input } from '@components/formСomponents/input';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IBook, ICollection, IFormPageParams } from '@utils/interfaces';
-import { useApi, useCollectionActions } from '@utils/hooks';
+import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 
 import { ICollectionForm } from './interfaces';
 import { BookSelection } from './components/bookSelection';

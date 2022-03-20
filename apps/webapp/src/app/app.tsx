@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { AlertsBlock } from '@components/alertsBlock';
+import { AlertsBlock } from '@components/AlertsBlock';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Home } from '@pages/base/home';
