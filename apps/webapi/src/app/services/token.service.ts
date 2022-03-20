@@ -13,6 +13,10 @@ class TokenService {
       refreshToken
     }
   }
+
+  public async validateRefreshToken(token: string): Promise<IAccount> {
+    return jwt.verify(token, environment.jwtRefreshSecret);
+  }
 }
 
 export const tokenService = new TokenService();

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
-import { API_LOGIN_ERROR } from '@core/constants';
+import { axios, API_LOGIN_ERROR } from '@core/constants';
 import { AuthRoutePaths, BaseRoutePaths } from '@core/enums';
 import { IAuthResponse } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock';
@@ -11,7 +11,7 @@ import { useApi } from '@shared/hooks';
 import { login as setAuthData } from '@store/reducers/authSlice';
 
 import { IPageParams } from './interfaces';
-import { STYLES } from './constants';
+import { STYLES, SUCCESSFULLY_AUTHORIZED } from './constants';
 
 export const Authorizing = () => {
   const history = useHistory();
@@ -27,13 +27,13 @@ export const Authorizing = () => {
 
     login(provider, code)
       .then((authResponse: IAuthResponse) => {
-        dispatch(setAuthData(authResponse.account));
-        
-        addSuccess('Successfully authorized');
+        dispatch(setAuthData(authResponse));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.accessToken}`;
+
+        addSuccess(SUCCESSFULLY_AUTHORIZED);
         history.push(BaseRoutePaths.HOME);
       })
-      .catch((e) => {
-        console.log(e)
+      .catch(() => {
         addError(API_LOGIN_ERROR);
         history.push(AuthRoutePaths.LOGIN);
       });

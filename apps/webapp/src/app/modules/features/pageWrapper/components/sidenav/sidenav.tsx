@@ -2,7 +2,7 @@ import { Box, Drawer, List } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { API_LOGOUT_ERROR } from '@core/constants';
+import { API_LOGOUT_ERROR, axios } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
 import { AvatarBlock } from '@shared/components/avatarBlock';
 import { getIsAdmin, getUser, logout as logoutUser } from '@store/reducers';
@@ -36,6 +36,7 @@ export const Sidenav = (props: IProps) => {
       .then(() => {
         addSuccess(API_LOGOUT_SUCCESS);
         dispatch(logoutUser());
+        delete axios.defaults.headers.common['Authorization'];
       })
       .catch(() => {
         addError(API_LOGOUT_ERROR);

@@ -1,9 +1,10 @@
-import { Roles } from '@core/enums';
+import { AuthProviders, Roles } from '@core/enums';
 
 export interface IAccount {
   name: string,
   surname: string,
   email: string,
   image: string,
-  role: Roles
+  role: Roles,
+  provider: AuthProviders
 }

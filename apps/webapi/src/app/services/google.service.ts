@@ -25,7 +25,8 @@ class GoogleService {
       name: account.name,
       surname: account.surname,
       image: account.image,
-      role: account.role
+      role: account.role,
+      provider: account.provider
     });
 
     return {
