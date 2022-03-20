@@ -1,5 +1,8 @@
 import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { getIsAdmin, getIsAuthorized } from '@store/reducers';
+import { useAuthHandlers } from '@shared/hooks';
 import { AdminRoutePaths } from '@core/enums';
 import { wrapAdminPage } from '@features/pageWrapper';
 import { compose } from '@shared/utils';
@@ -18,6 +21,15 @@ import { GenreForm } from './genreForm';
 import { Dashboard } from './dashboard';
 
 const Page = () => {
+  const isAuthorized = useSelector(getIsAuthorized);
+  const isAdmin = useSelector(getIsAdmin);
+
+  const { handleLogOut } = useAuthHandlers();
+
+  if(!isAuthorized || !isAdmin) {
+    handleLogOut(`You don't have access to this page`);
+  }
+
   return (
     <>
       <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`} component={Dashboard}/>

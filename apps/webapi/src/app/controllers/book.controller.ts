@@ -45,7 +45,7 @@ class BookController {
 
       return response.status(ResponseStatuses.STATUS_OK).json(book);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 

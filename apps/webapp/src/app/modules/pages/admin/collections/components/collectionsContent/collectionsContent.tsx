@@ -134,7 +134,7 @@ export const CollectionsContent = () => {
 
         <Box sx={STYLES.cardsWrapper}>
           {
-           data.map((collection: ICollection) => {
+            data.map((collection: ICollection) => {
               return <CollectionCard
                         key={collection.id}
                         collection={collection}

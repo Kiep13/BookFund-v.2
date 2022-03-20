@@ -1,8 +1,30 @@
 export const STYLES_PAGE_WRAPPER = {
+  pageWithSidebar: {
+    height: '100vh',
+    display: 'flex'
+  },
+  pageWithoutSidebar: {
+    maxWidth: 'calc(100% - 350px)',
+    width: '100%',
+    m: 'auto'
+  },
   box: {
     flexGrow: 1,
     p: 3,
     height: 'fit-content'
+  },
+  header: {
+    mb: 4
+  }
+}
+
+export const STYLES_HEADER = {
+  rightBlock: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  loginButton: {
+    ml: 2
   }
 }
 

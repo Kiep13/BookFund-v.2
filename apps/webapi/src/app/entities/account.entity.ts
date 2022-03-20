@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Roles } from '@core/enums';
+import { AuthProviders, Roles } from '@core/enums';
 
 @Entity({
   name: 'account'
@@ -39,17 +39,12 @@ export class AccountEntity {
   image: string;
 
   @Column({
-    name: 'activationLink',
-    type: 'varchar'
+    name: 'provider',
+    type: 'enum',
+    enumName: 'providersEnum',
+    enum: AuthProviders
   })
-  activationLink: string;
-
-  @Column({
-    name: 'isActivated',
-    type: 'boolean',
-    default: false
-  })
-  isActivated: boolean;
+  provider: AuthProviders;
 
   @Column({
     name: 'role',

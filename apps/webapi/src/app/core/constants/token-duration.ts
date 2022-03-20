@@ -1,0 +1,1 @@
+export const TOKEN_DURATION = 2592000000;

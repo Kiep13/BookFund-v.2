@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { v4 as uuid } from 'uuid';
 
 import * as alertStore from '@store/reducers/alertsStore';
 
@@ -25,13 +26,13 @@ export const useAlerts = () => {
     addAlert(message, AlertTypes.ERROR);
   }
 
-  const removeAlert = (id: number): void  => {
+  const removeAlert = (id: string): void  => {
     dispatch(alertStore.removeAlert(id));
   }
 
   const addAlert = (message: string, type: AlertTypes): void => {
     const newAlert: IAlert = {
-      id: Date.now(),
+      id: uuid(),
       message,
       type: type,
       delay: DELAY,

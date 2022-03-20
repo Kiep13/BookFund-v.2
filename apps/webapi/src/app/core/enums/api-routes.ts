@@ -1,4 +1,5 @@
 export enum ApiRoutes {
+  AUTH = 'auth',
   AUTHOR = 'author',
   IMAGE = 'image',
   BOOK = 'book',

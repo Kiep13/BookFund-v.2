@@ -1,21 +1,11 @@
-import { Box, CssBaseline  }from '@mui/material';
+import { useSelector } from 'react-redux';
 
-import { Header } from './components/header';
-import { Sidenav } from './components/sidenav';
-import { STYLES_PAGE_WRAPPER } from './constants';
-import './pageWrapper.scss';
+import { getIsAuthorized } from '@store/reducers';
+import { PageWithSidebar, PageWithoutSidebar } from './components';
+import { IProps } from './props.interface';
 
-export const PageWrapper = (props: any) => {
-  return (
-    <section className='page-wrapper'>
-      <CssBaseline/>
-      <Sidenav menuItems={props.menuItems}/>
-      <Box component="main" sx={STYLES_PAGE_WRAPPER.box}>
-        <div className='page-wrapper__header'>
-          <Header/>
-        </div>
-        {props.children}
-      </Box>
-    </section>
-  );
+export const PageWrapper = (props: IProps) => {
+  const isAuthorized = useSelector(getIsAuthorized);
+
+  return isAuthorized ? <PageWithSidebar {...props}/> : <PageWithoutSidebar children={props.children}/>
 }

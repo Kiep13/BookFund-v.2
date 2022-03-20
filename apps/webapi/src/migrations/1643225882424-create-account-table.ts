@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-import { Roles } from '../app/core/enums';
+import { AuthProviders, Roles } from '../app/core/enums';
 
 export class createAccountTable1643225882424 implements MigrationInterface {
 
@@ -37,14 +37,11 @@ export class createAccountTable1643225882424 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: 'activationLink',
-            type: 'varchar',
+            name: 'provider',
+            type: 'enum',
+            enum: [AuthProviders.GOOGLE, AuthProviders.GITHUB, AuthProviders.FACEBOOK],
+            enumName: 'providersEnum',
             isNullable: false
-          },
-          {
-            name: 'isActivated',
-            type: 'boolean',
-            default: 'false'
           },
           {
             name: 'role',

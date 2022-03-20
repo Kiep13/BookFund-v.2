@@ -1,7 +1,7 @@
 import { AlertTypes } from '../enums';
 
 export interface IAlert {
-  id: number,
+  id: string,
   type: AlertTypes,
   message: string,
   delay: number,
