@@ -1,7 +1,5 @@
 import { PageSizes } from '@utils/enums';
-import { ISortOptions } from '@utils/interfaces';
-
-import { IDataColumn } from './interfaces';
+import { IDataColumn, ISortOptions } from '@utils/interfaces';
 
 export interface IProps {
   columns: IDataColumn[],

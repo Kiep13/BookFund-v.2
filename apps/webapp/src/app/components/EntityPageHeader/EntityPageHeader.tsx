@@ -6,7 +6,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { Card } from '@components/Card';
 
 import { STYLES } from './constants';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handleDeleteClick}: IProps) => {
   return (

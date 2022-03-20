@@ -1,4 +1,4 @@
-import { IDataColumn } from '@components/dataTable/interfaces';
+import { IDataColumn } from '@utils/interfaces';
 
 export interface IProps {
   columns: IDataColumn[],

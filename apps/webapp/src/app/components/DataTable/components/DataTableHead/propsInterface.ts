@@ -1,6 +1,5 @@
 import { SortDirections } from '@utils/enums';
-
-import { IDataColumn } from '../../interfaces';
+import { IDataColumn } from '@utils/interfaces';
 
 export interface IProps {
   columns: IDataColumn[],

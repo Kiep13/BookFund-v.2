@@ -1,5 +1,7 @@
 export * from './alertTypes';
+export * from './alignTypes';
 export * from './cardActions';
+export * from './cellTypes';
 export * from './pageSizes';
 export * from './responseStatuses';
 export * from './roles';

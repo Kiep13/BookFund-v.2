@@ -1,4 +1,4 @@
-import { AlignTypes } from '../enums';
+import { AlignTypes } from '@utils/enums';
 
 export type IAlignType = AlignTypes.Left |
                          AlignTypes.Right |

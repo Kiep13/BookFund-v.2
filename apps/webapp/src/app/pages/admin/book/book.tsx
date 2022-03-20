@@ -5,7 +5,7 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { Card } from '@components/Card';
-import { EntityPageHeader } from '@components/entityPageHeader';
+import { EntityPageHeader } from '@components/EntityPageHeader';
 import { State, StatefulCard } from '@components/statefulCard';
 import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@utils/constants';
 import { AdminRoutePaths } from '@utils/enums';

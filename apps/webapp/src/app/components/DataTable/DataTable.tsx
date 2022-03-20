@@ -15,14 +15,13 @@ import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 
 import { PageSizes, SortDirections, TableActions } from '@utils/enums';
-import { ISortOptions, ITableItemAction } from '@utils/interfaces';
+import { IDataColumn, ISortOptions, ITableItemAction } from '@utils/interfaces';
+import { AlignTypes } from '@utils/enums';
+import { formatData } from '@utils/helpers';
 
-import { DataTableHead } from './components/dataTableHead';
+import { DataTableHead } from './components/DataTableHead';
 import { STYLES } from './constants';
-import { AlignTypes } from './enums';
-import { IDataColumn } from './interfaces';
-import { formatData } from './utils';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const DataTable = (props: IProps) => {
   const { columns, sortOptions, page, rowsPerPage, data, count, loading } = props;

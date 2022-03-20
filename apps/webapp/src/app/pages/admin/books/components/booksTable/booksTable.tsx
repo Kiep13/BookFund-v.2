@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { DataTable } from '@components/dataTable';
-import { IDataColumn } from '@components/dataTable/interfaces';
+import { DataTable } from '@components/DataTable';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes, SortDirections, TableActions } from '@utils/enums';
-import { IBook, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@utils/interfaces';
+import { IBook, IDataColumn, IListApiView, ISearchOptions, ISortOptions, ITableItemAction } from '@utils/interfaces';
 import { useApi, useAlerts, useBookActions } from '@utils/hooks';
 
 import { COLUMNS, SUCCESSFULLY_DELETED } from '../../constants';

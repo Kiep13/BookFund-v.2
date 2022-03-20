@@ -1,12 +1,11 @@
 import { Box, TableCell, TableRow, TableSortLabel, TableHead  } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
-import { SortDirections } from '@utils/enums';
+import { AlignTypes, SortDirections } from '@utils/enums';
+import { IDataColumn } from '@utils/interfaces';
 
 import { STYLES } from '../../constants';
-import { AlignTypes  } from '../../enums';
-import { IDataColumn } from '../../interfaces';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const DataTableHead = (props: IProps) => {
   const { columns, order, orderBy, onRequestSort } = props;

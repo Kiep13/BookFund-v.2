@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { DemoTable } from '@components/demoTable';
+import { DemoTable } from '@components/DemoTable';
 import { useAlerts } from '@utils/hooks';
 import { IBook } from '@utils/interfaces';
 

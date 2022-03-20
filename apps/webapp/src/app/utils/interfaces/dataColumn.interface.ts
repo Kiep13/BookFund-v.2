@@ -1,5 +1,6 @@
-import { CellTypes } from '../enums/cellTypes';
-import { IAlignType } from './alignType.interface';
+import { CellTypes } from '@utils/enums';
+
+import { IAlignType } from './alignTypeInterface';
 
 export interface IDataColumn {
   id: string,

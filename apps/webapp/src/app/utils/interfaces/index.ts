@@ -1,5 +1,6 @@
 export * from './account.interface';
 export * from './alert.interface';
+export * from './alignTypeInterface';
 export * from './author.interface';
 export * from './authResponse.interface';
 export * from './book.interface';
@@ -7,6 +8,7 @@ export * from './cardAction.interface';
 export * from './cardItemAction.interface';
 export * from './collection.interface';
 export * from './confirmationPopup.interface';
+export * from './dataColumn.interface';
 export * from './formPageParams.interface';
 export * from './formPageState.interface';
 export * from './genre.interface';

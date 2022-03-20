@@ -1,5 +1,5 @@
-import { AlignTypes, CellTypes } from '@components/dataTable/enums';
-import { IDataColumn } from '@components/dataTable/interfaces';
+import { IDataColumn } from '@utils/interfaces';
+import { AlignTypes, CellTypes } from '@utils/enums';
 
 export const COLUMNS: IDataColumn[] = [
   {

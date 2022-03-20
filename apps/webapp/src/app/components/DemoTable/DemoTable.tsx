@@ -10,12 +10,12 @@ import {
   Paper,
 } from '@mui/material';
 
-import { AlignTypes } from '@components/dataTable/enums';
-import { IDataColumn } from '@components/dataTable/interfaces';
-import { formatData } from '@components/dataTable/utils';
+import { AlignTypes } from '@utils/enums';
+import { formatData } from '@utils/helpers';
+import { IDataColumn } from '@utils/interfaces';
 
 import { STYLES } from './constants';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const DemoTable = ({data, columns, onDeleteClick}: IProps) => {
 

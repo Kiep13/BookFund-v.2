@@ -1,7 +1,8 @@
 import moment from 'moment';
 
-import { DATE_FORMAT } from '../constants';
-import { CellTypes } from '../enums';
+import { CellTypes } from '@utils/enums';
+
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 export function formatData(data: string | number | Date, type: CellTypes): string {
   if (!data && type !== CellTypes.Float) {
