@@ -1,12 +1,12 @@
 import { Box, Drawer, List } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { API_LOGOUT_ERROR, axios } from '@core/constants';
+import { API_LOGOUT_ERROR } from '@core/constants';
 import { AdminRoutePaths } from '@core/enums';
 import { AvatarBlock } from '@shared/components/avatarBlock';
-import { getIsAdmin, getUser, logout as logoutUser } from '@store/reducers';
-import { useApi } from '@shared/hooks';
+import { getIsAdmin, getUser } from '@store/reducers';
+import { useApi, useAuthHandlers } from '@shared/hooks';
 import { useAlerts } from '@features/alertsBlock';
 
 import {
@@ -22,9 +22,10 @@ import { IProps } from './props.interface';
 
 export const Sidenav = (props: IProps) => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const { logout } = useApi();
+
   const { addSuccess, addError } = useAlerts();
+  const { handleLogOut } = useAuthHandlers();
 
   const account = useSelector(getUser);
   const isAdmin = useSelector(getIsAdmin);
@@ -35,8 +36,7 @@ export const Sidenav = (props: IProps) => {
     logout()
       .then(() => {
         addSuccess(API_LOGOUT_SUCCESS);
-        dispatch(logoutUser());
-        delete axios.defaults.headers.common['Authorization'];
+        handleLogOut();
       })
       .catch(() => {
         addError(API_LOGOUT_ERROR);

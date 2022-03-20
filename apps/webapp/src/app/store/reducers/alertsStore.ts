@@ -15,7 +15,7 @@ export const alertsSlice = createSlice({
         action.payload
       ];
     },
-    removeAlert: (state: IAlertStore, action: PayloadAction<number>) => {
+    removeAlert: (state: IAlertStore, action: PayloadAction<string>) => {
       const id = action.payload;
       const index = state.value.findIndex((alert: IAlert) => alert.id === id);
 

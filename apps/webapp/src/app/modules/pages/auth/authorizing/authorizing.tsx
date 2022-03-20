@@ -7,7 +7,7 @@ import { axios, API_LOGIN_ERROR } from '@core/constants';
 import { AuthRoutePaths, BaseRoutePaths } from '@core/enums';
 import { IAuthResponse } from '@core/interfaces';
 import { useAlerts } from '@features/alertsBlock';
-import { useApi } from '@shared/hooks';
+import { useApi, useAuthHandlers } from '@shared/hooks';
 import { login as setAuthData } from '@store/reducers/authSlice';
 
 import { IPageParams } from './interfaces';
@@ -20,7 +20,8 @@ export const Authorizing = () => {
   const dispatch = useDispatch();
 
   const { login, refresh } = useApi();
-  const { addSuccess, addError } = useAlerts();
+  const { addSuccess } = useAlerts();
+  const { handleLogOut } = useAuthHandlers();
 
   const sendLoginRequest = () => {
     const provider = (params as IPageParams).provider;
@@ -35,8 +36,7 @@ export const Authorizing = () => {
         history.push(BaseRoutePaths.HOME);
       })
       .catch(() => {
-        addError(API_LOGIN_ERROR);
-        history.push(AuthRoutePaths.LOGIN);
+        handleLogOut(API_LOGIN_ERROR);
       });
   }
 
@@ -49,8 +49,7 @@ export const Authorizing = () => {
         history.goBack();
       })
       .catch(() => {
-        addError(API_SESSION_EXPIRED_ERROR);
-        history.push(AuthRoutePaths.LOGIN);
+        handleLogOut(API_SESSION_EXPIRED_ERROR);
       })
   }
 
