@@ -11,15 +11,16 @@ import { useApi } from '@shared/hooks';
 import { login as setAuthData } from '@store/reducers/authSlice';
 
 import { IPageParams } from './interfaces';
-import { STYLES, SUCCESSFULLY_AUTHORIZED } from './constants';
+import { API_SESSION_EXPIRED_ERROR, STYLES, SUCCESSFULLY_AUTHORIZED } from './constants';
 
 export const Authorizing = () => {
   const history = useHistory();
   const params = useParams();
   const location = useLocation();
-  const { login } = useApi();
-  const { addSuccess, addError } = useAlerts();
   const dispatch = useDispatch();
+
+  const { login, refresh } = useApi();
+  const { addSuccess, addError } = useAlerts();
 
   const sendLoginRequest = () => {
     const provider = (params as IPageParams).provider;
@@ -39,8 +40,26 @@ export const Authorizing = () => {
       });
   }
 
+  const sendRefreshRequest = () => {
+    refresh()
+      .then((authResponse: IAuthResponse) => {
+        dispatch(setAuthData(authResponse));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.accessToken}`;
+
+        history.goBack();
+      })
+      .catch(() => {
+        addError(API_SESSION_EXPIRED_ERROR);
+        history.push(AuthRoutePaths.LOGIN);
+      })
+  }
+
   useEffect(() => {
-    sendLoginRequest();
+    if(location.pathname === AuthRoutePaths.REFRESH) {
+      sendRefreshRequest();
+    } else {
+      sendLoginRequest();
+    }
   }, []);
 
   return (
@@ -48,7 +67,7 @@ export const Authorizing = () => {
       <Box sx={STYLES.content}>
         <CircularProgress size={150}/>
         <Typography variant='h2' gutterBottom component='div'>
-          Authorizing
+          Loading
         </Typography>
       </Box>
     </Box>

@@ -60,7 +60,7 @@ class AuthController {
 
   public async refresh(request, response, next): Response {
     try {
-      const { refreshToken } = request.cookies;
+      const { refreshToken }  = request.cookies;
 
       if(!refreshToken) {
         throw ApiError.UnauthorizedError();
@@ -77,7 +77,7 @@ class AuthController {
         provider: accountData.provider
       });
 
-      if(account) {
+      if(!account) {
         throw ApiError.UnauthorizedError();
       }
 

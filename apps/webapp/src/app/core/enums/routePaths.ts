@@ -6,6 +6,7 @@ export enum BaseRoutePaths {
 
 export enum AuthRoutePaths{
   AUTHORIZING = '/auth',
+  REFRESH = '/refresh',
   LOGIN = '/login'
 }
 

@@ -18,7 +18,13 @@ export const useApi = () => {
       params: {
         code
       }
-    });
+    })
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const refresh = async (): Promise<IAuthResponse> => {
+    return await axios.get(`${environment.backEndUrl}/v1/auth/refresh`)
+      .then((response: AxiosResponse) => response.data);
   }
 
   const logout = async (): Promise<void> => {
@@ -42,7 +48,8 @@ export const useApi = () => {
   }
 
   const getAuthor = async (id: number): Promise<IAuthor>  => {
-    return await axios.get(`${environment.backEndUrl}/v1/author/${id}`);
+    return await axios.get(`${environment.backEndUrl}/v1/author/${id}`)
+      .then((response: AxiosResponse) => response.data);
   }
 
   const getAuthors = async (searchOptions: ISearchOptions): Promise<IListApiView<IAuthor>> => {
@@ -68,7 +75,8 @@ export const useApi = () => {
   }
 
   const getGenre = async (id: number): Promise<IGenre> => {
-    return await axios.get(`${environment.backEndUrl}/v1/genre/${id}`);
+    return await axios.get(`${environment.backEndUrl}/v1/genre/${id}`)
+      .then((response: AxiosResponse) => response.data);
   }
 
   const getGenres = async (searchOptions: ISearchOptions): Promise<IGenre[]> => {
@@ -98,7 +106,8 @@ export const useApi = () => {
   }
 
   const getBook = async (id: number): Promise<IBook>  => {
-    return await axios.get(`${environment.backEndUrl}/v1/book/${id}`);
+    return await axios.get(`${environment.backEndUrl}/v1/book/${id}`)
+      .then((response: AxiosResponse) => response.data);
   }
 
   const getBooks = async (searchOptions: ISearchOptions): Promise<IListApiView<IBook>> => {
@@ -138,6 +147,7 @@ export const useApi = () => {
 
   return {
     login,
+    refresh,
     logout,
     saveImage,
     addAuthor,
