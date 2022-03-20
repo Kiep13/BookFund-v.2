@@ -5,9 +5,7 @@ import { ResponseStatuses } from '@core/enums';
 import { ApiError } from '@exceptions/api-error';
 
 export const errorMiddleware = (error: any, request: Request, response: Response, next: Function): Response => {
-  console.log(error);
-
-  if(error instanceof ApiError) {
+  if(error instanceof ApiError || error.status === ResponseStatuses.STATUS_NOT_AUTHORIZED) {
     return response.status(error.status).json({
       message: error.message,
       errors: error.errors

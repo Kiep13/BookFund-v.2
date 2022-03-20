@@ -63,13 +63,13 @@ class AuthController {
       const { refreshToken }  = request.cookies;
 
       if(!refreshToken) {
-        throw ApiError.UnauthorizedError();
+        return next(ApiError.UnauthorizedError());
       }
 
       const accountData = await tokenService.validateRefreshToken(refreshToken);
 
       if(!accountData) {
-        throw ApiError.UnauthorizedError();
+        return next(ApiError.UnauthorizedError());
       }
 
       const account = await connection.manager.findOne(AccountEntity, {
@@ -78,7 +78,7 @@ class AuthController {
       });
 
       if(!account) {
-        throw ApiError.UnauthorizedError();
+        return next(ApiError.UnauthorizedError());
       }
 
       const tokens = tokenService.generateTokens({

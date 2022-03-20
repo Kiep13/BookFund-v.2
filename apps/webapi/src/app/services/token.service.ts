@@ -14,6 +14,10 @@ class TokenService {
     }
   }
 
+  public async validateAccessToken(token: string): Promise<IAccount> {
+    return jwt.verify(token, environment.jwtAccessSecret);
+  }
+
   public async validateRefreshToken(token: string): Promise<IAccount> {
     return jwt.verify(token, environment.jwtRefreshSecret);
   }
