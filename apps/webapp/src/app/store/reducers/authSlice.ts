@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Roles } from '@core/enums';
-import { IAuthResponse } from '@core/interfaces';
 import { IAuthStore, IStore } from '@store/interfaces';
+import { Roles } from '@utils/enums';
+import { IAuthResponse } from '@utils/interfaces';
 
 import { AUTH_STORE_INITIAL_STATE } from '../constants';
 

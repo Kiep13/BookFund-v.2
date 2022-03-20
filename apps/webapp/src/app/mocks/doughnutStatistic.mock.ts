@@ -1,4 +1,4 @@
-import { IGenre } from '@core/interfaces';
+import { IGenre } from '@utils/interfaces';
 import { GENRES_MOCK } from '@mocks/genres.mock';
 
 export const DOUGHNUT_STATISTIC_MOCK = {

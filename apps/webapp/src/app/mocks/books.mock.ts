@@ -1,4 +1,4 @@
-import { IBook } from '@core/interfaces';
+import { IBook } from '@utils/interfaces';
 
 import { AUTHORS_MOCK } from './authors.mock';
 

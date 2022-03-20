@@ -14,13 +14,12 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "src",
     "paths": {
-      "@core/*": ["app/core/*"],
-      "@features/*": ["app/modules/features/*"],
+      "@components/*": ["app/components/*"],
       "@mocks/*": ["app/mocks/*"],
-      "@pages/*": ["app/modules/pages/*"],
-      "@shared/*": ["app/shared/*"],
+      "@pages/*": ["app/pages/*"],
       "@store/*": ["app/store/*"],
-      "@environments/*": ["environments/*"]
+      "@environments/*": ["environments/*"],
+      "@utils/*": ["app/utils/*"]
     }
   },
   "files": [],

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IAlert } from '@features/alertsBlock/interfaces';
+import { IAlert } from '@components/alertsBlock/interfaces';
 
 import { ALERT_STORE_INITIAL_STATE } from '../constants';
 import { IAlertStore, IStore } from '../interfaces';

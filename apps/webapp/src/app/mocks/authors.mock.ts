@@ -1,4 +1,4 @@
-import { IAuthor } from '@core/interfaces';
+import { IAuthor } from '@utils/interfaces';
 
 export const AUTHORS_MOCK: IAuthor[] = [
   {

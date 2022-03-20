@@ -1,4 +1,4 @@
-import { IAccount } from '@core/interfaces';
+import { IAccount } from '@utils/interfaces';
 
 export interface IAuthStore {
   value: {

@@ -50,6 +50,7 @@
     "tslib": "^2.0.0",
     "typeorm": "^0.2.41",
     "typeorm-seeding": "^1.6.1",
+    "uuid4": "^2.0.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {

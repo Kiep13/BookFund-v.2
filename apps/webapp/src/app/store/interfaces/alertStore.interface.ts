@@ -1,4 +1,4 @@
-import { IAlert } from '@features/alertsBlock/interfaces';
+import { IAlert } from '@components/alertsBlock/interfaces';
 
 export interface IAlertStore {
   value: IAlert[]

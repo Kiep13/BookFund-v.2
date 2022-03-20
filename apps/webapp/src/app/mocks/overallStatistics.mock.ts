@@ -1,4 +1,4 @@
-import { IOverallStatistic } from '@core/interfaces';
+import { IOverallStatistic } from '@utils/interfaces';
 
 export const OVERALL_STATISTIC_MOCK: IOverallStatistic[] = [
   {

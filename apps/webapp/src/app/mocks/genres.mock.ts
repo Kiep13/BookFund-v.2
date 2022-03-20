@@ -1,4 +1,4 @@
-import { IGenre } from '@core/interfaces';
+import { IGenre } from '@utils/interfaces';
 
 export const GENRES_MOCK: IGenre[] = [
   {

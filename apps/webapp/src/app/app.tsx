@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@core/enums';
+import { AlertsBlock } from '@components/alertsBlock';
 import { Authorizing, Login } from '@pages/auth';
-import { AlertsBlock } from '@features/alertsBlock';
 import { Admin } from '@pages/admin';
 import { Home } from '@pages/base/home';
 import { Articles } from '@pages/user/articles';
 import { Favorites } from '@pages/user/favorites';
-import store from '@store/store';
+import store from '@store/index';
+import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 
 const App = () => {
   const history = useHistory();
