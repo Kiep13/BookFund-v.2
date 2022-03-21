@@ -9,7 +9,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-import { VERTICAL_BAR_STATISTICS } from '@mocks/vericalBarStatistics';
+import { VERTICAL_BAR_STATISTICS } from '@mocks/vericalBarStatisticsMock';
 import { BAR_CHART_OPTIONS } from '@utils/constants';
 
 import { DashboardCardWrapper } from '../../shared';

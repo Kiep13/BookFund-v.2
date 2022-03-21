@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { GENRES_MOCK } from '@mocks/genres.mock';
+import { GENRES_MOCK } from '@mocks/genresMock';
 import { StatefulCard } from '@components/StatefulCard';
 import { Card } from '@components/Card';
 import { PageHeaderCard } from '@components/PageHeaderCard';

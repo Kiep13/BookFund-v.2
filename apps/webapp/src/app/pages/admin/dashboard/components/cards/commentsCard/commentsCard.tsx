@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-import { COMMENTS_LINE_CHART_DATA } from '@mocks/lineChartData.mock';
+import { COMMENTS_LINE_CHART_DATA } from '@mocks/lineChartDataMock';
 import { LINE_CHART_OPTIONS } from '@utils/constants';
 
 import { COMMENTS_CARD_TITLE } from '../../../constants';

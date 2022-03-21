@@ -1,5 +1,6 @@
 import { IGenre } from '@utils/interfaces';
-import { GENRES_MOCK } from '@mocks/genres.mock';
+
+import { GENRES_MOCK } from './genresMock';
 
 export const DOUGHNUT_STATISTIC_MOCK = {
   labels: GENRES_MOCK.slice(0, 5).map((genre: IGenre) => {

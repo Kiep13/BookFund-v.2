@@ -1,6 +1,6 @@
 import { IBook } from '@utils/interfaces';
 
-import { AUTHORS_MOCK } from './authors.mock';
+import { AUTHORS_MOCK } from './authorsMock';
 
 export const BOOKS_MOCK: IBook[] = [
   {

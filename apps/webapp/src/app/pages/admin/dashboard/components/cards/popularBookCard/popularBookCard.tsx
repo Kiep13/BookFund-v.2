@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 
 import { BookPromoCard } from '@components/BookPromoCard';
-import { BOOKS_MOCK } from '@mocks/books.mock';
+import { BOOKS_MOCK } from '@mocks/booksMock';
 import { IBook } from '@utils/interfaces';
 
 import { POPULAR_BOOK_CARD_TITLE } from '../../../constants';
