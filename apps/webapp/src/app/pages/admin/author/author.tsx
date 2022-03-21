@@ -8,16 +8,16 @@ import { Card } from '@components/Card';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { EntityPageHeader } from '@components/EntityPageHeader';
 import { HorizontalBookCard } from '@components/HorizontalBookCard';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { API_TOOLTIP_ERROR, DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
-import { PageSizes } from '@utils/enums';
+import { CardStates, PageSizes } from '@utils/enums';
 import { IAuthor, IBook, IFormPageParams, IListApiView, ISearchOptions } from '@utils/interfaces';
 import { useAlerts, useApi, useAuthorActions, useBookActions } from '@utils/hooks';
 
 import { IMAGE_PROPERTIES, PAGE_TITLE, STYLES, SUCCESSFULLY_DELETED } from './constants';
 
 export const Author = () => {
-  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [author, setAuthor] = useState<IAuthor>();
   const [count, setCount] = useState<number>(0);
   const [books, setBooks] = useState<IBook[]>([]);
@@ -57,7 +57,7 @@ export const Author = () => {
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       });
   }
 
@@ -82,11 +82,11 @@ export const Author = () => {
         ]);
 
         setLoadingBooks(false);
-        setPageState(State.CONTENT);
+        setPageState(CardStates.CONTENT);
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       });
   }
 

@@ -5,10 +5,11 @@ import { useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { ImageUpload } from '@components/ImageUpload';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { Card } from '@components/Card';
 import { Input } from '@components/formСomponents/Input';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
+import { CardStates } from '@utils/enums';
 import { IAuthor, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useAuthorActions } from '@utils/hooks';
 
@@ -28,7 +29,7 @@ export const AuthorForm = () => {
   const alerts = useAlerts();
   const authorActions = useAuthorActions();
 
-  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const callSubmitAction = (values: IAuthorForm) => {
@@ -71,7 +72,7 @@ export const AuthorForm = () => {
     const authorId = (params as IFormPageParams).id;
 
     if (!authorId) {
-      setPageState(State.CONTENT);
+      setPageState(CardStates.CONTENT);
       return;
     }
 
@@ -84,11 +85,11 @@ export const AuthorForm = () => {
           imageUrl: author.image
         });
 
-        setPageState(State.CONTENT)
+        setPageState(CardStates.CONTENT)
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       });
   }
 

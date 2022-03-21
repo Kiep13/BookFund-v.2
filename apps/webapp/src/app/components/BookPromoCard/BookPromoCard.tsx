@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardContent, CardMedia, Link, Typography } from '@mui/material';
 
-import { TextWithHint } from '@components/textWithHint';
+import { TextWithHint } from '@components/TextWithHint';
 
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';

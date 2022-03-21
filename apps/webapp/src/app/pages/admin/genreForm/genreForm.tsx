@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { Input } from '@components/formСomponents/Input';
 import { Card } from '@components/Card';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IFormPageParams, IGenre, IGenreFormPageState } from '@utils/interfaces';
-import { AdminRoutePaths } from '@utils/enums';
+import { AdminRoutePaths, CardStates } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 
 import { GenreAutocomplete } from './components/genreAutocomplete';
@@ -28,7 +28,7 @@ export const GenreForm = () => {
   const location = useLocation();
   const params = useParams();
 
-  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const api = useApi();
@@ -77,7 +77,7 @@ export const GenreForm = () => {
         formik.setFieldValue('parent', predefinedParent);
       }
 
-      setPageState(State.CONTENT);
+      setPageState(CardStates.CONTENT);
       return;
     }
 
@@ -88,11 +88,11 @@ export const GenreForm = () => {
           ...genre
         });
 
-        setPageState(State.CONTENT);
+        setPageState(CardStates.CONTENT);
       })
       .catch(() => {
         addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       });
   }
 

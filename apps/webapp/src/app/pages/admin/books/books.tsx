@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import { AdminRoutePaths } from '@utils/enums';
 import { Card } from '@components/Card';
-import { PageHeaderCard } from '@components/pageHeaderCard';
+import { PageHeaderCard } from '@components/PageHeaderCard';
 
 import { BooksTable } from './components/booksTable';
 import { STYLES } from './constants';

@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ImageUpload } from '@components/ImageUpload';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { Card } from '@components/Card';
 import { Input } from '@components/formСomponents/Input';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
+import { CardStates } from '@utils/enums';
 import { IBook, ICollection, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 
@@ -30,7 +31,7 @@ export const CollectionForm = () => {
   const alerts = useAlerts();
   const collectionActions = useCollectionActions();
 
-  const [pageState, setPageState] = useState<State>(State.CONTENT);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.CONTENT);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const callSubmitAction = (values: ICollectionForm) => {
@@ -73,7 +74,7 @@ export const CollectionForm = () => {
     const collectionId = (params as IFormPageParams).id;
 
     if(!collectionId) {
-      setPageState(State.CONTENT);
+      setPageState(CardStates.CONTENT);
       return;
     }
 
@@ -91,11 +92,11 @@ export const CollectionForm = () => {
           books: collection.books || []
         });
 
-        setPageState(State.CONTENT);
+        setPageState(CardStates.CONTENT);
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       })
   }
 

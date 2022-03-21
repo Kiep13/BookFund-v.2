@@ -4,17 +4,18 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { HorizontalBookCard } from '@components/HorizontalBookCard';
 import { EntityPageHeader } from '@components/EntityPageHeader';
 import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
+import { CardStates } from '@utils/enums';
 import { IBook, ICollection, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 
 import { IMAGE_PROPERTIES, SUCCESSFULLY_DELETED, STYLES, PAGE_TITLE } from './constants';
 
 export const Collection = () => {
-  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [collection, setCollection] = useState<ICollection>();
 
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
@@ -45,11 +46,11 @@ export const Collection = () => {
     api.getCollection(collectionId)
       .then((response: ICollection) => {
         setCollection(response);
-        setPageState(State.CONTENT);
+        setPageState(CardStates.CONTENT);
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       })
   }
 

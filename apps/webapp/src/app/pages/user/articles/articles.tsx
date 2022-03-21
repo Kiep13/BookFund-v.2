@@ -1,4 +1,4 @@
-import { wrapUserPage } from '@components/pageWrapper';
+import { wrapUserPage } from '@components/PageWrapper';
 import { compose } from '@utils/helpers';
 
 export const Page = () => {

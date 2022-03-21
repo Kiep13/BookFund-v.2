@@ -4,7 +4,8 @@ import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { CollectionCard } from '@components/ColllectionCard';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
+import { CardStates } from '@utils/enums';
 import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 
 import {
@@ -19,7 +20,7 @@ import { ICardAction, ICardItemAction, ICollection, IListApiView, ISearchOptions
 import { DELAY, NO_MATCHING_COLLECTIONS, STYLES, SUCCESSFULLY_DELETED } from '../../constants';
 
 export const CollectionsContent = () => {
-  const [state, setState] = useState<State>(State.LOADING);
+  const [state, setState] = useState<CardStates>(CardStates.LOADING);
   const [data, setData] = useState<ICollection[]>([]);
   const [count, setCount] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -38,7 +39,7 @@ export const CollectionsContent = () => {
 
   const getCollections = useCallback(
     debounce(async (search) => {
-      setState(State.LOADING);
+      setState(CardStates.LOADING);
 
       const searchOptions: ISearchOptions = {
         pageSize: rowsPerPage,
@@ -51,10 +52,10 @@ export const CollectionsContent = () => {
           setData(response.data);
           setCount(response.count);
 
-          setState(response.data.length > 0 ? State.CONTENT : State.NO_CONTENT);
+          setState(response.data.length > 0 ? CardStates.CONTENT : CardStates.NO_CONTENT);
         })
         .catch(() => {
-          setState(State.ERROR);
+          setState(CardStates.ERROR);
           alerts.addError(API_TOOLTIP_ERROR);
         })
 
@@ -82,7 +83,7 @@ export const CollectionsContent = () => {
         return;
       }
 
-      setState(State.LOADING);
+      setState(CardStates.LOADING);
       getCollections(searchTerm);
     });
 

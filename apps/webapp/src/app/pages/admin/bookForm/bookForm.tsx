@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ImageUpload } from '@components/ImageUpload';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { Input } from '@components/formСomponents/Input';
 import { Card } from '@components/Card';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
+import { CardStates } from '@utils/enums';
 import { IBook, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useBookActions } from '@utils/hooks';
 
@@ -31,7 +32,7 @@ export const BookForm = () => {
   const alerts = useAlerts();
   const bookActions = useBookActions();
 
-  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const callSubmitAction = (values: IBookForm) => {
@@ -74,7 +75,7 @@ export const BookForm = () => {
     const bookId = (params as IFormPageParams).id;
 
     if(!bookId) {
-      setPageState(State.CONTENT);
+      setPageState(CardStates.CONTENT);
       return;
     }
 
@@ -90,11 +91,11 @@ export const BookForm = () => {
           genres: book.genres || [],
         });
 
-        setPageState(State.CONTENT);
+        setPageState(CardStates.CONTENT);
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       })
   }
 

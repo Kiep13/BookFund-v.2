@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { wrapAdminPage } from '@components/pageWrapper';
+import { wrapAdminPage } from '@components/PageWrapper';
 import { getIsAdmin, getIsAuthorized } from '@store/reducers';
 import { useAuthHandlers } from '@utils/hooks';
 import { AdminRoutePaths } from '@utils/enums';

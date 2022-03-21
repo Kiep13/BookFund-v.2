@@ -6,16 +6,16 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { Card } from '@components/Card';
 import { EntityPageHeader } from '@components/EntityPageHeader';
-import { State, StatefulCard } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@utils/constants';
-import { AdminRoutePaths } from '@utils/enums';
+import { AdminRoutePaths, CardStates } from '@utils/enums';
 import { IBook, IFormPageParams, IGenre } from '@utils/interfaces';
 import { useAlerts, useApi, useBookActions } from '@utils/hooks';
 
 import { IMAGE_PROPERTIES, PAGE_TITLE, SUCCESSFULLY_DELETED, STYLES } from './constants';
 
 export const Book = () => {
-  const [pageState, setPageState] = useState<State>(State.LOADING);
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [book, setBook] = useState<IBook>();
 
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
@@ -46,11 +46,11 @@ export const Book = () => {
     api.getBook(bookId)
       .then((response: IBook) => {
         setBook(response);
-        setPageState(State.CONTENT);
+        setPageState(CardStates.CONTENT);
       })
       .catch(() => {
         alerts.addError(API_TOOLTIP_ERROR);
-        setPageState(State.ERROR);
+        setPageState(CardStates.ERROR);
       })
   }
 

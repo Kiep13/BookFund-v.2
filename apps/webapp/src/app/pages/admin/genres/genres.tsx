@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { GENRES_MOCK } from '@mocks/genres.mock';
-import { StatefulCard, State } from '@components/statefulCard';
+import { StatefulCard } from '@components/StatefulCard';
 import { Card } from '@components/Card';
-import { PageHeaderCard } from '@components/pageHeaderCard';
+import { PageHeaderCard } from '@components/PageHeaderCard';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { AdminRoutePaths } from '@utils/enums';
+import { AdminRoutePaths, CardStates } from '@utils/enums';
 import { IGenre } from '@utils/interfaces';
 import { useAlerts, useApi } from '@utils/hooks';
 
@@ -23,8 +23,8 @@ export const Genres = () => {
 
   const [selectedGenre, setSelectedGenre] = useState<IGenre>(GENRES_MOCK[0]);
   const [genres, setGenres] = useState<IGenre[]>([]);
-  const [treeState, setTreeState] = useState<State>(State.LOADING);
-  const [infoState, setInfoState] = useState<State>(State.LOADING);
+  const [treeState, setTreeState] = useState<CardStates>(CardStates.LOADING);
+  const [infoState, setInfoState] = useState<CardStates>(CardStates.LOADING);
 
   const loadGenres = async () => {
     await api.getGenresTree()
@@ -35,12 +35,12 @@ export const Genres = () => {
         if(response.length) {
           loadSelectedGenre(response[0].id);
 
-          setTreeState(State.CONTENT);
+          setTreeState(CardStates.CONTENT);
           return;
         }
 
-        setTreeState(State.NO_CONTENT);
-        setInfoState(State.NO_CONTENT);
+        setTreeState(CardStates.NO_CONTENT);
+        setInfoState(CardStates.NO_CONTENT);
       })
       .catch(handleError);
   }
@@ -49,19 +49,19 @@ export const Genres = () => {
     await api.getGenre(id)
       .then((response: IGenre) => {
         setSelectedGenre(response);
-        setInfoState(State.CONTENT);
+        setInfoState(CardStates.CONTENT);
       })
       .catch(handleError);
   }
 
   const handleError = () => {
     addError(API_TOOLTIP_ERROR);
-    setTreeState(State.ERROR);
-    setInfoState(State.ERROR);
+    setTreeState(CardStates.ERROR);
+    setInfoState(CardStates.ERROR);
   }
 
   const handleGenreSelection = (genre: IGenre) => {
-    setInfoState(State.LOADING);
+    setInfoState(CardStates.LOADING);
     loadSelectedGenre(genre.id);
   }
 
@@ -87,8 +87,8 @@ export const Genres = () => {
       .then(() => {
         addSuccess(SUCCESSFULLY_DELETED);
 
-        setTreeState(State.LOADING);
-        setInfoState(State.LOADING);
+        setTreeState(CardStates.LOADING);
+        setInfoState(CardStates.LOADING);
 
         loadGenres();
       })

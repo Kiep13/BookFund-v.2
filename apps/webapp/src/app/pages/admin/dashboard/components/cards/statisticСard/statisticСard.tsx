@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-import shortenNumber from '@components/shortenNumber';
+import { shortenNumber } from '@utils/helpers';
 import { IOverallStatistic } from '@utils/interfaces';
 
 import { STYLES } from './constants';
