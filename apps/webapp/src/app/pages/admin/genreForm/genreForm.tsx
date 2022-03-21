@@ -5,7 +5,7 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { State, StatefulCard } from '@components/statefulCard';
-import { Input } from '@components/formСomponents/input';
+import { Input } from '@components/formСomponents/Input';
 import { Card } from '@components/Card';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IFormPageParams, IGenre, IGenreFormPageState } from '@utils/interfaces';

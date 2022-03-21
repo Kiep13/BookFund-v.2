@@ -1,7 +1,7 @@
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
-import { AutocompleteMultiInput } from '@components/formСomponents/autocompleteMultiInput';
+import { AutocompleteMultiInput } from '@components/formСomponents/AutocompleteMultiInput';
 import { PageSizes } from '@utils/enums';
 import { IGenre, IOption, ISearchOptions } from '@utils/interfaces';
 import { useApi } from '@utils/hooks';

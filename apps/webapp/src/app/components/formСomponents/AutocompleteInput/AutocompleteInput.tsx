@@ -4,7 +4,7 @@ import { HTMLAttributes, SyntheticEvent, useEffect, useState } from 'react';
 
 import { IOption } from '@utils/interfaces';
 
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const AutocompleteInput = (props: IProps) => {
   const { fieldName, form } = props;

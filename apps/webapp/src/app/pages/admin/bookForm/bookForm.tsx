@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 import { ImageUpload } from '@components/imageUpload';
 import { State, StatefulCard } from '@components/statefulCard';
-import { Input } from '@components/formСomponents/input';
+import { Input } from '@components/formСomponents/Input';
 import { Card } from '@components/Card';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IBook, IFormPageParams } from '@utils/interfaces';

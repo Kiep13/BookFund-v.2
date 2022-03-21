@@ -1,7 +1,7 @@
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
-import { AutocompleteInput } from '@components/formСomponents/autocompleteInput';
+import { AutocompleteInput } from '@components/formСomponents/AutocompleteInput';
 import { PageSizes } from '@utils/enums';
 import { IBook, IOption, ISearchOptions } from '@utils/interfaces';
 import { useApi } from '@utils/hooks';

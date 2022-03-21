@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
 
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const Input = (props: IProps) => {
   const {id, name, label, type, fieldName, styles, multiline, maxRows } = props;

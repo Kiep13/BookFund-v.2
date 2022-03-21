@@ -7,7 +7,7 @@ import { FormikHelpers } from 'formik/dist/types';
 import { ImageUpload } from '@components/imageUpload';
 import { State, StatefulCard } from '@components/statefulCard';
 import { Card } from '@components/Card';
-import { Input } from '@components/formСomponents/input';
+import { Input } from '@components/formСomponents/Input';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { IAuthor, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useAuthorActions } from '@utils/hooks';

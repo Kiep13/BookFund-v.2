@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Typography, Rating } from '@mui/material';
 
 import { STYLES } from './constants';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
 export const HorizontalBookCard = ({ book }: IProps) => {
   return (
