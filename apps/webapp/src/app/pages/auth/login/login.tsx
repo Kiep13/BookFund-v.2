@@ -6,7 +6,7 @@ import {
   Typography
 } from '@mui/material';
 
-import { Logo } from '@components/logo';
+import { Logo } from '@components/Logo';
 
 import { Copyright, LoginButtons } from './components';
 import { STYLES_LOGIN_PAGE } from './constants';

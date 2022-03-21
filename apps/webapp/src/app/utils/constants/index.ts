@@ -5,6 +5,7 @@ export * from './barChartOptions';
 export * from './cardActions';
 export * from './confirmationPopupInfos';
 export * from './delay';
+export * from './imageUploadValidationElement';
 export * from './lineСhartOptions';
 export * from './validationСonstants';
 export * from './validationRegexp';

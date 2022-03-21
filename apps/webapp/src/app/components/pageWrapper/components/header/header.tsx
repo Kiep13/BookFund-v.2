@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { AuthRoutePaths } from '@utils/enums';
-import { Logo } from '@components/logo';
+import { Logo } from '@components/Logo';
 import { SearchInput } from '@components/searchInput';
 import { getIsAuthorized } from '@store/reducers';
 

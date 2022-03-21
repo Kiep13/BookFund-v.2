@@ -1,9 +1,8 @@
-import { ImageForm } from './components/imageForm';
-import { ImagePromo } from './components/imagePromo';
-import { IProps } from './props.interface';
+import { ImageForm } from './components/ImageForm';
+import { ImagePromo } from './components/ImagePromo';
+import { IProps } from './propsInterface';
 
-export const ImageUpload = (props: IProps) => {
-  const {alt, form, imageUrlFieldName, imageFileFieldName} = props;
+export const ImageUpload = ({form, imageUrlFieldName, imageFileFieldName}: IProps) => {
   const {values, errors} = form;
 
   const clearValue = () => {
@@ -16,7 +15,7 @@ export const ImageUpload = (props: IProps) => {
 
   return (
     isPromoAvailable ?
-      <ImagePromo alt={alt} image={values[imageUrlFieldName] || URL.createObjectURL(values[imageFileFieldName])}
+      <ImagePromo image={values[imageUrlFieldName] || URL.createObjectURL(values[imageFileFieldName])}
                   clearImage={clearValue}/>
       : <ImageForm form={form} imageUrlFieldName={imageUrlFieldName} imageFileFieldName={imageFileFieldName}/>
   );

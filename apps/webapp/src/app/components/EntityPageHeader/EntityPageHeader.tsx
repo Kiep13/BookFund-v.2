@@ -8,45 +8,42 @@ import { Card } from '@components/Card';
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handleDeleteClick}: IProps) => {
-  return (
-    <Card styles={STYLES.card}>
-      <Box sx={STYLES.content}>
+export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handleDeleteClick}: IProps) =>
+  <Card styles={STYLES.card}>
+    <Box sx={STYLES.content}>
 
-        <Box sx={STYLES.contentColumn}>
-          <IconButton
-            aria-label='Return'
-            sx={STYLES.iconButton}
-            onClick={() => handleBackClick()}>
-            <KeyboardBackspaceTwoToneIcon/>
-          </IconButton>
+      <Box sx={STYLES.contentColumn}>
+        <IconButton
+          aria-label='Return'
+          sx={STYLES.iconButton}
+          onClick={() => handleBackClick()}>
+          <KeyboardBackspaceTwoToneIcon/>
+        </IconButton>
 
-          <Typography
-            variant='h5'
-            gutterBottom
-            component='div'
-            sx={STYLES.title}>
-            { title }
-          </Typography>
-        </Box>
-
-        <Box>
-          <IconButton
-            aria-label='Edit'
-            sx={STYLES.iconButton}
-            onClick={() => handleEditClick()}>
-            <EditTwoToneIcon/>
-          </IconButton>
-
-          <IconButton
-            aria-label='Delete'
-            sx={STYLES.iconButton}
-            onClick={() => handleDeleteClick()}>
-            <DeleteTwoToneIcon/>
-          </IconButton>
-        </Box>
-
+        <Typography
+          variant='h5'
+          gutterBottom
+          component='div'
+          sx={STYLES.title}>
+          {title}
+        </Typography>
       </Box>
-    </Card>
-  )
-}
+
+      <Box>
+        <IconButton
+          aria-label='Edit'
+          sx={STYLES.iconButton}
+          onClick={() => handleEditClick()}>
+          <EditTwoToneIcon/>
+        </IconButton>
+
+        <IconButton
+          aria-label='Delete'
+          sx={STYLES.iconButton}
+          onClick={() => handleDeleteClick()}>
+          <DeleteTwoToneIcon/>
+        </IconButton>
+      </Box>
+
+    </Box>
+  </Card>

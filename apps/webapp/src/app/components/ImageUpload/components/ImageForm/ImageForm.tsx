@@ -3,11 +3,9 @@ import { Box, Button } from '@mui/material';
 import { Input } from '@components/formСomponents/Input';
 
 import { STYLES_IMAGE_FORM } from '../../constants';
-import { IProps } from './props.interface';
+import { IProps } from './propsInterface';
 
-export const ImageForm = (props: IProps) => {
-  const { form, imageUrlFieldName, imageFileFieldName } = props;
-
+export const ImageForm = ({ form, imageUrlFieldName, imageFileFieldName }: IProps) => {
   const handleFileUpload = (event: any) => {
     form.setFieldValue(imageFileFieldName, event.currentTarget.files[0]);
   }

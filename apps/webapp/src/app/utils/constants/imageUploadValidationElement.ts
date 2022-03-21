@@ -1,5 +1,4 @@
 import * as yup from 'yup';
 
-import { IMAGE_URL_REGEXP } from './imageUrlRegexp';
-
+export const IMAGE_URL_REGEXP = new RegExp(`(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|jpeg|png)`);
 export const IMAGE_UPLOAD_VALIDATION_ELEMENT = yup.string().matches(IMAGE_URL_REGEXP, 'Invalid url');

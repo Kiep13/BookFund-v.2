@@ -7,8 +7,7 @@ import { IDataColumn } from '@utils/interfaces';
 import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
-export const DataTableHead = (props: IProps) => {
-  const { columns, order, orderBy, onRequestSort } = props;
+export const DataTableHead = ({ columns, order, orderBy, onRequestSort }: IProps) => {
 
   const createSortHandler = (property: any) => (event: any) => {
     onRequestSort(event, property);

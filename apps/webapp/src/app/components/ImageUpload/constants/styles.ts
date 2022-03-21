@@ -25,7 +25,21 @@ export const STYLES_IMAGE_FORM = {
 
 export const STYLES_IMAGE_PROMO = {
   promoWrapper: {
-    display: 'block',
-    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
+  imageWrapper: {
+    maxHeight: '300px',
+    width: 'fit-content',
+    display: 'flex',
+    borderRadius: '8px',
+    mb: 2,
+  },
+  image: {
+    maxWidth: '100%',
+    maxHeight: '300px',
+    borderRadius: '4px',
+    position: 'relative'
+  }
 }

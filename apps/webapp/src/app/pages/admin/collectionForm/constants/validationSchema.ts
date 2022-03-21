@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 
-import { IMAGE_UPLOAD_VALIDATION_ELEMENT } from '@components/imageUpload/constants';
-import { MAX_NAME_LENGTH, MAX_TEXT_LENGTH } from '@utils/constants';
+import { IMAGE_UPLOAD_VALIDATION_ELEMENT, MAX_NAME_LENGTH, MAX_TEXT_LENGTH } from '@utils/constants';
 
 export const VALIDATION_SCHEMA = yup.object().shape({
   title: yup.string()

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
-import { ImageUpload } from '@components/imageUpload';
+import { ImageUpload } from '@components/ImageUpload';
 import { State, StatefulCard } from '@components/statefulCard';
 import { Card } from '@components/Card';
 import { Input } from '@components/formСomponents/Input';
@@ -126,7 +126,6 @@ export const AuthorForm = () => {
 
           <Box sx={STYLES.imageUploadWrapper}>
             <ImageUpload
-              alt={`Author's photo`}
               form={formik}
               imageUrlFieldName={'imageUrl'}
               imageFileFieldName={'imageFile'}/>

@@ -1,16 +1,13 @@
 import { Paper } from '@mui/material';
 
 import { STYLES } from './constants';
+import { IProps } from './propsInterface';
 
-export const Card = (props: any) => {
-  const styles = props.styles;
+export const Card = ({styles, children}: IProps) =>
+  <Paper elevation={3} sx={{
+    ...STYLES.wrapper,
+    ...(styles ? styles : {})
+  }}>
+    {children}
+  </Paper>
 
-  return (
-    <Paper elevation={3} sx={{
-      ...STYLES.wrapper,
-      ...(styles ? styles : {})
-    }}>
-      {props.children}
-    </Paper>
-  );
-}

@@ -7,7 +7,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { Card } from '@components/Card';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { EntityPageHeader } from '@components/EntityPageHeader';
-import { HorizontalBookCard } from '@components/horizontalBookCard';
+import { HorizontalBookCard } from '@components/HorizontalBookCard';
 import { State, StatefulCard } from '@components/statefulCard';
 import { API_TOOLTIP_ERROR, DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes } from '@utils/enums';

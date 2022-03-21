@@ -2,9 +2,8 @@ import { TextField } from '@mui/material';
 
 import { IProps } from './propsInterface';
 
-export const Input = (props: IProps) => {
-  const {id, name, label, type, fieldName, styles, multiline, maxRows } = props;
-  const {values, errors, touched, handleChange, handleBlur} = props.form;
+export const Input = ({id, name, label, type, fieldName, form, styles, multiline, maxRows }: IProps) => {
+  const {values, errors, touched, handleChange, handleBlur} = form;
 
   return <TextField
             id={id}

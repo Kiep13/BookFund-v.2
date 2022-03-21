@@ -5,7 +5,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { State, StatefulCard } from '@components/statefulCard';
-import { HorizontalBookCard } from '@components/horizontalBookCard';
+import { HorizontalBookCard } from '@components/HorizontalBookCard';
 import { EntityPageHeader } from '@components/EntityPageHeader';
 import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
 import { IBook, ICollection, IFormPageParams } from '@utils/interfaces';
