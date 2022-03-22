@@ -2,7 +2,9 @@ import queryString from 'query-string';
 
 import { FACEBOOK_AUTH_URL, FACEBOOK_SCOPE, GITHUB_AUTH_URL, GOOGLE_AUTH_URL, GOOGLE_SCOPE } from '@utils/constants';
 import { environment } from '@environments/environment';
-import { IGoogleAuthUrlParams, IFacebookAuthUrlParams, Providers, IGitHubAuthUrl } from '@pages/auth/login';
+
+import { IGoogleAuthUrlParams, IFacebookAuthUrlParams, IGitHubAuthUrl } from '../interfaces';
+import { Providers } from '../enums';
 
 const getUrlWithQueryParams = (baseUrl: string, params: IGoogleAuthUrlParams | IFacebookAuthUrlParams | IGitHubAuthUrl) => {
   const query = queryString.stringify(params);

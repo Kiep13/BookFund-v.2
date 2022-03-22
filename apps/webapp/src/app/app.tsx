@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 import { AlertsBlock } from '@components/AlertsBlock';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
-import { Home } from '@pages/base/home';
-import { Articles } from '@pages/user/articles';
-import { Favorites } from '@pages/user/favorites';
+import { Home } from '@pages/base/Home';
+import { Articles } from '@pages/user/Articles';
+import { Favorites } from '@pages/user/Favorites';
 import store from '@store/index';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 
