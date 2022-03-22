@@ -2,8 +2,8 @@ import { AxiosResponse } from 'axios';
 import queryString from 'query-string';
 
 import { environment } from '@environments/environment';
-import { IAuthorForm } from '@pages/admin/authorForm/interfaces';
-import { IBookForm } from '@pages/admin/bookForm/interfaces';
+import { IAuthorForm } from '@pages/admin/AuthorForm/interfaces';
+import { IBookForm } from '@pages/admin/BookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/collectionForm/interfaces';
 import { IGenreForm } from '@pages/admin/genreForm/interfaces';
 import { axios, API_TOOLTIP_ERROR } from '@utils/constants';

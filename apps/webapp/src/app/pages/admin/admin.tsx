@@ -7,12 +7,12 @@ import { useAuthHandlers } from '@utils/hooks';
 import { AdminRoutePaths } from '@utils/enums';
 import { compose } from '@utils/helpers';
 
-import { Author } from './author';
-import { Authors } from './authors';
-import { AuthorForm } from './authorForm';
-import { Book } from './book';
-import { Books } from './books';
-import { BookForm } from './bookForm';
+import { Author } from './Author';
+import { AuthorForm } from './AuthorForm';
+import { Authors } from './Authors';
+import { Book } from './Book';
+import { Books } from './Books';
+import { BookForm } from './BookForm';
 import { Collection } from './collection';
 import { Collections } from './collections';
 import { CollectionForm } from './collectionForm';
