@@ -1,4 +1,4 @@
-import { IAuthor } from './author.interface';
+import { IAuthor } from './authorInterface';
 import { IGenre } from './genre.interface';
 
 export interface IBook {

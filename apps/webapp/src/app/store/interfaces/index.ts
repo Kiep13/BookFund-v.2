@@ -1,3 +1,3 @@
-export * from './alertStore.interface';
-export * from './authStore.interface';
-export * from './store.interface';
+export * from './alertStoreInterface';
+export * from './authStoreInterface';
+export * from './storeInterface';

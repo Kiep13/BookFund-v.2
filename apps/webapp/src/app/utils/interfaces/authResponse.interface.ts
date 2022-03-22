@@ -1,4 +1,4 @@
-import { IAccount } from './account.interface';
+import { IAccount } from './accountInterface';
 
 export interface IAuthResponse {
   account: IAccount,

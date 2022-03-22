@@ -1,4 +1,4 @@
-import { IBook } from './book.interface';
+import { IBook } from './bookInterface';
 
 export interface IGenre {
   id: number,
