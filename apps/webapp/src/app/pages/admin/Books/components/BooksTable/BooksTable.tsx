@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { DataTable } from '@components/DataTable';
+import { DataTable } from '@components/tables/DataTable';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { API_TOOLTIP_ERROR, DELETE_BOOK_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes, SortDirections, TableActions } from '@utils/enums';

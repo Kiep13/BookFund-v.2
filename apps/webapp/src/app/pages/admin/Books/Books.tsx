@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 
 import { AdminRoutePaths } from '@utils/enums';
-import { Card } from '@components/Card';
-import { PageHeaderCard } from '@components/PageHeaderCard';
+import { Card } from '@components/cards/Card';
+import { PageHeaderCard } from '@components/headers/PageHeaderCard';
 
 import { BooksTable } from './components/BooksTable';
 import { STYLES } from './constants';

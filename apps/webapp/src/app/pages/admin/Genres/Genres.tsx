@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { GENRES_MOCK } from '@mocks/genresMock';
-import { StatefulCard } from '@components/StatefulCard';
-import { Card } from '@components/Card';
-import { PageHeaderCard } from '@components/PageHeaderCard';
+import { StatefulCard } from '@components/cards/StatefulCard';
+import { Card } from '@components/cards/Card';
+import { PageHeaderCard } from '@components/headers/PageHeaderCard';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { AdminRoutePaths, CardStates } from '@utils/enums';
 import { IGenre } from '@utils/interfaces';

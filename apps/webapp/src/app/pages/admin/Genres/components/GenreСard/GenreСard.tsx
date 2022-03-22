@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
-import { BookPromoCard } from '@components/BookPromoCard';
+import { BookPromoCard } from '@components/cards/BookPromoCard';
 import { IBook } from '@utils/interfaces';
 import { DELETE_GENRE_CONFIRMATION_POPUP } from '@utils/constants';
 import { useBookActions } from '@utils/hooks';

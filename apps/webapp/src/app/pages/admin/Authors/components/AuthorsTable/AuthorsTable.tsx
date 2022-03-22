@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
-import { DataTable } from '@components/DataTable';
+import { DataTable } from '@components/tables/DataTable';
 import { DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
 import { PageSizes, SortDirections, TableActions } from '@utils/enums';
 import { IAuthor, IDataColumn, ISearchOptions, ISortOptions, ITableItemAction } from '@utils/interfaces';

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { BookPromoCard } from '@components/BookPromoCard';
+import { BookPromoCard } from '@components/cards/BookPromoCard';
 import { BOOKS_MOCK } from '@mocks/booksMock';
 import { IBook } from '@utils/interfaces';
 

@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
-import { StatefulCard } from '@components/StatefulCard';
-import { HorizontalBookCard } from '@components/HorizontalBookCard';
-import { EntityPageHeader } from '@components/EntityPageHeader';
+import { StatefulCard } from '@components/cards/StatefulCard';
+import { HorizontalBookCard } from '@components/cards/HorizontalBookCard';
+import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IBook, ICollection, IFormPageParams } from '@utils/interfaces';

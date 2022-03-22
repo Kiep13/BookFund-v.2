@@ -3,8 +3,8 @@ import { debounce } from 'lodash';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
-import { CollectionCard } from '@components/ColllectionCard';
-import { StatefulCard } from '@components/StatefulCard';
+import { CollectionCard } from '@components/cards/ColllectionCard';
+import { StatefulCard } from '@components/cards/StatefulCard';
 import { CardStates } from '@utils/enums';
 import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 

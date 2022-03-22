@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 
-import { Card } from '@components/Card';
-import { PageHeaderCard } from '@components/PageHeaderCard';
+import { Card } from '@components/cards/Card';
+import { PageHeaderCard } from '@components/headers/PageHeaderCard';
 import { AdminRoutePaths } from '@utils/enums';
 
 import { AuthorsTable } from './components/AuthorsTable';

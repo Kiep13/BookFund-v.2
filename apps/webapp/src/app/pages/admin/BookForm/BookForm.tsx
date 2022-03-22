@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ImageUpload } from '@components/ImageUpload';
-import { StatefulCard } from '@components/StatefulCard';
+import { StatefulCard } from '@components/cards/StatefulCard';
 import { Input } from '@components/formСomponents/Input';
-import { Card } from '@components/Card';
+import { Card } from '@components/cards/Card';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IBook, IFormPageParams } from '@utils/interfaces';

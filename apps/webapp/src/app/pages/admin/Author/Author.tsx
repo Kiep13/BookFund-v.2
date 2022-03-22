@@ -4,11 +4,11 @@ import { Image } from 'mui-image';
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import { Card } from '@components/Card';
+import { Card } from '@components/cards/Card';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
-import { EntityPageHeader } from '@components/EntityPageHeader';
-import { HorizontalBookCard } from '@components/HorizontalBookCard';
-import { StatefulCard } from '@components/StatefulCard';
+import { EntityPageHeader } from '@components/headers/EntityPageHeader';
+import { HorizontalBookCard } from '@components/cards/HorizontalBookCard';
+import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
 import { CardStates, PageSizes } from '@utils/enums';
 import { IAuthor, IBook, IFormPageParams, IListApiView, ISearchOptions } from '@utils/interfaces';

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { Card } from '@components/Card';
+import { Card } from '@components/cards/Card';
 import { OVERALL_STATISTIC_MOCK } from '@mocks/overallStatisticsMock';
 import { IOverallStatistic } from '@utils/interfaces';
 

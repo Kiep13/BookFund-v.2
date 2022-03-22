@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { ImageUpload } from '@components/ImageUpload';
-import { StatefulCard } from '@components/StatefulCard';
-import { Card } from '@components/Card';
+import { StatefulCard } from '@components/cards/StatefulCard';
+import { Card } from '@components/cards/Card';
 import { Input } from '@components/formСomponents/Input';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { CardStates } from '@utils/enums';
