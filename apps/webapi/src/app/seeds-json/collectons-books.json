@@ -1,0 +1,302 @@
+[
+  {
+    "collectionId": 1,
+    "bookId": 1
+  },
+  {
+    "collectionId": 1,
+    "bookId": 2
+  },
+  {
+    "collectionId": 1,
+    "bookId": 3
+  },
+  {
+    "collectionId": 1,
+    "bookId": 4
+  },
+  {
+    "collectionId": 1,
+    "bookId": 5
+  },
+  {
+    "collectionId": 2,
+    "bookId": 6
+  },
+  {
+    "collectionId": 2,
+    "bookId": 7
+  },
+  {
+    "collectionId": 2,
+    "bookId": 8
+  },
+  {
+    "collectionId": 2,
+    "bookId": 9
+  },
+  {
+    "collectionId": 2,
+    "bookId": 10
+  },
+  {
+    "collectionId": 3,
+    "bookId": 11
+  },
+  {
+    "collectionId": 3,
+    "bookId": 12
+  },
+  {
+    "collectionId": 3,
+    "bookId": 13
+  },
+  {
+    "collectionId": 3,
+    "bookId": 14
+  },
+  {
+    "collectionId": 3,
+    "bookId": 15
+  },
+  {
+    "collectionId": 4,
+    "bookId": 16
+  },
+  {
+    "collectionId": 4,
+    "bookId": 17
+  },
+  {
+    "collectionId": 4,
+    "bookId": 18
+  },
+  {
+    "collectionId": 4,
+    "bookId": 19
+  },
+  {
+    "collectionId": 4,
+    "bookId": 20
+  },
+  {
+    "collectionId": 5,
+    "bookId": 21
+  },
+  {
+    "collectionId": 5,
+    "bookId": 22
+  },
+  {
+    "collectionId": 5,
+    "bookId": 23
+  },
+  {
+    "collectionId": 5,
+    "bookId": 24
+  },
+  {
+    "collectionId": 5,
+    "bookId": 25
+  },
+  {
+    "collectionId": 6,
+    "bookId": 26
+  },
+  {
+    "collectionId": 6,
+    "bookId": 27
+  },
+  {
+    "collectionId": 6,
+    "bookId": 28
+  },
+  {
+    "collectionId": 6,
+    "bookId": 29
+  },
+  {
+    "collectionId": 6,
+    "bookId": 30
+  },
+  {
+    "collectionId": 7,
+    "bookId": 31
+  },
+  {
+    "collectionId": 7,
+    "bookId": 32
+  },
+  {
+    "collectionId": 7,
+    "bookId": 33
+  },
+  {
+    "collectionId": 7,
+    "bookId": 34
+  },
+  {
+    "collectionId": 7,
+    "bookId": 35
+  },
+  {
+    "collectionId": 8,
+    "bookId": 36
+  },
+  {
+    "collectionId": 8,
+    "bookId": 37
+  },
+  {
+    "collectionId": 8,
+    "bookId": 38
+  },
+  {
+    "collectionId": 8,
+    "bookId": 39
+  },
+  {
+    "collectionId": 8,
+    "bookId": 40
+  },
+  {
+    "collectionId": 9,
+    "bookId": 41
+  },
+  {
+    "collectionId": 9,
+    "bookId": 42
+  },
+  {
+    "collectionId": 9,
+    "bookId": 43
+  },
+  {
+    "collectionId": 9,
+    "bookId": 44
+  },
+  {
+    "collectionId": 9,
+    "bookId": 45
+  },
+  {
+    "collectionId": 10,
+    "bookId": 46
+  },
+  {
+    "collectionId": 10,
+    "bookId": 47
+  },
+  {
+    "collectionId": 10,
+    "bookId": 48
+  },
+  {
+    "collectionId": 10,
+    "bookId": 49
+  },
+  {
+    "collectionId": 10,
+    "bookId": 50
+  },
+  {
+    "collectionId": 11,
+    "bookId": 2
+  },
+  {
+    "collectionId": 11,
+    "bookId": 4
+  },
+  {
+    "collectionId": 11,
+    "bookId": 8
+  },
+  {
+    "collectionId": 11,
+    "bookId": 16
+  },
+  {
+    "collectionId": 11,
+    "bookId": 32
+  },
+  {
+    "collectionId": 12,
+    "bookId": 3
+  },
+  {
+    "collectionId": 12,
+    "bookId": 6
+  },
+  {
+    "collectionId": 12,
+    "bookId": 9
+  },
+  {
+    "collectionId": 12,
+    "bookId": 12
+  },
+  {
+    "collectionId": 12,
+    "bookId": 15
+  },
+  {
+    "collectionId": 13,
+    "bookId": 4
+  },
+  {
+    "collectionId": 13,
+    "bookId": 8
+  },
+  {
+    "collectionId": 13,
+    "bookId": 12
+  },
+  {
+    "collectionId": 13,
+    "bookId": 16
+  },
+  {
+    "collectionId": 13,
+    "bookId": 20
+  },
+  {
+    "collectionId": 14,
+    "bookId": 5
+  },
+  {
+    "collectionId": 14,
+    "bookId": 10
+  },
+  {
+    "collectionId": 14,
+    "bookId": 15
+  },
+  {
+    "collectionId": 14,
+    "bookId": 20
+  },
+  {
+    "collectionId": 14,
+    "bookId": 25
+  },
+  {
+    "collectionId": 15,
+    "bookId": 6
+  },
+  {
+    "collectionId": 15,
+    "bookId": 12
+  },
+  {
+    "collectionId": 15,
+    "bookId": 18
+  },
+  {
+    "collectionId": 15,
+    "bookId": 24
+  },
+  {
+    "collectionId": 15,
+    "bookId": 30
+  }
+]

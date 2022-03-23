@@ -1,26 +1,26 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
 
-const mainGenres =  require('../seeds-json/main-genres.json');
-const subGenres =  require('../seeds-json/sub-genres.json');
+const collections =  require('../seeds-json/collections.json');
+const collectionsBooks = require('../seeds-json/collectons-books.json');
 
-export default class AddGenres implements Seeder {
+export default class AddCollections implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
       .insert()
-      .into('genre', ['name'])
+      .into('collection', ['title', 'subtitle', 'image', 'description'])
       .values([
-        ...mainGenres
+        ...collections
       ])
       .execute();
 
     await connection
       .createQueryBuilder()
       .insert()
-      .into('genre', ['name', 'parentId'])
+      .into('collection_book', ['collectionId', 'bookId'])
       .values([
-        ...subGenres
+        ...collectionsBooks
       ])
       .execute();
   }

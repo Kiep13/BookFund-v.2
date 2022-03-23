@@ -4,7 +4,7 @@ import { Connection } from 'typeorm';
 const books =  require('../seeds-json/books.json');
 const booksGenres = require('../seeds-json/book-genres.json');
 
-export default class AddAuthors implements Seeder {
+export default class AddABooks implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
