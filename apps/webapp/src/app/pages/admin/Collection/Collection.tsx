@@ -21,9 +21,8 @@ export const Collection = () => {
 
   const history = useHistory();
   const params = useParams();
-  const alerts = useAlerts();
-  const api = useApi();
-  const bookActions = useBookActions();
+  const { addSuccess, addError } = useAlerts();
+  const { getCollection } = useApi();
   const collectionActions = useCollectionActions();
 
   const navigateToEditPage = () => {
@@ -32,7 +31,7 @@ export const Collection = () => {
 
   const handleConfirmDeletion = () => {
     collection && collectionActions.deleteCollection(collection.id, () => {
-      alerts.addSuccess(SUCCESSFULLY_DELETED);
+      addSuccess(SUCCESSFULLY_DELETED);
       collectionActions.navigateToCollectionsPage();
     });
 
@@ -42,13 +41,13 @@ export const Collection = () => {
   const loadCollection = () => {
     const collectionId = (params as IFormPageParams).id;
 
-    api.getCollection(collectionId)
+    getCollection(collectionId)
       .then((response: ICollection) => {
         setCollection(response);
         setPageState(CardStates.CONTENT);
       })
       .catch(() => {
-        alerts.addError(API_TOOLTIP_ERROR);
+        addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       })
   }
