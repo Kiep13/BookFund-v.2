@@ -41,7 +41,7 @@ export const Author = () => {
   const handleConfirmDeletion = (): void => {
     author && authorsActions.deleteAuthor(author.id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
-      authorsActions.navigateToAuthorsPage();
+      authorsActions.navigateToAdminAuthorsPage();
     });
 
     setIsModalOpened(false);

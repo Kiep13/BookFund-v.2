@@ -92,7 +92,7 @@ export const CollectionsContent = () => {
   const handleCardAction = (cardAction: ICardItemAction) => {
     switch (cardAction.actionType) {
       case CardActions.VIEW: {
-        collectionActions.navigateToCollectionPage(cardAction.id);
+        collectionActions.navigateToAdminCollectionPage(cardAction.id);
       } break;
       case CardActions.EDIT: {
         collectionActions.navigateToEditForm(cardAction.id);

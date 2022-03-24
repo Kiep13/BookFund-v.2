@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { AdminRoutePaths } from '@utils/enums';
+import { AdminRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 
 export const useCollectionActions = () => {
@@ -9,11 +9,31 @@ export const useCollectionActions = () => {
   const alerts = useAlerts();
   const api = useApi();
 
-  const navigateToCollectionPage = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION}/${id}`);
+  const getCollectionPageUrlWithoutId = (): string => {
+    return `${BaseRoutePaths.COLLECTION}`;
   }
 
-  const navigateToCollectionsPage = () => {
+  const getCollectionPageUrl = (id: number): string => {
+    return `${BaseRoutePaths.COLLECTION}/${id}`;
+  }
+
+  const getAdminCollectionPageUrlWithoutId = (): string => {
+    return `${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION}`;
+  }
+
+  const getAdminCollectionPageUrl = (id: number): string => {
+    return `${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION}/${id}`;
+  }
+
+  const navigateToCollectionPage = (id: number): void => {
+    history.push(getCollectionPageUrl(id));
+  }
+
+  const navigateToAdminCollectionPage = (id: number): void => {
+    history.push(getAdminCollectionPageUrl(id));
+  }
+
+  const navigateToAdminCollectionsPage = () => {
     history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`);
   }
 
@@ -34,8 +54,13 @@ export const useCollectionActions = () => {
   }
 
   return {
+    getCollectionPageUrlWithoutId,
+    getCollectionPageUrl,
+    getAdminCollectionPageUrlWithoutId,
+    getAdminCollectionPageUrl,
     navigateToCollectionPage,
-    navigateToCollectionsPage,
+    navigateToAdminCollectionPage,
+    navigateToAdminCollectionsPage,
     navigateToAddForm,
     navigateToEditForm,
     deleteCollection

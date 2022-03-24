@@ -67,7 +67,7 @@ export const AuthorsTable = () => {
   const handleClick = (tableItemAction: ITableItemAction): void => {
     switch(tableItemAction.actionType) {
       case TableActions.VIEW: {
-        authorActions.navigateToAuthorPage(tableItemAction.id);
+        authorActions.navigateToAdminAuthorPage(tableItemAction.id);
       } break;
       case TableActions.EDIT: {
         authorActions.navigateToEditForm(tableItemAction.id);

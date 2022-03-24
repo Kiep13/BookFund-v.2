@@ -13,7 +13,7 @@ import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BaseRoutePaths, CardStates, SortDirections } from '@utils/enums';
 import { IBook, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 import { compose } from '@utils/helpers';
-import { useAlerts, useApi, useBookActions } from '@utils/hooks';
+import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 
 import { STYLES } from './constants';
 
@@ -26,8 +26,8 @@ const Page = () => {
   const [pageCollections, setPageCollections] = useState<number>(0);
   const [loadingCollections, setLoadingCollections] = useState<boolean>(true);
 
-  const history = useHistory();
   const {navigateToBookPage} = useBookActions();
+  const {navigateToCollectionPage} = useCollectionActions();
   const {getBooks, getCollections} = useApi();
   const {addError} = useAlerts();
 
@@ -78,10 +78,6 @@ const Page = () => {
         addError(API_TOOLTIP_ERROR);
         setState(CardStates.ERROR);
       })
-  }
-
-  const navigateToCollectionPage = (id: number) => {
-    history.push(`${BaseRoutePaths.COLLECTION}/${id}`);
   }
 
   useEffect(() => {

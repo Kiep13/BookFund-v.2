@@ -33,7 +33,7 @@ export const Collection = () => {
   const handleConfirmDeletion = () => {
     collection && collectionActions.deleteCollection(collection.id, () => {
       addSuccess(SUCCESSFULLY_DELETED);
-      collectionActions.navigateToCollectionsPage();
+      collectionActions.navigateToAdminCollectionsPage();
     });
 
     setIsModalOpened(false);

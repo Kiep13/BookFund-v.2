@@ -56,7 +56,7 @@ export const CollectionForm = () => {
       }
 
       await callSubmitAction(values);
-      collectionActions.navigateToCollectionsPage();
+      collectionActions.navigateToAdminCollectionsPage();
     } catch (e) {
       alerts.addError(API_TOOLTIP_ERROR);
     } finally {
@@ -158,7 +158,7 @@ export const CollectionForm = () => {
             <Button
               variant='outlined'
               sx={STYLES.cancelButton}
-              onClick={collectionActions.navigateToCollectionsPage}>
+              onClick={collectionActions.navigateToAdminCollectionsPage}>
               Cancel
             </Button>
 

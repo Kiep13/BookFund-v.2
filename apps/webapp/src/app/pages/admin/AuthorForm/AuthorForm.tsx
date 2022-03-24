@@ -54,7 +54,7 @@ export const AuthorForm = () => {
       }
 
       await callSubmitAction(values);
-      authorActions.navigateToAuthorsPage();
+      authorActions.navigateToAdminAuthorsPage();
     } catch(e) {
       alerts.addError(API_TOOLTIP_ERROR);
     } finally {
@@ -145,7 +145,7 @@ export const AuthorForm = () => {
             <Button
               variant='outlined'
               sx={STYLES.cancelButton}
-              onClick={authorActions.navigateToAuthorsPage}>
+              onClick={authorActions.navigateToAdminAuthorsPage}>
               Cancel
             </Button>
 

@@ -3,7 +3,8 @@ export enum BaseRoutePaths {
   FAVORITES = '/favorites',
   ARTICLES = '/articles',
   COLLECTION = '/collection',
-  BOOK = '/book'
+  BOOK = '/book',
+  AUTHOR = '/author'
 }
 
 export enum AuthRoutePaths{
