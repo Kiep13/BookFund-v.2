@@ -1,8 +1,7 @@
 export const STYLES = {
-  page: {
+  content: {
     maxWidth: 1100,
     m: 'auto',
-    minHeight: 'calc(100vh - 240px)',
     height: 'fit-content',
   }
 }
