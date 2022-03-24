@@ -1,7 +1,8 @@
 export enum BaseRoutePaths {
   HOME = '/',
   FAVORITES = '/favorites',
-  ARTICLES = '/articles'
+  ARTICLES = '/articles',
+  COLLECTION = '/collection'
 }
 
 export enum AuthRoutePaths{

@@ -1,6 +1,7 @@
-import { Box, Typography } from '@mui/material';
+import { Box, CardActionArea, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
 import { wrapUserPage } from '@components/PageWrapper';
@@ -9,7 +10,7 @@ import { CollectionCard } from '@components/cards/ColllectionCard';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { getIsAuthorized, getUser } from '@store/reducers';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { CardStates, SortDirections } from '@utils/enums';
+import { BaseRoutePaths, CardStates, SortDirections } from '@utils/enums';
 import { IBook, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 import { compose } from '@utils/helpers';
 import { useAlerts, useApi } from '@utils/hooks';
@@ -25,14 +26,15 @@ const Page = () => {
   const [pageCollections, setPageCollections] = useState<number>(0);
   const [loadingCollections, setLoadingCollections] = useState<boolean>(true);
 
-  const { getBooks, getCollections } = useApi();
-  const { addError } = useAlerts();
+  const history = useHistory();
+  const {getBooks, getCollections} = useApi();
+  const {addError} = useAlerts();
 
   const isAuthorized = useSelector(getIsAuthorized);
   const user = useSelector(getUser);
 
   const loadBooks = () => {
-    const searchOptions: ISearchOptions =  {
+    const searchOptions: ISearchOptions = {
       pageSize: 10,
       page: 0,
       order: SortDirections.Asc,
@@ -54,7 +56,7 @@ const Page = () => {
     setLoadingCollections(true);
     setPageCollections(page);
 
-    const searchOptions: ISearchOptions =  {
+    const searchOptions: ISearchOptions = {
       pageSize: 12,
       page: page,
       order: SortDirections.Asc,
@@ -75,6 +77,10 @@ const Page = () => {
         addError(API_TOOLTIP_ERROR);
         setState(CardStates.ERROR);
       })
+  }
+
+  const navigateToCollectionPage = (id: number) => {
+    history.push(`${BaseRoutePaths.COLLECTION}/${id}`);
   }
 
   useEffect(() => {
@@ -112,11 +118,11 @@ const Page = () => {
         <Box sx={STYLES.collectionsWrapper}>
           {
             collections.map((collection: ICollection) =>
-              <Box key={collection.id}>
+              <CardActionArea key={collection.id} onClick={() => navigateToCollectionPage(collection.id)}>
                 <CollectionCard
                   collection={collection}
                   isActionsAvailable={true}/>
-              </Box>
+              </CardActionArea>
             )
           }
         </Box>

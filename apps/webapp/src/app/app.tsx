@@ -7,6 +7,7 @@ import { AlertsBlock } from '@components/AlertsBlock';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Home } from '@pages/base/Home';
+import { Collection } from '@pages/base/Collection';
 import { Articles } from '@pages/user/Articles';
 import { Favorites } from '@pages/user/Favorites';
 import store from '@store/index';
@@ -26,6 +27,8 @@ const App = () => {
         <Route path={BaseRoutePaths.HOME} component={Home} exact/>
         <Route path={BaseRoutePaths.FAVORITES} component={Favorites}/>
         <Route path={BaseRoutePaths.ARTICLES} component={Articles}/>
+
+        <Route path={`${BaseRoutePaths.COLLECTION}/:id`} component={Collection}/>
 
         <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>
         <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
