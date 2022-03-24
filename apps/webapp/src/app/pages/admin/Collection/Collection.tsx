@@ -7,7 +7,7 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { CollectionContent } from '@components/entityContents/CollectionContent';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
-import { AdminRoutePaths, CardStates } from '@utils/enums';
+import { CardStates } from '@utils/enums';
 import { ICollection, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 
@@ -23,6 +23,7 @@ export const Collection = () => {
   const params = useParams();
   const { addSuccess, addError } = useAlerts();
   const { getCollection } = useApi();
+  const { getAdminBookPageUrlWithoutId } = useBookActions();
   const collectionActions = useCollectionActions();
 
   const navigateToEditPage = () => {
@@ -66,7 +67,7 @@ export const Collection = () => {
 
       <Box sx={STYLES.page}>
         <StatefulCard state={pageState}>
-          <CollectionContent collection={collection} bookLink={`${AdminRoutePaths.ADMIN}/${AdminRoutePaths.BOOK}`}/>
+          <CollectionContent collection={collection} bookLink={getAdminBookPageUrlWithoutId()}/>
         </StatefulCard>
       </Box>
 

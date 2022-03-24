@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { AdminRoutePaths } from '@utils/enums';
+import { AdminRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 
 export const useBookActions = () => {
@@ -9,7 +9,19 @@ export const useBookActions = () => {
   const alerts = useAlerts();
   const api = useApi();
 
+  const getBookPageUrlWithoutId = (): string => {
+    return `${BaseRoutePaths.BOOK}`;
+  }
+
   const getBookPageUrl = (id: number): string => {
+    return `${BaseRoutePaths.BOOK}/${id}`;
+  }
+
+  const getAdminBookPageUrlWithoutId = (): string => {
+    return `${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}`;
+  }
+
+  const getAdminBookPageUrl = (id: number): string => {
     return `${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/${id}`;
   }
 
@@ -17,7 +29,11 @@ export const useBookActions = () => {
     history.push(getBookPageUrl(id));
   }
 
-  const navigateToBooksPage = (): void => {
+  const navigateToAdminBookPage = (id: number): void => {
+    history.push(getAdminBookPageUrl(id));
+  }
+
+  const navigateToAdminBooksPage = (): void => {
     history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`);
   }
 
@@ -34,9 +50,12 @@ export const useBookActions = () => {
   }
 
   return {
-    getBookPageUrl,
+    getBookPageUrlWithoutId,
+    getAdminBookPageUrlWithoutId,
+    getAdminBookPageUrl,
     navigateToBookPage,
-    navigateToBooksPage,
+    navigateToAdminBookPage,
+    navigateToAdminBooksPage,
     navigateToEditForm,
     deleteBook
   }

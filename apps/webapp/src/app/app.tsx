@@ -7,6 +7,7 @@ import { AlertsBlock } from '@components/AlertsBlock';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Home } from '@pages/base/Home';
+import { Book } from '@pages/base/Book';
 import { Collection } from '@pages/base/Collection';
 import { Articles } from '@pages/user/Articles';
 import { Favorites } from '@pages/user/Favorites';
@@ -28,6 +29,7 @@ const App = () => {
         <Route path={BaseRoutePaths.FAVORITES} component={Favorites}/>
         <Route path={BaseRoutePaths.ARTICLES} component={Articles}/>
 
+        <Route path={`${BaseRoutePaths.BOOK}/:id`} component={Book}/>
         <Route path={`${BaseRoutePaths.COLLECTION}/:id`} component={Collection}/>
 
         <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>

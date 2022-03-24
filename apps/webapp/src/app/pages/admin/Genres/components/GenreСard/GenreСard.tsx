@@ -96,7 +96,7 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
               genre.books && genre.books.length > 0 ?
                 (genre.books.slice(0, 10) || []).map((book: IBook) => {
                   return (
-                    <Link to={bookActions.getBookPageUrl(book.id)}>
+                    <Link to={bookActions.getAdminBookPageUrl(book.id)}>
                       <Box
                         key={book.id}
                         sx={STYLES.linkedBook}>

@@ -34,7 +34,7 @@ export const Book = () => {
   const handleConfirmDeletion = (): void => {
     book && bookActions.deleteBook(book.id, () => {
       alerts.addSuccess(SUCCESSFULLY_DELETED);
-      bookActions.navigateToBooksPage();
+      bookActions.navigateToAdminBooksPage();
     });
 
     setIsModalOpened(false);

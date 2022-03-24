@@ -80,7 +80,7 @@ export const BooksTable = () => {
   const handleClick = (tableItemAction: ITableItemAction) => {
     switch(tableItemAction.actionType) {
       case TableActions.VIEW: {
-        bookActions.navigateToBookPage(tableItemAction.id);
+        bookActions.navigateToAdminBookPage(tableItemAction.id);
       } break;
       case TableActions.EDIT: {
         bookActions.navigateToEditForm(tableItemAction.id);

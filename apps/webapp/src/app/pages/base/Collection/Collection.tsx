@@ -6,8 +6,8 @@ import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { CollectionContent } from '@components/entityContents/CollectionContent';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { useAlerts, useApi } from '@utils/hooks';
-import { BaseRoutePaths, CardStates } from '@utils/enums';
+import { useAlerts, useApi, useBookActions } from '@utils/hooks';
+import { CardStates } from '@utils/enums';
 import { compose } from '@utils/helpers';
 import { ICollection, IFormPageParams } from '@utils/interfaces';
 
@@ -19,6 +19,7 @@ const Page = () => {
 
   const history = useHistory();
   const params = useParams();
+  const { getBookPageUrlWithoutId } = useBookActions();
   const { addError } = useAlerts();
   const { getCollection } = useApi();
 
@@ -47,7 +48,7 @@ const Page = () => {
         handleBackClick={() => history.goBack()}/>
 
       <StatefulCard state={pageState}>
-        <CollectionContent collection={collection} bookLink={`${BaseRoutePaths.BOOK}`}/>
+        <CollectionContent collection={collection} bookLink={getBookPageUrlWithoutId()}/>
       </StatefulCard>
     </>
   )

@@ -130,7 +130,7 @@ export const Author = () => {
 
                 {
                   books.map((book: IBook) => {
-                    return <Link to={bookActions.getBookPageUrl(book.id)}>
+                    return <Link to={bookActions.getAdminBookPageUrl(book.id)}>
                       <Box sx={STYLES.bookBox} key={book.id}>
                         <HorizontalBookCard book={book}/>
                       </Box>

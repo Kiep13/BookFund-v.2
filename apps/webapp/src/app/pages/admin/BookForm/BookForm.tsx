@@ -56,7 +56,7 @@ export const BookForm = () => {
       }
 
       await callSubmitAction(values);
-      bookActions.navigateToBooksPage();
+      bookActions.navigateToAdminBooksPage();
     } catch(e) {
       alerts.addError(API_TOOLTIP_ERROR);
     } finally {
@@ -165,7 +165,7 @@ export const BookForm = () => {
             <Button
               variant='outlined'
               sx={STYLES.cancelButton}
-              onClick={bookActions.navigateToBooksPage}>
+              onClick={bookActions.navigateToAdminBooksPage}>
               Cancel
             </Button>
 

@@ -13,7 +13,7 @@ import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BaseRoutePaths, CardStates, SortDirections } from '@utils/enums';
 import { IBook, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 import { compose } from '@utils/helpers';
-import { useAlerts, useApi } from '@utils/hooks';
+import { useAlerts, useApi, useBookActions } from '@utils/hooks';
 
 import { STYLES } from './constants';
 
@@ -27,6 +27,7 @@ const Page = () => {
   const [loadingCollections, setLoadingCollections] = useState<boolean>(true);
 
   const history = useHistory();
+  const {navigateToBookPage} = useBookActions();
   const {getBooks, getCollections} = useApi();
   const {addError} = useAlerts();
 
@@ -104,7 +105,7 @@ const Page = () => {
         <Box sx={STYLES.booksWrapper}>
           {
             books.map((book: IBook) =>
-              <Box key={book.id} sx={STYLES.book}>
+              <Box key={book.id} sx={STYLES.book} onClick={() => navigateToBookPage(book.id)}>
                 <BookPromoCard book={book}/>
               </Box>
             )
