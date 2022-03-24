@@ -11,9 +11,8 @@ export const STYLES = {
     mb: 1
   },
   cardsWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: '20px'
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gap: '10px',
   }
 }

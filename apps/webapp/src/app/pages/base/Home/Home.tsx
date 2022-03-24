@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -16,9 +17,14 @@ import { useAlerts, useApi } from '@utils/hooks';
 import { STYLES } from './constants';
 
 const Page = () => {
-  const [books, setBooks] = useState<IBook[]>([]);
-  const [collections, setCollections] = useState<ICollection[]>([]);
   const [state, setState] = useState<CardStates>(CardStates.LOADING);
+  const [books, setBooks] = useState<IBook[]>([]);
+
+  const [collections, setCollections] = useState<ICollection[]>([]);
+  const [countCollections, setCountCollections] = useState<number>(0);
+  const [pageCollections, setPageCollections] = useState<number>(0);
+  const [loadingCollections, setLoadingCollections] = useState<boolean>(true);
+
   const { getBooks, getCollections } = useApi();
   const { addError } = useAlerts();
 
@@ -44,17 +50,25 @@ const Page = () => {
       })
   };
 
-  const loadCollections = () => {
+  const loadCollections = (page: number = pageCollections) => {
+    setLoadingCollections(true);
+    setPageCollections(page);
+
     const searchOptions: ISearchOptions =  {
-      pageSize: 10,
-      page: 0,
+      pageSize: 12,
+      page: page,
       order: SortDirections.Asc,
       orderBy: 'createdAt'
     }
 
     getCollections(searchOptions)
       .then((response: IListApiView<ICollection>) => {
-        setCollections(response.data);
+        setCollections([
+          ...collections,
+          ...response.data
+        ]);
+        setCountCollections(response.count);
+        setLoadingCollections(false);
         setState(CardStates.CONTENT);
       })
       .catch(() => {
@@ -106,6 +120,21 @@ const Page = () => {
             )
           }
         </Box>
+
+        {
+          countCollections > collections.length && (
+            <Box sx={STYLES.loadMoreWrapper}>
+              <LoadingButton
+                loading={loadingCollections}
+                sx={STYLES.loadMoreButton}
+                variant='contained'
+                onClick={() => loadCollections(pageCollections + 1)}>
+                Load more
+              </LoadingButton>
+            </Box>
+          )
+        }
+
       </StatefulCard>
     </Box>
   )

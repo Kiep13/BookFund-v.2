@@ -7,11 +7,14 @@ import { IconButton } from '@mui/material';
 
 import { ICardAction, ICardItemAction } from '@utils/interfaces';
 
-import { STYLES } from './constants';
+import { HEIGHT_WITH_ACTIONS, HEIGHT_WITHOUT_ACTIONS, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
 export const CollectionCard = ({collection, isActionsAvailable, actions, onActionClick}: IProps) =>
-  <Card sx={STYLES.card}>
+  <Card sx={{
+    ...STYLES.card,
+    height: actions && actions.length > 0 ? HEIGHT_WITH_ACTIONS : HEIGHT_WITHOUT_ACTIONS
+  }}>
     <CardMedia
       component='img'
       height='140'

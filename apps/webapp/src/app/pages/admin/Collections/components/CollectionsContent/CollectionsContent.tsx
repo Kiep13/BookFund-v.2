@@ -5,16 +5,15 @@ import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { CollectionCard } from '@components/cards/ColllectionCard';
 import { StatefulCard } from '@components/cards/StatefulCard';
-import { CardStates } from '@utils/enums';
+import { CardActions, CardStates, DodecagonPageSizes } from '@utils/enums';
 import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
-
 import {
   API_TOOLTIP_ERROR,
   DELETE_CARD_ACTION, DELETE_COLLECTION_CONFIRMATION_POPUP,
   EDIT_CARD_ACTION,
   VIEW_CARD_ACTION
 } from '@utils/constants';
-import { CardActions, PageSizes } from '@utils/enums';
+
 import { ICardAction, ICardItemAction, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 
 import { DELAY, NO_MATCHING_COLLECTIONS, STYLES, SUCCESSFULLY_DELETED } from '../../constants';
@@ -25,7 +24,7 @@ export const CollectionsContent = () => {
   const [count, setCount] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState(PageSizes.Ten);
+  const [rowsPerPage, setRowsPerPage] = useState(DodecagonPageSizes.Twelve);
 
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number>();
@@ -34,7 +33,7 @@ export const CollectionsContent = () => {
   const alerts = useAlerts();
   const collectionActions = useCollectionActions();
 
-  const rowsPerPageOptions = Object.values(PageSizes).map(value => +value).filter((value) => value);
+  const rowsPerPageOptions = Object.values(DodecagonPageSizes).map(value => +value).filter((value) => value);
   const cardActions: ICardAction[] = [VIEW_CARD_ACTION, EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const getCollections = useCallback(
@@ -60,7 +59,7 @@ export const CollectionsContent = () => {
         })
 
     }, DELAY),
-    []
+    [rowsPerPage, page]
   )
 
   const handleRowsPerPageChanged = (event: any): void => {
@@ -112,7 +111,7 @@ export const CollectionsContent = () => {
 
   useEffect(() => {
     getCollections(searchTerm);
-  }, [searchTerm]);
+  }, [searchTerm, rowsPerPage, page]);
 
   return (
     <>
