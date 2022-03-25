@@ -2,13 +2,12 @@ import { Box, Chip, Typography } from '@mui/material';
 import { Image } from 'mui-image';
 import { Link } from 'react-router-dom';
 
-import { AdminRoutePaths } from '@utils/enums';
 import { IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const BookContent = ({ book }: IProps) =>
+export const BookContent = ({ book, authorLink }: IProps) =>
   <Box sx={STYLES.content}>
     <Image
       src={book?.image || ''}
@@ -28,7 +27,7 @@ export const BookContent = ({ book }: IProps) =>
         <Box>
           <Typography variant='body2' sx={STYLES.attributeLabel}>Author: </Typography>
           <Typography variant='body2' sx={STYLES.attributeValue}>
-            <Link to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR}/${book?.author?.id}`}
+            <Link to={`${authorLink}/${book?.author?.id}`}
                   style={STYLES.link}>
               { book?.author?.name } {book?.author?.surname}
             </Link>

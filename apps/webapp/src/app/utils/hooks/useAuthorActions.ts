@@ -30,7 +30,7 @@ export const useAuthorActions = () => {
   }
 
   const navigateToAdminAuthorPage = (id: number): void => {
-    history.push(getAuthorPageUrl(id));
+    history.push(getAdminAuthorPageUrl(id));
   }
 
   const navigateToAdminAuthorsPage = (): void => {

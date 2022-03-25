@@ -51,6 +51,7 @@ export const useBookActions = () => {
 
   return {
     getBookPageUrlWithoutId,
+    getBookPageUrl,
     getAdminBookPageUrlWithoutId,
     getAdminBookPageUrl,
     navigateToBookPage,
