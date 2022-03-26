@@ -1,7 +1,8 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { AuthorEntity } from '@entities/author.entity';
 import { CollectionEntity } from '@entities/collection.entity';
+import { CommentEntity } from '@entities/comment.entity';
 import { GenreEntity } from '@entities/genre.entity';
 
 @Entity({
@@ -72,6 +73,9 @@ export class BookEntity {
     cascade: true
   })
   collections: CollectionEntity[];
+
+  @OneToMany(() => CommentEntity, comment => comment.book)
+  comments: CommentEntity[];
 
   @Column({
     name: 'createdAt',

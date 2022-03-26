@@ -10,6 +10,7 @@ import authRoutes from '@routes/auth.routes';
 import authorRoutes from '@routes/author.routes';
 import bookRoutes from '@routes/book.routes';
 import collectionRoutes from '@routes/collection.routes';
+import commentRoutes from '@routes/comment.routes';
 import genreRoutes from '@routes/genre.routes';
 import imageRoutes from '@routes/image.routes';
 
@@ -31,6 +32,7 @@ apiServer.use(`/v1/${ApiRoutes.AUTHOR}`, authorRoutes);
 apiServer.use(`/v1/${ApiRoutes.BOOK}`, bookRoutes);
 apiServer.use(`/v1/${ApiRoutes.GENRE}`, genreRoutes);
 apiServer.use(`/v1/${ApiRoutes.COLLECTION}`, collectionRoutes);
+apiServer.use(`/v1/${ApiRoutes.COMMENT}`, commentRoutes);
 apiServer.use(`/v1/${ApiRoutes.IMAGE}`, imageRoutes);
 
 apiServer.use(errorMiddleware);

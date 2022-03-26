@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { CommentEntity } from '@entities/comment.entity';
 import { AuthProviders, Roles } from '@core/enums';
 
 @Entity({
@@ -54,6 +55,9 @@ export class AccountEntity {
     default: Roles.USER
   })
   role: Roles;
+
+  @OneToMany(() => CommentEntity, comment => comment.book)
+  comments: CommentEntity[];
 
   @Column({
     name: 'createdAt',

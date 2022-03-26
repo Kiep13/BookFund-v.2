@@ -82,6 +82,7 @@ class AuthController {
       }
 
       const tokens = tokenService.generateTokens({
+        id: account.id,
         email: account.email,
         name: account.name,
         surname: account.surname,

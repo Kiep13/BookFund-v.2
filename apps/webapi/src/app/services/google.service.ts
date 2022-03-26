@@ -21,6 +21,7 @@ class GoogleService {
     const account = candidate ? await this.synchronize(candidate.id, user) : await this.register(user);
 
     const tokens = tokenService.generateTokens({
+      id: account.id,
       email: account.email,
       name: account.name,
       surname: account.surname,
