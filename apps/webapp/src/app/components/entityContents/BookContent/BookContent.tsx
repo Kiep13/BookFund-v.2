@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import { CommentForm } from '@components/CommentForm';
+import { CommentsList } from '@components/CommentsList';
 import { IComment, IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STYLES } from './constants';
@@ -70,7 +71,14 @@ export const BookContent = ({ book, authorLink, isCommentFormShown }: IProps) =>
         }
 
         {
-          isCommentSaved && isCommentFormShown &&  book && <CommentForm book={book} handleSaving={handleCommentSave}/>
+          isCommentSaved && isCommentFormShown &&  book &&
+            <Box sx={STYLES.commentForm}>
+              <CommentForm book={book} handleSaving={handleCommentSave}/>
+            </Box>
+        }
+
+        {
+          isCommentFormShown && <CommentsList/>
         }
       </Box>
     </Box>

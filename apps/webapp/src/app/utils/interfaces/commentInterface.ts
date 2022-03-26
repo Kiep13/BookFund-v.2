@@ -4,6 +4,7 @@ import { IBook } from './bookInterface';
 export interface IComment {
   book: IBook,
   rate: number,
-  user?: IAccount,
+  id?: number,
+  account?: IAccount,
   text?: string
 }

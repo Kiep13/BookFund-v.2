@@ -29,5 +29,8 @@ export const STYLES = {
   chip: {
     m: 1,
     ml: 0
+  },
+  commentForm: {
+    mb: 3
   }
 }

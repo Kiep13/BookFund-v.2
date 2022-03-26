@@ -130,6 +130,13 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/book/delete/${id}`);
   }
 
+  const getComments = async (searchOptions: ISearchOptions): Promise<IListApiView<IComment>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IListApiView<IComment>>(`${environment.backEndUrl}/v1/comment/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   const addComment = async (comment: IComment): Promise<IComment> => {
     return await axios.post<IComment>(`${environment.backEndUrl}/v1/comment/new`, comment)
       .then((response: AxiosResponse<IComment>) => response.data);
@@ -180,6 +187,7 @@ export const useApi = () => {
     getBook,
     getBooks,
     deleteBook,
+    getComments,
     addComment,
     addCollection,
     updateCollection,

@@ -6,6 +6,7 @@ import { authMiddleware } from '@middlewares/index';
 
 const router = new Router();
 
+router.get(`/${ApiRoutesModifiers.LIST}`, commentController.getComments);
 router.post(`/${ApiRoutesModifiers.NEW}`, authMiddleware, commentController.createComment);
 
 export default router;
