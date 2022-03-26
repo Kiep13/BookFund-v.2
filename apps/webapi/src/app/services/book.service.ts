@@ -1,5 +1,7 @@
+import { connection } from '@core/connection';
 import { IBookForm } from '@core/interfaces';
 import { BookEntity } from '@entities/book.entity';
+import { CommentEntity } from '@entities/comment.entity';
 
 class BookService {
   public buildBookFromBody(requestBody: IBookForm): BookEntity {
@@ -14,6 +16,39 @@ class BookService {
     book.image = requestBody.imageUrl;
 
     return book;
+  }
+
+  public async updateBookAverageRate(bookId: number): Promise<void> {
+    const book = await connection.manager.findOne(BookEntity, bookId, {
+      relations: ['comments']
+    });
+
+    const sum = book.comments
+      .map((comment: CommentEntity) => comment.rate)
+      .reduce((rate: number, sum: number) => {
+        return rate + sum;
+      }, 0);
+
+    const averageRate = +Number(sum / book.comments.length).toFixed(2);
+
+    await connection.manager.update(BookEntity, bookId, {
+      avgRate: averageRate
+    });
+  }
+
+  public async isCommentedByUser(bookId: number, accountId: number): Promise<boolean> {
+    const comment = await connection.manager.findOne(CommentEntity, {
+      where: {
+        account: {
+          id: accountId
+        },
+        book: {
+          id: bookId
+        }
+      }
+    });
+
+    return Boolean(comment);
   }
 }
 

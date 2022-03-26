@@ -8,7 +8,16 @@ import { ICollectionForm } from '@pages/admin/CollectionForm/interfaces';
 import { IGenreForm } from '@pages/admin/GenreForm/interfaces';
 import { axios, API_TOOLTIP_ERROR } from '@utils/constants';
 import { useAlerts } from '@utils/hooks';
-import { IAuthor, IAuthResponse, IBook, ICollection, IGenre, IListApiView, ISearchOptions } from '@utils/interfaces';
+import {
+  IAuthor,
+  IAuthResponse,
+  IBook,
+  ICollection,
+  IComment,
+  IGenre,
+  IListApiView,
+  ISearchOptions
+} from '@utils/interfaces';
 
 export const useApi = () => {
   const { addError } = useAlerts();
@@ -121,6 +130,11 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/book/delete/${id}`);
   }
 
+  const addComment = async (comment: IComment): Promise<IComment> => {
+    return await axios.post<IComment>(`${environment.backEndUrl}/v1/comment/new`, comment)
+      .then((response: AxiosResponse<IComment>) => response.data);
+  }
+
   const addCollection = async (collection: ICollectionForm): Promise<AxiosResponse<void>> => {
     return await axios.post<void>(`${environment.backEndUrl}/v1/collection/new`, collection);
   }
@@ -166,6 +180,7 @@ export const useApi = () => {
     getBook,
     getBooks,
     deleteBook,
+    addComment,
     addCollection,
     updateCollection,
     getCollection,

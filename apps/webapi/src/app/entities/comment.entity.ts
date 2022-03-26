@@ -41,7 +41,8 @@ export class CommentEntity {
 
   @Column({
     name: 'text',
-    type: 'text'
+    type: 'text',
+    nullable: true
   })
   text: string;
 

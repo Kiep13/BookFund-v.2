@@ -8,6 +8,7 @@ import { environment } from '@environments/environment';
 import { BookEntity } from '@entities/book.entity';
 import { bookService } from '@services/book.service';
 import { imageService } from '@services/image.service';
+import { tokenService } from '@services/token.service';
 
 class BookController {
   public async createBook(request: Request, response: Response, next: Function): Response {
@@ -58,6 +59,13 @@ class BookController {
           id: bookId
         }
       });
+
+      const { refreshToken }  = request.cookies;
+
+      if(refreshToken) {
+        const account = await tokenService.validateRefreshToken(refreshToken);
+        book.isCommented = await bookService.isCommentedByUser(bookId, account.id);
+      }
 
       return response.status(ResponseStatuses.STATUS_OK).json(book);
     } catch (error) {

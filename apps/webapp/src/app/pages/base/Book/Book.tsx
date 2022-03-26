@@ -1,11 +1,13 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { BookContent } from '@components/entityContents/BookContent';
 import { wrapUserPage } from '@components/PageWrapper';
+import { getIsAuthorized } from '@store/reducers';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IBook, IFormPageParams } from '@utils/interfaces';
@@ -21,10 +23,11 @@ export const Page = () => {
   const history = useHistory();
   const params = useParams();
 
+  const isAuthorized = useSelector(getIsAuthorized);
+
   const { getBook } = useApi();
   const { addError } = useAlerts();
   const { getAuthorPageUrlWithoutId } = useAuthorActions();
-
 
   const loadBook = (): void => {
     const bookId = (params as IFormPageParams).id;
@@ -52,7 +55,7 @@ export const Page = () => {
 
       <Box sx={STYLES.content}>
         <StatefulCard state={pageState}>
-          <BookContent book={book} authorLink={getAuthorPageUrlWithoutId()}/>
+          <BookContent book={book} authorLink={getAuthorPageUrlWithoutId()} isCommentFormShown={isAuthorized}/>
         </StatefulCard>
       </Box>
     </>

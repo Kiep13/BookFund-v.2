@@ -78,6 +78,14 @@ export class BookEntity {
   comments: CommentEntity[];
 
   @Column({
+    select: false,
+    nullable: true,
+    insert: false,
+    update: false
+  })
+  public isCommented: boolean;
+
+  @Column({
     name: 'createdAt',
     type: 'timestamp',
     nullable: true,

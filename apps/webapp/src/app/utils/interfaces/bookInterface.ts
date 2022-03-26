@@ -13,6 +13,7 @@ export interface IBook {
   authorId?: number,
   createdAt?: Date,
   genres?: IGenre[],
+  isCommented?: boolean,
   authorFullName?: string,
   updatedAt?: Date
 }

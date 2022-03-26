@@ -1,7 +1,6 @@
 import { Box, CardActionArea, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
 import { wrapUserPage } from '@components/PageWrapper';
@@ -10,7 +9,7 @@ import { CollectionCard } from '@components/cards/ColllectionCard';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { getIsAuthorized, getUser } from '@store/reducers';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { BaseRoutePaths, CardStates, SortDirections } from '@utils/enums';
+import { CardStates, SortDirections } from '@utils/enums';
 import { IBook, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 import { compose } from '@utils/helpers';
 import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';

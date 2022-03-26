@@ -7,6 +7,7 @@ export * from './bookInterface';
 export * from './cardActionInterface';
 export * from './cardItemActionInterface';
 export * from './collectionInterface';
+export * from './commentInterface';
 export * from './confirmationPopupInterface';
 export * from './dataColumnInterface';
 export * from './formPageParamsInterface';

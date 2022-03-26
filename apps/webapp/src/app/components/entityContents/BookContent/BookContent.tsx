@@ -1,62 +1,81 @@
-import { Box, Chip, Typography } from '@mui/material';
+import { Box, Chip, Typography, Rating } from '@mui/material';
 import { Image } from 'mui-image';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-import { IGenre } from '@utils/interfaces';
+import { CommentForm } from '@components/CommentForm';
+import { IComment, IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const BookContent = ({ book, authorLink }: IProps) =>
-  <Box sx={STYLES.content}>
-    <Image
-      src={book?.image || ''}
-      width={IMAGE_PROPERTIES.width}
-      height={IMAGE_PROPERTIES.height}
-      fit={IMAGE_PROPERTIES.fit}
-      errorIcon={IMAGE_PROPERTIES.errorIcon}
-      bgColor={IMAGE_PROPERTIES.backgroundColor}
-      sx={STYLES.image}/>
+export const BookContent = ({ book, authorLink, isCommentFormShown }: IProps) => {
+  const [isCommentSaved, setIsCommentSaved] = useState<boolean>(!book?.isCommented && true);
 
-    <Box sx={STYLES.info}>
-      <Typography variant='h3' gutterBottom component='div'>
-        { book?.title || '' }
-      </Typography>
+  const handleCommentSave = (comment: IComment) => {
+    setIsCommentSaved(false);
+  }
 
-      <Box sx={STYLES.descriptionBlock}>
-        <Box>
-          <Typography variant='body2' sx={STYLES.attributeLabel}>Author: </Typography>
-          <Typography variant='body2' sx={STYLES.attributeValue}>
-            <Link to={`${authorLink}/${book?.author?.id}`}
-                  style={STYLES.link}>
-              { book?.author?.name } {book?.author?.surname}
-            </Link>
-          </Typography>
+  return (
+    <Box sx={STYLES.content}>
+      <Image
+        src={book?.image || ''}
+        width={IMAGE_PROPERTIES.width}
+        height={IMAGE_PROPERTIES.height}
+        fit={IMAGE_PROPERTIES.fit}
+        errorIcon={IMAGE_PROPERTIES.errorIcon}
+        bgColor={IMAGE_PROPERTIES.backgroundColor}
+        sx={STYLES.image}/>
+
+      <Box sx={STYLES.info}>
+        <Typography variant='h3' gutterBottom component='div'>
+          { book?.title || '' }
+        </Typography>
+
+        <Box sx={STYLES.descriptionBlock}>
+          { Boolean(book?.avgRate) && book?.avgRate && <Rating readOnly value={book.avgRate} precision={0.1}/>}
+          <Box>
+            <Typography variant='body2' sx={STYLES.attributeLabel}>Author: </Typography>
+            <Typography variant='body2' sx={STYLES.attributeValue}>
+              <Link to={`${authorLink}/${book?.author?.id}`}
+                    style={STYLES.link}>
+                { book?.author?.name } {book?.author?.surname}
+              </Link>
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant='body2' sx={STYLES.attributeLabel}>Year: </Typography>
+            <Typography variant='body2' sx={STYLES.attributeValue}>{ book?.year }</Typography>
+          </Box>
+          <Box>
+            <Typography variant='body2' sx={STYLES.attributeLabel}>Amount of pages: </Typography>
+            <Typography variant='body2' sx={STYLES.attributeValue}>{ book?.amountPages }</Typography>
+          </Box>
         </Box>
-        <Box>
-          <Typography variant='body2' sx={STYLES.attributeLabel}>Year: </Typography>
-          <Typography variant='body2' sx={STYLES.attributeValue}>{ book?.year }</Typography>
-        </Box>
-        <Box>
-          <Typography variant='body2' sx={STYLES.attributeLabel}>Amount of pages: </Typography>
-          <Typography variant='body2' sx={STYLES.attributeValue}>{ book?.amountPages }</Typography>
-        </Box>
+
+        {
+          book?.genres?.map((genre: IGenre) => {
+            return <Chip label={genre.name}
+                         key={genre.id}
+                         color='primary'
+                         variant='outlined'
+                         sx={STYLES.chip}/>
+          })
+        }
+
+        {
+          book?.description?.split('\n').map((text: string, index: number) => {
+            return <p key={`paragraph_${index}`}>{text}</p>
+          })
+        }
+
+        {
+          isCommentSaved && isCommentFormShown &&  book && <CommentForm book={book} handleSaving={handleCommentSave}/>
+        }
       </Box>
-
-      {
-        book?.genres?.map((genre: IGenre) => {
-          return <Chip label={genre.name}
-                       key={genre.id}
-                       color='primary'
-                       variant='outlined'
-                       sx={STYLES.chip}/>
-        })
-      }
-
-      {
-        book?.description?.split('\n').map((text: string, index: number) => {
-          return <p key={`paragraph_${index}`}>{text}</p>
-        })
-      }
     </Box>
-  </Box>
+  )
+}
+
+
+
