@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 
 import { CommentForm } from '@components/CommentForm';
 import { CommentsList } from '@components/CommentsList';
+import { FavoriteActions } from '@components/FavoriteActions';
 import { useCommentList } from '@utils/hooks';
-import { IComment, IGenre } from '@utils/interfaces';
+import { IComment, IFavorite, IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const BookContent = ({ book, authorLink, isCommentFormShown }: IProps) => {
+export const BookContent = ({ book, authorLink, isCommentFormShown, isStatusShown, handleBookChange }: IProps) => {
   const [isCommentSaved, setIsCommentSaved] = useState<boolean>(!book?.isCommented && true);
 
   const {
@@ -28,20 +29,41 @@ export const BookContent = ({ book, authorLink, isCommentFormShown }: IProps) =>
     addCreatedComment(comment);
   }
 
+  const handleAddToFavorite = (favorite: IFavorite) => {
+    handleBookChange && handleBookChange({
+      ...book,
+      favorite: favorite
+    });
+  }
+
+  const handleRemovedFromFavorite = () => {
+    delete book?.favorite;
+
+    handleBookChange && handleBookChange({
+      ...book
+    });
+  }
+
   useEffect(() => {
     loadComments();
   }, []);
 
   return (
     <Box sx={STYLES.content}>
-      <Image
-        src={book?.image || ''}
-        width={IMAGE_PROPERTIES.width}
-        height={IMAGE_PROPERTIES.height}
-        fit={IMAGE_PROPERTIES.fit}
-        errorIcon={IMAGE_PROPERTIES.errorIcon}
-        bgColor={IMAGE_PROPERTIES.backgroundColor}
-        sx={STYLES.image}/>
+      <Box>
+        <Image
+          src={book?.image || ''}
+          width={IMAGE_PROPERTIES.width}
+          height={IMAGE_PROPERTIES.height}
+          fit={IMAGE_PROPERTIES.fit}
+          errorIcon={IMAGE_PROPERTIES.errorIcon}
+          bgColor={IMAGE_PROPERTIES.backgroundColor}
+          sx={STYLES.image}/>
+
+        {isStatusShown && book && (
+          <FavoriteActions book={book} handleAddedToFavorite={handleAddToFavorite} handleRemovedFromFavorite={handleRemovedFromFavorite}/>
+        )}
+      </Box>
 
       <Box sx={STYLES.info}>
         <Typography variant='h3' gutterBottom component='div'>

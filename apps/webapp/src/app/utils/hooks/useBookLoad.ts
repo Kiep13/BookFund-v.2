@@ -29,9 +29,17 @@ export const useBookLoad = () => {
       })
   }
 
+  const handleBookChange = (updatedBook: IBook) => {
+    setBook({
+      ...book,
+      ...updatedBook
+    })
+  }
+
   return {
     pageState,
     book,
-    loadBook
+    loadBook,
+    handleBookChange
   }
 }

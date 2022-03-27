@@ -15,6 +15,7 @@ import {
   ICollection,
   IComment,
   IGenre,
+  IFavorite,
   IListApiView,
   ISearchOptions
 } from '@utils/interfaces';
@@ -142,6 +143,15 @@ export const useApi = () => {
       .then((response: AxiosResponse<IComment>) => response.data);
   }
 
+  const addFavorite = async (book: IBook): Promise<IFavorite> => {
+    return await axios.post<IFavorite>(`${environment.backEndUrl}/v1/favorite/new`, book)
+      .then((response: AxiosResponse<IFavorite>) => response.data);
+  }
+
+  const deleteFavorite = async (id: number): Promise<AxiosResponse<void>> => {
+    return axios.delete<void>(`${environment.backEndUrl}/v1/favorite/delete/${id}`);
+  }
+
   const addCollection = async (collection: ICollectionForm): Promise<AxiosResponse<void>> => {
     return await axios.post<void>(`${environment.backEndUrl}/v1/collection/new`, collection);
   }
@@ -189,6 +199,8 @@ export const useApi = () => {
     deleteBook,
     getComments,
     addComment,
+    addFavorite,
+    deleteFavorite,
     addCollection,
     updateCollection,
     getCollection,

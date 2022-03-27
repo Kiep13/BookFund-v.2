@@ -18,7 +18,8 @@ export const Page = () => {
   const {
     book,
     pageState,
-    loadBook
+    loadBook,
+    handleBookChange
   } = useBookLoad();
 
   const isAuthorized = useSelector(getIsAuthorized);
@@ -37,7 +38,11 @@ export const Page = () => {
 
       <Box sx={STYLES.content}>
         <StatefulCard state={pageState}>
-          <BookContent book={book} authorLink={getAuthorPageUrlWithoutId()} isCommentFormShown={isAuthorized}/>
+          <BookContent book={book}
+                       authorLink={getAuthorPageUrlWithoutId()}
+                       isCommentFormShown={isAuthorized}
+                       isStatusShown={isAuthorized}
+                       handleBookChange={handleBookChange}/>
         </StatefulCard>
       </Box>
     </>

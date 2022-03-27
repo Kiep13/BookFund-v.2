@@ -3,6 +3,7 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
 import { AuthorEntity } from '@entities/author.entity';
 import { CollectionEntity } from '@entities/collection.entity';
 import { CommentEntity } from '@entities/comment.entity';
+import { FavoriteEntity } from '@entities/favorite.entity';
 import { GenreEntity } from '@entities/genre.entity';
 
 @Entity({
@@ -74,6 +75,9 @@ export class BookEntity {
   })
   collections: CollectionEntity[];
 
+  @OneToMany(() => FavoriteEntity, favorite => favorite.book)
+  favorites: FavoriteEntity[];
+
   @OneToMany(() => CommentEntity, comment => comment.book)
   comments: CommentEntity[];
 
@@ -102,5 +106,7 @@ export class BookEntity {
     default: new Date()
   })
   updatedAt: Date;
+
+  public favorite: FavoriteEntity;
 }
 

@@ -37,16 +37,6 @@ export class createFavoritesTable1643448703214 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: 'rate',
-            type: 'int',
-            isNullable: true
-          },
-          {
-            name: 'comment',
-            type: 'text',
-            isNullable: true
-          },
-          {
             name: 'createdAt',
             type: 'timestamp',
             isNullable: true,

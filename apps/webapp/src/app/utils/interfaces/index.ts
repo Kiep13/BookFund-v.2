@@ -10,6 +10,7 @@ export * from './collectionInterface';
 export * from './commentInterface';
 export * from './confirmationPopupInterface';
 export * from './dataColumnInterface';
+export * from './favoriteInterface';
 export * from './formPageParamsInterface';
 export * from './formPageStateInterface';
 export * from './genre.interface';

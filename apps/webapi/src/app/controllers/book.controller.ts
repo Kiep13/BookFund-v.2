@@ -65,6 +65,7 @@ class BookController {
       if(refreshToken) {
         const account = await tokenService.validateRefreshToken(refreshToken);
         book.isCommented = await bookService.isCommentedByUser(bookId, account.id);
+        book.favorite = await bookService.getFavoriteStatus(bookId, account.id);
       }
 
       return response.status(ResponseStatuses.STATUS_OK).json(book);

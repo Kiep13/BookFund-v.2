@@ -1,13 +1,15 @@
 export const STYLES = {
   content: {
     display: 'flex',
-    gap: '20px'
+    gap: '20px',
+    alignItems: 'flex-start'
   },
   image: {
     flex: 1,
     borderRadius: '4px',
     overflow: 'hidden',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    mb: 2
   },
   info: {
     flex: 2

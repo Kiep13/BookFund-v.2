@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { CommentEntity } from '@entities/comment.entity';
+import { FavoriteEntity } from '@entities/favorite.entity';
 import { AuthProviders, Roles } from '@core/enums';
 
 @Entity({
@@ -55,6 +56,9 @@ export class AccountEntity {
     default: Roles.USER
   })
   role: Roles;
+
+  @OneToMany(() => FavoriteEntity, favorite => favorite.account)
+  favorites: FavoriteEntity[];
 
   @OneToMany(() => CommentEntity, comment => comment.book)
   comments: CommentEntity[];

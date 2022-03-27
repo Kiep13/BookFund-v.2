@@ -4,6 +4,7 @@ export enum ApiRoutes {
   IMAGE = 'image',
   BOOK = 'book',
   GENRE = 'genre',
+  FAVROTIE = 'favorite',
   COLLECTION = 'collection',
   COMMENT = 'comment'
 }

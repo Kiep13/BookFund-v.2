@@ -1,5 +1,6 @@
 export * from './alertTypes';
 export * from './alignTypes';
+export * from './bookStatuses';
 export * from './cardActions';
 export * from './cardStates';
 export * from './cellTypes';

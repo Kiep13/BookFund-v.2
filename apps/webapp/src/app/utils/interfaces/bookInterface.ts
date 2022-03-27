@@ -1,4 +1,5 @@
 import { IAuthor } from './authorInterface';
+import { IFavorite } from './favoriteInterface';
 import { IGenre } from './genre.interface';
 
 export interface IBook {
@@ -15,5 +16,6 @@ export interface IBook {
   genres?: IGenre[],
   isCommented?: boolean,
   authorFullName?: string,
-  updatedAt?: Date
+  updatedAt?: Date,
+  favorite?: IFavorite
 }
