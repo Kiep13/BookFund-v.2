@@ -30,6 +30,8 @@ class CommentController {
     try {
       const requestParams = request.query;
 
+      requestParams.orderBy = requestParams.orderBy ? `comment.${requestParams.orderBy}` : requestParams.orderBy;
+
       const [comments, count] = await connection.createQueryBuilder(CommentEntity, 'comment')
         .select([
           'comment.id',
@@ -43,15 +45,15 @@ class CommentController {
           ...(
             requestParams.orderBy ?
               {
-                [requestParams.orderBy]: requestParams.order || SortDirections.DESC
+                [requestParams.orderBy]: requestParams.order || SortDirections.ASC
               } :
               {
-                'comment.createdAt': requestParams.order || SortDirections.DESC
+                'comment.id': requestParams.order || SortDirections.DESC
               }
           )
         })
         .take(+requestParams.pageSize)
-        .skip(+requestParams.pageSize * (+requestParams.page || 0))
+        .skip((+requestParams.pageSize * (+requestParams.page || 0)) + (+requestParams.skip || 0))
         .where({
           book: {
             id: +requestParams.keyId

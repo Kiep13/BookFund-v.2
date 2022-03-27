@@ -17,13 +17,13 @@ export const useCommentList = () => {
   const { getComments } = useApi();
   const { addError } = useAlerts();
 
-  const loadComments = () => {
+  const loadComments = (newPage: number = page) => {
     setLoadingComments(true);
     const bookId = (params as IFormPageParams).id;
 
     const searchOptions: ISearchOptions = {
       pageSize: PageSizes.Ten,
-      page: page,
+      page: newPage,
       keyId: bookId,
       skip: skip
     };
@@ -45,7 +45,7 @@ export const useCommentList = () => {
 
   const loadNextPage = () => {
     setPage(page + 1);
-    loadComments();
+    loadComments(page + 1);
   }
 
   const addCreatedComment = (comment: IComment) => {
