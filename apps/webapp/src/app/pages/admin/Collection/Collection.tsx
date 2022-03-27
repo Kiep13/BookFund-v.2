@@ -1,28 +1,23 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { CollectionContent } from '@components/entityContents/CollectionContent';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
-import { API_TOOLTIP_ERROR, DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
-import { CardStates } from '@utils/enums';
-import { ICollection, IFormPageParams } from '@utils/interfaces';
-import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';
+import { DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
+import { useAlerts, useBookActions, useCollectionActions, useCollectionLoad } from '@utils/hooks';
 
 import { SUCCESSFULLY_DELETED, STYLES, PAGE_TITLE } from './constants';
 
 export const Collection = () => {
-  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
-  const [collection, setCollection] = useState<ICollection>();
-
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
   const history = useHistory();
-  const params = useParams();
-  const { addSuccess, addError } = useAlerts();
-  const { getCollection } = useApi();
+
+  const { collection, pageState, loadCollection } = useCollectionLoad();
+  const { addSuccess } = useAlerts();
   const { getAdminBookPageUrlWithoutId } = useBookActions();
   const collectionActions = useCollectionActions();
 
@@ -37,20 +32,6 @@ export const Collection = () => {
     });
 
     setIsModalOpened(false);
-  }
-
-  const loadCollection = () => {
-    const collectionId = (params as IFormPageParams).id;
-
-    getCollection(collectionId)
-      .then((response: ICollection) => {
-        setCollection(response);
-        setPageState(CardStates.CONTENT);
-      })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-        setPageState(CardStates.ERROR);
-      })
   }
 
   useEffect(() => {
