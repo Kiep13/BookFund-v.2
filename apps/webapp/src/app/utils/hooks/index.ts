@@ -4,3 +4,4 @@ export * from './useAuthHandlers';
 export * from './useAuthorActions';
 export * from './useBookActions';
 export * from './useCollectionActions';
+export * from './useCommentList';

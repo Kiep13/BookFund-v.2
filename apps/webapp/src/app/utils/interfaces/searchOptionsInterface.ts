@@ -5,4 +5,5 @@ export interface ISearchOptions {
   page?: number,
   order?: string,
   orderBy?: string,
+  skip?: number
 }

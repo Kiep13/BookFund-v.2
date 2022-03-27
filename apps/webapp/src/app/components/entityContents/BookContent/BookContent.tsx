@@ -1,10 +1,11 @@
 import { Box, Chip, Typography, Rating } from '@mui/material';
 import { Image } from 'mui-image';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CommentForm } from '@components/CommentForm';
 import { CommentsList } from '@components/CommentsList';
+import { useCommentList } from '@utils/hooks';
 import { IComment, IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STYLES } from './constants';
@@ -13,9 +14,23 @@ import { IProps } from './propsInterface';
 export const BookContent = ({ book, authorLink, isCommentFormShown }: IProps) => {
   const [isCommentSaved, setIsCommentSaved] = useState<boolean>(!book?.isCommented && true);
 
+  const {
+    comments,
+    count,
+    loadingComments,
+    addCreatedComment,
+    loadComments,
+    loadNextPage
+  } = useCommentList();
+
   const handleCommentSave = (comment: IComment) => {
     setIsCommentSaved(false);
+    addCreatedComment(comment);
   }
+
+  useEffect(() => {
+    loadComments();
+  }, []);
 
   return (
     <Box sx={STYLES.content}>
@@ -78,7 +93,10 @@ export const BookContent = ({ book, authorLink, isCommentFormShown }: IProps) =>
         }
 
         {
-          isCommentFormShown && <CommentsList/>
+          isCommentFormShown && <CommentsList comments={comments}
+                                              count={count}
+                                              loadingComments={loadingComments}
+                                              loadNextPage={loadNextPage}/>
         }
       </Box>
     </Box>
