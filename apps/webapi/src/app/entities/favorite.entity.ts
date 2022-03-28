@@ -50,13 +50,6 @@ export class FavoriteEntity {
   status: BookStatuses;
 
   @Column({
-    name: 'text',
-    type: 'text',
-    nullable: true
-  })
-  text: string;
-
-  @Column({
     name: 'createdAt',
     type: 'timestamp',
     nullable: true,

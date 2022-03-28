@@ -143,6 +143,13 @@ export const useApi = () => {
       .then((response: AxiosResponse<IComment>) => response.data);
   }
 
+  const getFavorites = async (searchOptions: ISearchOptions): Promise<IListApiView<IFavorite>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IListApiView<IFavorite>>(`${environment.backEndUrl}/v1/favorite/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   const addFavorite = async (book: IBook): Promise<IFavorite> => {
     return await axios.post<IFavorite>(`${environment.backEndUrl}/v1/favorite/new`, book)
       .then((response: AxiosResponse<IFavorite>) => response.data);
@@ -199,6 +206,7 @@ export const useApi = () => {
     deleteBook,
     getComments,
     addComment,
+    getFavorites,
     addFavorite,
     deleteFavorite,
     addCollection,

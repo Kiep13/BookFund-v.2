@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 
 import { FavoriteEntity } from '@entities/favorite.entity';
 import { connection } from '@core/connection';
-import { BookStatuses, ResponseStatuses } from '@core/enums';
+import { BookStatuses, ResponseStatuses, SortDirections } from '@core/enums';
+import { IListApiView } from '@core/interfaces';
 
 class FavoritesController {
   public async createFavorite(request: Request, response: Response, next: Function): Response {
@@ -18,6 +19,50 @@ class FavoritesController {
       delete favorite.book;
 
       return response.status(ResponseStatuses.STATUS_CREATED).json(favorite);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async getFavorites(request: Request, response: Response, next: Function): Response {
+    try {
+      const account = request.account;
+      const requestParams = request.query;
+
+      const [favorites, count] = await connection.createQueryBuilder(FavoriteEntity, 'favorite')
+        .select([
+          'favorite.id',
+          'favorite.status',
+        ])
+        .leftJoinAndSelect('favorite.book', 'book')
+        .leftJoinAndSelect('book.author', 'author')
+        .orderBy({
+          ...(
+            requestParams.orderBy ?
+              {
+                [requestParams.orderBy]: requestParams.order || SortDirections.ASC
+              } :
+              {
+                'favorite.id': requestParams.order || SortDirections.DESC
+              }
+          )
+        })
+        .take(+requestParams.pageSize)
+        .skip(+requestParams.pageSize * (+requestParams.page || 0))
+        .where({
+          ...(requestParams.searchTerm ? {status: requestParams.searchTerm} : {}),
+          account: {
+            id: account.id
+          }
+        })
+        .getManyAndCount();
+
+      const result: IListApiView<FavoriteEntity> = {
+        data: favorites,
+        count: count
+      }
+
+      return response.status(ResponseStatuses.STATUS_OK).json(result);
     } catch (error) {
       next(error)
     }

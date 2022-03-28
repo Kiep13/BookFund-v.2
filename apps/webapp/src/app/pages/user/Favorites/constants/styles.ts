@@ -7,25 +7,22 @@ export const STYLES = {
   greeting: {
     fontWeight: 100
   },
-  booksHeading: {
-    fontWeight: 100
+  statusSelector: {
+    width: '100%',
+    maxWidth: 350,
+    mb: 2
   },
-  booksWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    overflowX: 'auto',
-    gap: '20px',
-    mb: 4
+  favoriteBooks: {
+    width: 'fit-content',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+    gap: '10px',
+    m: 'auto'
   },
   book: {
     display: 'inline-flex',
     width: 'fit-content',
     mb: 2
-  },
-  collectionsWrapper: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gap: '10px',
   },
   loadMoreWrapper: {
     display: 'flex',
