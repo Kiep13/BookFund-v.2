@@ -4,7 +4,8 @@ export enum BaseRoutePaths {
   ARTICLES = '/articles',
   COLLECTION = '/collection',
   BOOK = '/book',
-  AUTHOR = '/author'
+  AUTHOR = '/author',
+  SEARCH = '/search'
 }
 
 export enum AuthRoutePaths{
