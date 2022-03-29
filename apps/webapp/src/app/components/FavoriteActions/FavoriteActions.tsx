@@ -1,17 +1,21 @@
 import FavoriteBorderTwoToneIcon from '@mui/icons-material/FavoriteBorderTwoTone';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import Button from '@mui/material/Button';
+import { useState } from 'react';
 
-import { API_OPERATION_ERROR } from '@utils/constants';
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
+import { API_OPERATION_ERROR, REMOVE_FROM_FAVORITES_CONFIRMATION_POPUP } from '@utils/constants';
 import { useAlerts, useApi } from '@utils/hooks';
 import { IFavorite } from '@utils/interfaces';
 
 import { STYLES, SUCCESSFULLY_ADDED_TO_FAVORITE, SUCCESSFULLY_REMOVED_FROM_FAVORITE } from './constants';
 import { IProps } from './propsInterface';
 
-export const FavoriteActions = ({ book, handleAddedToFavorite, handleRemovedFromFavorite }: IProps) => {
-  const { addFavorite, deleteFavorite } = useApi();
-  const { addError, addSuccess } = useAlerts();
+export const FavoriteActions = ({book, handleAddedToFavorite, handleRemovedFromFavorite}: IProps) => {
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+
+  const {addFavorite, deleteFavorite} = useApi();
+  const {addError, addSuccess} = useAlerts();
 
   const handleAddToFavorite = () => {
     addFavorite(book)
@@ -32,12 +36,14 @@ export const FavoriteActions = ({ book, handleAddedToFavorite, handleRemovedFrom
       })
       .catch(() => {
         addError(API_OPERATION_ERROR);
-      })
+      });
+
+    setIsModalOpened(false);
   }
 
   const buttonAddToFavorite = (
     <Button variant='outlined'
-            startIcon={<FavoriteBorderTwoToneIcon />}
+            startIcon={<FavoriteBorderTwoToneIcon/>}
             sx={STYLES.button}
             onClick={() => handleAddToFavorite()}>
       Add to favorite
@@ -46,14 +52,26 @@ export const FavoriteActions = ({ book, handleAddedToFavorite, handleRemovedFrom
 
   const buttonInFavorite = (
     <Button variant='outlined'
-            startIcon={<FavoriteTwoToneIcon />}
+            startIcon={<FavoriteTwoToneIcon/>}
             sx={STYLES.button}
-            onClick={() => handleRemoveFromFavorite()}>
+            onClick={() => setIsModalOpened(true)}>
       In favorite
     </Button>
   )
 
-  return book?.favorite ? buttonInFavorite : buttonAddToFavorite;
+  return (
+    <>
+      {
+        book?.favorite ? buttonInFavorite : buttonAddToFavorite
+      }
+      <ConfirmationPopup
+        info={REMOVE_FROM_FAVORITES_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={() => handleRemoveFromFavorite()}
+        handleClose={() => setIsModalOpened(false)}
+      />
+    </>
+  )
 }
 
 

@@ -23,3 +23,9 @@ export const DELETE_COLLECTION_CONFIRMATION_POPUP: IConfirmationPopup = {
   text: 'Are you sure that you want delete this collection?',
   confirmationButtonLabel: 'Delete'
 }
+
+export const REMOVE_FROM_FAVORITES_CONFIRMATION_POPUP: IConfirmationPopup = {
+  title: 'Remove from favorites',
+  text: 'Are you sure that you want remove from favorites?',
+  confirmationButtonLabel: 'Remove'
+}
