@@ -14,6 +14,7 @@ import favoriteRoutes from '@routes/favorite.routes';
 import collectionRoutes from '@routes/collection.routes';
 import commentRoutes from '@routes/comment.routes';
 import imageRoutes from '@routes/image.routes';
+import searchRoutes from '@routes/search.routes';
 
 const apiServer = express();
 
@@ -32,10 +33,11 @@ apiServer.use(`/v1/${ApiRoutes.AUTH}`, authRoutes);
 apiServer.use(`/v1/${ApiRoutes.AUTHOR}`, authorRoutes);
 apiServer.use(`/v1/${ApiRoutes.BOOK}`, bookRoutes);
 apiServer.use(`/v1/${ApiRoutes.GENRE}`, genreRoutes);
-apiServer.use(`/v1/${ApiRoutes.FAVROTIE}`, favoriteRoutes);
+apiServer.use(`/v1/${ApiRoutes.FAVORITE}`, favoriteRoutes);
 apiServer.use(`/v1/${ApiRoutes.COLLECTION}`, collectionRoutes);
 apiServer.use(`/v1/${ApiRoutes.COMMENT}`, commentRoutes);
 apiServer.use(`/v1/${ApiRoutes.IMAGE}`, imageRoutes);
+apiServer.use(`/v1/${ApiRoutes.SEARCH}`, searchRoutes);
 
 apiServer.use(errorMiddleware);
 

@@ -6,3 +6,4 @@ export * from './comment.controller';
 export * from './favorites.controller';
 export * from './genre.controller';
 export * from './image.controller';
+export * from './search.controller';
