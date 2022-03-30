@@ -17,7 +17,7 @@ import {
   IGenre,
   IFavorite,
   IListApiView,
-  ISearchOptions
+  ISearchOptions, ISearchResults
 } from '@utils/interfaces';
 
 export const useApi = () => {
@@ -183,6 +183,13 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/collection/delete/${id}`);
   }
 
+  const search = async (searchOptions: ISearchOptions): Promise<ISearchResults> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<ISearchResults>(`${environment.backEndUrl}/v1/search/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     login,
     refresh,
@@ -213,6 +220,7 @@ export const useApi = () => {
     updateCollection,
     getCollection,
     getCollections,
-    deleteCollection
+    deleteCollection,
+    search
   }
 }
