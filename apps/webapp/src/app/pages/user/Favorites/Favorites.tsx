@@ -53,7 +53,7 @@ export const Page = () => {
       .then((response: IListApiView<IFavorite>) => {
         setCount(response.count);
 
-        if (favorites.length === 0 && response.data.length === 0) {
+        if (page === 0 && response.data.length === 0) {
           setLoadingFavorites(false);
           setPageState(CardStates.NO_CONTENT);
           return;
