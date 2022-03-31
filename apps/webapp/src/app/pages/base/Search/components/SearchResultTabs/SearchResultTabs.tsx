@@ -1,10 +1,13 @@
-import { Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
 import { STYLES } from '../../constants';
+import { BooksSearchResults } from '../BooksSearchResults';
+import { TabLabel } from '../TabLabel';
 import { TabPanel } from '../TabPanel';
+import { IProps } from './propsInterface';
 
-export const SearchResultTabs = () => {
+export const SearchResultTabs = ({searchResults, searchTerm}: IProps) => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const handleChange = (event, newValue: number) => {
@@ -12,7 +15,7 @@ export const SearchResultTabs = () => {
   };
 
   return (
-    <>
+    <Box sx={STYLES.searchResultBox}>
       <Tabs
         orientation='vertical'
         variant='scrollable'
@@ -20,12 +23,12 @@ export const SearchResultTabs = () => {
         onChange={handleChange}
         sx={STYLES.searchResultTabs}
       >
-        <Tab label='Books'/>
-        <Tab label='Collections'/>
-        <Tab label='Authors'/>
+        <Tab label={<TabLabel label={'Books'} value={searchResults.books.count}/>}/>
+        <Tab label={<TabLabel label={'Collections'} value={searchResults.collections.count}/>}/>
+        <Tab label={<TabLabel label={'Authors'} value={searchResults.authors.count}/>}/>
       </Tabs>
       <TabPanel value={selectedTab} index={0}>
-        Item One
+        <BooksSearchResults searchResults={searchResults.books} searchTerm={searchTerm}/>
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         Item Two
@@ -33,6 +36,6 @@ export const SearchResultTabs = () => {
       <TabPanel value={selectedTab} index={2}>
         Item Three
       </TabPanel>
-    </>
+    </Box>
   )
 }

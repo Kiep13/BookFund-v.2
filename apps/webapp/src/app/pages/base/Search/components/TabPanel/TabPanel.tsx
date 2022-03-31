@@ -1,17 +1,14 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
+import { STYLES_TAB_PANEL } from '../../constants';
 import { IProps } from './propsInterface';
 
-export const TabPanel = ({ children, value, index}: IProps) => {
+export const TabPanel = ({ children, value, index }: IProps) => {
   return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      aria-labelledby={`vertical-tab-${index}`}
-    >
+    <div role='tabpanel' hidden={value !== index}>
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box sx={STYLES_TAB_PANEL.tabPanel}>
+          {children}
         </Box>
       )}
     </div>
