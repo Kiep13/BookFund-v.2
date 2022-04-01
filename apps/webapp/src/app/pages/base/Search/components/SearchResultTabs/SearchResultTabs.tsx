@@ -2,6 +2,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
 import { STYLES } from '../../constants';
+import { AuthorsSearchResult } from '../AuthorsSearchResult';
 import { BooksSearchResults } from '../BooksSearchResults';
 import { CollectionsSearchResult } from '../CollectionsSearchResult';
 import { TabLabel } from '../TabLabel';
@@ -35,7 +36,7 @@ export const SearchResultTabs = ({searchResults, searchTerm}: IProps) => {
         <CollectionsSearchResult searchResults={searchResults.collections} searchTerm={searchTerm}/>
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
-        Item Three
+        <AuthorsSearchResult searchResults={searchResults.authors} searchTerm={searchTerm}/>
       </TabPanel>
     </Box>
   )

@@ -3,7 +3,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 
 import { CollectionCard } from '@components/cards/ColllectionCard';
-import { PageSizes } from '@utils/enums';
+import { DodecagonPageSizes } from '@utils/enums';
 import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 import { ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 
@@ -27,7 +27,7 @@ export const CollectionsSearchResult = ({searchResults, searchTerm}: IProps) => 
 
     const searchOptions: ISearchOptions = {
       page: pageValue,
-      pageSize: PageSizes.Ten,
+      pageSize: DodecagonPageSizes.Twelve,
       searchTerm
     }
 

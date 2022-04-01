@@ -19,7 +19,7 @@ class AuthorService {
 
   public async getAuthors(requestParams: ISearchOptions): Promise<IListApiView<AuthorEntity>> {
     const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
-      select: ['id', 'surname', 'name', 'createdAt', 'updatedAt'],
+      select: ['id', 'surname', 'name', 'image', 'createdAt', 'updatedAt'],
       relations: ['books'],
       order: {
         ...(requestParams.orderBy && requestParams.orderBy !== 'fullName' ? {

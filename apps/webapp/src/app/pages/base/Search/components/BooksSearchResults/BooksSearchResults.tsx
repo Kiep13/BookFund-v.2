@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { HorizontalBookCard } from '@components/cards/HorizontalBookCard';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { PageSizes } from '@utils/enums';
+import { DodecagonPageSizes } from '@utils/enums';
 import { useAlerts, useApi, useBookActions } from '@utils/hooks';
 import { IBook, IListApiView, ISearchOptions } from '@utils/interfaces';
 
@@ -27,7 +27,7 @@ export const BooksSearchResults = ({searchResults, searchTerm}: IProps) => {
 
     const searchOptions: ISearchOptions = {
       page: pageValue,
-      pageSize: PageSizes.Ten,
+      pageSize: DodecagonPageSizes.Twelve,
       searchTerm
     }
 
