@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { STYLES } from '../../constants';
 import { BooksSearchResults } from '../BooksSearchResults';
+import { CollectionsSearchResult } from '../CollectionsSearchResult';
 import { TabLabel } from '../TabLabel';
 import { TabPanel } from '../TabPanel';
 import { IProps } from './propsInterface';
@@ -31,7 +32,7 @@ export const SearchResultTabs = ({searchResults, searchTerm}: IProps) => {
         <BooksSearchResults searchResults={searchResults.books} searchTerm={searchTerm}/>
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
-        Item Two
+        <CollectionsSearchResult searchResults={searchResults.collections} searchTerm={searchTerm}/>
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
         Item Three

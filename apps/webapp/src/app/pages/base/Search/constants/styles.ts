@@ -68,3 +68,26 @@ export const STYLES_BOOK_SEARCH_RESULTS = {
     fontSize: '22px'
   }
 }
+
+export const STYLES_COLLECTIONS_SEARCH_RESULTS = {
+  wrapper: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '20px',
+  },
+  loadMoreWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    height: 50,
+    m: 'auto',
+    mt: 2,
+  },
+  loadMoreButton: {
+    width: 350
+  },
+  noCollections: {
+    fontWeight: 200,
+    fontSize: '22px'
+  }
+}

@@ -1,11 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, CardActionArea, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 
 import { HorizontalBookCard } from '@components/cards/HorizontalBookCard';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { PageSizes } from '@utils/enums';
-import { useAlerts, useApi } from '@utils/hooks';
+import { useAlerts, useApi, useBookActions } from '@utils/hooks';
 import { IBook, IListApiView, ISearchOptions } from '@utils/interfaces';
 
 import { STYLES_BOOK_SEARCH_RESULTS } from '../../constants';
@@ -19,8 +19,9 @@ export const BooksSearchResults = ({searchResults, searchTerm}: IProps) => {
 
   const { getBooks } = useApi();
   const { addError } = useAlerts();
+  const { navigateToBookPage } = useBookActions();
 
-  const loadData = (pageValue) => {
+  const loadData = (pageValue: number) => {
     setLoading(true);
     setPage(pageValue);
 
@@ -51,7 +52,9 @@ export const BooksSearchResults = ({searchResults, searchTerm}: IProps) => {
       {
         books.map((book: IBook) =>
           <Box key={book.id} sx={STYLES_BOOK_SEARCH_RESULTS.book}>
-            <HorizontalBookCard book={book}/>
+            <CardActionArea key={book.id} onClick={() => navigateToBookPage(book.id)}>
+              <HorizontalBookCard book={book}/>
+            </CardActionArea>
           </Box>
         )
       }
