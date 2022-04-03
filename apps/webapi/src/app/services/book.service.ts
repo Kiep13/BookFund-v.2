@@ -1,5 +1,8 @@
+import { ILike } from 'typeorm';
+
 import { connection } from '@core/connection';
-import { IBookForm } from '@core/interfaces';
+import { SortDirections } from '@core/enums';
+import { IBookForm, IListApiView, ISearchOptions } from '@core/interfaces';
 import { BookEntity } from '@entities/book.entity';
 import { CommentEntity } from '@entities/comment.entity';
 import { FavoriteEntity } from '@entities/favorite.entity';
@@ -17,6 +20,49 @@ class BookService {
     book.image = requestBody.imageUrl;
 
     return book;
+  }
+
+  public async getBooks(requestParams: ISearchOptions): Promise<IListApiView<BookEntity>> {
+    const [books, count] = await connection.createQueryBuilder(BookEntity, 'book')
+      .select([
+        'book.id',
+        'book.title',
+        'book.amountPages',
+        'book.year',
+        'book.image',
+        'book.description',
+        'book.avgRate',
+        'book.createdAt',
+        'book.updatedAt'
+      ])
+      .leftJoinAndSelect('book.author', 'author')
+      .orderBy({
+        ...(
+          requestParams.orderBy && requestParams.orderBy === 'authorFullName' ?
+            {
+              'author.surname': requestParams.order || SortDirections.ASC,
+              'author.name': requestParams.order || SortDirections.ASC,
+            } :
+            {
+              [requestParams.orderBy || 'book.title']: requestParams.order || SortDirections.ASC
+            }
+        )
+      })
+      .take(+requestParams.pageSize)
+      .skip(+requestParams.pageSize * (+requestParams.page || 0))
+      .where({
+        title: ILike(`%${requestParams.searchTerm || ''}%`),
+        ...( requestParams.keyId ? {
+          author: {
+            id: +requestParams.keyId
+          }} : {})
+      })
+      .getManyAndCount();
+
+    return {
+      data: books,
+      count: count
+    }
   }
 
   public async updateBookAverageRate(bookId: number): Promise<void> {

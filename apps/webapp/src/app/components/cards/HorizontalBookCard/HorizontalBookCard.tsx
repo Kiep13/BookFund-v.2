@@ -1,17 +1,20 @@
-import { Box, Card, CardContent, CardMedia, Typography, Rating } from '@mui/material';
+import { Box, Card, CardContent, Typography, Rating } from '@mui/material';
+import { Image } from 'mui-image';
 
-import { STYLES } from './constants';
+import { IMAGE_PROPERTIES, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
 export const HorizontalBookCard = ({book}: IProps) =>
   <Card sx={STYLES.card}>
-    <CardMedia
-      component='img'
-      sx={STYLES.image}
-      image={book.image}
-      alt={`${book.title} cover`}
-    />
-    <Box>
+    <Image
+      src={book?.image || ''}
+      width={IMAGE_PROPERTIES.width}
+      height={IMAGE_PROPERTIES.height}
+      fit={IMAGE_PROPERTIES.fit}
+      errorIcon={IMAGE_PROPERTIES.errorIcon}
+      bgColor={IMAGE_PROPERTIES.backgroundColor}
+      styles={STYLES.image}/>
+    <Box sx={STYLES.cardContent}>
       <CardContent>
         <Typography component='div' variant='h5'>
           {book.title}

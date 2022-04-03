@@ -3,7 +3,10 @@ export const STYLES = {
     display: 'flex'
   },
   image: {
-    width: 151
+    flex: 1,
+  },
+  cardContent: {
+    width: 'calc(100% - 150px)'
   },
   description: {
     maxWidth: '100%',
@@ -11,6 +14,7 @@ export const STYLES = {
     WebkitBoxOrient: 'vertical',
     WebkitLineClamp: 4,
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    fontSize: '1rem'
   }
 }

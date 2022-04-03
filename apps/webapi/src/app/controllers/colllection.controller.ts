@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import { ILike } from 'typeorm';
 
 import { connection } from '@core/connection';
-import { ApiRoutes, ResponseStatuses, SortDirections } from '@core/enums';
-import { IListApiView } from '@core/interfaces';
+import { ApiRoutes, ResponseStatuses } from '@core/enums';
+import { IListApiView, ISearchOptions } from '@core/interfaces';
 import { CollectionEntity } from '@entities/collection.entity';
 import { environment } from '@environments/environment';
 import { imageService } from '@services/image.service';
@@ -62,25 +61,9 @@ class CollectionController {
 
   public async getCollections(request: Request, response: Response, next: Function): Response {
     try {
-      const requestParams = request.query;
+      const requestParams: ISearchOptions = request.query;
 
-      const [collections, count] = await connection.getRepository(CollectionEntity).findAndCount({
-        select: ['id', 'title', 'subtitle', 'image', 'description', 'createdAt'],
-        relations: ['books'],
-        order: {
-          createdAt: SortDirections.DESC
-        },
-        take: +requestParams.pageSize,
-        skip: (+requestParams.pageSize * +requestParams.page),
-        where: {
-          title: ILike(`%${requestParams.searchTerm || ''}%`)
-        }
-      });
-
-      const result: IListApiView<CollectionEntity> = {
-        data: collections,
-        count: count
-      };
+      const result: IListApiView<CollectionEntity> = await collectionService.getCollections(requestParams);
 
       return response.status(ResponseStatuses.STATUS_OK).json(result);
     } catch (error) {

@@ -4,9 +4,10 @@ export enum ApiRoutes {
   IMAGE = 'image',
   BOOK = 'book',
   GENRE = 'genre',
-  FAVROTIE = 'favorite',
+  FAVORITE = 'favorite',
   COLLECTION = 'collection',
-  COMMENT = 'comment'
+  COMMENT = 'comment',
+  SEARCH = 'search'
 }
 
 export enum ApiRoutesModifiers {

@@ -18,5 +18,6 @@ export * from './listApiViewInterface';
 export * from './optionInterface';
 export * from './overallStatisticsInterface';
 export * from './searchOptionsInterface';
+export * from './searchResultsInterface';
 export * from './sortOptionsInterace';
 export * from './tableItemActionInterface';
