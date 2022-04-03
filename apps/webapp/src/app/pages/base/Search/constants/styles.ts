@@ -4,10 +4,6 @@ export const STYLES = {
     m: 'auto',
     mb: 3
   },
-  searchTextField: {
-    mt: 2,
-    mb: 2
-  },
   searchResultWrapper: {
     flexGrow: 1,
     display: 'flex',
@@ -25,6 +21,19 @@ export const STYLES = {
   }
 }
 
+export const STYLES_SEARCH_INPUT = {
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '15px',
+    alignItems: 'center',
+    mt: 2,
+    mb: 2
+  },
+  input: {
+    height: '45px',
+  },
+}
 
 export const STYLES_TAB_PANEL = {
   tabPanel: {

@@ -6,7 +6,7 @@ import { wrapUserPage } from '@components/PageWrapper';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { CardStates } from '@utils/enums';
+import { BaseRoutePaths, CardStates } from '@utils/enums';
 import { compose } from '@utils/helpers';
 import { useAlerts, useApi } from '@utils/hooks';
 import { ISearchOptions, ISearchResults } from '@utils/interfaces';
@@ -27,7 +27,13 @@ const Page = () => {
   const { search } = useApi();
   const { addError }  = useAlerts();
 
+  const handleSearchTermChange = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+    history.replace(`${BaseRoutePaths.SEARCH}/${newSearchTerm}`);
+  }
+
   const loadSearchResult = () => {
+    setPageState(CardStates.LOADING);
     const searchOptions: ISearchOptions = {
       ...DEFAULT_SEARCH_OPTIONS,
       searchTerm
@@ -46,14 +52,14 @@ const Page = () => {
 
   useEffect(() => {
     loadSearchResult();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <>
       <EntityPageHeader title={PAGE_TITLE} handleBackClick={() => history.goBack()}/>
 
       <Box sx={STYLES.page}>
-        <SearchInput searchTerm={searchTerm}/>
+        <SearchInput searchTerm={searchTerm} handleSubmit={handleSearchTermChange}/>
 
         <StatefulCard state={pageState}>
           <Box sx={STYLES.searchResultWrapper}>
