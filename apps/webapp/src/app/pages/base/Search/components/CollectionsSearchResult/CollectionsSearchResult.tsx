@@ -3,13 +3,13 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 
 import { CollectionCard } from '@components/cards/ColllectionCard';
+import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { DodecagonPageSizes } from '@utils/enums';
 import { useAlerts, useApi, useCollectionActions } from '@utils/hooks';
 import { ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 
 import { STYLES_COLLECTIONS_SEARCH_RESULTS } from '../../constants';
 import { IProps } from './propsInterface';
-import { API_TOOLTIP_ERROR } from "@utils/constants";
 
 export const CollectionsSearchResult = ({searchResults, searchTerm}: IProps) => {
   const [collections, setCollections] = useState<ICollection[]>(searchResults.data);
