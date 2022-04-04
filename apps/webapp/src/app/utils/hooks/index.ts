@@ -8,3 +8,4 @@ export * from './useBookLoad';
 export * from './useCollectionActions';
 export * from './useCollectionLoad';
 export * from './useCommentList';
+export * from './useStorage';
