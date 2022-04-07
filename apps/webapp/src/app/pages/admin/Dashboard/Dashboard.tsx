@@ -52,7 +52,7 @@ export const Dashboard = () => {
 
       <Box sx={STYLES.cardRow}>
         <Box sx={STYLES.genresCard}>
-          <GenresCard/>
+          <GenresCard selectedMonth={selectedMonth}/>
         </Box>
 
         <Box sx={STYLES.actionsStatisticCard}>

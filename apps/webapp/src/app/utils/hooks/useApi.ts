@@ -17,7 +17,7 @@ import {
   IGenre,
   IFavorite,
   IListApiView,
-  ISearchOptions, ISearchResults
+  ISearchOptions, ISearchResults, IAdminDashboardSearchOptions, IGenreStatistic
 } from '@utils/interfaces';
 
 export const useApi = () => {
@@ -190,6 +190,13 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getGenresStatistic = async (searchOptions: IAdminDashboardSearchOptions): Promise<IGenreStatistic[]> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IGenreStatistic[]>(`${environment.backEndUrl}/v1/statistic/genres/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     login,
     refresh,
@@ -221,6 +228,7 @@ export const useApi = () => {
     getCollection,
     getCollections,
     deleteCollection,
-    search
+    search,
+    getGenresStatistic
   }
 }
