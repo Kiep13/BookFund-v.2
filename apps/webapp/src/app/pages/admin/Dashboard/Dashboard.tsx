@@ -60,7 +60,7 @@ export const Dashboard = () => {
         </Box>
 
         <Box sx={STYLES.popularBookCard}>
-          <PopularBookCard/>
+          <PopularBookCard selectedMonth={selectedMonth}/>
         </Box>
       </Box>
 

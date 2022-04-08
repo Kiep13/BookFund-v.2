@@ -63,7 +63,7 @@ export const ActionPerMonthDateCard = ({selectedMonth}: IProps) => {
 
   useEffect(() => {
     loadStatistic();
-  }, [selectedMonth])
+  }, [selectedMonth]);
 
   return (
     <DashboardCardWrapper title={ACTION_PER_MONTH_DATE_CARD_TITLE}>

@@ -204,6 +204,13 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getMostPopularBook = async (searchOptions: IAdminDashboardSearchOptions): Promise<IBook> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IBook>(`${environment.backEndUrl}/v1/statistic/book/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     login,
     refresh,
@@ -237,6 +244,7 @@ export const useApi = () => {
     deleteCollection,
     search,
     getGenresStatistic,
-    getActionsStatistic
+    getActionsStatistic,
+    getMostPopularBook
   }
 }

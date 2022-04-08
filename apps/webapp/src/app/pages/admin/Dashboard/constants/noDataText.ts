@@ -1,1 +1,1 @@
-export const NO_DATA_TEXT = 'No Data Available';
+export const NO_DATA_TEXT = 'No Data';

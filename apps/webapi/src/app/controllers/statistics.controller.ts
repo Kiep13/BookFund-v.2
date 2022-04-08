@@ -71,6 +71,36 @@ class StatisticsController {
       next(error)
     }
   }
+
+  public async getPopularBook(request: Request, response: Response, next: Function): Response {
+    const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
+
+    try {
+      const mostPopularBook = await connection.createQueryBuilder(FavoriteEntity, 'favorite')
+        .leftJoinAndSelect('favorite.book', 'book')
+        .leftJoinAndSelect('book.author', 'author')
+        .groupBy('book.id')
+        .select('COUNT(favorite.id)', 'amount')
+        .addSelect('book.id', 'id')
+        .orderBy('amount', SortDirections.DESC)
+        .where(`favorite.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
+        .limit(1)
+        .getRawOne();
+
+      if(!mostPopularBook?.id) {
+        return response.status(ResponseStatuses.STATUS_OK).json(mostPopularBook);
+      }
+
+      const result = await connection.manager.findOne(BookEntity, mostPopularBook.id, {
+        relations: ['author']
+      });
+
+      return response.status(ResponseStatuses.STATUS_OK).json(result);
+    } catch (error) {
+      console.log(error);
+      next(error)
+    }
+  }
 }
 
 export const statisticsController = new StatisticsController();
