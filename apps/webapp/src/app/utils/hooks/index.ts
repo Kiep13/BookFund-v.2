@@ -9,4 +9,5 @@ export * from './useCharts';
 export * from './useCollectionActions';
 export * from './useCollectionLoad';
 export * from './useCommentList';
+export * from './useDates';
 export * from './useStorage';
