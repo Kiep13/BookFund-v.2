@@ -9,5 +9,6 @@ const router = new Router();
 router.get(`/genres`, authMiddleware, adminMiddleware, statisticsController.getGenresStatistics);
 router.get(`/actions`, authMiddleware, adminMiddleware, statisticsController.getActionsStatistics);
 router.get(`/book`, authMiddleware, adminMiddleware, statisticsController.getPopularBook);
+router.get(`/providers`, authMiddleware, adminMiddleware, statisticsController.getProvidersStatistic);
 
 export default router;

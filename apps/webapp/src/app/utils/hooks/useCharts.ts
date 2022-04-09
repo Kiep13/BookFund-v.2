@@ -1,7 +1,16 @@
 import moment from 'moment';
 
-import { IDoughnutData, IDoughnutRaw, ILineData, ILineDataset, ILineRaw } from '@utils/interfaces';
-import { COLORS, DATE_API_FORMAT } from '@utils/constants';
+import {
+  IBarData,
+  IBarDataset,
+  IBarRaw,
+  IDoughnutData,
+  IDoughnutRaw,
+  ILineData,
+  ILineDataset,
+  ILineRaw
+} from '@utils/interfaces';
+import { BLUE_PALETTE, DATE_API_FORMAT } from '@utils/constants';
 import { useDates } from '@utils/hooks';
 
 
@@ -15,15 +24,15 @@ export const useCharts = () => {
         {
           label: label,
           data: statistic.map((item: IDoughnutRaw) => item.amount),
-          backgroundColor: COLORS.slice(0, statistic.length),
-          borderColor: COLORS.slice(0, statistic.length),
+          backgroundColor: BLUE_PALETTE.slice(0, statistic.length),
+          borderColor: BLUE_PALETTE.slice(0, statistic.length),
           borderWidth: 1
         }
       ]
     }
   }
 
-  const transformToChartData = (selectedDate: Date, statistic: object, labels: object): ILineData => {
+  const transformToLineData = (selectedDate: Date, statistic: object, labels: object): ILineData => {
     const dateLabels: string[] = buildMonthDates(selectedDate);
 
     const datasets: ILineDataset[] = [];
@@ -42,8 +51,8 @@ export const useCharts = () => {
       const dataset: ILineDataset = {
         label: labels[key],
         data,
-        borderColor: COLORS[currentIndex],
-        backgroundColor: COLORS[currentIndex],
+        borderColor: BLUE_PALETTE[currentIndex],
+        backgroundColor: BLUE_PALETTE[currentIndex],
         lineTension: 0.7
       }
 
@@ -56,8 +65,25 @@ export const useCharts = () => {
     }
   }
 
+  const transformToBarData = (data: IBarRaw[]): IBarData => {
+    const datasets: IBarDataset[] = data.map((item: IBarRaw, index: number) => {
+      return {
+        label: item.label,
+        data: [item.value],
+        borderColor: BLUE_PALETTE[index],
+        backgroundColor: BLUE_PALETTE[index]
+      }
+    });
+
+    return {
+      labels: [''],
+      datasets
+    }
+  }
+
   return {
     transformToDoughnutData,
-    transformToChartData
+    transformToLineData,
+    transformToBarData
   }
 }

@@ -32,7 +32,7 @@ export const ActionPerMonthDateCard = ({selectedMonth}: IProps) => {
 
   const {getActionsStatistic} = useApi();
   const {addError} = useAlerts();
-  const {transformToChartData} = useCharts();
+  const {transformToLineData} = useCharts();
 
   const loadStatistic = () => {
     setCardState(CardStates.LOADING);
@@ -52,7 +52,7 @@ export const ActionPerMonthDateCard = ({selectedMonth}: IProps) => {
           return;
         }
 
-        setChartData(transformToChartData(selectedMonth, response, LABELS));
+        setChartData(transformToLineData(selectedMonth, response, LABELS));
         setCardState(CardStates.CONTENT)
       })
       .catch(() => {

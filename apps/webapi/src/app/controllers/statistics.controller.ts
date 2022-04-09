@@ -101,6 +101,24 @@ class StatisticsController {
       next(error)
     }
   }
+
+  public async getProvidersStatistic(request: Request, response: Response, next: Function): Response {
+    const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
+
+    try {
+      const statistics: IActionStatistic[] = await connection.createQueryBuilder(AccountEntity, 'account')
+        .select('COUNT(account.id)', 'amount')
+        .addSelect(`account.provider`, 'provider')
+        .groupBy('account.provider')
+        .orderBy('provider', SortDirections.DESC)
+        .where(`account.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
+        .getRawMany();
+
+      return response.status(ResponseStatuses.STATUS_OK).json(statistics);
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const statisticsController = new StatisticsController();

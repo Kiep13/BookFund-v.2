@@ -66,7 +66,7 @@ export const Dashboard = () => {
 
       <Box sx={STYLES.cardRow}>
         <Box sx={STYLES.socialAuthCard}>
-          <SocialAuthCard/>
+          <SocialAuthCard selectedMonth={selectedMonth}/>
         </Box>
 
         <Box sx={STYLES.commentsCard}>
