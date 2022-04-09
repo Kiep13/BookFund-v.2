@@ -17,7 +17,13 @@ import {
   IGenre,
   IFavorite,
   IListApiView,
-  ISearchOptions, ISearchResults, IAdminDashboardSearchOptions, IGenreStatistic, IActionsStatistic, IProviderStatistic
+  ISearchOptions,
+  ISearchResults,
+  IAdminDashboardSearchOptions,
+  IGenreStatistic,
+  IActionsStatistic,
+  IProviderStatistic,
+  IRatesStatistic
 } from '@utils/interfaces';
 
 export const useApi = () => {
@@ -218,6 +224,13 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getRatesStatistic = async (searchOptions: IAdminDashboardSearchOptions): Promise<IRatesStatistic> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IRatesStatistic>(`${environment.backEndUrl}/v1/statistic/rates/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     login,
     refresh,
@@ -253,6 +266,7 @@ export const useApi = () => {
     getGenresStatistic,
     getActionsStatistic,
     getMostPopularBook,
-    getProvidersStatistic
+    getProvidersStatistic,
+    getRatesStatistic
   }
 }

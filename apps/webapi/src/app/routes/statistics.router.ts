@@ -10,5 +10,6 @@ router.get(`/genres`, authMiddleware, adminMiddleware, statisticsController.getG
 router.get(`/actions`, authMiddleware, adminMiddleware, statisticsController.getActionsStatistics);
 router.get(`/book`, authMiddleware, adminMiddleware, statisticsController.getPopularBook);
 router.get(`/providers`, authMiddleware, adminMiddleware, statisticsController.getProvidersStatistic);
+router.get(`/rates`, authMiddleware, adminMiddleware, statisticsController.getRatesStatistic);
 
 export default router;

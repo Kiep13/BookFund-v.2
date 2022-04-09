@@ -70,7 +70,7 @@ export const Dashboard = () => {
         </Box>
 
         <Box sx={STYLES.commentsCard}>
-          <CommentsCard/>
+          <CommentsCard selectedMonth={selectedMonth}/>
         </Box>
       </Box>
     </>

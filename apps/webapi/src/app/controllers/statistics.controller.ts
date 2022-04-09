@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 
 import { connection } from '@core/connection';
 import { DATE_API_FORMAT } from '@core/constants';
-import { ResponseStatuses, SortDirections } from '@core/enums';
-import { IActionsStatistic, IActionStatistic } from '@core/interfaces';
+import { RateTypes, ResponseStatuses, SortDirections } from '@core/enums';
+import { IActionsStatistic, IActionStatistic, IRateStatisticResponse, ITypedRateStatistic } from '@core/interfaces';
 import { AccountEntity } from '@entities/account.entity';
 import { BookEntity } from '@entities/book.entity';
 import { CommentEntity } from '@entities/comment.entity';
@@ -115,6 +115,37 @@ class StatisticsController {
         .getRawMany();
 
       return response.status(ResponseStatuses.STATUS_OK).json(statistics);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async getRatesStatistic (request: Request, response: Response, next: Function): Response {
+    const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
+
+    try {
+      const rates: ITypedRateStatistic[] = await connection.createQueryBuilder(CommentEntity, 'comment')
+        .select(`CASE
+            WHEN comment.rate < 3 THEN \'${RateTypes.NEGATIVE}\'
+            WHEN comment.rate >= 3 AND comment.rate < 4 THEN \'${RateTypes.NEUTRAL}\'
+            WHEN comment.rate >= 4 THEN \'${RateTypes.POSITIVE}\'
+            END
+         `, 'type')
+        .addSelect(`TO_CHAR(comment.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .groupBy('date')
+        .addGroupBy('type')
+        .addSelect('COUNT(comment.id)', 'amount')
+        .orderBy('date', SortDirections.DESC)
+        .where(`comment.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
+        .getRawMany();
+
+    const statistic: IRateStatisticResponse = {
+      positive: rates.filter((rate: ITypedRateStatistic) => rate.type === RateTypes.POSITIVE),
+      neutral: rates.filter((rate: ITypedRateStatistic) => rate.type === RateTypes.NEUTRAL),
+      negative: rates.filter((rate: ITypedRateStatistic) => rate.type === RateTypes.NEGATIVE),
+    }
+
+      return response.status(ResponseStatuses.STATUS_OK).json(statistic);
     } catch (error) {
       next(error)
     }
