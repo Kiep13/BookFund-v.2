@@ -1,4 +1,8 @@
+export * from './chart';
+export * from './statistic';
+
 export * from './accountInterface';
+export * from './adminDashboardSearchOptionsInterface';
 export * from './alertInterface';
 export * from './alignTypeInterface';
 export * from './authorInterface';

@@ -17,7 +17,8 @@ import {
   IGenre,
   IFavorite,
   IListApiView,
-  ISearchOptions, ISearchResults
+  ISearchOptions,
+  ISearchResults
 } from '@utils/interfaces';
 
 export const useApi = () => {

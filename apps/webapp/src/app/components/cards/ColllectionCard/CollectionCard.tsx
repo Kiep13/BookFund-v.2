@@ -34,7 +34,7 @@ export const CollectionCard = ({collection, isActionsAvailable, actions, onActio
         <CardActions disableSpacing sx={STYLES.actionsBlock}>
           {
             (actions || []).map(({icon: Icon, ariLabel, actionType}: ICardAction) => {
-              return <IconButton aria-label={ariLabel} onClick={() => {
+              return <IconButton aria-label={ariLabel} key={actionType} onClick={() => {
                 const cardAction: ICardItemAction = {
                   id: collection.id,
                   actionType

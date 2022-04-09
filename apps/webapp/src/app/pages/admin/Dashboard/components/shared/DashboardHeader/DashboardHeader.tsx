@@ -3,15 +3,14 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import moment from 'moment';
-import { useState } from 'react';
 
 import { Card } from '@components/cards/Card';
 
 import { MIN_STATISTIC_DATE } from '../../../constants';
 import { STYLES } from './constants';
+import { IProps } from './propsInterface';
 
-export const DashboardHeader = () => {
-  const [value, setValue] = useState(new Date());
+export const DashboardHeader = ({ selectedMonth, handleSelectedMonthChange }: IProps) => {
 
   const maxDate = moment(new Date()).endOf('month').endOf('day').toDate();
 
@@ -32,9 +31,9 @@ export const DashboardHeader = () => {
           label='Statistic period'
           minDate={MIN_STATISTIC_DATE}
           maxDate={maxDate}
-          value={value}
+          value={selectedMonth}
           onChange={(newValue: Date | null) => {
-            setValue(newValue || new Date());
+            handleSelectedMonthChange(newValue || new Date());
           }}
           renderInput={(params) => <TextField {...params} helperText={null} />}
         />
