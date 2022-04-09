@@ -13,6 +13,7 @@ export * from './github-user.interface';
 export * from './google-auth-tokens.interface';
 export * from './google-user.interface';
 export * from './list-api-view.interface';
+export * from './overall-statistic.interface';
 export * from './rate-statictic.interface';
 export * from './search-options.interface';
 export * from './search-results.interface';

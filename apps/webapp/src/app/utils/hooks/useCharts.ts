@@ -8,11 +8,10 @@ import {
   IDoughnutRaw,
   ILineData,
   ILineDataset,
-  ILineRaw
+  ILineRaw, IOverallRaw, IOverallStatistic, IOverallStatisticRaw
 } from '@utils/interfaces';
 import { BLUE_PALETTE, DATE_API_FORMAT } from '@utils/constants';
 import { useDates } from '@utils/hooks';
-
 
 export const useCharts = () => {
   const {buildMonthDates} = useDates();
@@ -81,9 +80,40 @@ export const useCharts = () => {
     }
   }
 
+  const transformToOverallStatistic = (data: IOverallStatisticRaw, labels: object): IOverallStatistic[] => {
+    const result: IOverallStatistic[] = [];
+
+    for(const [key, value] of Object.entries(data)) {
+      let difference = solveDifference(value);
+
+      const overallItem: IOverallStatistic = {
+        title: labels[key],
+        total: value.total,
+        difference
+      }
+
+      result.push(overallItem);
+    }
+
+    return result;
+  }
+
+  const solveDifference = (value: IOverallRaw): number => {
+    if(!value.current) {
+      return 0;
+    } else if(!value.previous) {
+      return 100;
+    } else if(value.current >= value.previous) {
+      return Math.ceil(((value.current/value.previous) * 100))
+    } else {
+      return Math.ceil(((value.previous/value.current) * -100))
+    }
+  }
+
   return {
     transformToDoughnutData,
     transformToLineData,
-    transformToBarData
+    transformToBarData,
+    transformToOverallStatistic
   }
 }

@@ -7,9 +7,10 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, DATE_API_FORMAT } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IAdminDashboardSearchOptions, IBook } from '@utils/interfaces';
-import { useAlerts, useApi } from '@utils/hooks';
+import { useAlerts } from '@utils/hooks';
 
 import { NO_DATA_TEXT, POPULAR_BOOK_CARD_TITLE } from '../../../constants';
+import { useDashboardApi } from '../../../hooks';
 import { DashboardCardWrapper } from '../../shared';
 import { HEIGHT_CONTENT, HEIGHT_NO_CONTENT, STYLES } from './constants';
 import { IProps } from './propsInterface';
@@ -18,7 +19,7 @@ export const PopularBookCard = ({ selectedMonth }: IProps) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [book, setBook] = useState<IBook>();
 
-  const {getMostPopularBook} = useApi();
+  const {getMostPopularBook} = useDashboardApi();
   const {addError} = useAlerts();
 
   const loadStatistic = () => {

@@ -1,11 +1,8 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-import { Card } from '@components/cards/Card';
 import { StatefulCard } from '@components/cards/StatefulCard';
-import { OVERALL_STATISTIC_MOCK } from '@mocks/overallStatisticsMock';
 import { CardStates } from '@utils/enums';
-import { IOverallStatistic } from '@utils/interfaces';
 import { useStorage } from '@utils/hooks';
 
 import { DashboardHeader } from './components/shared';
@@ -14,8 +11,7 @@ import {
   CommentsCard,
   GenresCard,
   SocialAuthCard,
-  StatisticCard,
-  PopularBookCard
+  PopularBookCard, OverallStatisticCardsRow
 } from './components/cards';
 import { SELECTED_MONTH_STORAGE_KEY, STYLES } from './constants';
 
@@ -59,13 +55,7 @@ export const Dashboard = () => {
       <DashboardHeader selectedMonth={selectedMonth} handleSelectedMonthChange={handleSelectedMonthChange}/>
 
       <Box sx={STYLES.content}>
-        {
-          OVERALL_STATISTIC_MOCK.map((overallStatistic: IOverallStatistic) => {
-            return <Card styles={STYLES.overallStatisticCard} key={overallStatistic.total}>
-              <StatisticCard {...overallStatistic}/>
-            </Card>
-          })
-        }
+        <OverallStatisticCardsRow selectedMonth={selectedMonth}/>
       </Box>
 
       <Box sx={STYLES.cardRow}>

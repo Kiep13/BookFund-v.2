@@ -13,7 +13,8 @@ export const STYLES = {
     mb: 3
   },
   overallStatisticCard: {
-    flex: 1
+    flex: 1,
+    height: '115px'
   },
   cardRow: {
     display: 'flex',

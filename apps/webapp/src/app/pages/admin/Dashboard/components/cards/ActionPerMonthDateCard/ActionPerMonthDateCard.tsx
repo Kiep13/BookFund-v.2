@@ -17,9 +17,10 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, DATE_API_FORMAT, LINE_CHART_OPTIONS } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IActionsStatistic, IActionStatistic, IAdminDashboardSearchOptions, ILineData } from '@utils/interfaces';
-import { useAlerts, useApi, useCharts } from '@utils/hooks';
+import { useAlerts, useCharts } from '@utils/hooks';
 
 import { ACTION_PER_MONTH_DATE_CARD_TITLE, NO_DATA_TEXT } from '../../../constants';
+import { useDashboardApi } from '../../../hooks';
 import { DashboardCardWrapper } from '../../shared';
 import { LABELS } from './constants';
 import { IProps } from './propsInterface';
@@ -30,7 +31,7 @@ export const ActionPerMonthDateCard = ({selectedMonth}: IProps) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [chartData, setChartData] = useState<ILineData>();
 
-  const {getActionsStatistic} = useApi();
+  const {getActionsStatistic} = useDashboardApi();
   const {addError} = useAlerts();
   const {transformToLineData} = useCharts();
 

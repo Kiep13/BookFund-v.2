@@ -16,10 +16,11 @@ import { useEffect, useState } from 'react';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, DATE_API_FORMAT, LINE_CHART_OPTIONS } from '@utils/constants';
 import { CardStates } from '@utils/enums';
-import { useAlerts, useApi, useCharts } from '@utils/hooks';
+import { useAlerts, useCharts } from '@utils/hooks';
 import { IActionStatistic, IAdminDashboardSearchOptions, ILineData, IRatesStatistic } from '@utils/interfaces';
 
 import { COMMENTS_CARD_TITLE, NO_DATA_TEXT } from '../../../constants';
+import { useDashboardApi } from '../../../hooks';
 import { DashboardCardWrapper } from '../../shared';
 import { LABELS } from './constants';
 import { IProps } from './propsInterface';
@@ -30,7 +31,7 @@ export const CommentsCard = ({ selectedMonth }: IProps ) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [chartData, setChartData] = useState<ILineData>();
 
-  const { getRatesStatistic } = useApi();
+  const { getRatesStatistic } = useDashboardApi();
   const { addError } = useAlerts();
   const {transformToLineData} = useCharts();
 

@@ -6,6 +6,7 @@ import { adminMiddleware } from '@middlewares/admin-middleware';
 
 const router = new Router();
 
+router.get(`/overall`, authMiddleware, adminMiddleware, statisticsController.getOverallStatistics);
 router.get(`/genres`, authMiddleware, adminMiddleware, statisticsController.getGenresStatistics);
 router.get(`/actions`, authMiddleware, adminMiddleware, statisticsController.getActionsStatistics);
 router.get(`/book`, authMiddleware, adminMiddleware, statisticsController.getPopularBook);

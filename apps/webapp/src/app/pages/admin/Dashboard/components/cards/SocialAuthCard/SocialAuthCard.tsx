@@ -19,9 +19,10 @@ import { useEffect, useState } from 'react';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, BAR_CHART_OPTIONS, DATE_API_FORMAT } from '@utils/constants';
 import { CardStates } from '@utils/enums';
-import { useAlerts, useApi, useCharts } from '@utils/hooks';
+import { useAlerts, useCharts } from '@utils/hooks';
 
 import { NO_DATA_TEXT, SOCIAL_AUTH_CARD_TITLE } from '../../../constants';
+import { useDashboardApi } from '../../../hooks';
 import { DashboardCardWrapper } from '../../shared';
 import { IProps } from './propsInterface';
 
@@ -38,7 +39,7 @@ export const SocialAuthCard = ({ selectedMonth }: IProps) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [chartData, setChartData] = useState<IBarData>();
 
-  const { getProvidersStatistic } = useApi();
+  const { getProvidersStatistic } = useDashboardApi();
   const { addError } = useAlerts();
   const { transformToBarData } = useCharts();
 

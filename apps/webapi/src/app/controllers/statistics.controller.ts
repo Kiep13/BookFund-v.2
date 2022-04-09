@@ -3,14 +3,34 @@ import { Request, Response } from 'express';
 import { connection } from '@core/connection';
 import { DATE_API_FORMAT } from '@core/constants';
 import { RateTypes, ResponseStatuses, SortDirections } from '@core/enums';
-import { IActionsStatistic, IActionStatistic, IRateStatisticResponse, ITypedRateStatistic } from '@core/interfaces';
+import {
+  IActionsStatistic,
+  IActionStatistic,
+  IDateRange,
+  IRateStatisticResponse,
+  ITypedRateStatistic
+} from '@core/interfaces';
 import { AccountEntity } from '@entities/account.entity';
 import { BookEntity } from '@entities/book.entity';
 import { CommentEntity } from '@entities/comment.entity';
 import { FavoriteEntity } from '@entities/favorite.entity';
 import { dateService } from '@services/date.service';
+import { overallStatisticService } from '@services/overall-statistic.service';
 
 class StatisticsController {
+  public async getOverallStatistics(request: Request, response: Response, next: Function): Response {
+    const dateRange: IDateRange = dateService.transformFromApiToRangeDatesWithPreviousMonth(request.query.date);
+    const currentMonth: number = dateService.getMonthFromDbDate(dateRange.endDate);
+
+    try {
+      const result = await overallStatisticService.getOverallStatistic(dateRange, currentMonth);
+
+      return response.status(ResponseStatuses.STATUS_OK).json(result);
+    } catch (error) {
+      next(error)
+    }
+  }
+
   public async getGenresStatistics(request: Request, response: Response, next: Function): Response {
     const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
 

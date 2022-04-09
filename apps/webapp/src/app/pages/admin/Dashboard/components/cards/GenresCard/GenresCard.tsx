@@ -7,9 +7,10 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, DATE_API_FORMAT } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IAdminDashboardSearchOptions, IDoughnutData, IGenreStatistic } from '@utils/interfaces';
-import { useAlerts, useApi, useCharts } from '@utils/hooks';
+import { useAlerts, useCharts } from '@utils/hooks';
 
 import { GENRES_CARD_TITLE, NO_DATA_TEXT } from '../../../constants';
+import { useDashboardApi } from '../../../hooks';
 import { DashboardCardWrapper } from '../../shared';
 import { IProps } from './propsInterface';
 
@@ -19,7 +20,7 @@ export const GenresCard = ({selectedMonth}: IProps) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [chartData, setChartData] = useState<IDoughnutData>();
 
-  const { getGenresStatistic } = useApi();
+  const { getGenresStatistic } = useDashboardApi();
   const { addError } = useAlerts();
   const { transformToDoughnutData } = useCharts();
 
