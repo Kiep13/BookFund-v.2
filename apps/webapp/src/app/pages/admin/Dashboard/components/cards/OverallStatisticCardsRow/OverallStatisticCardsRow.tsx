@@ -19,8 +19,8 @@ export const OverallStatisticCardsRow = ({ selectedMonth }: IProps) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [overallStatisticData, setOverallStatisticData] = useState<IOverallStatistic[]>(OVERALL_STATISTIC_MOCK);
 
-  const {getOverallStatistic} = useDashboardApi();
-  const {addError} = useAlerts();
+  const { getOverallStatistic } = useDashboardApi();
+  const { addError } = useAlerts();
   const { transformToOverallStatistic } = useCharts();
 
   const loadStatistic = () => {

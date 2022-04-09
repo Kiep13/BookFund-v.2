@@ -1,9 +1,4 @@
 import {
-  IAdminDashboardSearchOptions,
-  IBarData, IBarRaw,
-  IProviderStatistic
-} from "@utils/interfaces";
-import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -20,6 +15,7 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { API_TOOLTIP_ERROR, BAR_CHART_OPTIONS, DATE_API_FORMAT } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { useAlerts, useCharts } from '@utils/hooks';
+import { IAdminDashboardSearchOptions, IBarData, IBarRaw, IProviderStatistic } from '@utils/interfaces';
 
 import { NO_DATA_TEXT, SOCIAL_AUTH_CARD_TITLE } from '../../../constants';
 import { useDashboardApi } from '../../../hooks';

@@ -19,8 +19,8 @@ export const PopularBookCard = ({ selectedMonth }: IProps) => {
   const [cardState, setCardState] = useState<CardStates>(CardStates.LOADING);
   const [book, setBook] = useState<IBook>();
 
-  const {getMostPopularBook} = useDashboardApi();
-  const {addError} = useAlerts();
+  const { getMostPopularBook } = useDashboardApi();
+  const { addError } = useAlerts();
 
   const loadStatistic = () => {
     setCardState(CardStates.LOADING);

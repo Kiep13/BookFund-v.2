@@ -33,7 +33,7 @@ export const CommentsCard = ({ selectedMonth }: IProps ) => {
 
   const { getRatesStatistic } = useDashboardApi();
   const { addError } = useAlerts();
-  const {transformToLineData} = useCharts();
+  const { transformToLineData } = useCharts();
 
   const loadStatistic = () => {
     setCardState(CardStates.LOADING);

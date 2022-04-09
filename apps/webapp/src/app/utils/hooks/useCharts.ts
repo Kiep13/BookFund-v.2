@@ -10,7 +10,7 @@ import {
   ILineDataset,
   ILineRaw, IOverallRaw, IOverallStatistic, IOverallStatisticRaw
 } from '@utils/interfaces';
-import { BLUE_PALETTE, DATE_API_FORMAT } from '@utils/constants';
+import { BLUE_PALETTE, DATE_API_FORMAT, DATE_LINE_CHART_FORMAT } from '@utils/constants';
 import { useDates } from '@utils/hooks';
 
 export const useCharts = () => {
@@ -41,7 +41,7 @@ export const useCharts = () => {
 
       const data = dateLabels.map((dateLabel: string) => {
         const statisticItem = (value as ILineRaw[]).find((statisticItem: ILineRaw) => {
-          return moment(statisticItem.date, DATE_API_FORMAT).startOf('date').format('MMM D') === dateLabel;
+          return moment(statisticItem.date, DATE_API_FORMAT).startOf('date').format(DATE_LINE_CHART_FORMAT) === dateLabel;
         })
 
         return statisticItem?.amount || 0;
