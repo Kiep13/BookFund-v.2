@@ -1,6 +1,12 @@
 const CARD_HEIGHT: string = '470px'
 
 export const STYLES = {
+  loaderWrapper: {
+    height: 'calc(100vh - 160px)',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
+  },
   content: {
     display: 'flex',
     gap: 2,

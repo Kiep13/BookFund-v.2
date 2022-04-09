@@ -2,7 +2,9 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { Card } from '@components/cards/Card';
+import { StatefulCard } from '@components/cards/StatefulCard';
 import { OVERALL_STATISTIC_MOCK } from '@mocks/overallStatisticsMock';
+import { CardStates } from '@utils/enums';
 import { IOverallStatistic } from '@utils/interfaces';
 import { useStorage } from '@utils/hooks';
 
@@ -18,13 +20,18 @@ import {
 import { SELECTED_MONTH_STORAGE_KEY, STYLES } from './constants';
 
 export const Dashboard = () => {
-  const [selectedMonth, setSelectedMonth] = useState<Date>(new Date());
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
+  const [selectedMonth, setSelectedMonth] = useState<Date>();
   const { doesStorageHave, getFromStorage, saveToStorage } = useStorage();
 
   const readMonthFromLocalStorage = () => {
     if(doesStorageHave(SELECTED_MONTH_STORAGE_KEY)) {
       setSelectedMonth(getFromStorage(SELECTED_MONTH_STORAGE_KEY));
+    } else {
+      setSelectedMonth(new Date());
     }
+
+    setPageState(CardStates.CONTENT);
   }
 
   const handleSelectedMonthChange = (date: Date) => {
@@ -35,6 +42,17 @@ export const Dashboard = () => {
   useEffect(() => {
     readMonthFromLocalStorage();
   }, []);
+
+  if(!selectedMonth) {
+    return (
+      <Box sx={STYLES.loaderWrapper}>
+        <StatefulCard state={pageState}>
+          <Box/>
+        </StatefulCard>
+      </Box>
+
+    )
+  }
 
   return (
     <>
@@ -74,6 +92,7 @@ export const Dashboard = () => {
         </Box>
       </Box>
     </>
+
   )
 }
 
