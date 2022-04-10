@@ -20,7 +20,7 @@ import {
   STYLES
 } from './constants';
 
-export const Page = () => {
+const Page = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [statusValue, setStatusValue] = useState<string>(ALL_VALUE);
   const [count, setCount] = useState<number>(0);

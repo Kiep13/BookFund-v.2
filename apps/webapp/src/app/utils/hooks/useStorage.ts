@@ -11,9 +11,14 @@ export const useStorage = () => {
     localStorage.setItem(key, data);
   }
 
+  const deleteFromStorage = (key: string) => {
+    localStorage.removeItem(key);
+  }
+
   return {
     doesStorageHave,
     getFromStorage,
-    saveToStorage
+    saveToStorage,
+    deleteFromStorage
   }
 }

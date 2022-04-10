@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 import { login as setAuthData } from '@store/reducers/authSlice';
-import { axios, API_LOGIN_ERROR } from '@utils/constants';
+import { axios, API_LOGIN_ERROR, RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
 import { AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { IAuthResponse } from '@utils/interfaces';
-import { useAlerts, useApi, useAuthHandlers } from '@utils/hooks';
+import { useAlerts, useApi, useAuthHandlers, useStorage } from '@utils/hooks';
 
 import { IPageParams } from './interfaces';
 import { API_SESSION_EXPIRED_ERROR, STYLES, SUCCESSFULLY_AUTHORIZED } from './constants';
@@ -21,6 +21,7 @@ export const Authorizing = () => {
   const { login, refresh } = useApi();
   const { addSuccess } = useAlerts();
   const { handleLogOut } = useAuthHandlers();
+  const { doesStorageHave, getFromStorage, deleteFromStorage } = useStorage();
 
   const sendLoginRequest = () => {
     const provider = (params as IPageParams).provider;
@@ -44,6 +45,14 @@ export const Authorizing = () => {
       .then((authResponse: IAuthResponse) => {
         dispatch(setAuthData(authResponse));
         axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.accessToken}`;
+
+        if(doesStorageHave(RELOAD_PATHNAME_STORAGE_KEY)) {
+          const pathname = getFromStorage(RELOAD_PATHNAME_STORAGE_KEY);
+          deleteFromStorage(RELOAD_PATHNAME_STORAGE_KEY);
+
+          history.push(pathname);
+          return;
+        }
 
         history.goBack();
       })
