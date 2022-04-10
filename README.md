@@ -5,6 +5,8 @@ A small application created using React and Node. Handles tables from the databa
 <img src="screenshots/screenshot1.png" alt="screenshot1" width="600">
 <img src="screenshots/screenshot2.png" alt="screenshot2" width="600">
 <img src="screenshots/screenshot3.png" alt="screenshot3" width="600">
+<img src="screenshots/screenshot4.png" alt="screenshot3" width="600">
+<img src="screenshots/screenshot5.png" alt="screenshot3" width="600">
 </p>
 
 ### Docker
