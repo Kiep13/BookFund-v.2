@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import { AlertsBlock } from '@components/AlertsBlock';
-import { ProtectedRoute } from '@components/routes/ProtectedRoute';
+import { PrivateRoute, ProtectedRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Author, Book, Collection, Home, Search } from '@pages/base';
@@ -36,7 +36,9 @@ const App = () => {
         <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
         <Route path={AuthRoutePaths.LOGIN} component={Login}/>
 
-        <Route path={AdminRoutePaths.ADMIN} component={Admin}/>
+        <PrivateRoute path={AdminRoutePaths.ADMIN}>
+          <Admin/>
+        </PrivateRoute>
       </Switch>
     </Provider>
   );
