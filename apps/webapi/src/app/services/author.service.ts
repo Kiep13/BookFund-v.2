@@ -1,5 +1,3 @@
-import { ILike } from 'typeorm';
-
 import { connection } from  '@core/connection';
 import { SortDirections } from '@core/enums';
 import { IAuthorForm, IListApiView, ISearchOptions } from '@core/interfaces';
@@ -18,30 +16,31 @@ class AuthorService {
   }
 
   public async getAuthors(requestParams: ISearchOptions): Promise<IListApiView<AuthorEntity>> {
-    const [authors, count] = await connection.getRepository(AuthorEntity).findAndCount({
-      select: ['id', 'surname', 'name', 'image', 'createdAt', 'updatedAt'],
-      relations: ['books'],
-      order: {
-        ...(requestParams.orderBy && requestParams.orderBy !== 'fullName' ? {
-          [requestParams.orderBy]: requestParams.order || SortDirections.ASC
-        } : {
-          surname: requestParams.order || SortDirections.ASC,
-          name: requestParams.order || SortDirections.ASC,
-        })
-      },
-      take: +requestParams.pageSize,
-      skip: (+requestParams.pageSize * +requestParams.page),
-      where: [
-        {surname: ILike(`%${requestParams.searchTerm || ''}%`)},
-        {name: ILike(`%${requestParams.searchTerm || ''}%`)},
-      ]
-    });
+    const baseRequestConfigurations = () => connection.createQueryBuilder(AuthorEntity, 'author')
+      .leftJoinAndSelect('author.books', 'book')
+      .groupBy('author.id')
+      .select('COUNT(book.id)', 'amountBooks')
+      .addSelect('CONCAT(author.name, \' \', author.surname)', 'fullName')
+      .addSelect('author.id', 'id')
+      .addSelect('author.name', 'name')
+      .addSelect('author.surname', 'surname')
+      .addSelect('author.image', 'image')
+      .addSelect('author.createdAt', 'createdAt')
+      .addSelect('author.updatedAt', 'updatedAt');
 
-    authors.map((author: AuthorEntity) => {
-      author.amountBooks = author.books.length;
-      delete author.books;
-      author.fullName = `${author.name || ''} ${author.surname || ''}`
-    });
+    const authors = await baseRequestConfigurations()
+      .orderBy(`\"${requestParams.orderBy || 'fullName'}\"`, requestParams.order || SortDirections.ASC)
+      .limit(+requestParams.pageSize)
+      .offset(+requestParams.pageSize * +requestParams.page)
+      .where(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
+      .orWhere(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
+      .getRawMany();
+
+    const count = await baseRequestConfigurations()
+      .orderBy(`\"${requestParams.orderBy || 'fullName'}\"`, requestParams.order || SortDirections.ASC)
+      .where(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
+      .orWhere(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
+      .getCount();
 
     return {
       data: authors,

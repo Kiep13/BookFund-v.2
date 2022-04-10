@@ -3,7 +3,7 @@ import { AlignTypes, CellTypes } from '@utils/enums';
 
 export const COLUMNS: IDataColumn[] = [
   {
-    id: 'name',
+    id: 'fullName',
     numeric: false,
     label: 'Name',
     name: 'fullName',
