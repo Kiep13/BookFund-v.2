@@ -33,13 +33,13 @@ class AuthorService {
       .limit(+requestParams.pageSize)
       .offset(+requestParams.pageSize * +requestParams.page)
       .where(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
-      .orWhere(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
+      .orWhere(`\"surname\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
       .getRawMany();
 
     const count = await baseRequestConfigurations()
       .orderBy(`\"${requestParams.orderBy || 'fullName'}\"`, requestParams.order || SortDirections.ASC)
       .where(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
-      .orWhere(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
+      .orWhere(`\"surname\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
       .getCount();
 
     return {

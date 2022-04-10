@@ -33,8 +33,6 @@ export const OverallStatisticCardsRow = ({ selectedMonth }: IProps) => {
 
     getOverallStatistic(searchOptions)
       .then((response: IOverallStatisticRaw) => {
-        console.log(response);
-
         const data: IOverallStatistic[] = transformToOverallStatistic(response, LABELS);
         data.push(OVERALL_STATISTIC_MOCK[3]);
         setOverallStatisticData(data);
