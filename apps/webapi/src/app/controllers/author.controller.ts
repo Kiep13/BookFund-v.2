@@ -41,7 +41,21 @@ class AuthorController {
   public async getAuthor(request: Request, response: Response, next: Function): Response {
     try {
       const authorId = +request.params.id;
-      const author = await connection.manager.findOne(AuthorEntity, authorId);
+
+      const author = await connection.createQueryBuilder(AuthorEntity, 'author')
+        .leftJoinAndSelect('author.books', 'book')
+        .groupBy('author.id')
+        .select('COUNT(book.id)', 'amountBooks')
+        .addSelect('CONCAT(author.name, \' \', author.surname)', 'fullName')
+        .addSelect('author.id', 'id')
+        .addSelect('author.name', 'name')
+        .addSelect('author.surname', 'surname')
+        .addSelect('author.image', 'image')
+        .addSelect('author.biography', 'biography')
+        .addSelect('author.createdAt', 'createdAt')
+        .addSelect('author.updatedAt', 'updatedAt')
+        .where(`author.id = ${authorId}`)
+        .getRawOne()
 
       return response.status(ResponseStatuses.STATUS_OK).json(author);
     } catch (error) {

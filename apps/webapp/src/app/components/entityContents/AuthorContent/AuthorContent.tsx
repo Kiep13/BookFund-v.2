@@ -65,10 +65,10 @@ export const AuthorContent = ({ author, bookLink }: IProps ) => {
 
       <Box sx={STYLES.info}>
         <Typography variant='h3' gutterBottom component='div'>
-          {author?.name} {author?.surname}
+          {author?.fullName}
         </Typography>
 
-        <Box sx={STYLES.booksCount}>{count} {count !== 1 ? `books` : `book`} </Box>
+        <Box sx={STYLES.booksCount}>{author?.amountBooks} {author?.amountBooks !== 1 ? `books` : `book`} </Box>
 
         {
           author?.biography?.split('\n').map((text: string, index: number) => {
