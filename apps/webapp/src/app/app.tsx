@@ -1,12 +1,12 @@
 import { CssBaseline  }from '@mui/material';
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { AlertsBlock } from '@components/AlertsBlock';
 import { PrivateRoute, ProtectedRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
-import { Author, Book, Collection, Home, Search } from '@pages/base';
+import { Author, Book, Collection, Home, NotFound, Search } from '@pages/base';
 import { Articles, Favorites } from '@pages/user';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import store from '@store/index';
@@ -39,6 +39,9 @@ const App = () => {
         <PrivateRoute path={AdminRoutePaths.ADMIN}>
           <Admin/>
         </PrivateRoute>
+
+        <Route path={BaseRoutePaths.NOT_FOUND} component={NotFound}/>
+        <Route path={'*'} render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
       </Switch>
     </Provider>
   );
