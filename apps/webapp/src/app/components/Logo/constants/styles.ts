@@ -3,7 +3,8 @@ export const STYLES = {
     display: 'flex',
     alignItems: 'center',
     fontSize: '28px',
-    gap: 1
+    gap: 1,
+    color: 'black'
   },
   image: {
     width: '40px',
