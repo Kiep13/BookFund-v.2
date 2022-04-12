@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import queryString from 'query-string';
 
 import { environment } from '@environments/environment';
-import { axios} from '@utils/constants';
+import { axiosInstance as axios} from '@utils/constants';
 import {
   IBook,
   IAdminDashboardSearchOptions,

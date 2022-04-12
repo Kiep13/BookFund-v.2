@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { logout } from '@store/reducers';
-import { axios } from '@utils/constants';
+import { axiosInstance as axios } from '@utils/constants';
 import { AuthRoutePaths } from '@utils/enums';
 import { useAlerts } from '@utils/hooks';
 

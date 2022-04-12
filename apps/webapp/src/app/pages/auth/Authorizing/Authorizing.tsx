@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 import { login as setAuthData } from '@store/reducers/authSlice';
-import { axios, API_LOGIN_ERROR, RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
+import { axiosInstance as axios, API_LOGIN_ERROR, RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
 import { AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { IAuthResponse } from '@utils/interfaces';
 import { useAlerts, useApi, useAuthHandlers, useStorage } from '@utils/hooks';

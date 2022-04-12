@@ -24,6 +24,6 @@ export const authMiddleware = async (request: Request, response: Response, next:
     request.account = account;
     next();
   } catch(e) {
-    return next(ApiError.UnauthorizedError);
+    return next(ApiError.UnauthorizedError());
   }
 }

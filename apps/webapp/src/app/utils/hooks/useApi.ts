@@ -6,7 +6,7 @@ import { IAuthorForm } from '@pages/admin/AuthorForm/interfaces';
 import { IBookForm } from '@pages/admin/BookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/CollectionForm/interfaces';
 import { IGenreForm } from '@pages/admin/GenreForm/interfaces';
-import { axios, API_TOOLTIP_ERROR } from '@utils/constants';
+import { axiosInstance as axios, API_TOOLTIP_ERROR } from '@utils/constants';
 import { useAlerts } from '@utils/hooks';
 import {
   IAuthor,

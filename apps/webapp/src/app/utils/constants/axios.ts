@@ -1,23 +1,20 @@
-import axios, { AxiosResponse } from 'axios';
-import { useHistory } from 'react-router';
+import axios from 'axios';
 
 import { AuthRoutePaths, ResponseStatuses } from '@utils/enums';
 
-axios.interceptors.request.use((config) => {
-  config.withCredentials = true;
-  return config;
+const axiosInstance = axios.create({
+  withCredentials: true
 });
 
-axios.interceptors.response.use((response: AxiosResponse) => {
-  return response;
-}, async (error) => {
-  if(error.status === ResponseStatuses.STATUS_NOT_AUTHORIZED) {
-    const history = useHistory();
-    history.push(AuthRoutePaths.REFRESH);
-    return;
-  }
-});
+axiosInstance.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status === ResponseStatuses.STATUS_NOT_AUTHORIZED) {
+      window.location.href = AuthRoutePaths.REFRESH;
+      return;
+    }
+  });
 
 export {
-  axios
+  axiosInstance
 };
