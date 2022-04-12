@@ -46,7 +46,6 @@ export const Dashboard = () => {
           <Box/>
         </StatefulCard>
       </Box>
-
     )
   }
 

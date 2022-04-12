@@ -78,8 +78,8 @@ export const AuthorContent = ({ author, bookLink }: IProps ) => {
 
         {
           books.map((book: IBook) => {
-            return <Link to={`${bookLink}/${book.id}`}>
-              <Box sx={STYLES.bookBox} key={book.id}>
+            return <Link to={`${bookLink}/${book.id}`} key={book.id}>
+              <Box sx={STYLES.bookBox}>
                 <HorizontalBookCard book={book}/>
               </Box>
             </Link>

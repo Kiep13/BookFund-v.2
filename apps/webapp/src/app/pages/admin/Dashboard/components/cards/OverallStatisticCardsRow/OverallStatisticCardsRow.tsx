@@ -53,7 +53,7 @@ export const OverallStatisticCardsRow = ({ selectedMonth }: IProps) => {
     <>
       {
         overallStatisticData.map((item: IOverallStatistic) => {
-          return <Card styles={STYLES.overallStatisticCard} key={item.total}>
+          return <Card styles={STYLES.overallStatisticCard} key={item.title}>
             <StatefulCard state={cardState}>
               <StatisticCard {...item}/>
             </StatefulCard>
