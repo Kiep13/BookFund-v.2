@@ -41,7 +41,7 @@ export const Page = () => {
           <BookContent book={book}
                        authorLink={getAuthorPageUrlWithoutId()}
                        isCommentFormShown={isAuthorized}
-                       isStatusShown={isAuthorized}
+                       isActionsShown={isAuthorized}
                        handleBookChange={handleBookChange}/>
         </StatefulCard>
       </Box>

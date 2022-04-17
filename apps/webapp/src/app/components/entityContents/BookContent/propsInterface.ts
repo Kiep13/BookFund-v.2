@@ -4,6 +4,6 @@ export interface IProps {
   book: IBook | undefined,
   authorLink: string,
   isCommentFormShown?: boolean,
-  isStatusShown?: boolean,
+  isActionsShown?: boolean,
   handleBookChange?: Function
 }

@@ -7,7 +7,7 @@ import { PrivateRoute, ProtectedRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Author, Book, Collection, Home, NotFound, Search } from '@pages/base';
-import { Articles, Favorites } from '@pages/user';
+import { Articles, Favorites, Reading } from '@pages/user';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import store from '@store/index';
 
@@ -19,8 +19,9 @@ const App = () => {
       <Switch>
         <Route path={BaseRoutePaths.HOME} component={Home} exact/>
         <Route path={`${BaseRoutePaths.AUTHOR}/:id`} component={Author}/>
-        <Route path={`${BaseRoutePaths.BOOK}/:id`} component={Book}/>
+        <Route path={`${BaseRoutePaths.BOOK}/:id`} component={Book} exact/>
         <Route path={`${BaseRoutePaths.COLLECTION}/:id`} component={Collection}/>
+        <Route path={`${BaseRoutePaths.SEARCH}/:searchTerm`} component={Search}/>
 
         <ProtectedRoute path={BaseRoutePaths.FAVORITES}>
           <Favorites/>
@@ -28,8 +29,8 @@ const App = () => {
         <ProtectedRoute path={BaseRoutePaths.ARTICLES}>
           <Articles/>
         </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
-          <Search/>
+        <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`}>
+          <Reading/>
         </ProtectedRoute>
 
         <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>

@@ -33,6 +33,14 @@ export const STYLES = {
     ml: 0
   },
   commentForm: {
-    mb: 3
+    mb: 2
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 1
+  },
+  readButton: {
+    width: '100%'
   }
 }
