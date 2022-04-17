@@ -23,7 +23,7 @@ const App = () => {
         <PublicRoute path={`${BaseRoutePaths.AUTHOR}/:id`}>
           <Author/>
         </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`}>
+        <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`} exact>
           <Book/>
         </PublicRoute>
         <PublicRoute path={`${BaseRoutePaths.COLLECTION}/:id`}>
