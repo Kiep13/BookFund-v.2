@@ -41,6 +41,7 @@ export const STYLES = {
     gap: 1
   },
   readButton: {
-    width: '100%'
+    width: '100%',
+    lineHeight: 'initial'
   }
 }
