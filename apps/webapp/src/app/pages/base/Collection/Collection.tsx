@@ -1,16 +1,14 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { wrapUserPage } from '@components/PageWrapper';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { CollectionContent } from '@components/entityContents/CollectionContent';
 import { useBookActions, useCollectionLoad } from '@utils/hooks';
-import { compose } from '@utils/helpers';
 
 import { PAGE_TITLE } from './constants';
 
-const Page = () => {
+export const Collection = () => {
   const history = useHistory();
 
   const {
@@ -36,8 +34,4 @@ const Page = () => {
     </>
   )
 }
-
-export const Collection = compose(
-  wrapUserPage()
-)(Page);
 

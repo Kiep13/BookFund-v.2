@@ -6,14 +6,12 @@ import { useSelector } from 'react-redux';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { BookContent } from '@components/entityContents/BookContent';
-import { wrapUserPage } from '@components/PageWrapper';
 import { getIsAuthorized } from '@store/reducers';
 import { useAuthorActions, useBookLoad } from '@utils/hooks';
-import { compose } from '@utils/helpers';
 
 import { PAGE_TITLE, STYLES } from './constants';
 
-export const Page = () => {
+export const Book = () => {
   const history = useHistory();
   const {
     book,
@@ -48,7 +46,3 @@ export const Page = () => {
     </>
   )
 }
-
-export const Book = compose(
-  wrapUserPage()
-)(Page);

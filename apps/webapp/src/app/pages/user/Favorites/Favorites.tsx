@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { BookPromoCard } from '@components/cards/BookPromoCard';
 import { StatefulCard } from '@components/cards/StatefulCard';
-import { wrapUserPage } from '@components/PageWrapper';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BookStatuses, CardStates } from '@utils/enums';
-import { compose } from '@utils/helpers';
 import { useAlerts, useApi, useBookActions } from '@utils/hooks';
 import { IFavorite, IListApiView, ISearchOptions } from '@utils/interfaces';
 
@@ -20,7 +18,7 @@ import {
   STYLES
 } from './constants';
 
-const Page = () => {
+export const Favorites = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [statusValue, setStatusValue] = useState<string>(ALL_VALUE);
   const [count, setCount] = useState<number>(0);
@@ -130,7 +128,3 @@ const Page = () => {
     </Box>
   )
 }
-
-export const Favorites = compose(
-  wrapUserPage()
-)(Page);

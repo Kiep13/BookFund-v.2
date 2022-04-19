@@ -1,6 +1,7 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import { Layout } from '@components/Layout';
 import { getIsAdmin, getIsAuthorized } from '@store/reducers';
 import { RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
 import { AuthRoutePaths } from '@utils/enums';
@@ -25,7 +26,7 @@ export const PrivateRoute = ({ children, ...rest }) => {
       return <Redirect to={`${AuthRoutePaths.LOGIN}`}/>;
     }
 
-    return children;
+    return <Layout children={children} />;
   }
 
   return (

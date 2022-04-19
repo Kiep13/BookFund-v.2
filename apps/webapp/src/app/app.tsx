@@ -1,4 +1,4 @@
-import { CssBaseline  }from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { Provider } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
@@ -29,6 +29,9 @@ const App = () => {
         <PublicRoute path={`${BaseRoutePaths.COLLECTION}/:id`}>
           <Collection/>
         </PublicRoute>
+        <PublicRoute path={BaseRoutePaths.NOT_FOUND}>
+          <NotFound/>
+        </PublicRoute>
 
         <ProtectedRoute path={BaseRoutePaths.FAVORITES}>
           <Favorites/>
@@ -40,15 +43,14 @@ const App = () => {
           <Search/>
         </ProtectedRoute>
 
-        <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>
-        <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
-        <Route path={AuthRoutePaths.LOGIN} component={Login}/>
-
         <PrivateRoute path={AdminRoutePaths.ADMIN}>
           <Admin/>
         </PrivateRoute>
 
-        <Route path={BaseRoutePaths.NOT_FOUND} component={NotFound}/>
+        <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>
+        <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
+        <Route path={AuthRoutePaths.LOGIN} component={Login}/>
+
         <Route path={'*'} render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
       </Switch>
     </Provider>
