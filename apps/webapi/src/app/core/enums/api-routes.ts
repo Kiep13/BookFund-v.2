@@ -8,7 +8,8 @@ export enum ApiRoutes {
   COLLECTION = 'collection',
   COMMENT = 'comment',
   SEARCH = 'search',
-  STATISTIC = 'statistic'
+  STATISTIC = 'statistic',
+  READ = 'read'
 }
 
 export enum ApiRoutesModifiers {
