@@ -5,5 +5,7 @@ export enum ObjectProperties {
   PARENT = 'Parent',
   MEDIABOX = 'MediaBox',
   FILTER = 'Filter',
-  STRUCT_TREE_ROOT = 'StructTreeRoot'
+  STRUCT_TREE_ROOT = 'StructTreeRoot',
+  PREV = 'Prev',
+  NEXT = 'Next'
 }
