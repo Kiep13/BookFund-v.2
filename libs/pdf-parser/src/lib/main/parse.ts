@@ -1,8 +1,8 @@
 import { inflateSync } from 'zlib';
 
 import { PROPERTIES_REG_EXP, PDF_VERSION_REG_EXP } from '../constants';
-import {FilterTypes} from '../enums';
-import { buildNodeTree, getCatalogNode, parseProperties } from '../helpers';
+import { StreamCompressionMethods } from '../enums';
+import { buildNodeTree, getCatalogNode, getPages, parseProperties } from '../helpers';
 
 export const parse = (buffer) => {
   let stringBufferContent = buffer.toString('binary');
@@ -71,12 +71,13 @@ export const parse = (buffer) => {
 
       delete object.content;
 
-      if(object.stream && object?.Filter === FilterTypes.FLATE_DECODE) {
-        const bufferStream = Buffer.from(object.stream, 'binary')
+      if(object.stream && object?.Filter === StreamCompressionMethods.FlateDecode) {
+        const bufferStream = Buffer.from(object.stream, 'binary');
         object.stream = inflateSync(bufferStream).toString();
       }
     } catch (e) {
       console.log(object.objectId);
+      console.log(object.stream.length)
       console.log(e);
       throw Error;
     }
@@ -91,7 +92,7 @@ export const parse = (buffer) => {
   const pdfInfo = {
     pdfVersion,
     // totalPagesCount: +nodeTree['Pages'][0].Count,
-    nodeTree,
+    nodeTree
   }
 
   return pdfInfo;

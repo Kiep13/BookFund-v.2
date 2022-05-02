@@ -9,7 +9,7 @@ import { ResponseStatuses } from '@core/enums';
 class ReadController {
   public async getPages(request: Request, response: Response, next: Function): Response {
     try {
-      const buffer = await fs.readFile(`${path.resolve(__dirname, 'assets\\books\\test1.7.pdf')}`);
+      const buffer = await fs.readFile(`${path.resolve(__dirname, 'assets\\books\\test1.3.pdf')}`);
       const pdfInfo = parse(buffer);
 
       return response.status(ResponseStatuses.STATUS_OK).json(pdfInfo);
