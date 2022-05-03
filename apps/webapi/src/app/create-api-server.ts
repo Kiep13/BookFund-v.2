@@ -29,6 +29,7 @@ apiServer.use(cors({
 apiServer.use(express.json());
 apiServer.use(cookieParser());
 apiServer.use(express.static(`../${environment.imagesFolder}`));
+apiServer.use(express.static(`../assets/books`));
 
 apiServer.use(`/v1/${ApiRoutes.AUTH}`, authRoutes);
 apiServer.use(`/v1/${ApiRoutes.AUTHOR}`, authorRoutes);

@@ -191,6 +191,10 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getBookFile = async (): Promise<any> => {
+    return await axios.get(`${environment.backEndUrl}/v1/book/1/read`, { responseType: 'arraybuffer' });
+  }
+
   return {
     login,
     refresh,
@@ -222,6 +226,7 @@ export const useApi = () => {
     getCollection,
     getCollections,
     deleteCollection,
-    search
+    search,
+    getBookFile
   }
 }
