@@ -1,3 +1,5 @@
+import { ERROR_COLOR } from '@utils/constants';
+
 export const STYLES_IMAGE_FORM = {
   formWrapper: {
     display: 'flex',
@@ -20,6 +22,17 @@ export const STYLES_IMAGE_FORM = {
   },
   urlInput: {
     flex: 8
+  },
+  error: {
+    mt: 1,
+    fontSize: 12,
+    color: '#d32f2f',
+    ms: 2,
+    me: 2,
+  },
+  errorButton: {
+    color: ERROR_COLOR,
+    borderColor: ERROR_COLOR
   }
 }
 

@@ -31,7 +31,7 @@ class AuthorService {
     const authors = await baseRequestConfigurations()
       .orderBy(`\"${requestParams.orderBy || 'fullName'}\"`, requestParams.order || SortDirections.ASC)
       .limit(+requestParams.pageSize)
-      .offset(+requestParams.pageSize * +requestParams.page)
+      .offset(+requestParams.pageSize * (+requestParams.page || 0))
       .where(`\"name\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
       .orWhere(`\"surname\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
       .getRawMany();

@@ -35,6 +35,9 @@ export const STYLES = {
   imageWrapper: {
     mb: 3
   },
+  fileWrapper: {
+    mb: 3
+  },
   descriptionInput: {
     mb: 3,
     width: '100%'

@@ -4,7 +4,7 @@ import { FormikHelpers } from 'formik/dist/types';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ImageUpload } from '@components/ImageUpload';
+import { ImageUpload } from '@components/formСomponents/ImageUpload';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { Card } from '@components/cards/Card';
 import { Input } from '@components/formСomponents/Input';
