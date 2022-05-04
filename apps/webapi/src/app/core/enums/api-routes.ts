@@ -3,6 +3,7 @@ export enum ApiRoutes {
   AUTHOR = 'author',
   IMAGE = 'image',
   BOOK = 'book',
+  FILE = 'file',
   GENRE = 'genre',
   FAVORITE = 'favorite',
   COLLECTION = 'collection',

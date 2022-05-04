@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as path from 'path';
 
 class ReadController {
-  public async getPages(request: Request, response: Response, next: Function): Response {
+  public async getFile(request: Request, response: Response, next: Function): Response {
     try {
       // const buffer = await fs.readFile(`${path.resolve(__dirname, 'assets\\books\\test1.3.pdf')}`);
       // const pdfInfo = parse(buffer);

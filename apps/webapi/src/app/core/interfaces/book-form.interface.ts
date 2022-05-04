@@ -8,5 +8,7 @@ export interface IBookForm {
   genres: GenreEntity[],
   description: string,
   author?: AuthorEntity,
-  imageUrl?: string
+  imageUrl?: string,
+  fileName?: string,
+  fileUrl?: string
 }

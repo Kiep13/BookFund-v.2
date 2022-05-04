@@ -53,7 +53,14 @@ export const BookForm = () => {
         const formData = new FormData();
         formData.append('image', values.imageFile);
 
-        values.imageUrl = await(await api.saveImage(formData));
+        values.imageUrl = await api.saveImage(formData);
+      }
+
+      if(values.file) {
+        const formData = new FormData();
+        formData.append('file', values.file);
+
+        values.fileUrl = await api.saveFile(formData);
       }
 
       await callSubmitAction(values);

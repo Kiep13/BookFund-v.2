@@ -2,6 +2,7 @@ export * from './image.service';
 export * from './book.service';
 export * from './collection.service';
 export * from './facebook.service';
+export * from './file.service';
 export * from './genre.service';
 export * from './github.service';
 export * from './google.service';

@@ -10,5 +10,6 @@ export interface IBookForm {
   imageUrl?: string,
   imageFile?: File,
   fileName?: string,
-  file?: File
+  file?: File,
+  fileUrl?: string
 }

@@ -34,6 +34,16 @@ export class createBookTable1643311401294 implements MigrationInterface {
             isNullable: true
           },
           {
+            name: 'fileUrl',
+            type: 'varchar',
+            isNullable: false
+          },
+          {
+            name: 'fileName',
+            type: 'varchar',
+            isNullable: false
+          },
+          {
             name: 'description',
             type: 'text',
             isNullable: false
