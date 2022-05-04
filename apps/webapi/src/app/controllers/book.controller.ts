@@ -7,6 +7,7 @@ import { environment } from '@environments/environment';
 import { BookEntity } from '@entities/book.entity';
 import { bookService } from '@services/book.service';
 import { imageService } from '@services/image.service';
+import { fileService } from '@services/file.service';
 import { tokenService } from '@services/token.service';
 
 class BookController {
@@ -29,8 +30,13 @@ class BookController {
       const currentBook = await connection.manager.findOne(BookEntity, bookId, {
         relations: ['genres']
       });
+
       if (currentBook.image !== request.body.imageUrl && currentBook.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
         await imageService.deleteImage(currentBook.image);
+      }
+
+      if (currentBook.fileUrl !== request.body.fileUrl) {
+        await fileService.deleteFile(currentBook.fileUrl);
       }
 
       await connection.manager.createQueryBuilder(BookEntity, 'book')

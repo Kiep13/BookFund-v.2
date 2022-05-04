@@ -5,7 +5,7 @@ export const FileUpload = ({form, fileNameFieldName, fileFieldName}: IProps) => 
   const {values, errors} = form;
 
   const clearValue = () => {
-    form.setFieldValue(fileNameFieldName, '');
+    form.setFieldValue(fileNameFieldName, null);
     form.setFieldValue(fileFieldName, undefined);
   }
 

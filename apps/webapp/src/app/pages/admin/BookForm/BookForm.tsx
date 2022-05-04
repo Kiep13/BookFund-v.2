@@ -184,7 +184,7 @@ export const BookForm = () => {
             <Button
               variant='contained'
               type='submit'
-              disabled={formik.isSubmitting || (formik.touched && !formik.isValid)}>
+              disabled={formik.isSubmitting || !formik.isValid}>
               Save
             </Button>
           </Box>
