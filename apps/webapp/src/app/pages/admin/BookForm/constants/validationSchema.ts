@@ -11,10 +11,6 @@ export const VALIDATION_SCHEMA = yup.object().shape({
     .max(MAX_NAME_LENGTH, `Title must be at most ${MAX_NAME_LENGTH} characters`),
   author: yup.object()
     .required('This field can not be empty'),
-  amountPages: yup.number()
-    .required('This field can not be empty')
-    .min(1, 'Amount of pages must be at least 1')
-    .max(5000, 'Amount of pages must be at most 5000'),
   year: yup.number()
     .required('This field can not be empty')
     .min(1950, 'Year must be at least 1')

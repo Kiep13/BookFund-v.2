@@ -10,7 +10,7 @@ class ImageService {
     const expansion = fileNameParts[fileNameParts.length - 1];
     const fileName = `${uuid.v4()}.${expansion}`;
 
-    const filePath = `${path.resolve(__dirname, '..', '..', environment.imagesFolder, fileName)}`;
+    const filePath = `${path.resolve(__dirname, environment.imagesFolder, fileName)}`;
 
     await file.mv(filePath);
     return fileName;
@@ -20,7 +20,7 @@ class ImageService {
     const fileParts = fileUrl.split('/');
     const fileName = fileParts[fileParts.length - 1];
 
-    const filePath = `${path.resolve(__dirname, '..', '..', environment.imagesFolder, fileName)}`;
+    const filePath = `${path.resolve(__dirname, environment.imagesFolder, fileName)}`;
     await fs.unlinkSync(filePath);
   }
 }

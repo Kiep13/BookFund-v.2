@@ -14,7 +14,7 @@ router.put(`/${ApiRoutesModifiers.UPDATE}/:id`, authMiddleware, adminMiddleware,
 router.delete(`/${ApiRoutesModifiers.DELETE}/:id`,  authMiddleware, adminMiddleware, bookController.deleteBook);
 
 router.post(`/${ApiRoutes.FILE}/${ApiRoutesModifiers.SAVE}`, authMiddleware, adminMiddleware, fileController.saveFile);
-router.get(`/${ApiRoutes.FILE}/:name`, authMiddleware, fileController.saveFile);
+router.get(`/${ApiRoutes.FILE}/:name`, fileController.getFile);
 
 router.get(`/:id/${ApiRoutes.READ}`, readController.getFile);
 router.get(`/:id`, bookController.getBook);
