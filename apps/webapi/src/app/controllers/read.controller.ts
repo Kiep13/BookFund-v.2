@@ -1,17 +1,23 @@
 import { Request, Response } from 'express';
-import * as path from 'path';
+
+import { BookStatuses, ResponseStatuses } from '@core/enums';
+import { readingService } from '@services/reading.service';
 
 class ReadController {
   public async getFile(request: Request, response: Response, next: Function): Response {
     try {
-      // const buffer = await fs.readFile(`${path.resolve(__dirname, 'assets\\books\\test1.3.pdf')}`);
-      // const pdfInfo = parse(buffer);
-      //
-      // return response.status(ResponseStatuses.STATUS_OK).json(pdfInfo);
+      const bookId = +request.params.id;
+      const accountId = request.account.id;
 
-      const filePath = path.join(__dirname, 'assets/books', 'test1.6.pdf');
+      let favorite = await readingService.getActualReadingInfo(bookId, accountId);
 
-      return response.sendFile(filePath);
+      if(!favorite) {
+        favorite = await readingService.createFavorite(bookId, request.account);
+      } else if(favorite.status === BookStatuses.WANT_TO_READ || favorite.status === BookStatuses.DONE) {
+        favorite = await readingService.updateFavoriteStatus(favorite);
+      }
+
+      return response.status(ResponseStatuses.STATUS_OK).json(favorite);
     } catch (error) {
       next(error)
     }

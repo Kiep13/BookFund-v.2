@@ -1,49 +1,49 @@
 import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 
-export function SinglePage(props) {
-  const [numPages, setNumPages] = useState(0);
-  const [pageNumber, setPageNumber] = useState(0); //setting 1 to show fisrt page
+import { IProps } from './propsInterface';
 
-  function onDocumentLoadSuccess({numPages}) {
-    setNumPages(numPages);
-    setPageNumber(3);
+export function SinglePage({ bookmarkPage, pdfDocument }: IProps) {
+  const [amountPages, setAmountPages] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const handleDocumentLoadSuccess = ({numPages}) => {
+    setAmountPages(numPages);
+    setPageNumber(bookmarkPage);
   }
 
-  function changePage(offset) {
+  const changePage = (offset) => {
     setPageNumber(prevPageNumber => prevPageNumber + offset);
   }
 
-  function previousPage() {
+  const goPreviousPage = () => {
     changePage(-1);
   }
 
-  function nextPage() {
+  const goNextPage = () => {
     changePage(1);
   }
-
-  const {pdf} = props;
 
   return (
     <>
       <Document
-        file={pdf}
-        options={{workerSrc: "/pdf.worker.js"}}
-        onLoadSuccess={onDocumentLoadSuccess}
+        file={pdfDocument}
+        options={{workerSrc: '/pdf.worker.js'}}
+        onLoadSuccess={handleDocumentLoadSuccess}
       >
         <Page pageNumber={pageNumber} size={'A4'}/>
       </Document>
       <div>
         <p>
-          Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+          Page {pageNumber || (amountPages ? 1 : "--")} of {amountPages || "--"}
         </p>
-        <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
+        <button type='button' disabled={pageNumber <= 1} onClick={goPreviousPage}>
           Previous
         </button>
         <button
-          type="button"
-          disabled={pageNumber >= numPages}
-          onClick={nextPage}
+          type='button'
+          disabled={pageNumber >= amountPages}
+          onClick={goNextPage}
         >
           Next
         </button>

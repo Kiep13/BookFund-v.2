@@ -14,6 +14,7 @@ import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { CardStates } from '@utils/enums';
 import { IBook, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useBookActions } from '@utils/hooks';
+import { environment } from '@environments/environment';
 
 import { AuthorAutocomplete, GenresMultiAutocomplete } from './components';
 import {
@@ -63,7 +64,7 @@ export const BookForm = () => {
 
         values.fileUrl = await api.saveFile(formData);
 
-        const documentInfo = await pdfjs.getDocument(values.fileUrl).promise;
+        const documentInfo = await pdfjs.getDocument(`${environment.backEndUrl}${values.fileUrl}`).promise;
         values.amountPages = documentInfo.numPages;
       }
 

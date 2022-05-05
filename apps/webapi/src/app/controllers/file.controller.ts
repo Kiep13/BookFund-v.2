@@ -10,7 +10,7 @@ class FileController {
     try {
       const fileName = await fileService.saveFile(request.files.file);
 
-      return response.status(ResponseStatuses.STATUS_CREATED).send(`${environment.selfUrl}/v1/${ApiRoutes.BOOK}/${ApiRoutes.FILE}/${fileName}`);
+      return response.status(ResponseStatuses.STATUS_CREATED).send(`/v1/${ApiRoutes.BOOK}/${ApiRoutes.FILE}/${fileName}`);
     } catch (error) {
       next(error)
     }

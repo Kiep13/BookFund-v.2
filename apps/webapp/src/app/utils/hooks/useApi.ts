@@ -193,8 +193,13 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
-  const getBookFile = async (): Promise<any> => {
-    return await axios.get(`${environment.backEndUrl}/v1/book/1/read`, { responseType: 'arraybuffer' });
+  const getReadingInfo = async (id: number): Promise<IFavorite> => {
+    return await axios.get<IFavorite>(`${environment.backEndUrl}/v1/book/${id}/read`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const getBookFile = async (bookFileUrl: string): Promise<any> => {
+    return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, { responseType: 'arraybuffer' });
   }
 
   return {
@@ -230,6 +235,7 @@ export const useApi = () => {
     getCollections,
     deleteCollection,
     search,
+    getReadingInfo,
     getBookFile
   }
 }
