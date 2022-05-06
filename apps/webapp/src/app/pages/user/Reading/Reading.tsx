@@ -11,6 +11,7 @@ import { useApi } from '@utils/hooks';
 
 import { Header, Viewer } from './components';
 import { STYLES } from './constants';
+import { PageViews } from './enums';
 
 pdfjs.GlobalWorkerOptions.workerSrc = worker;
 
@@ -20,10 +21,11 @@ export const Reading = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [readingInfo, setReadingInfo] = useState<IFavorite>();
   const [pdfFile, setPdfFile] = useState<File>();
+  const [pageView, setPageView] = useState(PageViews.SinglePage);
 
   const { getReadingInfo, getBookFile } = useApi();
 
-  const initReadingInfo = () => {
+  const initReadingInfo = (): void => {
     const bookId = (params as IFormPageParams).id;
 
     getReadingInfo(bookId)
@@ -43,6 +45,10 @@ export const Reading = () => {
       })
   }
 
+  const handlePageViewChange = (value: PageViews): void => {
+    setPageView(value);
+  };
+
   useEffect(() => {
     initReadingInfo();
   }, []);
@@ -51,12 +57,18 @@ export const Reading = () => {
     <StatefulCard state={pageState}>
       <Box sx={STYLES.page.wrapper}>
         {
-          readingInfo && <Header book={readingInfo?.book}/>
+          readingInfo &&
+          <Header
+            book={readingInfo?.book}
+            pageView={pageView}
+            handlePageViewChange={handlePageViewChange}
+          />
         }
         <Box sx={STYLES.content}>
           {
             pdfFile &&
             <Viewer
+              pageView={pageView}
               pdfDocument={pdfFile}
               bookmarkPage={readingInfo?.bookmarkPage || 1}
             />

@@ -12,9 +12,19 @@ export const STYLES = {
     wrapper: {
       minHeight: `${HEADER_HEIGHT} !important`,
       maxHeight: HEADER_HEIGHT,
+      display: 'flex',
+      justifyContent: 'space-between',
+      pr: '35px !important'
+    },
+    titleBlock: {
+      display: 'flex',
+      alignItems: 'center'
     },
     title: {
       mb: 0
+    },
+    selector: {
+      minWidth: 120
     }
   },
   content: {
@@ -36,6 +46,11 @@ export const STYLES = {
       justifyContent: 'center',
       height: '40px',
       mb: '20px'
+    },
+    pageInput: {
+      width: '60px',
+      pt: '5px',
+      pb: '5px'
     }
   }
 }
