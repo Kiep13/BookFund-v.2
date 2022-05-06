@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { pdfjs } from 'react-pdf';
 import { useParams } from 'react-router-dom';
 import worker from 'pdfjs-dist/build/pdf.worker.entry';
@@ -8,8 +9,8 @@ import { CardStates } from '@utils/enums';
 import { IFavorite, IFormPageParams } from '@utils/interfaces';
 import { useApi } from '@utils/hooks';
 
-import { SinglePage } from './components/SinglePage';
-import './Reading.scss';
+import { Header, Viewer } from './components';
+import { STYLES } from './constants';
 
 pdfjs.GlobalWorkerOptions.workerSrc = worker;
 
@@ -27,7 +28,7 @@ export const Reading = () => {
 
     getReadingInfo(bookId)
       .then((response: IFavorite) => {
-        setReadingInfo(readingInfo);
+        setReadingInfo(response);
 
         const bookFileUrl = response.book.fileUrl || '';
 
@@ -48,17 +49,20 @@ export const Reading = () => {
 
   return (
     <StatefulCard state={pageState}>
-      <div className="App">
-        <h4>Single Page</h4>
+      <Box sx={STYLES.page.wrapper}>
         {
-          pdfFile &&
-          <SinglePage
-            pdfDocument={pdfFile}
-            bookmarkPage={readingInfo?.bookmarkPage || 1}
-          />
+          readingInfo && <Header book={readingInfo?.book}/>
         }
-        <hr />
-      </div>
+        <Box sx={STYLES.content}>
+          {
+            pdfFile &&
+            <Viewer
+              pdfDocument={pdfFile}
+              bookmarkPage={readingInfo?.bookmarkPage || 1}
+            />
+          }
+        </Box>
+      </Box>
     </StatefulCard>
   );
 }
