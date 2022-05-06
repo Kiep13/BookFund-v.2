@@ -42,7 +42,7 @@ const App = () => {
         <ProtectedRoute path={BaseRoutePaths.ARTICLES}>
           <Articles/>
         </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`}>
+        <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
           <Reading/>
         </ProtectedRoute>
 
