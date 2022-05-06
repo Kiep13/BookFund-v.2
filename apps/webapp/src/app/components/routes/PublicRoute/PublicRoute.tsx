@@ -1,6 +1,7 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import { Layout } from '@components/Layout';
 import { getIsAuthorized } from '@store/reducers';
 import { RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY, RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
 import { AuthRoutePaths } from '@utils/enums';
@@ -12,7 +13,7 @@ export const PublicRoute = ({ children, ...rest }) => {
 
   const render = () => {
     if(isAuthorized) {
-      return children;
+      return <Layout children={children} />;
     }
 
     saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);

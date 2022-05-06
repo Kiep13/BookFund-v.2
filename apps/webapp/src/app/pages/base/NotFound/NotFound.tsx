@@ -1,13 +1,11 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { wrapUserPage } from '@components/PageWrapper';
-import { AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
-import { compose } from '@utils/helpers';
+import { BaseRoutePaths } from '@utils/enums';
 
 import { STYLES } from './constants';
 
-const Page = () =>
+export const NotFound = () =>
   <Box sx={STYLES.page}>
     <Typography variant='h1' component='div' gutterBottom>Page Not Found</Typography>
     <Box sx={STYLES.explanation}>
@@ -16,15 +14,7 @@ const Page = () =>
     </Box>
     <Box sx={STYLES.buttonsWrapper}>
       <Link to={BaseRoutePaths.HOME}>
-        <Button variant='outlined'>Home</Button>
-      </Link>
-
-      <Link to={AuthRoutePaths.LOGIN}>
-        <Button variant='outlined'>Login</Button>
+        <Button variant='outlined'>Back Home</Button>
       </Link>
     </Box>
   </Box>
-
-export const NotFound = compose(
-  wrapUserPage()
-)(Page);
