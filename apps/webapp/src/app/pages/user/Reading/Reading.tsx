@@ -7,7 +7,7 @@ import worker from 'pdfjs-dist/build/pdf.worker.entry';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { CardStates } from '@utils/enums';
 import { IFavorite, IFormPageParams } from '@utils/interfaces';
-import { useApi } from '@utils/hooks';
+import { useAlerts, useApi } from '@utils/hooks';
 
 import { Header, Viewer } from './components';
 import { STYLES } from './constants';
@@ -23,7 +23,8 @@ export const Reading = () => {
   const [pdfFile, setPdfFile] = useState<File>();
   const [pageView, setPageView] = useState(PageViews.SinglePage);
 
-  const { getReadingInfo, getBookFile } = useApi();
+  const {getReadingInfo, getBookFile, updateReadingInfo} = useApi();
+  const {addError} = useAlerts();
 
   const initReadingInfo = (): void => {
     const bookId = (params as IFormPageParams).id;
@@ -49,13 +50,29 @@ export const Reading = () => {
     setPageView(value);
   };
 
+  const handleBookmarkChange = (value: number) => {
+    if (!readingInfo) {
+      return;
+    }
+
+    const newReadingInfo: IFavorite = {
+      ...readingInfo,
+      bookmarkPage: value
+    }
+
+    updateReadingInfo(newReadingInfo)
+      .catch(() => {
+        addError('Error due attempt to synchronize book');
+      });
+  }
+
   useEffect(() => {
     initReadingInfo();
   }, []);
 
   return (
-    <StatefulCard state={pageState}>
-      <Box sx={STYLES.page.wrapper}>
+    <Box sx={STYLES.page.wrapper}>
+      <StatefulCard state={pageState}>
         {
           readingInfo &&
           <Header
@@ -71,10 +88,11 @@ export const Reading = () => {
               pageView={pageView}
               pdfDocument={pdfFile}
               bookmarkPage={readingInfo?.bookmarkPage || 1}
+              handleBookmarkChange={handleBookmarkChange}
             />
           }
         </Box>
-      </Box>
-    </StatefulCard>
+      </StatefulCard>
+    </Box>
   );
 }

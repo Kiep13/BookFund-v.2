@@ -8,7 +8,7 @@ import { ActionButtons } from '../ActionButtons';
 import { IProps } from './propsInterface';
 import './Viewer.scss';
 
-export const Viewer = ({ bookmarkPage, pageView, pdfDocument }: IProps) => {
+export const Viewer = ({ bookmarkPage, pageView, pdfDocument, handleBookmarkChange }: IProps) => {
   const [amountPages, setAmountPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -19,6 +19,7 @@ export const Viewer = ({ bookmarkPage, pageView, pdfDocument }: IProps) => {
 
   const handlePageChange = (value: number) => {
     setPageNumber(value);
+    handleBookmarkChange(value);
   }
 
   useEffect(() => {

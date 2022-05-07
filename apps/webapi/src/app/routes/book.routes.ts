@@ -3,7 +3,6 @@ import { Router } from 'express';
 import { ApiRoutes, ApiRoutesModifiers } from '@core/enums';
 import { bookController } from '@controllers/book.controller';
 import { fileController } from '@controllers/file.controller';
-import { readController } from '@controllers/read.controller';
 import { adminMiddleware, authMiddleware } from '@middlewares/index';
 
 const router = new Router();
@@ -16,7 +15,6 @@ router.delete(`/${ApiRoutesModifiers.DELETE}/:id`,  authMiddleware, adminMiddlew
 router.post(`/${ApiRoutes.FILE}/${ApiRoutesModifiers.SAVE}`, authMiddleware, adminMiddleware, fileController.saveFile);
 router.get(`/${ApiRoutes.FILE}/:name`, fileController.getFile);
 
-router.get(`/:id/${ApiRoutes.READ}`, authMiddleware, readController.getFile);
 router.get(`/:id`, bookController.getBook);
 
 export default router;

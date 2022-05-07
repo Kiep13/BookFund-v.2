@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 
+import { connection } from '@core/connection';
 import { BookStatuses, ResponseStatuses } from '@core/enums';
+import { FavoriteEntity } from '@entities/favorite.entity';
 import { readingService } from '@services/reading.service';
 
 class ReadController {
-  public async getFile(request: Request, response: Response, next: Function): Response {
+  public async getInfo(request: Request, response: Response, next: Function): Response {
     try {
       const bookId = +request.params.id;
       const accountId = request.account.id;
@@ -18,6 +20,18 @@ class ReadController {
       }
 
       return response.status(ResponseStatuses.STATUS_OK).json(favorite);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async updateReadingInfo(request: Request, response: Response, next: Function): Response {
+    try {
+      const favoriteId = +request.body.id;
+
+      await connection.manager.update(FavoriteEntity, favoriteId, request.body);
+
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT);
     } catch (error) {
       next(error)
     }

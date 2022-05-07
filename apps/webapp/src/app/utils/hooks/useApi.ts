@@ -194,7 +194,12 @@ export const useApi = () => {
   }
 
   const getReadingInfo = async (id: number): Promise<IFavorite> => {
-    return await axios.get<IFavorite>(`${environment.backEndUrl}/v1/book/${id}/read`)
+    return await axios.get<IFavorite>(`${environment.backEndUrl}/v1/read/${id}`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const updateReadingInfo = async (favorite: IFavorite): Promise<void> => {
+    return await axios.post<void>(`${environment.backEndUrl}/v1/read/update`, favorite)
       .then((response: AxiosResponse) => response.data);
   }
 
@@ -236,6 +241,7 @@ export const useApi = () => {
     deleteCollection,
     search,
     getReadingInfo,
-    getBookFile
+    updateReadingInfo,
+    getBookFile,
   }
 }

@@ -8,7 +8,7 @@ import { STYLES } from '../../constants';
 import { PageViews } from '../../enums';
 import { IProps } from './propsInterface';
 
-export const ActionButtons = ({ pageNumber, amountPages, pageView, handlePageChange}: IProps) => {
+export const ActionButtons = ({pageNumber, amountPages, pageView, handlePageChange}: IProps) => {
   const goFirst = (): void => {
     handlePageChange(1);
   }
@@ -16,9 +16,7 @@ export const ActionButtons = ({ pageNumber, amountPages, pageView, handlePageCha
   const handlePageNumberType = (event: any): void => {
     const value = +event.target.value;
 
-    console.log(value)
-
-    if(!value || value > amountPages) {
+    if (!value || value > amountPages) {
       return;
     }
 
@@ -40,7 +38,7 @@ export const ActionButtons = ({ pageNumber, amountPages, pageView, handlePageCha
   }
 
   return (
-    <Box  sx={STYLES.document.actionButtons}>
+    <Box sx={STYLES.document.actionButtons}>
       <IconButton
         aria-label='First'
         disabled={pageNumber <= 1}
@@ -81,7 +79,7 @@ export const ActionButtons = ({ pageNumber, amountPages, pageView, handlePageCha
 
       <IconButton
         aria-label='Last'
-        disabled={pageNumber +pageView > amountPages}
+        disabled={pageNumber + pageView > amountPages}
         onClick={goLast}>
         <KeyboardDoubleArrowRightTwoToneIcon/>
       </IconButton>
