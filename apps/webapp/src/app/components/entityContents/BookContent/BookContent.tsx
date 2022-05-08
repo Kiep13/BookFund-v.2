@@ -10,7 +10,7 @@ import { FavoriteActions } from '@components/FavoriteActions';
 import { useBookActions, useCommentList } from '@utils/hooks';
 import { IComment, IFavorite, IGenre } from '@utils/interfaces';
 
-import { IMAGE_PROPERTIES, STYLES } from './constants';
+import { IMAGE_PROPERTIES, STATUS_LABELS, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
 export const BookContent = ({ book, authorLink, isCommentFormShown, isActionsShown, handleBookChange }: IProps) => {
@@ -85,6 +85,12 @@ export const BookContent = ({ book, authorLink, isCommentFormShown, isActionsSho
       </Box>
 
       <Box sx={STYLES.info}>
+        {isActionsShown && book?.favorite && (
+          <Box sx={STYLES.status}>
+            <Chip label={STATUS_LABELS[book.favorite.status]} color='primary'/>
+          </Box>
+        )}
+
         <Typography variant='h3' gutterBottom component='div'>
           { book?.title || '' }
         </Typography>

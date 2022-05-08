@@ -11,6 +11,9 @@ export const STYLES = {
     alignSelf: 'center',
     mb: 2
   },
+  status: {
+    mb: 1
+  },
   info: {
     flex: 2
   },
