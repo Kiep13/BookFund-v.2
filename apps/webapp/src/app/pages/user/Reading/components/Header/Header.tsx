@@ -1,4 +1,4 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import KeyboardBackspaceTwoToneIcon from '@mui/icons-material/KeyboardBackspaceTwoTone';
 import { useHistory } from 'react-router-dom';
 
@@ -8,11 +8,15 @@ import { STYLES } from '../../constants';
 import { PageViewSelector } from '../PageViewSelector';
 import { IProps } from './propsInterface';
 
-export const Header = ({ book, pageView, handlePageViewChange }: IProps) => {
+export const Header = ({ book, pageView, isLastPageOpened, handlePageViewChange, handleMarkAsDone }: IProps) => {
   const history = useHistory();
 
   const goToBookPage = (): void => {
     history.push(`${BaseRoutePaths.BOOK}/${book.id}`);
+  }
+
+  const handleMarkAsDoneClick = () => {
+    handleMarkAsDone();
   }
 
   return (
@@ -21,22 +25,35 @@ export const Header = ({ book, pageView, handlePageViewChange }: IProps) => {
         <Box sx={STYLES.header.titleBlock}>
           <IconButton
             aria-label='Return'
-            onClick={goToBookPage}>
+            onClick={goToBookPage}
+          >
             <KeyboardBackspaceTwoToneIcon/>
           </IconButton>
           <Typography
             variant='h6'
             gutterBottom
             component='div'
-            sx={STYLES.header.title}>
+            sx={STYLES.header.title}
+          >
             { book.title }
           </Typography>
         </Box>
 
-        <PageViewSelector
-          pageView={pageView}
-          handlePageViewChange={handlePageViewChange}
-        />
+        <Box sx={STYLES.header.actions}>
+          {
+            isLastPageOpened &&
+            <Button
+              variant='contained'
+              onClick={handleMarkAsDoneClick}
+            >
+              Mark as done
+            </Button>
+          }
+          <PageViewSelector
+            pageView={pageView}
+            handlePageViewChange={handlePageViewChange}
+          />
+        </Box>
       </Toolbar>
     </AppBar>
   )

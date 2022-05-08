@@ -23,6 +23,12 @@ export const STYLES = {
     title: {
       mb: 0
     },
+    actions: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 3,
+      alignItems: 'center'
+    },
     selector: {
       minWidth: 120
     }
@@ -51,6 +57,25 @@ export const STYLES = {
       width: '60px',
       pt: '5px',
       pb: '5px'
+    }
+  },
+  congratulationsMessage: {
+    content: {
+      display: 'flex',
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column'
+    },
+    subtitle: {
+      fontSize: 28,
+      fontWeight: 200
+    },
+    homeLink: {
+      display: 'flex',
+      fontSize: '24px',
+      alignItems: 'center',
+      cursor: 'pointer'
     }
   }
 }

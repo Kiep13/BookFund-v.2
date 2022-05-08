@@ -1,16 +1,17 @@
+import worker from 'pdfjs-dist/build/pdf.worker.entry';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { pdfjs } from 'react-pdf';
 import { useParams } from 'react-router-dom';
-import worker from 'pdfjs-dist/build/pdf.worker.entry';
 
 import { StatefulCard } from '@components/cards/StatefulCard';
-import { CardStates } from '@utils/enums';
-import { IFavorite, IFormPageParams } from '@utils/interfaces';
+import { BookStatuses, CardStates } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
+import { IFavorite, IFormPageParams } from '@utils/interfaces';
 
-import { Header, Viewer } from './components';
-import { STYLES } from './constants';
+
+import { CongratulationsMessage, Header, Viewer } from './components';
+import { ERROR_SYNCHRONIZE_BOOK, MARK_AS_DONE_TOOLTIP_MESSAGE, STYLES } from './constants';
 import { PageViews } from './enums';
 
 pdfjs.GlobalWorkerOptions.workerSrc = worker;
@@ -22,9 +23,11 @@ export const Reading = () => {
   const [readingInfo, setReadingInfo] = useState<IFavorite>();
   const [pdfFile, setPdfFile] = useState<File>();
   const [pageView, setPageView] = useState(PageViews.SinglePage);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const [isDone, setIsDone] = useState<boolean>(false);
 
   const {getReadingInfo, getBookFile, updateReadingInfo} = useApi();
-  const {addError} = useAlerts();
+  const {addSuccess, addError} = useAlerts();
 
   const initReadingInfo = (): void => {
     const bookId = (params as IFormPageParams).id;
@@ -50,10 +53,12 @@ export const Reading = () => {
     setPageView(value);
   };
 
-  const handleBookmarkChange = (value: number) => {
+  const handleBookmarkChange = (value: number, isLastPage: boolean = false) => {
     if (!readingInfo) {
       return;
     }
+
+    handleIsLastPage(isLastPage);
 
     const newReadingInfo: IFavorite = {
       ...readingInfo,
@@ -62,13 +67,57 @@ export const Reading = () => {
 
     updateReadingInfo(newReadingInfo)
       .catch(() => {
-        addError('Error due attempt to synchronize book');
+        addError(ERROR_SYNCHRONIZE_BOOK);
+      });
+  }
+
+  const handleIsLastPage = (isLastPage: boolean) => {
+    setIsLastPage(isLastPage);
+
+    if (isLastPage) {
+      addSuccess(MARK_AS_DONE_TOOLTIP_MESSAGE);
+    }
+  }
+
+  const handleMarkAsDone = () => {
+    if (!readingInfo) {
+      return;
+    }
+
+    const newReadingInfo: IFavorite = {
+      ...readingInfo,
+      status: BookStatuses.DONE
+    }
+
+    setPageState(CardStates.LOADING)
+    updateReadingInfo(newReadingInfo)
+      .then(() => {
+        setIsDone(true);
+        setPageState(CardStates.CONTENT);
+      })
+      .catch(() => {
+        addError(ERROR_SYNCHRONIZE_BOOK);
+        setPageState(CardStates.ERROR);
       });
   }
 
   useEffect(() => {
     initReadingInfo();
   }, []);
+
+  const pageCongratulationsMessage = <CongratulationsMessage/>;
+
+  const pageReadContent = <>
+    {
+      pdfFile &&
+      <Viewer
+        pageView={pageView}
+        pdfDocument={pdfFile}
+        bookmarkPage={readingInfo?.bookmarkPage || 1}
+        handleBookmarkChange={handleBookmarkChange}
+      />
+    }
+  </>
 
   return (
     <Box sx={STYLES.page.wrapper}>
@@ -77,19 +126,16 @@ export const Reading = () => {
           readingInfo &&
           <Header
             book={readingInfo?.book}
+            isLastPageOpened={isLastPage}
             pageView={pageView}
             handlePageViewChange={handlePageViewChange}
+            handleMarkAsDone={handleMarkAsDone}
           />
         }
+
         <Box sx={STYLES.content}>
           {
-            pdfFile &&
-            <Viewer
-              pageView={pageView}
-              pdfDocument={pdfFile}
-              bookmarkPage={readingInfo?.bookmarkPage || 1}
-              handleBookmarkChange={handleBookmarkChange}
-            />
+            isDone ? pageCongratulationsMessage : pageReadContent
           }
         </Box>
       </StatefulCard>

@@ -31,7 +31,7 @@ class ReadController {
 
       await connection.manager.update(FavoriteEntity, favoriteId, request.body);
 
-      return response.status(ResponseStatuses.STATUS_NO_CONTENT);
+      return response.status(ResponseStatuses.STATUS_OK).json(request.body);
     } catch (error) {
       next(error)
     }

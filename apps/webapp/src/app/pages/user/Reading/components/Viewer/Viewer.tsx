@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import { Document, Page } from 'react-pdf';
 import { useEffect, useState } from 'react';
+import { Document, Page } from 'react-pdf';
 
 import { STYLES } from '../../constants';
 import { PageViews } from '../../enums';
@@ -10,16 +10,24 @@ import './Viewer.scss';
 
 export const Viewer = ({ bookmarkPage, pageView, pdfDocument, handleBookmarkChange }: IProps) => {
   const [amountPages, setAmountPages] = useState(0);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(bookmarkPage);
 
   const handleDocumentLoadSuccess = ({numPages}) => {
     setAmountPages(numPages);
-    setPageNumber(bookmarkPage);
+
+    //this method call is needed because mock books from seed doesn't have actual amount of pages
+    handlePageChange(bookmarkPage, numPages);
   }
 
-  const handlePageChange = (value: number) => {
+  const handlePageChange = (value: number, currentAmountPages: number = amountPages) => {
     setPageNumber(value);
-    handleBookmarkChange(value);
+
+    const isLastPage = (pageView === PageViews.SinglePage && value === currentAmountPages)
+      || (pageView === PageViews.TwoPage &&
+        ((currentAmountPages % 2 === 1 && value === currentAmountPages)
+          || (currentAmountPages % 2 === 0 && value === currentAmountPages - 1) ));
+
+    handleBookmarkChange(value, isLastPage);
   }
 
   useEffect(() => {

@@ -5,5 +5,7 @@ import { PageViews } from '../../enums';
 export interface IProps {
   book: IBook,
   pageView: PageViews,
-  handlePageViewChange: Function
+  isLastPageOpened: boolean,
+  handlePageViewChange: Function,
+  handleMarkAsDone: Function
 }
