@@ -11,6 +11,7 @@ import { useBookActions, useCommentList } from '@utils/hooks';
 import { IComment, IFavorite, IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STATUS_LABELS, STYLES } from './constants';
+import { BookStatuses } from '@utils/enums';
 import { IProps } from './propsInterface';
 
 export const BookContent = ({ book, authorLink, isCommentFormShown, isActionsShown, handleBookChange }: IProps) => {
@@ -74,7 +75,10 @@ export const BookContent = ({ book, authorLink, isCommentFormShown, isActionsSho
               startIcon={<MenuBookTwoToneIcon/>}
               sx={STYLES.readButton}
               onClick={() => handleReadClick()}>
-              Read
+              {
+                book.favorite && book.favorite.status === BookStatuses.DONE ?
+                  'Read again' : 'Read'
+              }
             </Button>
             <FavoriteActions
               book={book}

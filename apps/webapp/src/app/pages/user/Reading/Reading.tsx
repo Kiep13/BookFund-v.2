@@ -84,12 +84,14 @@ export const Reading = () => {
       return;
     }
 
+    setPageState(CardStates.LOADING);
+    setIsLastPage(false);
+
     const newReadingInfo: IFavorite = {
       ...readingInfo,
       status: BookStatuses.DONE
     }
 
-    setPageState(CardStates.LOADING)
     updateReadingInfo(newReadingInfo)
       .then(() => {
         setIsDone(true);
