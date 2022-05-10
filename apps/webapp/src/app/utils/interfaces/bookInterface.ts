@@ -14,6 +14,8 @@ export interface IBook {
   authorId?: number,
   createdAt?: Date,
   genres?: IGenre[],
+  fileName?: string,
+  fileUrl?: string,
   isCommented?: boolean,
   authorFullName?: string,
   updatedAt?: Date,

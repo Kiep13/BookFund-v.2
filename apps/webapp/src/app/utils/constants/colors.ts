@@ -1,3 +1,5 @@
+export const ERROR_COLOR = '#d32f2f';
+
 export const BLUE_PALETTE: string[] = [
   '#03045E',
   '#023E8A',

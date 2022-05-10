@@ -35,7 +35,7 @@ export const Home = () => {
     const searchOptions: ISearchOptions = {
       pageSize: 10,
       page: 0,
-      order: SortDirections.Asc,
+      order: SortDirections.Desc,
       orderBy: 'createdAt'
     }
 

@@ -8,5 +8,8 @@ export interface IBookForm {
   description: string,
   author?: IAuthor,
   imageUrl?: string,
-  imageFile?: File
+  imageFile?: File,
+  fileName?: string,
+  file?: File,
+  fileUrl?: string
 }

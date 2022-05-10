@@ -44,10 +44,12 @@ export const useApi = () => {
 
   const saveImage = async (formData: FormData): Promise<string> => {
     return await axios.post<string>(`${environment.backEndUrl}/v1/image/save`, formData)
-      .then((response: AxiosResponse) => response.data)
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-      });
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const saveFile = async (formData: FormData): Promise<string> => {
+    return await axios.post<string>(`${environment.backEndUrl}/v1/book/file/save`, formData)
+      .then((response: AxiosResponse) => response.data);
   }
 
   const addAuthor = async (author: IAuthorForm): Promise<AxiosResponse<void>> => {
@@ -191,11 +193,26 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getReadingInfo = async (id: number): Promise<IFavorite> => {
+    return await axios.get<IFavorite>(`${environment.backEndUrl}/v1/read/${id}`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const updateReadingInfo = async (favorite: IFavorite): Promise<void> => {
+    return await axios.post<void>(`${environment.backEndUrl}/v1/read/update`, favorite)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const getBookFile = async (bookFileUrl: string): Promise<any> => {
+    return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, { responseType: 'arraybuffer' });
+  }
+
   return {
     login,
     refresh,
     logout,
     saveImage,
+    saveFile,
     addAuthor,
     updateAuthor,
     getAuthor,
@@ -222,6 +239,9 @@ export const useApi = () => {
     getCollection,
     getCollections,
     deleteCollection,
-    search
+    search,
+    getReadingInfo,
+    updateReadingInfo,
+    getBookFile,
   }
 }

@@ -11,6 +11,9 @@ export const STYLES = {
     alignSelf: 'center',
     mb: 2
   },
+  status: {
+    mb: 1
+  },
   info: {
     flex: 2
   },
@@ -33,6 +36,15 @@ export const STYLES = {
     ml: 0
   },
   commentForm: {
-    mb: 3
+    mb: 2
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 1
+  },
+  readButton: {
+    width: '100%',
+    lineHeight: 'initial'
   }
 }

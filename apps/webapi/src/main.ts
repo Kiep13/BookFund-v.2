@@ -1,3 +1,3 @@
 import 'reflect-metadata';
 
-import '/app/start-application';
+import './app/start-application';

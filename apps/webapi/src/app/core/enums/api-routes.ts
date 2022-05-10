@@ -3,12 +3,14 @@ export enum ApiRoutes {
   AUTHOR = 'author',
   IMAGE = 'image',
   BOOK = 'book',
+  FILE = 'file',
   GENRE = 'genre',
   FAVORITE = 'favorite',
   COLLECTION = 'collection',
   COMMENT = 'comment',
   SEARCH = 'search',
-  STATISTIC = 'statistic'
+  STATISTIC = 'statistic',
+  READ = 'read'
 }
 
 export enum ApiRoutesModifiers {

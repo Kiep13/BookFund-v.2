@@ -14,6 +14,7 @@ import favoriteRoutes from '@routes/favorite.routes';
 import collectionRoutes from '@routes/collection.routes';
 import commentRoutes from '@routes/comment.routes';
 import imageRoutes from '@routes/image.routes';
+import readRoutes from '@routes/read.routes';
 import searchRoutes from '@routes/search.routes';
 import statisticsRouter from '@routes/statistics.router';
 
@@ -29,6 +30,7 @@ apiServer.use(cors({
 apiServer.use(express.json());
 apiServer.use(cookieParser());
 apiServer.use(express.static(`../${environment.imagesFolder}`));
+apiServer.use(express.static(`../assets/books`));
 
 apiServer.use(`/v1/${ApiRoutes.AUTH}`, authRoutes);
 apiServer.use(`/v1/${ApiRoutes.AUTHOR}`, authorRoutes);
@@ -38,6 +40,7 @@ apiServer.use(`/v1/${ApiRoutes.FAVORITE}`, favoriteRoutes);
 apiServer.use(`/v1/${ApiRoutes.COLLECTION}`, collectionRoutes);
 apiServer.use(`/v1/${ApiRoutes.COMMENT}`, commentRoutes);
 apiServer.use(`/v1/${ApiRoutes.IMAGE}`, imageRoutes);
+apiServer.use(`/v1/${ApiRoutes.READ}`, readRoutes);
 apiServer.use(`/v1/${ApiRoutes.SEARCH}`, searchRoutes);
 apiServer.use(`/v1/${ApiRoutes.STATISTIC}`, statisticsRouter);
 

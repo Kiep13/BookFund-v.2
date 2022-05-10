@@ -18,6 +18,8 @@ class BookService {
     book.genres = requestBody.genres;
     book.description = requestBody.description;
     book.image = requestBody.imageUrl;
+    book.fileName = requestBody.fileName;
+    book.fileUrl = requestBody.fileUrl;
 
     return book;
   }

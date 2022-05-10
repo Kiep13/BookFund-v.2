@@ -6,5 +6,6 @@ export * from './comment.routes';
 export * from './favorite.routes';
 export * from './genre.routes';
 export * from './image.routes';
+export * from './read.routes';
 export * from './search.routes';
 export * from './statistics.router';

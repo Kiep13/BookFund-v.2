@@ -10,7 +10,7 @@ export const ImageUpload = ({form, imageUrlFieldName, imageFileFieldName}: IProp
     form.setFieldValue(imageFileFieldName, undefined);
   }
 
-  const isPromoAvailable = (Boolean(values[imageUrlFieldName]) && !Boolean(errors[imageFileFieldName]))
+  const isPromoAvailable = (Boolean(values[imageUrlFieldName]) && !Boolean(errors[imageUrlFieldName]))
                             || (Boolean(values[imageFileFieldName]) && !Boolean(errors[imageFileFieldName]));
 
   return (

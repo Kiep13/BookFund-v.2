@@ -1,4 +1,5 @@
-import { Box, Chip, Typography, Rating } from '@mui/material';
+import { Box, Button, Chip, Typography, Rating } from '@mui/material';
+import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
 import { Image } from 'mui-image';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -6,13 +7,14 @@ import { useEffect, useState } from 'react';
 import { CommentForm } from '@components/CommentForm';
 import { CommentsList } from '@components/CommentsList';
 import { FavoriteActions } from '@components/FavoriteActions';
-import { useCommentList } from '@utils/hooks';
+import { useBookActions, useCommentList } from '@utils/hooks';
+import { BookStatuses } from '@utils/enums';
 import { IComment, IFavorite, IGenre } from '@utils/interfaces';
 
-import { IMAGE_PROPERTIES, STYLES } from './constants';
+import { IMAGE_PROPERTIES, STATUS_LABELS, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const BookContent = ({ book, authorLink, isCommentFormShown, isStatusShown, handleBookChange }: IProps) => {
+export const BookContent = ({ book, authorLink, isCommentFormShown, isActionsShown, handleBookChange }: IProps) => {
   const [isCommentSaved, setIsCommentSaved] = useState<boolean>(!book?.isCommented && true);
 
   const {
@@ -23,6 +25,11 @@ export const BookContent = ({ book, authorLink, isCommentFormShown, isStatusShow
     loadComments,
     loadNextPage
   } = useCommentList();
+  const { navigateToReadingPage } = useBookActions();
+
+  const handleReadClick = () => {
+    book && navigateToReadingPage(book.id);
+  }
 
   const handleCommentSave = (comment: IComment) => {
     setIsCommentSaved(false);
@@ -60,12 +67,34 @@ export const BookContent = ({ book, authorLink, isCommentFormShown, isStatusShow
           bgColor={IMAGE_PROPERTIES.backgroundColor}
           sx={STYLES.image}/>
 
-        {isStatusShown && book && (
-          <FavoriteActions book={book} handleAddedToFavorite={handleAddToFavorite} handleRemovedFromFavorite={handleRemovedFromFavorite}/>
+        {isActionsShown && book && (
+          <Box sx={STYLES.actions}>
+            <Button
+              variant='contained'
+              size='medium'
+              startIcon={<MenuBookTwoToneIcon/>}
+              sx={STYLES.readButton}
+              onClick={() => handleReadClick()}>
+              {
+                book.favorite && book.favorite.status === BookStatuses.DONE ?
+                  'Read again' : 'Read'
+              }
+            </Button>
+            <FavoriteActions
+              book={book}
+              handleAddedToFavorite={handleAddToFavorite}
+              handleRemovedFromFavorite={handleRemovedFromFavorite}/>
+          </Box>
         )}
       </Box>
 
       <Box sx={STYLES.info}>
+        {isActionsShown && book?.favorite && (
+          <Box sx={STYLES.status}>
+            <Chip label={STATUS_LABELS[book.favorite.status]} color='primary'/>
+          </Box>
+        )}
+
         <Typography variant='h3' gutterBottom component='div'>
           { book?.title || '' }
         </Typography>

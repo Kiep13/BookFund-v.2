@@ -7,7 +7,7 @@ import { PrivateRoute, ProtectedRoute, PublicRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Author, Book, Collection, Home, NotFound, Search } from '@pages/base';
-import { Articles, Favorites } from '@pages/user';
+import { Articles, Favorites, Reading } from '@pages/user';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import store from '@store/index';
 
@@ -23,11 +23,14 @@ const App = () => {
         <PublicRoute path={`${BaseRoutePaths.AUTHOR}/:id`}>
           <Author/>
         </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`}>
+        <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`} exact>
           <Book/>
         </PublicRoute>
         <PublicRoute path={`${BaseRoutePaths.COLLECTION}/:id`}>
           <Collection/>
+        </PublicRoute>
+        <PublicRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
+          <Search/>
         </PublicRoute>
         <PublicRoute path={BaseRoutePaths.NOT_FOUND}>
           <NotFound/>
@@ -39,8 +42,8 @@ const App = () => {
         <ProtectedRoute path={BaseRoutePaths.ARTICLES}>
           <Articles/>
         </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
-          <Search/>
+        <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
+          <Reading/>
         </ProtectedRoute>
 
         <PrivateRoute path={AdminRoutePaths.ADMIN}>

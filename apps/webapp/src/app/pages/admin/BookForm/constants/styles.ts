@@ -17,22 +17,17 @@ export const STYLES = {
   authorWrapper: {
     mb: 3
   },
-  rowWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 3,
-    mb: 3
-  },
-  amountPagesInput: {
-    flex: 1
-  },
   yearInput: {
-    flex: 1
+    mb: 3,
+    width: '100%'
   },
   genresWrapper: {
     mb: 3
   },
   imageWrapper: {
+    mb: 3
+  },
+  fileWrapper: {
     mb: 3
   },
   descriptionInput: {

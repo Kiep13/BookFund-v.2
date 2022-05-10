@@ -41,6 +41,10 @@ export const useBookActions = () => {
     history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/${id}`);
   }
 
+  const navigateToReadingPage = (id: number) => {
+    history.push(`${BaseRoutePaths.BOOK}/${id}${BaseRoutePaths.READ}`);
+  }
+
   const deleteBook = (id: number, successFallback: () => void) => {
     api.deleteBook(id)
       .then(successFallback)
@@ -58,6 +62,7 @@ export const useBookActions = () => {
     navigateToAdminBookPage,
     navigateToAdminBooksPage,
     navigateToEditForm,
+    navigateToReadingPage,
     deleteBook
   }
 }

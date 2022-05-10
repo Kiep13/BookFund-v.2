@@ -19,7 +19,7 @@ class ImageController {
   public async getImage(request: Request, response: Response, next: Function) {
     try {
       const imageName = request.params.name;
-      const imagePath = path.join(__dirname, '..', '..', environment.imagesFolder, imageName);
+      const imagePath = path.join(__dirname, environment.imagesFolder, imageName);
 
       return response.sendFile(imagePath);
     } catch (error) {

@@ -43,6 +43,7 @@ export const FavoriteActions = ({book, handleAddedToFavorite, handleRemovedFromF
 
   const buttonAddToFavorite = (
     <Button variant='outlined'
+            size='medium'
             startIcon={<FavoriteBorderTwoToneIcon/>}
             sx={STYLES.button}
             onClick={() => handleAddToFavorite()}>
@@ -52,6 +53,7 @@ export const FavoriteActions = ({book, handleAddedToFavorite, handleRemovedFromF
 
   const buttonInFavorite = (
     <Button variant='outlined'
+            size='medium'
             startIcon={<FavoriteTwoToneIcon/>}
             sx={STYLES.button}
             onClick={() => setIsModalOpened(true)}>

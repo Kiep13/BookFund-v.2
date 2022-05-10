@@ -6,7 +6,8 @@ export enum BaseRoutePaths {
   BOOK = '/book',
   AUTHOR = '/author',
   SEARCH = '/search',
-  NOT_FOUND='/not-found'
+  NOT_FOUND='/not-found',
+  READ='/read'
 }
 
 export enum AuthRoutePaths{

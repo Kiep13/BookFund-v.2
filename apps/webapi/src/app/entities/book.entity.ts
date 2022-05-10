@@ -42,6 +42,18 @@ export class BookEntity {
   image: string;
 
   @Column({
+    name: 'fileName',
+    type: 'varchar'
+  })
+  fileName: string;
+
+  @Column({
+    name: 'fileUrl',
+    type: 'varchar'
+  })
+  fileUrl: string;
+
+  @Column({
     name: 'description',
     type: 'text'
   })

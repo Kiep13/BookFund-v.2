@@ -9,7 +9,7 @@ export default class AddABooks implements Seeder {
     await connection
       .createQueryBuilder()
       .insert()
-      .into('book', ['title', 'amountPages', 'year', 'image', 'authorId', 'description'])
+      .into('book', ['title', 'amountPages', 'year', 'image', 'authorId', 'fileName', 'fileUrl', 'description'])
       .values([
         ...books
       ])
