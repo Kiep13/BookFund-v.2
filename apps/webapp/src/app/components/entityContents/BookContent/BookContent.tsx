@@ -8,10 +8,10 @@ import { CommentForm } from '@components/CommentForm';
 import { CommentsList } from '@components/CommentsList';
 import { FavoriteActions } from '@components/FavoriteActions';
 import { useBookActions, useCommentList } from '@utils/hooks';
+import { BookStatuses } from '@utils/enums';
 import { IComment, IFavorite, IGenre } from '@utils/interfaces';
 
 import { IMAGE_PROPERTIES, STATUS_LABELS, STYLES } from './constants';
-import { BookStatuses } from '@utils/enums';
 import { IProps } from './propsInterface';
 
 export const BookContent = ({ book, authorLink, isCommentFormShown, isActionsShown, handleBookChange }: IProps) => {

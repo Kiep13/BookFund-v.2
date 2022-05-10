@@ -23,7 +23,7 @@ export const STYLES_IMAGE_FORM = {
   urlInput: {
     flex: 8
   },
-  error: {
+  errorText: {
     mt: 1,
     fontSize: 12,
     color: '#d32f2f',

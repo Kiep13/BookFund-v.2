@@ -49,7 +49,7 @@ export const FileForm = ({form, fileFieldName, fileNameFieldName}: IProps) => {
         error &&
         <Typography
           component='legend'
-          sx={STYLES.fileForm.error}>
+          sx={STYLES.fileForm.errorText}>
           {error}
         </Typography>
       }

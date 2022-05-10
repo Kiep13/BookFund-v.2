@@ -60,7 +60,7 @@ export const ImageForm = ({ form, imageUrlFieldName, imageFileFieldName }: IProp
         error &&
         <Typography
           component='legend'
-          sx={STYLES_IMAGE_FORM.error}>
+          sx={STYLES_IMAGE_FORM.errorText}>
           {error}
         </Typography>
       }

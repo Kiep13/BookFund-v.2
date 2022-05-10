@@ -22,7 +22,7 @@ export const STYLES = {
       color: ERROR_COLOR,
       borderColor: ERROR_COLOR
     },
-    error: {
+    errorText: {
       mt: 1,
       fontSize: 12,
       color: ERROR_COLOR,

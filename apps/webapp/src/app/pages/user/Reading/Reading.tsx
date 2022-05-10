@@ -9,7 +9,6 @@ import { BookStatuses, CardStates } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 import { IFavorite, IFormPageParams } from '@utils/interfaces';
 
-
 import { CongratulationsMessage, Header, Viewer } from './components';
 import { ERROR_SYNCHRONIZE_BOOK, MARK_AS_DONE_TOOLTIP_MESSAGE, STYLES } from './constants';
 import { PageViews } from './enums';
