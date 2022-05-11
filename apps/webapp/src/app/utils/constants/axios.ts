@@ -13,7 +13,7 @@ axiosInstance.interceptors.response.use(
       return;
     }
 
-    if(!window.location.href.includes(AuthRoutePaths.REFRESH)) {
+    if(!error.response.request.responseURL.includes('refresh')) {
       window.location.href = AuthRoutePaths.REFRESH;
       return;
     }
