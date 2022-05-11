@@ -1,10 +1,8 @@
 export interface IOverallRaw {
-  type: string,
   amount: number
 }
 
 export interface IOverallItem {
-  previous: number,
   current: number,
   total: number
 }
