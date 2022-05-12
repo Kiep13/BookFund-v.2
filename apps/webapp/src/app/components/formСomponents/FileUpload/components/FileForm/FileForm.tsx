@@ -7,7 +7,7 @@ import { IProps } from './propsInterface';
 export const FileForm = ({form, fileFieldName, fileNameFieldName}: IProps) => {
   const [error, setError] = useState<string>('');
 
-  const handleFileUpload = (event: any) => {
+  const handleInputChange = async (event: any) => {
     const file: File = event.currentTarget.files[0];
 
     if(!file.name.match(PDF_REG_EXP)) {
@@ -18,6 +18,8 @@ export const FileForm = ({form, fileFieldName, fileNameFieldName}: IProps) => {
 
     form.setFieldValue(fileNameFieldName, file.name);
     form.setFieldValue(fileFieldName, file);
+
+    await form.validateForm({...form.values, [fileNameFieldName]: file.name});
   }
 
   return (
@@ -27,7 +29,7 @@ export const FileForm = ({form, fileFieldName, fileNameFieldName}: IProps) => {
           accept='application/pdf'
           id='pdf-book-file'
           type='file'
-          onChange={handleFileUpload}
+          onChange={handleInputChange}
         />
       </Box>
       <Box sx={{

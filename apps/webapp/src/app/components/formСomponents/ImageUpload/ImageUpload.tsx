@@ -5,9 +5,11 @@ import { IProps } from './propsInterface';
 export const ImageUpload = ({form, imageUrlFieldName, imageFileFieldName}: IProps) => {
   const {values, errors} = form;
 
-  const clearValue = () => {
+  const clearValue = async () => {
     form.setFieldValue(imageUrlFieldName, '');
     form.setFieldValue(imageFileFieldName, undefined);
+
+    await form.validateForm({...form.values, [imageUrlFieldName]: '', [imageFileFieldName]: undefined});
   }
 
   const isPromoAvailable = (Boolean(values[imageUrlFieldName]) && !Boolean(errors[imageUrlFieldName]))
