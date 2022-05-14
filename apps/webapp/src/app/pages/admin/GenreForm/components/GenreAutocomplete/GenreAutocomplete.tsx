@@ -9,14 +9,14 @@ import { useApi } from '@utils/hooks';
 import { DELAY } from '../../constants';
 import { IProps } from './propsInterface';
 
-export const GenreAutocomplete = ({ form, fieldName }: IProps) => {
-  const api = useApi();
+export const GenreAutocomplete = ({form, fieldName}: IProps) => {
+  const {getGenres} = useApi();
 
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [options, setOptions] = useState<IOption[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const getGenres = useCallback(
+  const loadGenres = useCallback(
     debounce(async (search: string) => {
       setLoading(true);
 
@@ -24,7 +24,7 @@ export const GenreAutocomplete = ({ form, fieldName }: IProps) => {
         pageSize: PageSizes.Fifty,
         searchTerm: search
       }
-      const genres = await api.getGenres(searchOptions);
+      const genres = await getGenres(searchOptions);
 
       const genreOptions = genres.map((genre: IGenre) => {
         return {
@@ -40,16 +40,17 @@ export const GenreAutocomplete = ({ form, fieldName }: IProps) => {
   );
 
   useEffect(() => {
-    getGenres(searchTerm);
+    loadGenres(searchTerm);
   }, [searchTerm]);
 
   return (
     <AutocompleteInput
+      label='Parent genre'
       options={options}
-      label={'Parent genre'}
       loading={loading}
       form={form}
       fieldName={fieldName}
-      handleTyping={setSearchTerm}/>
+      handleTyping={setSearchTerm}
+    />
   );
 }

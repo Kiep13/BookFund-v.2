@@ -1,8 +1,8 @@
 import { IGenre } from '@utils/interfaces';
 
 export interface IProps {
-  genre: IGenre,
-  onEditClick: Function,
-  onDeleteClick: Function,
-  onAddSubgenreClick: Function,
+  genre: IGenre;
+  onEditClick: () => void;
+  onDeleteClick: () => void;
+  onAddSubgenreClick: () => void;
 }

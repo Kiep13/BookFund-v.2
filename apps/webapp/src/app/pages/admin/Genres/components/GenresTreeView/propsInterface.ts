@@ -1,6 +1,6 @@
 import { IGenre } from '@utils/interfaces';
 
 export interface IProps {
-  genres: IGenre[],
-  onSelectGenre: Function
+  genres: IGenre[];
+  onSelectGenre: Function;
 }

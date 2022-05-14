@@ -1,3 +1,3 @@
 export interface IProps {
-  sx: object
+  sx: object;
 }

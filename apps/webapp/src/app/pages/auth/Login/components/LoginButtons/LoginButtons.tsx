@@ -9,31 +9,28 @@ export const LoginButtons = () => {
 
   return (
     <Box sx={STYLES_LOGIN_BUTTONS.wrapper}>
+      {Object.values(Providers).map(provider => {
+        const Icon = PROVIDER_ICON[provider];
 
-      {
-        Object.values(Providers).map(provider => {
-          const Icon = PROVIDER_ICON[provider];
-
-          return (
-            <Box
-              key={provider}
-              sx={STYLES_LOGIN_BUTTONS.buttonWrapper}>
-              <a href={providersUrls[provider]}>
-                <Button
-                  sx={{
-                    ...STYLES_LOGIN_BUTTONS.button,
-                    color: PROVIDER_COLOR[provider],
-                    border: `1px solid ${PROVIDER_COLOR[provider]}`
-                  }}
-                >
-                  <Icon/>
-                  {PROVIDER_NAME[provider]}
-                </Button>
-              </a>
-            </Box>
-          )
-        })
-      }
+        return (
+          <Box
+            key={provider}
+            sx={STYLES_LOGIN_BUTTONS.buttonWrapper}>
+            <a href={providersUrls[provider]}>
+              <Button
+                sx={{
+                  ...STYLES_LOGIN_BUTTONS.button,
+                  color: PROVIDER_COLOR[provider],
+                  border: `1px solid ${PROVIDER_COLOR[provider]}`
+                }}
+              >
+                <Icon/>
+                {PROVIDER_NAME[provider]}
+              </Button>
+            </a>
+          </Box>
+        )
+      })}
     </Box>
   )
 }

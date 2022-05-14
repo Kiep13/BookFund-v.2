@@ -16,10 +16,18 @@ import { IProps } from './propsInterface';
 export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick}: IProps) => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
-  const bookActions = useBookActions();
+  const {getAdminBookPageUrl} = useBookActions();
 
   const handleDeleteConfirmation = () => {
     onDeleteClick();
+    setIsModalOpened(false);
+  }
+
+  const openModal = (): void => {
+    setIsModalOpened(true);
+  }
+
+  const closeModal = (): void => {
     setIsModalOpened(false);
   }
 
@@ -42,13 +50,13 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
             <IconButton
               aria-label='Edit'
               sx={STYLES.iconButton}
-              onClick={() => onEditClick()}>
+              onClick={onEditClick}>
               <EditTwoToneIcon/>
             </IconButton>
             <IconButton
               aria-label='Delete'
               sx={STYLES.iconButton}
-              onClick={() => setIsModalOpened(true)}>
+              onClick={openModal}>
               <DeleteTwoToneIcon/>
             </IconButton>
           </Box>
@@ -64,19 +72,18 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
             {genre.subGenres && genre.subGenres?.length > 0 ? `${genre.subGenres?.length} subgenres` : `Don't have subgenres yet`}
           </Typography>
 
-          <Button variant='contained' onClick={() => onAddSubgenreClick()}>Add new</Button>
+          <Button variant='contained' onClick={onAddSubgenreClick}>Add new</Button>
         </Box>
 
         <Box>
-          {
-            genre.subGenres?.map((subgenre) => {
-              return <Chip
-                key={subgenre.id}
-                label={subgenre.name}
-                variant='outlined'
-                sx={STYLES.genreChip}/>
-            })
-          }
+          {genre.subGenres?.map((subgenre) => {
+            return <Chip
+              key={subgenre.id}
+              label={subgenre.name}
+              variant='outlined'
+              sx={STYLES.genreChip}
+            />
+          })}
 
         </Box>
 
@@ -92,22 +99,18 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
           </Typography>
 
           <Box sx={STYLES.linkedBookContent}>
-            {
-              genre.books && genre.books.length > 0 ?
-                (genre.books.slice(0, 10) || []).map((book: IBook) => {
-                  return (
-                    <Link to={bookActions.getAdminBookPageUrl(book.id)}>
-                      <Box
-                        key={book.id}
-                        sx={STYLES.linkedBook}>
-                        <BookPromoCard key={book.id} book={book}/>
-                      </Box>
-                    </Link>
-
-                  )
-                }) :
-                `Don't have assigned books`
-            }
+            {genre.books && genre.books.length > 0 ?
+              (genre.books.slice(0, 10) || []).map((book: IBook) => {
+                return (
+                  <Link to={getAdminBookPageUrl(book.id)}>
+                    <Box
+                      key={book.id}
+                      sx={STYLES.linkedBook}>
+                      <BookPromoCard key={book.id} book={book}/>
+                    </Box>
+                  </Link>
+                )
+              }) : `Don't have assigned books`}
           </Box>
         </Box>
       </Box>
@@ -116,7 +119,7 @@ export const GenreCard = ({genre, onEditClick, onDeleteClick, onAddSubgenreClick
         info={DELETE_GENRE_CONFIRMATION_POPUP}
         isOpened={isModalOpened}
         handleConfirm={handleDeleteConfirmation}
-        handleClose={() => setIsModalOpened(false)}
+        handleClose={closeModal}
       />
     </>
   )

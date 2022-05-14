@@ -8,7 +8,6 @@ import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
 export const GenresTreeView = ({ genres, onSelectGenre }: IProps) => {
-
   const buildTreeNode = (genre: IGenre) => {
     return <TreeItem key={genre.id} nodeId={genre.id.toString()} label={genre.name} onClick={() => onSelectGenre(genre)}>
       { genre.subGenres && genre.subGenres.length > 0 && genre.subGenres.map(buildTreeNode) }
@@ -17,13 +16,10 @@ export const GenresTreeView = ({ genres, onSelectGenre }: IProps) => {
 
   return (
     <TreeView
-      aria-label="file system navigator"
       defaultCollapseIcon={<ExpandMoreIcon/>}
       defaultExpandIcon={<ChevronRightIcon/>}
       sx={STYLES.treeView}>
-      {
-          genres.map(buildTreeNode)
-      }
+      {genres.map(buildTreeNode)}
     </TreeView>
   )
 }
