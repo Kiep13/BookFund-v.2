@@ -29,13 +29,13 @@ import {
 import { IBookForm } from './interfaces';
 
 export const BookForm = () => {
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
+  const [editMode, setEditMode] = useState<boolean>(false);
+
   const params = useParams();
   const api = useApi();
   const alerts = useAlerts();
   const bookActions = useBookActions();
-
-  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
-  const [editMode, setEditMode] = useState<boolean>(false);
 
   const callSubmitAction = (values: IBookForm) => {
     const bookId = (params as IFormPageParams).id;
@@ -113,7 +113,7 @@ export const BookForm = () => {
 
   useEffect(() => {
     initForm();
-  }, [])
+  }, []);
 
   return <Card>
     <Box sx={STYLES.page}>

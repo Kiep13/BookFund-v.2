@@ -19,7 +19,7 @@ import { overallStatisticService } from '@services/overall-statistic.service';
 
 class StatisticsController {
   public async getOverallStatistics(request: Request, response: Response, next: Function): Response {
-    const dateRange: IDateRange = dateService.transformFromApiToRangeDatesWithPreviousMonth(request.query.date);
+    const dateRange: IDateRange = dateService.transformFromApiToRangeDates(request.query.date);
     const currentMonth: number = dateService.getMonthFromDbDate(dateRange.endDate);
 
     try {

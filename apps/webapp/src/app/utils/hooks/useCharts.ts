@@ -101,13 +101,9 @@ export const useCharts = () => {
   const solveDifference = (value: IOverallRaw): number => {
     if(!value.current) {
       return 0;
-    } else if(!value.previous) {
-      return 100;
-    } else if(value.current >= value.previous) {
-      return Math.ceil(((value.current/value.previous) * 100))
-    } else {
-      return Math.ceil(((value.previous/value.current) * -100))
     }
+
+    return Math.ceil(((value.current/value.total) * 100));
   }
 
   return {

@@ -4,9 +4,11 @@ import { IProps } from './propsInterface';
 export const FileUpload = ({form, fileNameFieldName, fileFieldName}: IProps) => {
   const {values, errors} = form;
 
-  const clearValue = () => {
+  const clearValue = async () => {
     form.setFieldValue(fileNameFieldName, null);
     form.setFieldValue(fileFieldName, undefined);
+
+    await form.validateForm({...form.values, [fileNameFieldName]: null});
   }
 
   const isPromoAvailable = (Boolean(values[fileNameFieldName]) && !Boolean(errors[fileNameFieldName]))

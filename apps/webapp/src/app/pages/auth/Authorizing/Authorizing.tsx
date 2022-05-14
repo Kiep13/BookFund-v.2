@@ -8,7 +8,7 @@ import {
   axiosInstance as axios,
   API_LOGIN_ERROR,
   RELOAD_PATHNAME_STORAGE_KEY,
-  RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY
+  RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY, RELOAD_PUBLIC_FINISHED
 } from '@utils/constants';
 import { AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { IAuthResponse } from '@utils/interfaces';
@@ -26,7 +26,7 @@ export const Authorizing = () => {
   const { login, refresh } = useApi();
   const { addSuccess } = useAlerts();
   const { handleLogOut } = useAuthHandlers();
-  const { doesStorageHave, getFromStorage, deleteFromStorage } = useStorage();
+  const { doesStorageHave, getFromStorage, deleteFromStorage, saveToStorage } = useStorage();
 
   const navigateBack = () => {
     if(doesStorageHave(RELOAD_PATHNAME_STORAGE_KEY)) {
@@ -66,8 +66,10 @@ export const Authorizing = () => {
         navigateBack();
       })
       .catch(() => {
+
         if(doesStorageHave(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY) && getFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY)) {
-          deleteFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY);
+          saveToStorage(RELOAD_PUBLIC_FINISHED, true);
+
           navigateBack();
           return;
         }

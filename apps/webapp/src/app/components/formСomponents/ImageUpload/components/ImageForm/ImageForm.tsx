@@ -9,7 +9,7 @@ import { IProps } from './propsInterface';
 export const ImageForm = ({ form, imageUrlFieldName, imageFileFieldName }: IProps) => {
   const [error, setError] = useState<string>('');
 
-  const handleFileUpload = (event: any) => {
+  const handleFileUpload = async (event: any) => {
     const file =  event.currentTarget.files[0];
 
     if(!file.name.match(IMAGE_REG_EXP)) {
@@ -18,6 +18,7 @@ export const ImageForm = ({ form, imageUrlFieldName, imageFileFieldName }: IProp
     }
 
     form.setFieldValue(imageFileFieldName, event.currentTarget.files[0]);
+    await form.validateForm({...form.values, [imageFileFieldName]: event.currentTarget.files[0]});
   }
 
   return (
