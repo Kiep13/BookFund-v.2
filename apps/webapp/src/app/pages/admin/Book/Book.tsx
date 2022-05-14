@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
@@ -8,36 +7,23 @@ import { Card } from '@components/cards/Card';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { BookContent } from '@components/entityContents/BookContent';
 import { DELETE_BOOK_CONFIRMATION_POPUP } from '@utils/constants';
-import { useAlerts, useAuthorActions, useBookActions, useBookLoad } from '@utils/hooks';
 
-import { PAGE_TITLE, SUCCESSFULLY_DELETED, STYLES } from './constants';
+import { PAGE_TITLE, STYLES } from './constants';
+import { useBook } from './useBook';
 
 export const Book = () => {
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-  const history = useHistory();
-
   const {
     book,
     pageState,
-    loadBook
-  } = useBookLoad();
-
-  const { addSuccess } = useAlerts();
-  const { deleteBook, navigateToAdminBooksPage, navigateToEditForm } = useBookActions();
-  const { getAdminAuthorPageUrlWithoutId } = useAuthorActions();
-
-  const navigateToEditPage = () => {
-    book && navigateToEditForm(book?.id);
-  }
-
-  const handleConfirmDeletion = (): void => {
-    book && deleteBook(book.id, () => {
-      addSuccess(SUCCESSFULLY_DELETED);
-      navigateToAdminBooksPage();
-    });
-
-    setIsModalOpened(false);
-  }
+    isModalOpened,
+    loadBook,
+    navigateBack,
+    navigateToEditPage,
+    getAdminAuthorPageUrlWithoutId,
+    handleConfirmDeletion,
+    openModal,
+    closeModal
+  } = useBook();
 
   useEffect(() => {
     loadBook();
@@ -47,9 +33,10 @@ export const Book = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={() => history.goBack()}
+        handleBackClick={navigateBack}
         handleEditClick={navigateToEditPage}
-        handleDeleteClick={() => setIsModalOpened(true)}/>
+        handleDeleteClick={openModal}
+      />
 
       <Card>
         <Box sx={STYLES.page}>
@@ -62,8 +49,8 @@ export const Book = () => {
       <ConfirmationPopup
         info={DELETE_BOOK_CONFIRMATION_POPUP}
         isOpened={isModalOpened}
-        handleConfirm={() => handleConfirmDeletion()}
-        handleClose={() => setIsModalOpened(false)}
+        handleConfirm={handleConfirmDeletion}
+        handleClose={closeModal}
       />
     </>
   )

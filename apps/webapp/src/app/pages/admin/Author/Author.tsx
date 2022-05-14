@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { Card } from '@components/cards/Card';
 import { AuthorContent } from '@components/entityContents/AuthorContent';
@@ -8,36 +7,23 @@ import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { DELETE_AUTHOR_CONFIRMATION_POPUP } from '@utils/constants';
-import { useAlerts, useAuthorActions, useAuthorLoad, useBookActions } from '@utils/hooks';
 
-import { PAGE_TITLE, STYLES, SUCCESSFULLY_DELETED } from './constants';
+import { PAGE_TITLE, STYLES } from './constants';
+import { useAuthor } from './useAuthor';
 
 export const Author = () => {
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-
-  const history = useHistory();
-
   const {
     author,
     pageState,
-    loadAuthor
-  } = useAuthorLoad();
-  const { addSuccess } = useAlerts();
-  const { navigateToEditForm, navigateToAdminAuthorsPage, deleteAuthor } = useAuthorActions();
-  const { getAdminBookPageUrlWithoutId } = useBookActions();
-
-  const navigateToEditPage = () => {
-    author && navigateToEditForm(author?.id);
-  }
-
-  const handleConfirmDeletion = (): void => {
-    author && deleteAuthor(author.id, () => {
-      addSuccess(SUCCESSFULLY_DELETED);
-      navigateToAdminAuthorsPage();
-    });
-
-    setIsModalOpened(false);
-  }
+    isModalOpened,
+    loadAuthor,
+    navigateBack,
+    navigateToEditPage,
+    getAdminBookPageUrlWithoutId,
+    openModal,
+    closeModal,
+    handleConfirmDeletion
+  } = useAuthor();
 
   useEffect(() => {
     loadAuthor();
@@ -47,9 +33,9 @@ export const Author = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={() => history.goBack()}
+        handleBackClick={navigateBack}
         handleEditClick={navigateToEditPage}
-        handleDeleteClick={() => setIsModalOpened(true)}/>
+        handleDeleteClick={openModal}/>
 
       <Card>
         <Box sx={STYLES.page}>
@@ -62,8 +48,8 @@ export const Author = () => {
       <ConfirmationPopup
         info={DELETE_AUTHOR_CONFIRMATION_POPUP}
         isOpened={isModalOpened}
-        handleConfirm={() => handleConfirmDeletion()}
-        handleClose={() => setIsModalOpened(false)}
+        handleConfirm={handleConfirmDeletion}
+        handleClose={closeModal}
       />
     </>
   )

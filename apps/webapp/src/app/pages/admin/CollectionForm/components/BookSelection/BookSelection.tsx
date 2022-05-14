@@ -11,7 +11,7 @@ import { IProps } from './propsInterface';
 export const BookSelection = ({ form, autocompleteFieldName, dataFieldName }: IProps) => {
   const { addError } = useAlerts();
 
-  const handleBookSelect = (book: IBook) => {
+  const handleBookSelect = (book: IBook): void => {
     const isExists = form.values[dataFieldName].map((item: IBook) => +item.id).includes(+book.id);
     if(isExists) {
       addError(ERROR_BOOK_ALREADY_SELECTED);
@@ -22,7 +22,7 @@ export const BookSelection = ({ form, autocompleteFieldName, dataFieldName }: IP
     form.validateForm();
   }
 
-  const handleDeleteSelectedBook = (id: number) => {
+  const handleDeleteSelectedBook = (id: number): void => {
     const filteredBookArray = form.values[dataFieldName].filter((book: IBook) => +book.id !== +id);
 
     form.setFieldValue(dataFieldName, filteredBookArray);

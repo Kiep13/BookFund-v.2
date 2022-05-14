@@ -45,7 +45,7 @@ export const AuthorAutocomplete = ({form, fieldName}: IProps) => {
   return (
     <AutocompleteInput
       options={options}
-      label={'Author'}
+      label='Author'
       loading={loading}
       form={form}
       fieldName={fieldName}

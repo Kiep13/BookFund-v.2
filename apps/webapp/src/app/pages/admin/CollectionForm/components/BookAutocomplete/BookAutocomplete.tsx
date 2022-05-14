@@ -16,7 +16,7 @@ export const BookAutocomplete = ({form, fieldName, handleBookSelect}: IProps) =>
   const [loading, setLoading] = useState<boolean>(false);
   const api = useApi();
 
-  const handleBookSelection = (option: IOption | null) => {
+  const handleBookSelection = (option: IOption | null): void => {
     if(!option) {
       return;
     }
@@ -62,8 +62,8 @@ export const BookAutocomplete = ({form, fieldName, handleBookSelect}: IProps) =>
 
   return (
     <AutocompleteInput
+      label='Type a book title'
       options={options}
-      label={'Type a book title'}
       loading={loading}
       form={form}
       fieldName={fieldName}

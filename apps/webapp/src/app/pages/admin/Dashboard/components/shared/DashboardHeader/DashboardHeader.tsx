@@ -27,7 +27,7 @@ export const DashboardHeader = ({ selectedMonth, handleSelectedMonthChange }: IP
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           views={['year', 'month']}
-          openTo={'month'}
+          openTo='month'
           label='Statistic period'
           minDate={MIN_STATISTIC_DATE}
           maxDate={maxDate}

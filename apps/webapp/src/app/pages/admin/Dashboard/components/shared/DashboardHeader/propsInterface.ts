@@ -1,4 +1,4 @@
 export interface IProps {
-  selectedMonth: Date,
-  handleSelectedMonthChange: Function
+  selectedMonth: Date;
+  handleSelectedMonthChange: Function;
 }

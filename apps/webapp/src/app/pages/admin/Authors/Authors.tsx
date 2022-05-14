@@ -11,7 +11,7 @@ export const Authors = () =>
   <>
     <Box sx={STYLES.box}>
       <PageHeaderCard
-        title={'Authors'}
+        title='Authors'
         url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`}/>
     </Box>
 

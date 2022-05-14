@@ -18,10 +18,10 @@ import { SELECTED_MONTH_STORAGE_KEY, STYLES } from './constants';
 export const Dashboard = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [selectedMonth, setSelectedMonth] = useState<Date>();
-  const { doesStorageHave, getFromStorage, saveToStorage } = useStorage();
+  const {doesStorageHave, getFromStorage, saveToStorage} = useStorage();
 
-  const readMonthFromLocalStorage = () => {
-    if(doesStorageHave(SELECTED_MONTH_STORAGE_KEY)) {
+  const readMonthFromLocalStorage = (): void => {
+    if (doesStorageHave(SELECTED_MONTH_STORAGE_KEY)) {
       setSelectedMonth(getFromStorage(SELECTED_MONTH_STORAGE_KEY));
     } else {
       setSelectedMonth(new Date());
@@ -30,7 +30,7 @@ export const Dashboard = () => {
     setPageState(CardStates.CONTENT);
   }
 
-  const handleSelectedMonthChange = (date: Date) => {
+  const handleSelectedMonthChange = (date: Date): void => {
     saveToStorage(SELECTED_MONTH_STORAGE_KEY, date);
     setSelectedMonth(date);
   }
@@ -39,7 +39,7 @@ export const Dashboard = () => {
     readMonthFromLocalStorage();
   }, []);
 
-  if(!selectedMonth) {
+  if (!selectedMonth) {
     return (
       <Box sx={STYLES.loaderWrapper}>
         <StatefulCard state={pageState}>
@@ -81,7 +81,6 @@ export const Dashboard = () => {
         </Box>
       </Box>
     </>
-
   )
 }
 

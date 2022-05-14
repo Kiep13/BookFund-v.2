@@ -10,9 +10,9 @@ import { DELAY } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const GenresMultiAutocomplete = ({form, fieldName}: IProps) => {
-  const [ loading, setLoading ] = useState<boolean>(true);
-  const [ options, setOptions ] = useState<IOption[]>([]);
-  const [ searchTerm, setSearchTerm ] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [options, setOptions] = useState<IOption[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const api = useApi();
 
   const getGenres = useCallback(
@@ -43,10 +43,11 @@ export const GenresMultiAutocomplete = ({form, fieldName}: IProps) => {
   }, [searchTerm]);
 
   return <AutocompleteMultiInput
-            form={form}
-            fieldName={fieldName}
-            handleTyping={setSearchTerm}
-            label={'Genres'}
-            loading={loading}
-            options={options}/>
+    form={form}
+    fieldName={fieldName}
+    handleTyping={setSearchTerm}
+    label='Genres'
+    loading={loading}
+    options={options}
+  />
 }

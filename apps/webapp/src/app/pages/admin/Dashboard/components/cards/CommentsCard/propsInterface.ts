@@ -1,3 +1,3 @@
 export interface IProps {
-  selectedMonth: Date
+  selectedMonth: Date;
 }
