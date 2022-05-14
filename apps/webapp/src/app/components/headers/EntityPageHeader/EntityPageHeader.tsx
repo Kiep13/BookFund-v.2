@@ -30,25 +30,21 @@ export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handl
       </Box>
 
       <Box>
-        {
-          handleEditClick &&
-          <IconButton
-            aria-label='Edit'
-            sx={STYLES.iconButton}
-            onClick={() => handleEditClick()}>
-            <EditTwoToneIcon/>
-          </IconButton>
-        }
+        {handleEditClick &&
+        <IconButton
+          aria-label='Edit'
+          sx={STYLES.iconButton}
+          onClick={() => handleEditClick()}>
+          <EditTwoToneIcon/>
+        </IconButton>}
 
-        {
-          handleDeleteClick &&
-          <IconButton
-            aria-label='Delete'
-            sx={STYLES.iconButton}
-            onClick={() => handleDeleteClick()}>
-            <DeleteTwoToneIcon/>
-          </IconButton>
-        }
+        {handleDeleteClick &&
+        <IconButton
+          aria-label='Delete'
+          sx={STYLES.iconButton}
+          onClick={() => handleDeleteClick()}>
+          <DeleteTwoToneIcon/>
+        </IconButton>}
 
       </Box>
 

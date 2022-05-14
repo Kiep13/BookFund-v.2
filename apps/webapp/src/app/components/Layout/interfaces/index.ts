@@ -1,1 +1,1 @@
-export * from './menuItem.interface';
+export * from './menuItemInterface';

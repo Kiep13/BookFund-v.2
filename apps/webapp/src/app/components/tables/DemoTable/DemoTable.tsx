@@ -47,13 +47,11 @@ export const DemoTable = ({data, columns, onDeleteClick}: IProps) => {
                   role='tr'
                   tabIndex={-1}
                   key={row.id}>
-                  {
-                    columns.map((cell: IDataColumn) => {
-                      return <TableCell component='td' align={cell.align} key={cell.id}>
-                        {formatData(row[cell.name || ''], cell.type)}
-                      </TableCell>;
-                    })
-                  }
+                  {columns.map((cell: IDataColumn) => {
+                    return <TableCell component='td' align={cell.align} key={cell.id}>
+                      {formatData(row[cell.name || ''], cell.type)}
+                    </TableCell>;
+                  })}
                   <TableCell component='td' align={AlignTypes.Right}>
                     <IconButton
                       aria-label='Delete'

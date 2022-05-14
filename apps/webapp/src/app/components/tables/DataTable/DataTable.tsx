@@ -14,43 +14,31 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 
-import { PageSizes, SortDirections, TableActions } from '@utils/enums';
-import { IDataColumn, ISortOptions, ITableItemAction } from '@utils/interfaces';
+import { TableActions } from '@utils/enums';
+import { IDataColumn } from '@utils/interfaces';
 import { AlignTypes } from '@utils/enums';
 import { formatData } from '@utils/helpers';
 
 import { DataTableHead } from './components/DataTableHead';
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
+import { useDataTable } from './useDataTable';
 
 export const DataTable = (props: IProps) => {
-  const { columns, sortOptions, page, rowsPerPage, data, count, loading } = props;
-
-  const rowsPerPageOptions = Object.values(PageSizes).map(value => +value).filter((value) => value);
-
-  const handleRequestSort = (event: any, property: any) => {
-    const isAsc = sortOptions.orderBy === property && sortOptions.order === SortDirections.Asc;
-
-    const newSortOptions: ISortOptions = {
-      order: isAsc ? SortDirections.Desc : SortDirections.Asc,
-      orderBy: property
-    }
-
-    props.onHandleSortRequest(newSortOptions);
-  };
-
-  const handleClick = (actionType: TableActions, id: number) => {
-    const tableItemAction: ITableItemAction = { id, actionType };
-    props.onHandleClick(tableItemAction);
-  };
-
-  const handleChangePage = (event: any, newPage: number) => {
-    props.onHandlePageChange(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: any) => {
-    props.onHandleRowsPerPageChanged(parseInt(event.target.value, 10));
-  };
+  const {
+    data,
+    page,
+    columns,
+    sortOptions,
+    loading,
+    rowsPerPage,
+    rowsPerPageOptions,
+    count,
+    handleRequestSort,
+    handleClick,
+    handleChangePage,
+    handleChangeRowsPerPage
+  } = useDataTable(props);
 
   const isDataEmpty = data.length === 0;
 
@@ -74,50 +62,53 @@ export const DataTable = (props: IProps) => {
                 loading && (
                   <TableRow>
                     <TableCell colSpan={columns.length + 1} sx={STYLES.loadingProgressBar}>
-                      <LinearProgress />
+                      <LinearProgress/>
                     </TableCell>
                   </TableRow>
                 )
               }
-              {
-                 data.map((row: any) => {
-                    return (
-                      <TableRow
-                        hover
-                        role='tr'
-                        tabIndex={-1}
-                        key={row.id}
-                      >
-                        {
-                          columns.map((cell: IDataColumn) => {
-                            return <TableCell component='td' align={cell.align} key={cell.id}>
-                              { formatData(row[cell.name || ''], cell.type) }
-                            </TableCell>;
-                          })
-                        }
-                        <TableCell component='td' align={AlignTypes.Right}>
-                          <IconButton
-                            aria-label='View'
-                            sx={STYLES.iconButton}
-                            onClick={() => {handleClick(TableActions.VIEW, row.id)}}>
-                            <VisibilityTwoToneIcon/>
-                          </IconButton>
-                          <IconButton
-                            aria-label='Edit'
-                            sx={STYLES.iconButton}
-                            onClick={() => {handleClick(TableActions.EDIT, row.id)}}>
-                            <EditTwoToneIcon/>
-                          </IconButton>
-                          <IconButton
-                            aria-label='Delete'
-                            sx={STYLES.iconButton}
-                            onClick={() => {handleClick(TableActions.DELETE, row.id)}}>
-                            <DeleteTwoToneIcon/>
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
+              {data.map((row: any) => {
+                return (
+                  <TableRow
+                    hover
+                    role='tr'
+                    tabIndex={-1}
+                    key={row.id}
+                  >
+                    {columns.map((cell: IDataColumn) => {
+                      return <TableCell component='td' align={cell.align} key={cell.id}>
+                        {formatData(row[cell.name || ''], cell.type)}
+                      </TableCell>;
+                    })}
+                    <TableCell component='td' align={AlignTypes.Right}>
+                      <IconButton
+                        aria-label='View'
+                        sx={STYLES.iconButton}
+                        onClick={() => {
+                          handleClick(TableActions.VIEW, row.id)
+                        }}>
+                        <VisibilityTwoToneIcon/>
+                      </IconButton>
+                      <IconButton
+                        aria-label='Edit'
+                        sx={STYLES.iconButton}
+                        onClick={() => {
+                          handleClick(TableActions.EDIT, row.id)
+                        }}>
+                        <EditTwoToneIcon/>
+                      </IconButton>
+                      <IconButton
+                        aria-label='Delete'
+                        sx={STYLES.iconButton}
+                        onClick={() => {
+                          handleClick(TableActions.DELETE, row.id)
+                        }}>
+                        <DeleteTwoToneIcon/>
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
               {isDataEmpty && (
                 <TableRow
                   style={{

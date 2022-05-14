@@ -1,4 +1,4 @@
 export interface IProps {
-  fileName: string,
-  clearImage: () => void
+  fileName: string;
+  clearImage: () => void;
 }

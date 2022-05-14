@@ -14,8 +14,8 @@ export const PageWithSidebar = (props: IProps) => {
 
   const location = useLocation();
 
-  const setMenu = () => {
-    if(location.pathname.includes(AdminRoutePaths.ADMIN)) {
+  const setMenu = (): void => {
+    if (location.pathname.includes(AdminRoutePaths.ADMIN)) {
       setMenuItems(ADMIN_MENU_ITEMS);
       return;
     }
@@ -24,7 +24,7 @@ export const PageWithSidebar = (props: IProps) => {
   }
 
   useEffect(() => {
-      setMenu();
+    setMenu();
   }, []);
 
   return (

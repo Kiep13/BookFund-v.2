@@ -19,11 +19,10 @@ export const Header = () => {
       </Link>
       <Box sx={STYLES_HEADER.rightBlock}>
         <SearchInput/>
-        {
-          !isAuthorized && <Link to={AuthRoutePaths.LOGIN}>
-            <Button variant='outlined' sx={STYLES_HEADER.loginButton}>Login</Button>
-          </Link>
-        }
+        {!isAuthorized &&
+        <Link to={AuthRoutePaths.LOGIN}>
+          <Button variant='outlined' sx={STYLES_HEADER.loginButton}>Login</Button>
+        </Link>}
       </Box>
 
     </Box>

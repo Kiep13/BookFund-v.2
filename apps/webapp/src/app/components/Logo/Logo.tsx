@@ -6,7 +6,7 @@ import { IMAGE_PROPERTIES, STYLES } from './constants';
 export const Logo = () =>
   <Box sx={STYLES.wrapper}>
     <Image
-      src={'../../../assets/book.png'}
+      src='assets/book.png'
       width={STYLES.image.width}
       height={STYLES.image.height}
       fit={IMAGE_PROPERTIES.fit}

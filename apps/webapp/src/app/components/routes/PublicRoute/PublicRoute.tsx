@@ -11,18 +11,18 @@ import {
 import { AuthRoutePaths } from '@utils/enums';
 import { useStorage } from '@utils/hooks';
 
-export const PublicRoute = ({ children, ...rest }) => {
+export const PublicRoute = ({children, ...rest}) => {
   const isAuthorized = useSelector(getIsAuthorized);
-  const { doesStorageHave, deleteFromStorage, saveToStorage } = useStorage();
+  const {doesStorageHave, deleteFromStorage, saveToStorage} = useStorage();
 
   const render = () => {
-    if(isAuthorized) {
-      return <Layout children={children} />;
+    if (isAuthorized) {
+      return <Layout children={children}/>;
     }
 
-    if(doesStorageHave(RELOAD_PUBLIC_FINISHED)) {
+    if (doesStorageHave(RELOAD_PUBLIC_FINISHED)) {
       deleteFromStorage(RELOAD_PUBLIC_FINISHED);
-      return <Layout children={children} />;
+      return <Layout children={children}/>;
     }
 
     saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);

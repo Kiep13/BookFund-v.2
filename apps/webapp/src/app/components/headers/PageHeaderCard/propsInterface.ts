@@ -1,4 +1,4 @@
 export interface IProps {
-  title: string,
-  url: string
+  title: string;
+  url: string;
 }

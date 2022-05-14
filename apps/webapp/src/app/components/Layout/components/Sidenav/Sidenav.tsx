@@ -21,17 +21,17 @@ import { IProps } from './propsInterface';
 
 export const Sidenav = ({menuItems}: IProps) => {
   const location = useLocation();
-  const { logout } = useApi();
+  const {logout} = useApi();
 
-  const { addSuccess, addError } = useAlerts();
-  const { handleLogOut } = useAuthHandlers();
+  const {addSuccess, addError} = useAlerts();
+  const {handleLogOut} = useAuthHandlers();
 
   const account = useSelector(getUser);
   const isAdmin = useSelector(getIsAdmin);
 
   const isAdminOpened = location.pathname.includes(AdminRoutePaths.ADMIN);
 
-  const sendLogoutRequest = () => {
+  const sendLogoutRequest = (): void => {
     logout()
       .then(() => {
         addSuccess(API_LOGOUT_SUCCESS);
@@ -54,12 +54,9 @@ export const Sidenav = ({menuItems}: IProps) => {
         ))}
       </List>
       <List sx={STYLES_SIDENAV.linksBlock}>
-        {
-          isAdmin &&
-          <NavItem menuItem={isAdminOpened ? GO_USER_MENU_ITEM : GO_ADMIN_MENU_ITEM}/>
-        }
+        {isAdmin && <NavItem menuItem={isAdminOpened ? GO_USER_MENU_ITEM : GO_ADMIN_MENU_ITEM}/>}
         <Box onClick={sendLogoutRequest}>
-          <NavItem menuItem={LOG_OUT_MENU_ITEM} />
+          <NavItem menuItem={LOG_OUT_MENU_ITEM}/>
         </Box>
       </List>
     </Drawer>

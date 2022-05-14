@@ -7,13 +7,13 @@ import { RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
 import { AuthRoutePaths } from '@utils/enums';
 import { useStorage } from '@utils/hooks';
 
-export const ProtectedRoute = ({ isFullScreen = false, children, ...rest }) => {
+export const ProtectedRoute = ({isFullScreen = false, children, ...rest}) => {
   const isAuthorized = useSelector(getIsAuthorized);
-  const { saveToStorage } = useStorage();
+  const {saveToStorage} = useStorage();
 
   const render = () => {
-    if(isAuthorized) {
-      return !isFullScreen ? <Layout children={children} /> : children;
+    if (isAuthorized) {
+      return !isFullScreen ? <Layout children={children}/> : children;
     }
 
     saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);

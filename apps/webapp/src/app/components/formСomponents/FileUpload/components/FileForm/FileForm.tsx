@@ -10,7 +10,7 @@ export const FileForm = ({form, fileFieldName, fileNameFieldName}: IProps) => {
   const handleInputChange = async (event: any) => {
     const file: File = event.currentTarget.files[0];
 
-    if(!file.name.match(PDF_REG_EXP)) {
+    if (!file.name.match(PDF_REG_EXP)) {
       setError(ERROR_INVALID_EXTENSION);
 
       return;
@@ -47,14 +47,13 @@ export const FileForm = ({form, fileFieldName, fileNameFieldName}: IProps) => {
         </Button>
         <Typography component='legend'>Select a pdf file</Typography>
       </Box>
-      {
-        error &&
-        <Typography
-          component='legend'
-          sx={STYLES.fileForm.errorText}>
-          {error}
-        </Typography>
-      }
+      {error &&
+      <Typography
+        component='legend'
+        sx={STYLES.fileForm.errorText}
+      >
+        {error}
+      </Typography>}
     </label>
   )
 }

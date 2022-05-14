@@ -6,13 +6,13 @@ import { Input } from '@components/formСomponents/Input';
 import { ERROR_INVALID_EXTENSION, IMAGE_REG_EXP, STYLES_IMAGE_FORM } from '../../constants';
 import { IProps } from './propsInterface';
 
-export const ImageForm = ({ form, imageUrlFieldName, imageFileFieldName }: IProps) => {
+export const ImageForm = ({form, imageUrlFieldName, imageFileFieldName}: IProps) => {
   const [error, setError] = useState<string>('');
 
   const handleFileUpload = async (event: any) => {
-    const file =  event.currentTarget.files[0];
+    const file = event.currentTarget.files[0];
 
-    if(!file.name.match(IMAGE_REG_EXP)) {
+    if (!file.name.match(IMAGE_REG_EXP)) {
       setError(ERROR_INVALID_EXTENSION);
       return;
     }
@@ -51,20 +51,18 @@ export const ImageForm = ({ form, imageUrlFieldName, imageFileFieldName }: IProp
 
         <Input
           id={imageUrlFieldName}
-          label={'Url link here'}
+          label='Url link here'
           fieldName={imageUrlFieldName}
           form={form}
           styles={STYLES_IMAGE_FORM.urlInput}
         />
       </Box>
-      {
-        error &&
-        <Typography
-          component='legend'
-          sx={STYLES_IMAGE_FORM.errorText}>
-          {error}
-        </Typography>
-      }
+      {error &&
+      <Typography
+        component='legend'
+        sx={STYLES_IMAGE_FORM.errorText}>
+        {error}
+      </Typography>}
     </>
   );
 }
