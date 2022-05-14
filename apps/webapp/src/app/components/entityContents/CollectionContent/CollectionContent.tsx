@@ -8,7 +8,7 @@ import { IBook } from '@utils/interfaces';
 import { IMAGE_PROPERTIES, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const CollectionContent = ({ collection, bookLink }: IProps) =>
+export const CollectionContent = ({collection, bookLink}: IProps) =>
   <>
     <Image
       src={collection?.image || ''}
@@ -20,28 +20,24 @@ export const CollectionContent = ({ collection, bookLink }: IProps) =>
 
     <Box sx={STYLES.content}>
       <Typography variant='h3' sx={STYLES.heading}>
-        { collection?.title }
+        {collection?.title}
       </Typography>
 
       <Box sx={STYLES.booksCount}>
         {collection?.books.length} {collection?.books.length !== 1 ? `books` : `book`}
       </Box>
 
-      {
-        collection?.description?.split('\n').map((text: string, index: number) => {
-          return <p key={`paragraph_${index}`}>{text}</p>
-        })
-      }
+      {collection?.description?.split('\n').map((text: string, index: number) => {
+        return <p key={`paragraph_${index}`}>{text}</p>
+      })}
 
-      {
-        collection?.books.map((book: IBook) => {
-          return <Link to={`${bookLink}/${book.id}`} key={book.id}>
-            <Box sx={STYLES.bookBox}>
-              <HorizontalBookCard book={book}/>
-            </Box>
-          </Link>
-        })
-      }
+      {collection?.books.map((book: IBook) => {
+        return <Link to={`${bookLink}/${book.id}`} key={book.id}>
+          <Box sx={STYLES.bookBox}>
+            <HorizontalBookCard book={book}/>
+          </Box>
+        </Link>
+      })}
 
     </Box>
   </>

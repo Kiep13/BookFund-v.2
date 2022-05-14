@@ -1,24 +1,25 @@
 import { Box, Button, TextField } from '@mui/material';
-import { useState } from 'react';
 
 import { STYLES } from './constants';
+import { useFeedbackStep } from './useFeedbackStep';
 import { IProps } from './propsInterface';
 
-export const FeedbackStep = ({ saveWithFeedback, saveWithoutFeedback }: IProps) => {
-  const [value, setValue] = useState<string>('');
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  }
+export const FeedbackStep = ({saveWithFeedback, saveWithoutFeedback}: IProps) => {
+  const {
+    value,
+    handleChange,
+    handleWithoutFeedback,
+    handleWithFeedback
+  } = useFeedbackStep(saveWithFeedback, saveWithoutFeedback);
 
   return (
     <>
       <TextField
         label='Your feedback'
+        variant='standard'
         multiline
         fullWidth={true}
         autoFocus={true}
-        variant={'standard'}
         value={value}
         onChange={handleChange}
         InputProps={{
@@ -28,12 +29,13 @@ export const FeedbackStep = ({ saveWithFeedback, saveWithoutFeedback }: IProps) 
       />
 
       <Box sx={STYLES.buttonsWrapper}>
-        { !Boolean(value) && <Button variant='outlined'
-                                     sx={STYLES.leftButton}
-                                     onClick={() => saveWithoutFeedback()}>
-                                      Save without feedback
-                             </Button>}
-        <Button variant='contained' onClick={() => saveWithFeedback(value)}>Save</Button>
+        {!Boolean(value) &&
+        <Button variant='outlined'
+                sx={STYLES.leftButton}
+                onClick={handleWithoutFeedback}>
+          Save without feedback
+        </Button>}
+        <Button variant='contained' onClick={handleWithFeedback}>Save</Button>
       </Box>
     </>
   )

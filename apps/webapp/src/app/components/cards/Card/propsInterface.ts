@@ -1,4 +1,4 @@
 export interface IProps {
-  children: any
-  styles?: object,
+  children: any;
+  styles?: object;
 }

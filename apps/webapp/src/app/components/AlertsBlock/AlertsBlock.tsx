@@ -11,11 +11,15 @@ export const AlertsBlock = () => {
 
   return (
     <Box sx={STYLES.alertsWrapper}>
-      {
-        alerts.map((alert: IAlert) => {
-          return <Alert key={alert.id} severity={alert.type} sx={STYLES.alert}>{alert.message}</Alert>
-        })
-      }
+      {alerts.map((alert: IAlert) => {
+          return <Alert
+            key={alert.id}
+            severity={alert.type}
+            sx={STYLES.alert}
+          >
+            {alert.message}
+          </Alert>
+      })}
     </Box>
   )
 }

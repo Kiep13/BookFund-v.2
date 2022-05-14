@@ -18,7 +18,12 @@ export const BookPromoCard = ({ book } : IProps) => {
           alt={book.title}
         />
         <CardContent>
-          <Typography gutterBottom variant='h6' component='div' sx={STYLES.title}>
+          <Typography
+            gutterBottom
+            variant='h6'
+            component='div'
+            sx={STYLES.title}
+          >
             <TextWithHint text={ book.title } />
           </Typography>
           <Link href="#" sx={STYLES.authorLink}>{ book.authorFullName }</Link>

@@ -1,6 +1,6 @@
 import { IAuthor } from '@utils/interfaces';
 
 export interface IProps {
-  author: IAuthor | undefined,
-  bookLink: string
+  author: IAuthor | undefined;
+  bookLink: string;
 }

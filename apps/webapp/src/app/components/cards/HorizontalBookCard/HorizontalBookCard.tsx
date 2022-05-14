@@ -13,14 +13,19 @@ export const HorizontalBookCard = ({book}: IProps) =>
       fit={IMAGE_PROPERTIES.fit}
       errorIcon={IMAGE_PROPERTIES.errorIcon}
       bgColor={IMAGE_PROPERTIES.backgroundColor}
-      styles={STYLES.image}/>
+      styles={STYLES.image}
+    />
     <Box sx={STYLES.cardContent}>
       <CardContent>
         <Typography component='div' variant='h5'>
           {book.title}
         </Typography>
 
-        <Rating value={book.avgRate} precision={0.1} readOnly/>
+        <Rating
+          value={book.avgRate}
+          precision={0.1}
+          readOnly
+        />
 
         <Box sx={STYLES.description}>
           {book.description}

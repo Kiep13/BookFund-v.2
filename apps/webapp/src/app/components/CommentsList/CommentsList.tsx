@@ -10,33 +10,36 @@ import { IProps } from './propsInterface';
 
 export const CommentsList = ({comments, count, loadingComments, loadNextPage}: IProps) =>
   <Box>
-    {
-      comments.length > 0 && <Typography variant='h4' sx={STYLES.commentsHeading}>Comments</Typography>
-    }
+    {comments.length > 0 &&
+    <Typography
+      variant='h4'
+      sx={STYLES.commentsHeading}
+    >
+      Comments
+    </Typography>}
 
-    {
-      comments.map((comment: IComment) =>
-        <Box key={comment.id} sx={STYLES.commentCard}>
-          <Card>
-            <CommentCard comment={comment}/>
-          </Card>
+    {comments.map((comment: IComment) =>
+      <Box key={comment.id} sx={STYLES.commentCard}>
+        <Card>
+          <CommentCard comment={comment}/>
+        </Card>
+      </Box>
+    )}
 
-        </Box>
-      )
-    }
+    {comments.length === 0 &&
+    <Typography
+      variant='h5'
+      sx={STYLES.commentsHeading}
+    >
+      Don't have comments yet
+    </Typography>}
 
-    {
-      comments.length === 0 && <Typography variant='h5' sx={STYLES.commentsHeading}>Don't have comments yet</Typography>
-    }
-
-    {
-      count > comments.length && (
-        <LoadingButton
-          loading={loadingComments}
-          variant='contained'
-          onClick={() => loadNextPage()}>
-          Load more
-        </LoadingButton>
-      )
-    }
+    {count > comments.length && (
+      <LoadingButton
+        loading={loadingComments}
+        variant='contained'
+        onClick={() => loadNextPage()}>
+        Load more
+      </LoadingButton>
+    )}
   </Box>

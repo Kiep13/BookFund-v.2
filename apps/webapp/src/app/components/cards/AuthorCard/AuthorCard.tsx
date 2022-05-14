@@ -15,10 +15,15 @@ export const AuthorCard = ({author}: IProps) =>
         height={IMAGE_PROPERTIES.height}
         fit={IMAGE_PROPERTIES.fit}
         errorIcon={IMAGE_PROPERTIES.errorIcon}
-        bgColor={IMAGE_PROPERTIES.backgroundColor}/>
+        bgColor={IMAGE_PROPERTIES.backgroundColor}
+      />
 
       <CardContent>
-        <Typography gutterBottom variant='h6' component='div'>
+        <Typography
+          gutterBottom
+          variant='h6'
+          component='div'
+        >
           <TextWithHint text={ author.fullName || ''} />
         </Typography>
         <Typography component='legend'>
