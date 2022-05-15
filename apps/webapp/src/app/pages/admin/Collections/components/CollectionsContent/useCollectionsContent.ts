@@ -122,7 +122,7 @@ export const useCollectionsContent = () => {
     page,
     isModalOpened,
     rowsPerPageOptions,
-    getCollections: loadCollections,
+    loadCollections,
     handleTyping,
     handlePageChange,
     handleRowsPerPageChanged,

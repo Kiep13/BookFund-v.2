@@ -34,16 +34,16 @@ export const Viewer = ({ bookmarkPage, pageView, pdfDocument, handleBookmarkChan
         >
           <Page
             pageNumber={pageNumber}
-            size={'A4'}
+            size='A4'
+            renderMode='svg'
             height={window.innerHeight - 135}
-            renderMode={'svg'}
           />
           {pageView == PageViews.TwoPage && pageNumber + 1 <= amountPages && (
             <Page
               pageNumber={pageNumber + 1}
-              size={'A4'}
+              size='A4'
+              renderMode='svg'
               height={window.innerHeight - 135}
-              renderMode={'svg'}
             />
           )}
         </Document>

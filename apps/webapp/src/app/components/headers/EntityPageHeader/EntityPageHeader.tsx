@@ -16,7 +16,7 @@ export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handl
         <IconButton
           aria-label='Return'
           sx={STYLES.iconButton}
-          onClick={() => handleBackClick()}>
+          onClick={handleBackClick}>
           <KeyboardBackspaceTwoToneIcon/>
         </IconButton>
 
@@ -34,7 +34,7 @@ export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handl
         <IconButton
           aria-label='Edit'
           sx={STYLES.iconButton}
-          onClick={() => handleEditClick()}>
+          onClick={handleEditClick}>
           <EditTwoToneIcon/>
         </IconButton>}
 
@@ -42,7 +42,7 @@ export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handl
         <IconButton
           aria-label='Delete'
           sx={STYLES.iconButton}
-          onClick={() => handleDeleteClick()}>
+          onClick={handleDeleteClick}>
           <DeleteTwoToneIcon/>
         </IconButton>}
 

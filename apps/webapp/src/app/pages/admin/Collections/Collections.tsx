@@ -10,7 +10,7 @@ export const Collections = () =>
   <>
     <Box sx={STYLES.header}>
       <PageHeaderCard
-        title={'Collections'}
+        title='Collections'
         url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`}/>
     </Box>
 

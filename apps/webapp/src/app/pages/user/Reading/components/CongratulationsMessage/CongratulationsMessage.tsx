@@ -32,7 +32,7 @@ export const CongratulationsMessage = () => {
       </Typography>
 
       <Image
-        src={'assets/confetti.png'}
+        src='assets/confetti.png'
         width={IMAGE_PROPERTIES.width}
         height={IMAGE_PROPERTIES.height}
         fit={IMAGE_PROPERTIES.fit}

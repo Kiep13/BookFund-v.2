@@ -58,15 +58,13 @@ export const DataTable = (props: IProps) => {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {
-                loading && (
-                  <TableRow>
-                    <TableCell colSpan={columns.length + 1} sx={STYLES.loadingProgressBar}>
-                      <LinearProgress/>
-                    </TableCell>
-                  </TableRow>
-                )
-              }
+              {loading && (
+                <TableRow>
+                  <TableCell colSpan={columns.length + 1} sx={STYLES.loadingProgressBar}>
+                    <LinearProgress/>
+                  </TableCell>
+                </TableRow>
+              )}
               {data.map((row: any) => {
                 return (
                   <TableRow

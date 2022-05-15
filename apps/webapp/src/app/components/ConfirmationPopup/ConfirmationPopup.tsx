@@ -12,7 +12,7 @@ import { IProps } from './propsInterface';
 export const ConfirmationPopup = ({info, isOpened, handleConfirm, handleClose}: IProps) =>
   <Dialog
     open={isOpened}
-    onClose={() => handleClose()}
+    onClose={handleClose}
     aria-labelledby='alert-dialog-title'
     aria-describedby='alert-dialog-description'
   >
@@ -25,8 +25,8 @@ export const ConfirmationPopup = ({info, isOpened, handleConfirm, handleClose}: 
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button onClick={() => handleClose()}>Cancel</Button>
-      <Button onClick={() => handleConfirm()} autoFocus>
+      <Button onClick={handleClose}>Cancel</Button>
+      <Button onClick={handleConfirm} autoFocus>
         {info.confirmationButtonLabel}
       </Button>
     </DialogActions>

@@ -38,7 +38,7 @@ export const CommentsList = ({comments, count, loadingComments, loadNextPage}: I
       <LoadingButton
         loading={loadingComments}
         variant='contained'
-        onClick={() => loadNextPage()}>
+        onClick={loadNextPage}>
         Load more
       </LoadingButton>
     )}

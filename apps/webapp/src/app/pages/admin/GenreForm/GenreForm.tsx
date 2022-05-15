@@ -48,7 +48,7 @@ export const GenreForm = () => {
           />
 
           <Box sx={STYLES.parentInputWrapper}>
-            <GenreAutocomplete form={formik} fieldName={'parent'}/>
+            <GenreAutocomplete form={formik} fieldName='parent'/>
           </Box>
 
           <Box sx={STYLES.formButtons}>

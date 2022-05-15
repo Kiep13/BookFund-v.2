@@ -53,7 +53,7 @@ const App = () =>
       <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
       <Route path={AuthRoutePaths.LOGIN} component={Login}/>
 
-      <Route path={'*'} render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
+      <Route path='*' render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
     </Switch>
   </Provider>
 

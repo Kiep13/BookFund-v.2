@@ -16,7 +16,8 @@ export const CollectionContent = ({collection, bookLink}: IProps) =>
       height={IMAGE_PROPERTIES.height}
       fit={IMAGE_PROPERTIES.fit}
       errorIcon={IMAGE_PROPERTIES.errorIcon}
-      bgColor={IMAGE_PROPERTIES.backgroundColor}/>
+      bgColor={IMAGE_PROPERTIES.backgroundColor}
+    />
 
     <Box sx={STYLES.content}>
       <Typography variant='h3' sx={STYLES.heading}>

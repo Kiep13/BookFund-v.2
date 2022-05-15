@@ -21,7 +21,7 @@ export const CollectionsContent = () => {
     page,
     isModalOpened,
     rowsPerPageOptions,
-    getCollections,
+    loadCollections,
     handleTyping,
     handlePageChange,
     handleRowsPerPageChanged,
@@ -31,16 +31,17 @@ export const CollectionsContent = () => {
   } = useCollectionsContent();
 
   useEffect(() => {
-    getCollections(searchTerm);
+    loadCollections(searchTerm);
   }, [searchTerm, rowsPerPage, page]);
 
   return (
     <>
       <TextField
         fullWidth
-        placeholder={'Type title here...'}
+        placeholder='Type title here...'
         sx={STYLES.searchInput}
-        onChange={handleTyping}/>
+        onChange={handleTyping}
+      />
 
       <StatefulCard state={state} noContentMessage={NO_MATCHING_COLLECTIONS}>
         <TablePagination
@@ -60,7 +61,8 @@ export const CollectionsContent = () => {
               collection={collection}
               isActionsAvailable={true}
               actions={cardActions}
-              onActionClick={handleCardAction}/>
+              onActionClick={handleCardAction}
+            />
           })}
         </Box>
 
