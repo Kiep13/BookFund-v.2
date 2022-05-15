@@ -8,14 +8,14 @@ import { STYLES } from '../../constants';
 import { PageViewSelector } from '../PageViewSelector';
 import { IProps } from './propsInterface';
 
-export const Header = ({ book, pageView, isLastPageOpened, handlePageViewChange, handleMarkAsDone }: IProps) => {
+export const Header = ({book, pageView, isLastPageOpened, handlePageViewChange, handleMarkAsDone}: IProps) => {
   const history = useHistory();
 
   const goToBookPage = (): void => {
     history.push(`${BaseRoutePaths.BOOK}/${book.id}`);
   }
 
-  const handleMarkAsDoneClick = () => {
+  const handleMarkAsDoneClick = (): void => {
     handleMarkAsDone();
   }
 
@@ -35,20 +35,19 @@ export const Header = ({ book, pageView, isLastPageOpened, handlePageViewChange,
             component='div'
             sx={STYLES.header.title}
           >
-            { book.title }
+            {book.title}
           </Typography>
         </Box>
 
         <Box sx={STYLES.header.actions}>
-          {
-            isLastPageOpened &&
+          {isLastPageOpened && (
             <Button
               variant='contained'
               onClick={handleMarkAsDoneClick}
             >
               Mark as done
             </Button>
-          }
+          )}
           <PageViewSelector
             pageView={pageView}
             handlePageViewChange={handlePageViewChange}

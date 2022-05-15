@@ -10,7 +10,7 @@ import { IMAGE_PROPERTIES, STYLES } from '../../constants';
 export const CongratulationsMessage = () => {
   const history = useHistory();
 
-  const goToHomePage = () => {
+  const goToHomePage = (): void => {
     history.push(BaseRoutePaths.HOME);
   }
 
@@ -32,7 +32,7 @@ export const CongratulationsMessage = () => {
       </Typography>
 
       <Image
-        src={'../../../assets/confetti.png'}
+        src={'assets/confetti.png'}
         width={IMAGE_PROPERTIES.width}
         height={IMAGE_PROPERTIES.height}
         fit={IMAGE_PROPERTIES.fit}

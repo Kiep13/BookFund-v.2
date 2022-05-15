@@ -6,7 +6,7 @@ import { ALL_VALUE } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const StatusSelector = ({ value, setValue }: IProps) => {
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent): void => {
     setValue(event.target.value);
   }
 
