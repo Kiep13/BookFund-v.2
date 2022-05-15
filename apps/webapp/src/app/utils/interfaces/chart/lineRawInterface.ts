@@ -1,4 +1,4 @@
 export interface ILineRaw {
-  date: string,
-  amount: number,
+  date: string;
+  amount: number;
 }

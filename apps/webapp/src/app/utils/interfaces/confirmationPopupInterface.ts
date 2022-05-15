@@ -1,5 +1,5 @@
 export interface IConfirmationPopup {
-  title: string,
-  text: string,
-  confirmationButtonLabel: string
+  title: string;
+  text: string;
+  confirmationButtonLabel: string;
 }

@@ -1,10 +1,10 @@
 export interface IActionStatistic {
-  date: string,
-  amount: number
+  date: string;
+  amount: number;
 }
 
 export interface IActionsStatistic {
-  users: IActionStatistic[],
-  favorites: IActionStatistic[],
-  comments: IActionStatistic[]
+  users: IActionStatistic[];
+  favorites: IActionStatistic[];
+  comments: IActionStatistic[];
 }

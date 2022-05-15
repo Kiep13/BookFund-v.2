@@ -6,7 +6,7 @@ export * from './adminDashboardSearchOptionsInterface';
 export * from './alertInterface';
 export * from './alignTypeInterface';
 export * from './authorInterface';
-export * from './authResponse.interface';
+export * from './authResponseInterface';
 export * from './bookInterface';
 export * from './cardActionInterface';
 export * from './cardItemActionInterface';

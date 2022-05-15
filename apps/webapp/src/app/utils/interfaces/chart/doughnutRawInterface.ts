@@ -1,4 +1,4 @@
 export interface IDoughnutRaw {
-  name: string,
-  amount: number,
+  name: string;
+  amount: number;
 }

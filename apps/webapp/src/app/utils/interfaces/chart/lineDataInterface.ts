@@ -1,12 +1,12 @@
 export interface ILineDataset {
-  label: string,
-  data: number[],
-  borderColor: string,
-  backgroundColor: string,
-  lineTension: number
+  label: string;
+  data: number[];
+  borderColor: string;
+  backgroundColor: string;
+  lineTension: number;
 }
 
 export interface ILineData {
-  labels: string[],
-  datasets: ILineDataset[]
+  labels: string[];
+  datasets: ILineDataset[];
 }

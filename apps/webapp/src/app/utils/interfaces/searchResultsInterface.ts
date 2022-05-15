@@ -4,7 +4,7 @@ import { ICollection } from './collectionInterface';
 import { IListApiView } from './listApiViewInterface';
 
 export interface ISearchResults {
-  books: IListApiView<IBook>,
-  authors: IListApiView<IAuthor>,
-  collections: IListApiView<ICollection>
+  books: IListApiView<IBook>;
+  authors: IListApiView<IAuthor>;
+  collections: IListApiView<ICollection>;
 }

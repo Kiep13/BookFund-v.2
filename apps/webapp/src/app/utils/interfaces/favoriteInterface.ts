@@ -4,9 +4,9 @@ import { IAccount } from './accountInterface';
 import { IBook } from './bookInterface';
 
 export interface IFavorite {
-  book: IBook,
-  status: BookStatuses,
-  id?: number,
-  account?: IAccount,
-  bookmarkPage?: number
+  book: IBook;
+  status: BookStatuses;
+  id?: number;
+  account?: IAccount;
+  bookmarkPage?: number;
 }

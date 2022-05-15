@@ -1,4 +1,4 @@
 export interface IProviderStatistic {
-  provider: string,
-  amount: number
+  provider: string;
+  amount: number;
 }
