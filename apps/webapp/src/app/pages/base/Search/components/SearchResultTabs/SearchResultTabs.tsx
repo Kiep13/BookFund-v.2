@@ -12,7 +12,7 @@ import { IProps } from './propsInterface';
 export const SearchResultTabs = ({searchResults, searchTerm}: IProps) => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
-  const handleChange = (event, newValue: number) => {
+  const handleChange = (event, newValue: number): void => {
     setSelectedTab(newValue);
   };
 
@@ -25,9 +25,9 @@ export const SearchResultTabs = ({searchResults, searchTerm}: IProps) => {
         onChange={handleChange}
         sx={STYLES.searchResultTabs}
       >
-        <Tab label={<TabLabel label={'Books'} value={searchResults.books.count}/>}/>
-        <Tab label={<TabLabel label={'Collections'} value={searchResults.collections.count}/>}/>
-        <Tab label={<TabLabel label={'Authors'} value={searchResults.authors.count}/>}/>
+        <Tab label={<TabLabel label='Books' value={searchResults.books.count}/>}/>
+        <Tab label={<TabLabel label='Collections' value={searchResults.collections.count}/>}/>
+        <Tab label={<TabLabel label='Authors' value={searchResults.authors.count}/>}/>
       </Tabs>
       <TabPanel value={selectedTab} index={0}>
         <BooksSearchResults searchResults={searchResults.books} searchTerm={searchTerm}/>

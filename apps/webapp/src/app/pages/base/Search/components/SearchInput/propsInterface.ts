@@ -1,4 +1,4 @@
 export interface IProps {
-  searchTerm: string,
-  handleSubmit: Function
+  searchTerm: string;
+  handleSubmit: Function;
 }

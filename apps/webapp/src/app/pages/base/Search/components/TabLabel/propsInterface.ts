@@ -1,4 +1,4 @@
 export interface IProps {
-  label: string,
-  value: number
+  label: string;
+  value: number;
 }

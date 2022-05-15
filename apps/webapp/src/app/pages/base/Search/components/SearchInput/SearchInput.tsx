@@ -1,32 +1,17 @@
 import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import { useState, KeyboardEvent } from 'react';
 
-import { ENTER_CODE, STYLES_SEARCH_INPUT } from '../../constants';
+import { STYLES_SEARCH_INPUT } from '../../constants';
 import { IProps } from './propsInterface';
+import { useSearchInput } from './useSearchInput';
 
 export const SearchInput = ({ searchTerm, handleSubmit }: IProps) => {
-  const [value, setValue] = useState<string>(searchTerm);
-
-  const handleChange = (event: any) => {
-    setValue(event.target.value);
-  }
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if(event.code !== ENTER_CODE || !value) {
-      return;
-    }
-
-    handleSubmit(value);
-  }
-
-  const handleEnter = () => {
-    if(!value) {
-      return;
-    }
-
-    handleSubmit(value);
-  }
+  const {
+    value,
+    handleChange,
+    handleKeyDown,
+    handleEnter
+  } = useSearchInput(searchTerm, handleSubmit);
 
   return (
     <Box sx={STYLES_SEARCH_INPUT.wrapper}>
@@ -42,11 +27,11 @@ export const SearchInput = ({ searchTerm, handleSubmit }: IProps) => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         sx={STYLES_SEARCH_INPUT.input}
-        size={'small'}
+        size='small'
         fullWidth
-        placeholder={'Search'}
+        placeholder='Search'
       />
-      <Button variant='contained' onClick={() => handleEnter()}>Submit</Button>
+      <Button variant='contained' onClick={handleEnter}>Submit</Button>
     </Box>
   )
 }

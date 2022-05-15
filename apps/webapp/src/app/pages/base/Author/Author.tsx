@@ -17,15 +17,19 @@ export const Author = () => {
     pageState,
     loadAuthor
   } = useAuthorLoad();
-  const { getBookPageUrlWithoutId } = useBookActions();
+  const {getBookPageUrlWithoutId} = useBookActions();
 
   useEffect(() => {
     loadAuthor();
   }, []);
 
+  const navigateBack = () => {
+    history.goBack();
+  }
+
   return (
     <>
-      <EntityPageHeader title={PAGE_TITLE} handleBackClick={() => history.goBack()}/>
+      <EntityPageHeader title={PAGE_TITLE} handleBackClick={navigateBack}/>
 
       <Box sx={STYLES.page}>
         <StatefulCard state={pageState}>

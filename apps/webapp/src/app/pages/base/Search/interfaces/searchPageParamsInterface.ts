@@ -1,3 +1,3 @@
 export interface ISearchPageParams {
-  searchTerm: string
+  searchTerm: string;
 }

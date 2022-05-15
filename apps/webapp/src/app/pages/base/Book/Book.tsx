@@ -22,17 +22,22 @@ export const Book = () => {
 
   const isAuthorized = useSelector(getIsAuthorized);
 
-  const { getAuthorPageUrlWithoutId } = useAuthorActions();
+  const {getAuthorPageUrlWithoutId} = useAuthorActions();
 
   useEffect(() => {
     loadBook();
   }, []);
 
+  const navigateBack = () => {
+    history.goBack();
+  }
+
   return (
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={() => history.goBack()}/>
+        handleBackClick={navigateBack}
+      />
 
       <Box sx={STYLES.content}>
         <StatefulCard state={pageState}>
@@ -40,7 +45,8 @@ export const Book = () => {
                        authorLink={getAuthorPageUrlWithoutId()}
                        isCommentFormShown={isAuthorized}
                        isActionsShown={isAuthorized}
-                       handleBookChange={handleBookChange}/>
+                       handleBookChange={handleBookChange}
+          />
         </StatefulCard>
       </Box>
     </>

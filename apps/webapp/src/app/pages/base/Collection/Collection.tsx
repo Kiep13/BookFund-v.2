@@ -16,17 +16,21 @@ export const Collection = () => {
     pageState,
     loadCollection
   } = useCollectionLoad();
-  const { getBookPageUrlWithoutId } = useBookActions();
+  const {getBookPageUrlWithoutId} = useBookActions();
 
   useEffect(() => {
     loadCollection();
   }, []);
 
+  const navigateBack = () => {
+    history.goBack();
+  }
+
   return (
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={() => history.goBack()}/>
+        handleBackClick={navigateBack}/>
 
       <StatefulCard state={pageState}>
         <CollectionContent collection={collection} bookLink={getBookPageUrlWithoutId()}/>

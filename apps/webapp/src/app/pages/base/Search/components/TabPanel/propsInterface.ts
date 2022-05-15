@@ -1,5 +1,5 @@
 export interface IProps {
-  index: number,
-  value: number,
-  children: any
+  index: number;
+  value: number;
+  children: any;
 }
