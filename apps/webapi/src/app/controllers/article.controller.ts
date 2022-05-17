@@ -47,7 +47,7 @@ class ArticleController {
       const result = {
         by: document.location.origin,
         title: document.title,
-        html: content
+        content
       }
 
       response.json(result);

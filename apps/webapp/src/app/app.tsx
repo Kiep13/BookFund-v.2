@@ -7,7 +7,7 @@ import { PrivateRoute, ProtectedRoute, PublicRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Author, Book, Collection, Home, NotFound, Search } from '@pages/base';
-import { Articles, Favorites, Reading } from '@pages/user';
+import { Article, Articles, Favorites, Reading } from '@pages/user';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import store from '@store/index';
 
@@ -37,6 +37,9 @@ const App = () =>
 
       <ProtectedRoute path={BaseRoutePaths.FAVORITES}>
         <Favorites/>
+      </ProtectedRoute>
+      <ProtectedRoute path={`${BaseRoutePaths.ARTICLE}/:id`} exact>
+        <Article/>
       </ProtectedRoute>
       <ProtectedRoute path={BaseRoutePaths.ARTICLES}>
         <Articles/>

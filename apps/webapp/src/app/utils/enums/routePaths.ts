@@ -1,6 +1,7 @@
 export enum BaseRoutePaths {
   HOME = '/',
   FAVORITES = '/favorites',
+  ARTICLE = '/article',
   ARTICLES = '/articles',
   COLLECTION = '/collection',
   BOOK = '/book',

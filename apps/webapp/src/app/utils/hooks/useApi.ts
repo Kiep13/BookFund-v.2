@@ -9,6 +9,7 @@ import { IGenreForm } from '@pages/admin/GenreForm/interfaces';
 import { axiosInstance as axios, API_TOOLTIP_ERROR } from '@utils/constants';
 import { useAlerts } from '@utils/hooks';
 import {
+  IArticle,
   IAuthor,
   IAuthResponse,
   IBook,
@@ -207,6 +208,13 @@ export const useApi = () => {
     return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, { responseType: 'arraybuffer' });
   }
 
+  const getArticle = async (url: string): Promise<IArticle>  => {
+    return await axios.post<IArticle>(`${environment.backEndUrl}/v1/article/new`, {
+      url
+    })
+      .then((response: AxiosResponse) => response.data);
+  }
+
   return {
     login,
     refresh,
@@ -243,5 +251,6 @@ export const useApi = () => {
     getReadingInfo,
     updateReadingInfo,
     getBookFile,
+    getArticle
   }
 }
