@@ -15,7 +15,7 @@ export const Article = () => {
   const {getArticle} = useApi();
 
   const loadArticle = (): void => {
-    const url = 'https://www.mofaic.gov.ae/ar-ae/missions/minsk';
+    const url = 'https://minsk.diplo.de/by-be/service/01-KonsularserviceA-Z';
 
     getArticle(url)
       .then((response) => {
