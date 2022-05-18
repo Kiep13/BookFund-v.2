@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import queryString from 'query-string';
 
 import { environment } from '@environments/environment';
+import { IArticleFolderForm } from '@pages/user/FolderForm/interfaces';
 import { IAuthorForm } from '@pages/admin/AuthorForm/interfaces';
 import { IBookForm } from '@pages/admin/BookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/CollectionForm/interfaces';
@@ -208,6 +209,14 @@ export const useApi = () => {
     return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, { responseType: 'arraybuffer' });
   }
 
+  const addFolder = async (folder: IArticleFolderForm): Promise<void> => {
+    return await axios.post(`${environment.backEndUrl}/v1/folder/new`, folder);
+  }
+
+  const updateFolder = async (id: number, folder: IArticleFolderForm): Promise<void> => {
+    return await axios.put(`${environment.backEndUrl}/v1/folder/update/${id}`, folder);
+  }
+
   const getArticle = async (url: string): Promise<IArticle>  => {
     return await axios.post<IArticle>(`${environment.backEndUrl}/v1/article/new`, {
       url
@@ -251,6 +260,8 @@ export const useApi = () => {
     getReadingInfo,
     updateReadingInfo,
     getBookFile,
+    addFolder,
+    updateFolder,
     getArticle
   }
 }

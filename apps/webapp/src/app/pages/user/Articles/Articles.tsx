@@ -1,15 +1,17 @@
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
 
 import { PageHeaderCard } from '@components/headers/PageHeaderCard';
-import { ARTICLES_FOLDERS_MOCK } from '@mocks/articlesFoldersMock';
 import { IArticleFolder } from '@utils/interfaces';
 
 import { ArticleFolderCard } from './components';
 import { STYLES } from './constants';
+import { useArticles } from './useArticles';
 
 export const Articles = () => {
-  const [folders, setFolders] = useState<IArticleFolder[]>(ARTICLES_FOLDERS_MOCK);
+  const {
+    folders,
+    handleFolderNewClick,
+  } = useArticles();
 
   return (
     <>
@@ -17,7 +19,7 @@ export const Articles = () => {
         <PageHeaderCard title='Article folders'>
           <Box sx={STYLES.pageHeaderActions}>
             <Button variant='outlined'>Add new article</Button>
-            <Button variant='contained'>Add new collection</Button>
+            <Button variant='contained' onClick={handleFolderNewClick}>Add new folder</Button>
           </Box>
         </PageHeaderCard>
       </Box>

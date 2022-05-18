@@ -7,7 +7,7 @@ import { PrivateRoute, ProtectedRoute, PublicRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
 import { Author, Book, Collection, Home, NotFound, Search } from '@pages/base';
-import { Article, Articles, Favorites, Reading } from '@pages/user';
+import { Article, Articles, Favorites, FolderForm, Reading } from '@pages/user';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import store from '@store/index';
 
@@ -41,8 +41,11 @@ const App = () =>
       <ProtectedRoute path={`${BaseRoutePaths.ARTICLE}/:id`} exact>
         <Article/>
       </ProtectedRoute>
-      <ProtectedRoute path={BaseRoutePaths.ARTICLES}>
+      <ProtectedRoute path={BaseRoutePaths.ARTICLES} exact>
         <Articles/>
+      </ProtectedRoute>
+      <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`}>
+        <FolderForm/>
       </ProtectedRoute>
       <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
         <Reading/>
