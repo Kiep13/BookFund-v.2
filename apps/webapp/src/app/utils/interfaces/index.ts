@@ -5,6 +5,7 @@ export * from './accountInterface';
 export * from './adminDashboardSearchOptionsInterface';
 export * from './alertInterface';
 export * from './alignTypeInterface';
+export * from './articleFolderInterface';
 export * from './articleInterface';
 export * from './authorInterface';
 export * from './authResponseInterface';

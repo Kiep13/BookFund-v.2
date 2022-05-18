@@ -1,3 +1,4 @@
+export * from './articlesFoldersMock';
 export * from './authorsMock';
 export * from './booksMock';
 export * from './doughnutStatisticMock';
