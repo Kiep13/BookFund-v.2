@@ -14,7 +14,7 @@ export const ArticleFolderCard = ({folder}: IProps) => {
 
   return (
     <Card sx={STYLES.folderCard.wrapper}>
-      <CardActionArea sx={STYLES.folderCard.actionArea}>
+      <CardActionArea sx={STYLES.folderCard.actionArea} component='div'>
         <CardContent sx={STYLES.folderCard.content}>
           <Typography
             gutterBottom

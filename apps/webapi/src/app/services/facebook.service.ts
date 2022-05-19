@@ -5,6 +5,7 @@ import { AuthProviders } from '@core/enums';
 import { IAuthResponse, IFacebookAuthTokens, IFacebookUser } from '@core/interfaces';
 import { environment } from '@environments/environment';
 import { AccountEntity } from '@entities/account.entity';
+import { folderService } from '@services/folder.service';
 import { tokenService } from '@services/token.service';
 
 class FacebookService {
@@ -58,7 +59,7 @@ class FacebookService {
     }).then((response) => response.data);
   }
 
-  private register(user: IFacebookUser): Promise<AccountEntity> {
+  private async register(user: IFacebookUser): Promise<AccountEntity> {
     const accountEntity = new AccountEntity();
 
     accountEntity.email = user.email;
@@ -67,7 +68,10 @@ class FacebookService {
     accountEntity.image = user.picture?.data.url;
     accountEntity.provider = AuthProviders.FACEBOOK;
 
-    return connection.manager.save(accountEntity);
+    await connection.manager.save(accountEntity);
+    await folderService.createDefaultFolder(accountEntity);
+
+    return accountEntity;
   }
 
   private async synchronize(accountId: number, user: IFacebookUser): Promise<AccountEntity> {

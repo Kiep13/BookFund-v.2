@@ -6,6 +6,7 @@ import { AuthProviders } from '@core/enums';
 import { IAuthResponse, IGutHubUser } from '@core/interfaces';
 import { environment } from '@environments/environment';
 import { AccountEntity } from '@entities/account.entity';
+import { folderService } from '@services/folder.service';
 import { tokenService } from '@services/token.service';
 
 class GithubService {
@@ -65,7 +66,7 @@ class GithubService {
       .then((response) => response.data);
   }
 
-  private register(user: IGutHubUser): Promise<AccountEntity> {
+  private async register(user: IGutHubUser): Promise<AccountEntity> {
     const accountEntity = new AccountEntity();
 
     accountEntity.email = user.email;
@@ -74,7 +75,10 @@ class GithubService {
     accountEntity.image = user.avatar_url;
     accountEntity.provider = AuthProviders.GITHUB;
 
-    return connection.manager.save(accountEntity);
+    await connection.manager.save(accountEntity);
+    await folderService.createDefaultFolder(accountEntity);
+
+    return accountEntity;
   }
 
   private async synchronize(accountId: number, user: IGutHubUser): Promise<AccountEntity> {
