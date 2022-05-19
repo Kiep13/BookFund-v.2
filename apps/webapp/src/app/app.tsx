@@ -47,6 +47,9 @@ const App = () =>
       <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`}>
         <FolderForm/>
       </ProtectedRoute>
+      <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/:id`}>
+        <FolderForm/>
+      </ProtectedRoute>
       <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
         <Reading/>
       </ProtectedRoute>

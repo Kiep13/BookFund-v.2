@@ -5,6 +5,7 @@ export enum BaseRoutePaths {
   ARTICLES = '/articles',
   FOLDER = '/folder',
   FOLDER_NEW = '/folder/new',
+  FOLDER_EDIT = '/folder/edit',
   COLLECTION = '/collection',
   BOOK = '/book',
   AUTHOR = '/author',

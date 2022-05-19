@@ -215,6 +215,11 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getFolder = async (id: number): Promise<IArticleFolder>  => {
+    return await axios.get(`${environment.backEndUrl}/v1/folder/${id}`)
+      .then((response: AxiosResponse<IArticleFolder>) => response.data);
+  }
+
   const addFolder = async (folder: IArticleFolderForm): Promise<void> => {
     return await axios.post(`${environment.backEndUrl}/v1/folder/new`, folder);
   }
@@ -271,6 +276,7 @@ export const useApi = () => {
     updateReadingInfo,
     getBookFile,
     getFolders,
+    getFolder,
     addFolder,
     updateFolder,
     deleteFolder,

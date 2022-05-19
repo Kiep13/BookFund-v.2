@@ -17,7 +17,7 @@ export const Articles = () => {
     pageState,
     isDeleteModalOpened,
     initFolders,
-    handleFolderNewClick,
+    navigateToNewFolderForm,
     handleFolderActionClick,
     handleDeleteConfirm,
     handleModalClose
@@ -33,7 +33,7 @@ export const Articles = () => {
         <PageHeaderCard title='Article folders'>
           <Box sx={STYLES.pageHeaderActions}>
             <Button variant='outlined'>Add new article</Button>
-            <Button variant='contained' onClick={handleFolderNewClick}>Add new folder</Button>
+            <Button variant='contained' onClick={navigateToNewFolderForm}>Add new folder</Button>
           </Box>
         </PageHeaderCard>
       </Box>

@@ -37,8 +37,12 @@ export const useArticles = () => {
       });
   }
 
-  const handleFolderNewClick = (): void => {
+  const navigateToNewFolderForm = (): void => {
     history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`);
+  }
+
+  const navigateToEditFolderForm = (id: number): void => {
+    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/${id}`);
   }
 
   const handleFolderActionClick = (id: number, actionType: CardActions): void => {
@@ -46,6 +50,7 @@ export const useArticles = () => {
 
     switch(actionType) {
       case CardActions.DELETE: setIsDeleteModalOpened(true); break;
+      case CardActions.EDIT: navigateToEditFolderForm(id); break;
     }
   }
 
@@ -73,7 +78,7 @@ export const useArticles = () => {
     pageState,
     isDeleteModalOpened,
     initFolders,
-    handleFolderNewClick,
+    navigateToNewFolderForm,
     handleFolderActionClick,
     handleDeleteConfirm,
     handleModalClose
