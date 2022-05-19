@@ -1,17 +1,25 @@
 import { Box, Button } from '@mui/material';
 
+import { StatefulCard } from '@components/cards/StatefulCard';
 import { PageHeaderCard } from '@components/headers/PageHeaderCard';
 import { IArticleFolder } from '@utils/interfaces';
 
 import { ArticleFolderCard } from './components';
-import { STYLES } from './constants';
+import { NO_SAVED_FOLDERS, STYLES } from './constants';
 import { useArticles } from './useArticles';
+import { useEffect } from "react";
 
 export const Articles = () => {
   const {
     folders,
+    pageState,
+    initFolders,
     handleFolderNewClick,
   } = useArticles();
+
+  useEffect(() => {
+    initFolders();
+  }, [])
 
   return (
     <>
@@ -24,13 +32,15 @@ export const Articles = () => {
         </PageHeaderCard>
       </Box>
 
-      <Box sx={STYLES.content}>
-        {folders.map((folder: IArticleFolder) =>
-          <Box key={folder.id}>
-            <ArticleFolderCard folder={folder}/>
-          </Box>
-        )}
-      </Box>
+      <StatefulCard state={pageState} noContentMessage={NO_SAVED_FOLDERS}>
+        <Box sx={STYLES.content}>
+          {folders.map((folder: IArticleFolder) =>
+            <Box key={folder.id}>
+              <ArticleFolderCard folder={folder}/>
+            </Box>
+          )}
+        </Box>
+      </StatefulCard>
     </>
   )
 }

@@ -11,6 +11,7 @@ import { axiosInstance as axios, API_TOOLTIP_ERROR } from '@utils/constants';
 import { useAlerts } from '@utils/hooks';
 import {
   IArticle,
+  IArticleFolder,
   IAuthor,
   IAuthResponse,
   IBook,
@@ -209,6 +210,11 @@ export const useApi = () => {
     return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, { responseType: 'arraybuffer' });
   }
 
+  const getFolders = async (): Promise<IListApiView<IArticleFolder>> => {
+    return await axios.get<IListApiView<IFavorite>>(`${environment.backEndUrl}/v1/folder/list`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   const addFolder = async (folder: IArticleFolderForm): Promise<void> => {
     return await axios.post(`${environment.backEndUrl}/v1/folder/new`, folder);
   }
@@ -260,6 +266,7 @@ export const useApi = () => {
     getReadingInfo,
     updateReadingInfo,
     getBookFile,
+    getFolders,
     addFolder,
     updateFolder,
     getArticle
