@@ -5,6 +5,7 @@ export * from './book.routes';
 export * from './collection.routes';
 export * from './comment.routes';
 export * from './favorite.routes';
+export * from './folder.routes';
 export * from './genre.routes';
 export * from './image.routes';
 export * from './read.routes';

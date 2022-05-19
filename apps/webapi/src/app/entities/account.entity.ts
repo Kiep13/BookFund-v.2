@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { CommentEntity } from '@entities/comment.entity';
 import { FavoriteEntity } from '@entities/favorite.entity';
+import { FolderEntity } from '@entities/folder.entity';
 import { AuthProviders, Roles } from '@core/enums';
 
 @Entity({
@@ -62,6 +63,9 @@ export class AccountEntity {
 
   @OneToMany(() => CommentEntity, comment => comment.book)
   comments: CommentEntity[];
+
+  @OneToMany(() => FolderEntity, folder => folder.account)
+  folders: FolderEntity[];
 
   @Column({
     name: 'createdAt',

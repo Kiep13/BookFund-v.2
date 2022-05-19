@@ -7,6 +7,7 @@ export enum ApiRoutes {
   FILE = 'file',
   GENRE = 'genre',
   FAVORITE = 'favorite',
+  FOLDER = 'folder',
   COLLECTION = 'collection',
   COMMENT = 'comment',
   SEARCH = 'search',

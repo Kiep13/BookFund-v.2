@@ -15,10 +15,10 @@ export const useFolderForm = () => {
   const history = useHistory();
   const params = useParams();
   const {addFolder, updateFolder} = useApi();
+  const {addSuccess, addError} = useAlerts();
 
   const [pageState, setPageState] = useState<CardStates>(CardStates.CONTENT);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const {addSuccess, addError} = useAlerts();
 
   const callSubmitAction = (values: IArticleFolderForm) => {
     const folderId = (params as IFormPageParams).id;
