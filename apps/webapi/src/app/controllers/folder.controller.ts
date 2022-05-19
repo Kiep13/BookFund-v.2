@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 
 import { ResponseStatuses, SortDirections } from '@core/enums';
 import { connection } from '@core/connection';
+import { IListApiView } from '@core/interfaces';
 import { FolderEntity } from '@entities/folder.entity';
-import { IListApiView } from "@core/interfaces";
 
 class FolderController {
   public async createFolder(request: Request, response: Response, next: Function): Response {
@@ -45,6 +45,19 @@ class FolderController {
       }
 
       return response.status(ResponseStatuses.STATUS_OK).json(result);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async deleteFolder(request: Request, response: Response, next: Function): Response {
+    try {
+      const folderId = +request.params.id;
+
+      const folder = await connection.manager.findOne(FolderEntity, folderId);
+      await connection.manager.remove(folder);
+
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
     } catch (error) {
       next(error)
     }

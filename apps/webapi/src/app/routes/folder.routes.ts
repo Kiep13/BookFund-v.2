@@ -7,5 +7,6 @@ const router = new Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, authMiddleware, folderController.getFolders);
 router.post(`/${ApiRoutesModifiers.NEW}`, authMiddleware, folderController.createFolder);
+router.delete(`/${ApiRoutesModifiers.DELETE}/:id`, authMiddleware, folderController.deleteFolder);
 
 export default router;

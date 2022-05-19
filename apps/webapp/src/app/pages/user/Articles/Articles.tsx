@@ -1,20 +1,26 @@
 import { Box, Button } from '@mui/material';
+import { useEffect } from 'react';
 
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { PageHeaderCard } from '@components/headers/PageHeaderCard';
+import { DELETE_ARTICLE_FOLDER_CONFIRMATION_POPUP } from '@utils/constants';
 import { IArticleFolder } from '@utils/interfaces';
 
 import { ArticleFolderCard } from './components';
 import { NO_SAVED_FOLDERS, STYLES } from './constants';
 import { useArticles } from './useArticles';
-import { useEffect } from "react";
 
 export const Articles = () => {
   const {
     folders,
     pageState,
+    isDeleteModalOpened,
     initFolders,
     handleFolderNewClick,
+    handleFolderActionClick,
+    handleDeleteConfirm,
+    handleModalClose
   } = useArticles();
 
   useEffect(() => {
@@ -36,11 +42,18 @@ export const Articles = () => {
         <Box sx={STYLES.content}>
           {folders.map((folder: IArticleFolder) =>
             <Box key={folder.id}>
-              <ArticleFolderCard folder={folder}/>
+              <ArticleFolderCard folder={folder} handleActionClick={handleFolderActionClick}/>
             </Box>
           )}
         </Box>
       </StatefulCard>
+
+      <ConfirmationPopup
+        info={DELETE_ARTICLE_FOLDER_CONFIRMATION_POPUP}
+        isOpened={isDeleteModalOpened}
+        handleConfirm={handleDeleteConfirm}
+        handleClose={handleModalClose}
+      />
     </>
   )
 }

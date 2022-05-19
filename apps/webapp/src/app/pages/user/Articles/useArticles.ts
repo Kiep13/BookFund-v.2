@@ -3,24 +3,28 @@ import { useHistory } from 'react-router-dom';
 
 import { ARTICLES_FOLDERS_MOCK } from '@mocks/articlesFoldersMock';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { BaseRoutePaths, CardStates } from '@utils/enums';
+import { BaseRoutePaths, CardActions, CardStates } from '@utils/enums';
 import { IArticleFolder, IListApiView } from '@utils/interfaces';
 import { useAlerts, useApi } from '@utils/hooks';
 
+import { SUCCESSFULLY_DELETED } from './constants';
+
 export const useArticles = () => {
   const history = useHistory();
-  const {getFolders} = useApi();
-  const {addError} = useAlerts();
+  const {getFolders, deleteFolder} = useApi();
+  const {addSuccess, addError} = useAlerts();
 
   const [folders, setFolders] = useState<IArticleFolder[]>(ARTICLES_FOLDERS_MOCK);
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
+  const [selectedId, setSelectedId] = useState<number>();
+  const [isDeleteModalOpened, setIsDeleteModalOpened] = useState<boolean>(false);
 
   const initFolders = async () => {
     getFolders()
       .then((response: IListApiView<IArticleFolder>) => {
         setFolders(response.data);
 
-        if(response.count) {
+        if (response.count) {
           setPageState(CardStates.CONTENT);
           return;
         }
@@ -37,10 +41,41 @@ export const useArticles = () => {
     history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`);
   }
 
+  const handleFolderActionClick = (id: number, actionType: CardActions): void => {
+    setSelectedId(id);
+
+    switch(actionType) {
+      case CardActions.DELETE: setIsDeleteModalOpened(true); break;
+    }
+  }
+
+  const handleDeleteConfirm = (): void => {
+    if(!selectedId) return;
+
+    setIsDeleteModalOpened(false);
+    deleteFolder(selectedId)
+      .then(() => {
+        initFolders();
+        addSuccess(SUCCESSFULLY_DELETED);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+        setPageState(CardStates.ERROR);
+      });
+  }
+
+  const handleModalClose = (): void => {
+    setIsDeleteModalOpened(false);
+  }
+
   return {
     folders,
     pageState,
+    isDeleteModalOpened,
     initFolders,
-    handleFolderNewClick
+    handleFolderNewClick,
+    handleFolderActionClick,
+    handleDeleteConfirm,
+    handleModalClose
   }
 }

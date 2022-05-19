@@ -7,8 +7,9 @@ import { ICardAction } from '@utils/interfaces';
 import { DEFAULT_FOLDER_DISPLAYED_NAME, DEFAULT_FOLDER_NAME, STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
-export const ArticleFolderCard = ({folder}: IProps) => {
-  const displayedFolderName = folder.name !== DEFAULT_FOLDER_NAME ? folder.name : DEFAULT_FOLDER_DISPLAYED_NAME;
+export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
+  const isDefaultFolder = folder.name === DEFAULT_FOLDER_NAME;
+  const displayedFolderName = !isDefaultFolder ? folder.name : DEFAULT_FOLDER_DISPLAYED_NAME;
   const displayedDate = moment(folder.createdAt).format(DATE_CARD_CREATED_AT_FORMAT);
   const actions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
@@ -20,7 +21,7 @@ export const ArticleFolderCard = ({folder}: IProps) => {
             gutterBottom
             variant='h5'
             component='div'
-            sx={(folder.name === DEFAULT_FOLDER_NAME ? STYLES.folderCard.defaultFolderName : {})}
+            sx={(isDefaultFolder ? STYLES.folderCard.defaultFolderName : {})}
           >
             {displayedFolderName}
           </Typography>
@@ -29,15 +30,19 @@ export const ArticleFolderCard = ({folder}: IProps) => {
             <Typography variant='body2' color='text.secondary'>
               {displayedDate}
             </Typography>
-            <CardActions disableSpacing sx={STYLES.folderCard.iconActions}>
-              {actions.map(({icon: Icon, ariLabel, actionType}: ICardAction) => {
-                return <IconButton
-                  aria-label={ariLabel}
-                  key={actionType}>
-                  <Icon/>
-                </IconButton>
-              })}
-            </CardActions>
+            {!isDefaultFolder && (
+              <CardActions disableSpacing sx={STYLES.folderCard.iconActions}>
+                {actions.map(({icon: Icon, ariLabel, actionType}: ICardAction) => {
+                  return <IconButton
+                    aria-label={ariLabel}
+                    key={actionType}
+                    onClick={() => handleActionClick(folder.id, actionType)}
+                  >
+                    <Icon/>
+                  </IconButton>
+                })}
+              </CardActions>
+            )}
           </Box>
         </CardContent>
       </CardActionArea>

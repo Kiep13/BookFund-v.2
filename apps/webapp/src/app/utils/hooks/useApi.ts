@@ -223,6 +223,10 @@ export const useApi = () => {
     return await axios.put(`${environment.backEndUrl}/v1/folder/update/${id}`, folder);
   }
 
+  const deleteFolder = async (id: number): Promise<AxiosResponse<void>> => {
+    return axios.delete<void>(`${environment.backEndUrl}/v1/folder/delete/${id}`);
+  }
+
   const getArticle = async (url: string): Promise<IArticle>  => {
     return await axios.post<IArticle>(`${environment.backEndUrl}/v1/article/new`, {
       url
@@ -269,6 +273,7 @@ export const useApi = () => {
     getFolders,
     addFolder,
     updateFolder,
+    deleteFolder,
     getArticle
   }
 }

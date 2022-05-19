@@ -29,3 +29,9 @@ export const REMOVE_FROM_FAVORITES_CONFIRMATION_POPUP: IConfirmationPopup = {
   text: 'Are you sure that you want remove this book from favorites?',
   confirmationButtonLabel: 'Remove'
 }
+
+export const DELETE_ARTICLE_FOLDER_CONFIRMATION_POPUP: IConfirmationPopup = {
+  title: 'Delete folder',
+  text: 'Are you sure that you want delete this folder?',
+  confirmationButtonLabel: 'Delete'
+}
