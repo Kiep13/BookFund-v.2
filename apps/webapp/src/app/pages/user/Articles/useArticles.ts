@@ -37,6 +37,10 @@ export const useArticles = () => {
       });
   }
 
+  const navigateToNewArticleForm = (): void => {
+    history.push(`${BaseRoutePaths.ARTICLE_NEW}`);
+  }
+
   const navigateToNewFolderForm = (): void => {
     history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`);
   }
@@ -78,6 +82,7 @@ export const useArticles = () => {
     pageState,
     isDeleteModalOpened,
     initFolders,
+    navigateToNewArticleForm,
     navigateToNewFolderForm,
     handleFolderActionClick,
     handleDeleteConfirm,

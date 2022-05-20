@@ -1,5 +1,6 @@
 export interface IArticleFolder {
-  id: number,
-  name: string,
-  createdAt: Date
+  id: number;
+  name: string;
+  createdAt: Date;
+  articlesCount?: number;
 }

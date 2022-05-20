@@ -7,6 +7,7 @@ import { IAuthorForm } from '@pages/admin/AuthorForm/interfaces';
 import { IBookForm } from '@pages/admin/BookForm/interfaces';
 import { ICollectionForm } from '@pages/admin/CollectionForm/interfaces';
 import { IGenreForm } from '@pages/admin/GenreForm/interfaces';
+import { IArticleForm } from '@pages/user/ArticleForm/interfaces';
 import { axiosInstance as axios, API_TOOLTIP_ERROR } from '@utils/constants';
 import { useAlerts } from '@utils/hooks';
 import {
@@ -25,7 +26,7 @@ import {
 } from '@utils/interfaces';
 
 export const useApi = () => {
-  const { addError } = useAlerts();
+  const {addError} = useAlerts();
 
   const login = async (provider: string, code: string): Promise<IAuthResponse> => {
     return await axios.get(`${environment.backEndUrl}/v1/auth/${provider}`, {
@@ -63,7 +64,7 @@ export const useApi = () => {
     return await axios.put(`${environment.backEndUrl}/v1/author/update/${id}`, author);
   }
 
-  const getAuthor = async (id: number): Promise<IAuthor>  => {
+  const getAuthor = async (id: number): Promise<IAuthor> => {
     return await axios.get(`${environment.backEndUrl}/v1/author/${id}`)
       .then((response: AxiosResponse) => response.data);
   }
@@ -121,7 +122,7 @@ export const useApi = () => {
     return await axios.put(`${environment.backEndUrl}/v1/book/update/${id}`, book);
   }
 
-  const getBook = async (id: number): Promise<IBook>  => {
+  const getBook = async (id: number): Promise<IBook> => {
     return await axios.get(`${environment.backEndUrl}/v1/book/${id}`)
       .then((response: AxiosResponse) => response.data);
   }
@@ -173,7 +174,7 @@ export const useApi = () => {
     return await axios.put(`${environment.backEndUrl}/v1/collection/update/${id}`, collection);
   }
 
-  const getCollection = async (id: number): Promise<ICollection>  => {
+  const getCollection = async (id: number): Promise<ICollection> => {
     return await axios.get(`${environment.backEndUrl}/v1/collection/${id}`)
       .then((response: AxiosResponse<ICollection>) => response.data);
   }
@@ -207,7 +208,7 @@ export const useApi = () => {
   }
 
   const getBookFile = async (bookFileUrl: string): Promise<any> => {
-    return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, { responseType: 'arraybuffer' });
+    return await axios.get(`${environment.backEndUrl}${bookFileUrl}`, {responseType: 'arraybuffer'});
   }
 
   const getFolders = async (): Promise<IListApiView<IArticleFolder>> => {
@@ -215,7 +216,7 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
-  const getFolder = async (id: number): Promise<IArticleFolder>  => {
+  const getFolder = async (id: number): Promise<IArticleFolder> => {
     return await axios.get(`${environment.backEndUrl}/v1/folder/${id}`)
       .then((response: AxiosResponse<IArticleFolder>) => response.data);
   }
@@ -232,10 +233,18 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/folder/delete/${id}`);
   }
 
-  const getArticle = async (url: string): Promise<IArticle>  => {
-    return await axios.post<IArticle>(`${environment.backEndUrl}/v1/article/new`, {
-      url
-    })
+  const getArticle = async (id: string): Promise<IArticle> => {
+    return await axios.get<IArticle>(`${environment.backEndUrl}/v1/article/${id}`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const addArticle = async (article: IArticleForm): Promise<void> => {
+    return await axios.post(`${environment.backEndUrl}/v1/article/new`, article)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const updateArticle = async (id: number, article: IArticleForm): Promise<void> => {
+    return await axios.post(`${environment.backEndUrl}/v1/article/update/${id}`, article)
       .then((response: AxiosResponse) => response.data);
   }
 
@@ -280,6 +289,8 @@ export const useApi = () => {
     addFolder,
     updateFolder,
     deleteFolder,
-    getArticle
+    getArticle,
+    addArticle,
+    updateArticle
   }
 }

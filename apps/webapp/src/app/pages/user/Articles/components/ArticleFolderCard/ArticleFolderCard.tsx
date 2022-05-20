@@ -1,10 +1,16 @@
 import { Card, CardContent, Typography, CardActionArea, CardActions, Box, IconButton } from '@mui/material';
 import moment from 'moment';
 
-import { DATE_CARD_CREATED_AT_FORMAT, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
+import {
+  DEFAULT_FOLDER_DISPLAYED_NAME,
+  DEFAULT_FOLDER_NAME,
+  DATE_CARD_CREATED_AT_FORMAT,
+  DELETE_CARD_ACTION,
+  EDIT_CARD_ACTION
+} from '@utils/constants';
 import { ICardAction } from '@utils/interfaces';
 
-import { DEFAULT_FOLDER_DISPLAYED_NAME, DEFAULT_FOLDER_NAME, STYLES } from '../../constants';
+import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
