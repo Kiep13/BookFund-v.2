@@ -1,7 +1,7 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
-import { CardStates } from '@utils/enums';
+import { BaseRoutePaths, CardStates } from '@utils/enums';
 import { useApi } from '@utils/hooks';
 import { IArticle, IFormPageParams } from '@utils/interfaces';
 
@@ -39,7 +39,7 @@ export const useArticle = () => {
   }
 
   const navigateBack = (): void => {
-    history.goBack();
+    article && history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${article.folder.id}`);
   }
 
   return {

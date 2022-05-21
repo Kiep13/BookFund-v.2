@@ -61,7 +61,9 @@ export const useFolder = () => {
   }
 
   const navigateToNewArticleForm = (): void => {
-
+    history.push(`${BaseRoutePaths.ARTICLE_NEW}`, {
+      defaultFolder: folder,
+    });
   }
 
   const handleHeaderIconClick = (actionType: CardActions): void => {
