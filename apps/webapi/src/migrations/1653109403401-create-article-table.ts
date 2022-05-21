@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey, TableIndex } from 'typeorm';
 
-export class createFolderTable1652938103042 implements MigrationInterface {
+export class createArticleTable1653109403401 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'folder',
+      name: 'article',
       columns: [
         {
           name: 'id',
@@ -14,12 +14,32 @@ export class createFolderTable1652938103042 implements MigrationInterface {
           isNullable: false
         },
         {
-          name: 'name',
+          name: 'title',
           type: 'varchar',
           isNullable: false
         },
         {
-          name: 'accountId',
+          name: 'contentFileUrl',
+          type: 'varchar',
+          isNullable: false
+        },
+        {
+          name: 'isRedirecting',
+          type: 'bool',
+          isNullable: false
+        },
+        {
+          name: 'exactUrl',
+          type: 'varchar',
+          isNullable: false
+        },
+        {
+          name: 'hostUrl',
+          type: 'varchar',
+          isNullable: false
+        },
+        {
+          name: 'folderId',
           type: 'int8',
           isNullable: false
         },
@@ -38,16 +58,16 @@ export class createFolderTable1652938103042 implements MigrationInterface {
       ]
     }), true);
 
-    await queryRunner.createForeignKey('folder', new TableForeignKey({
-      columnNames: ['accountId'],
+    await queryRunner.createForeignKey('article', new TableForeignKey({
+      columnNames: ['folderId'],
       referencedColumnNames: ['id'],
-      referencedTableName: 'account',
+      referencedTableName: 'folder',
       onDelete: 'CASCADE'
     }));
 
-    await queryRunner.createIndex('folder', new TableIndex({
-      name: 'TABLE_FOLDER_INDEX_ACCOUNT_ID',
-      columnNames: ['accountId']
+    await queryRunner.createIndex('article', new TableIndex({
+      name: 'TABLE_ARTICLE_INDEX_FOLDER_ID',
+      columnNames: ['folderId']
     }));
   }
 

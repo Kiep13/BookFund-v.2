@@ -65,6 +65,7 @@ export const useArticleForm = () => {
         if (!articleId) {
           const defaultFolder =  response.data.find((folder) => folder.name === DEFAULT_FOLDER_NAME);
           formik.setFieldValue('folder', defaultFolder?.id);
+          formik.validateForm();
 
           setPageState(CardStates.CONTENT);
           return;
@@ -90,17 +91,12 @@ export const useArticleForm = () => {
       });
   }
 
-  const handleFolderSelect = (): void => {
-
-  }
-
   return {
     pageState,
     formik,
     folderOptions,
     editMode,
     initForm,
-    navigateToPreviousPage,
-    handleFolderSelect
+    navigateToPreviousPage
   }
 }

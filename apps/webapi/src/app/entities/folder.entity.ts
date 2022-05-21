@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { AccountEntity } from '@entities/account.entity';
+import { ArticleEntity } from '@entities/article.entity';
 
 @Entity({
   name: 'folder'
@@ -26,6 +27,9 @@ export class FolderEntity {
     name: 'accountId'
   })
   account: AccountEntity;
+
+  @OneToMany(() => ArticleEntity, article => article.folder)
+  articles: ArticleEntity[];
 
   @Column({
     name: 'createdAt',

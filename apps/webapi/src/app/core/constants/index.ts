@@ -5,3 +5,4 @@ export * from './error-messages';
 export * from './messages';
 export * from './refresh-token-cookie-name';
 export * from './token-duration';
+export * from './url-content-file-extension';

@@ -5,6 +5,15 @@ import * as uuid from 'uuid';
 import { environment } from '@environments/environment';
 
 class FileService {
+  public async createFile(content: string, extension: string): Promise<string> {
+    const fileName = `${uuid.v4()}.${extension}`;
+    const filePath = `${path.resolve(__dirname, environment.articlesFolder, fileName)}`;
+
+    await fs.appendFileSync(filePath, content);
+
+    return fileName;
+  }
+
   public async saveFile(file): Promise<string> {
     const fileName = `${uuid.v4()}.pdf`;
 
