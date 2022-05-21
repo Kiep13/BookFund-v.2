@@ -233,6 +233,13 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/folder/delete/${id}`);
   }
 
+  const getArticles = async (searchOptions: ISearchOptions): Promise<IListApiView<IArticle>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IArticle[]>(`${environment.backEndUrl}/v1/article/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   const getArticle = async (id: string): Promise<IArticle> => {
     return await axios.get<IArticle>(`${environment.backEndUrl}/v1/article/${id}`)
       .then((response: AxiosResponse) => response.data);
@@ -289,6 +296,7 @@ export const useApi = () => {
     addFolder,
     updateFolder,
     deleteFolder,
+    getArticles,
     getArticle,
     addArticle,
     updateArticle
