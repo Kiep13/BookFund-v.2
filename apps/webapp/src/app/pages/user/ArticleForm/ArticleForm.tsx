@@ -17,6 +17,7 @@ export const ArticleForm = () => {
     folderOptions,
     editMode,
     initForm,
+    handleFolderSelect,
     navigateToPreviousPage
   } = useArticleForm();
 
@@ -52,6 +53,7 @@ export const ArticleForm = () => {
                 id='folder'
                 label='Folder'
                 value={formik.values.folder}
+                onChange={handleFolderSelect}
               >
                 {folderOptions.map((folder: IArticleFolder) =>
                   <MenuItem key={folder.id} value={folder.id}>

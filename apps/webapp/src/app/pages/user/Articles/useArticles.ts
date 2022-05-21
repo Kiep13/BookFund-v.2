@@ -5,14 +5,15 @@ import { ARTICLES_FOLDERS_MOCK } from '@mocks/articlesFoldersMock';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BaseRoutePaths, CardActions, CardStates } from '@utils/enums';
 import { IArticleFolder, IListApiView } from '@utils/interfaces';
-import { useAlerts, useApi } from '@utils/hooks';
+import { useAlerts, useApi, useFolderActions } from '@utils/hooks';
 
 import { SUCCESSFULLY_DELETED } from './constants';
 
 export const useArticles = () => {
   const history = useHistory();
-  const {getFolders, deleteFolder} = useApi();
+  const {getFolders} = useApi();
   const {addSuccess, addError} = useAlerts();
+  const {navigateToEditForm, handleDeleteFolder} = useFolderActions();
 
   const [folders, setFolders] = useState<IArticleFolder[]>(ARTICLES_FOLDERS_MOCK);
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
@@ -45,32 +46,25 @@ export const useArticles = () => {
     history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`);
   }
 
-  const navigateToEditFolderForm = (id: number): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/${id}`);
-  }
-
   const handleFolderActionClick = (id: number, actionType: CardActions): void => {
     setSelectedId(id);
 
     switch(actionType) {
       case CardActions.DELETE: setIsDeleteModalOpened(true); break;
-      case CardActions.EDIT: navigateToEditFolderForm(id); break;
+      case CardActions.EDIT: navigateToEditForm(id); break;
     }
+  }
+
+  const handleDeleteSuccess = (): void => {
+    initFolders();
+    addSuccess(SUCCESSFULLY_DELETED);
   }
 
   const handleDeleteConfirm = (): void => {
     if(!selectedId) return;
 
+    handleDeleteFolder(selectedId, handleDeleteSuccess);
     setIsDeleteModalOpened(false);
-    deleteFolder(selectedId)
-      .then(() => {
-        initFolders();
-        addSuccess(SUCCESSFULLY_DELETED);
-      })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
-        setPageState(CardStates.ERROR);
-      });
   }
 
   const handleModalClose = (): void => {

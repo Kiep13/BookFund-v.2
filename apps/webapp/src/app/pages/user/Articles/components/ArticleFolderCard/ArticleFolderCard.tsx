@@ -1,4 +1,5 @@
 import { Card, CardContent, Typography, CardActionArea, CardActions, Box, IconButton } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 
 import {
@@ -8,19 +9,26 @@ import {
   DELETE_CARD_ACTION,
   EDIT_CARD_ACTION
 } from '@utils/constants';
+import { BaseRoutePaths } from '@utils/enums';
 import { ICardAction } from '@utils/interfaces';
 
 import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
+  const history = useHistory();
+
   const isDefaultFolder = folder.name === DEFAULT_FOLDER_NAME;
   const displayedFolderName = !isDefaultFolder ? folder.name : DEFAULT_FOLDER_DISPLAYED_NAME;
   const displayedDate = moment(folder.createdAt).format(DATE_CARD_CREATED_AT_FORMAT);
   const actions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
+  const navigateToFolderPage = (): void => {
+    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${folder.id}`);
+  }
+
   return (
-    <Card sx={STYLES.folderCard.wrapper}>
+    <Card sx={STYLES.folderCard.wrapper} onClick={navigateToFolderPage}>
       <CardActionArea sx={STYLES.folderCard.actionArea} component='div'>
         <CardContent sx={STYLES.folderCard.content}>
           <Typography
@@ -46,7 +54,10 @@ export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
                   return <IconButton
                     aria-label={ariLabel}
                     key={actionType}
-                    onClick={() => handleActionClick(folder.id, actionType)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleActionClick(folder.id, actionType)
+                    }}
                   >
                     <Icon/>
                   </IconButton>

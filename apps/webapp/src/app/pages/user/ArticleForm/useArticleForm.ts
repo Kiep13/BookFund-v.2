@@ -1,7 +1,8 @@
+import { SelectChangeEvent } from '@mui/material';
 import { useHistory, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
-import { useState } from 'react';
 import { useFormik } from 'formik';
+import { useState } from 'react';
 
 import { API_TOOLTIP_ERROR, DEFAULT_FOLDER_NAME } from '@utils/constants';
 import { CardStates } from '@utils/enums';
@@ -91,12 +92,18 @@ export const useArticleForm = () => {
       });
   }
 
+  const handleFolderSelect = (event: SelectChangeEvent<IArticleFolder>): void => {
+    formik.setFieldValue('folder', +event.target.value);
+    formik.validateForm();
+  }
+
   return {
     pageState,
     formik,
     folderOptions,
     editMode,
     initForm,
+    handleFolderSelect,
     navigateToPreviousPage
   }
 }

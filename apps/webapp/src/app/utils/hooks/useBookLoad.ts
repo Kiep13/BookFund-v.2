@@ -12,8 +12,8 @@ export const useBookLoad = () => {
 
   const params = useParams();
 
-  const { getBook } = useApi();
-  const { addError } = useAlerts();
+  const {getBook} = useApi();
+  const {addError} = useAlerts();
 
   const loadBook = (): void => {
     const bookId = (params as IFormPageParams).id;

@@ -10,4 +10,5 @@ export * from './useCollectionActions';
 export * from './useCollectionLoad';
 export * from './useCommentList';
 export * from './useDates';
+export * from './useFolderActions';
 export * from './useStorage';

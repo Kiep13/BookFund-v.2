@@ -3,4 +3,5 @@ export interface IProps {
   handleBackClick: () => void;
   handleEditClick?: () => void;
   handleDeleteClick?: () => void;
+  isActionsHidden?: boolean;
 }

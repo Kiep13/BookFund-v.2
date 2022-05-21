@@ -8,7 +8,7 @@ import { Card } from '@components/cards/Card';
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handleDeleteClick}: IProps) =>
+export const EntityPageHeader = ({title, isActionsHidden, handleBackClick, handleEditClick, handleDeleteClick}: IProps) =>
   <Card styles={STYLES.card}>
     <Box sx={STYLES.content}>
 
@@ -29,24 +29,26 @@ export const EntityPageHeader = ({title, handleBackClick, handleEditClick, handl
         </Typography>
       </Box>
 
-      <Box>
-        {handleEditClick &&
-        <IconButton
-          aria-label='Edit'
-          sx={STYLES.iconButton}
-          onClick={handleEditClick}>
-          <EditTwoToneIcon/>
-        </IconButton>}
+      {!isActionsHidden && (
+        <Box>
+          {handleEditClick &&
+          <IconButton
+            aria-label='Edit'
+            sx={STYLES.iconButton}
+            onClick={handleEditClick}>
+            <EditTwoToneIcon/>
+          </IconButton>}
 
-        {handleDeleteClick &&
-        <IconButton
-          aria-label='Delete'
-          sx={STYLES.iconButton}
-          onClick={handleDeleteClick}>
-          <DeleteTwoToneIcon/>
-        </IconButton>}
+          {handleDeleteClick &&
+          <IconButton
+            aria-label='Delete'
+            sx={STYLES.iconButton}
+            onClick={handleDeleteClick}>
+            <DeleteTwoToneIcon/>
+          </IconButton>}
 
-      </Box>
+        </Box>
+      )}
 
     </Box>
   </Card>
