@@ -10,6 +10,15 @@ export const STYLES = {
     textAlign: 'center',
     mb: 5
   },
+  urlBox: {
+    mb: 3,
+    display: 'flex',
+    gap: '3px'
+  },
+  faded: {
+    color: '#838383',
+    display: 'contents'
+  },
   urlInput: {
     mb: 3,
     width: '100%'

@@ -4,7 +4,7 @@ const read  = require('node-readability');
 
 import { connection } from '@core/connection';
 import { ERROR_NO_ACCESS_FOLDER, URL_CONTENT_FILE_EXTENSION } from '@core/constants';
-import { ResponseStatuses, SortDirections } from '@core/enums';
+import { ApiRoutes, ResponseStatuses, SortDirections } from '@core/enums';
 import { IListApiView, ISearchOptions } from '@core/interfaces';
 import { environment } from '@environments/environment';
 import { ApiError } from '@exceptions/api-error';
@@ -40,6 +40,23 @@ class ArticleController {
       });
     } catch (error) {
       next(error)
+    }
+  }
+
+  public async updateArticle(request: Request, response: Response, next: Function): Response {
+    try {
+      const articleId = +request.params.id;
+
+      const article = await connection.manager.findOne(ArticleEntity, articleId);
+
+      article.folder = request.body.folder;
+      article.isRedirecting = request.body.isRedirecting;
+
+      await connection.manager.update(ArticleEntity, articleId, article);
+
+      return response.status(ResponseStatuses.STATUS_OK).json(article);
+    } catch (error) {
+      next(error);
     }
   }
 

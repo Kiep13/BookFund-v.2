@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material';
+import { Box, Button, FormControl, FormControlLabel, InputLabel, Link, MenuItem, Select, Switch, Typography } from '@mui/material';
 import { useEffect } from 'react';
 
 import { Card } from '@components/cards/Card';
@@ -38,13 +38,19 @@ export const ArticleForm = () => {
           </Typography>
 
           <form onSubmit={formik.handleSubmit}>
-            <Input
-              id='url'
-              label='Url'
-              fieldName='url'
-              form={formik}
-              styles={STYLES.urlInput}
-            />
+            {!editMode ? (
+              <Input
+                id='url'
+                label='Url'
+                fieldName='url'
+                form={formik}
+                styles={STYLES.urlInput}
+              />
+            ) : (
+              <Box sx={STYLES.urlBox}>
+                <Link href={formik.values.url}>Article url</Link>
+              </Box>
+            )}
 
             <FormControl fullWidth sx={STYLES.folderSelector}>
               <InputLabel id='folderLabel'>Folder</InputLabel>

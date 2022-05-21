@@ -251,7 +251,7 @@ export const useApi = () => {
   }
 
   const updateArticle = async (id: number, article: IArticleForm): Promise<void> => {
-    return await axios.post(`${environment.backEndUrl}/v1/article/update/${id}`, article)
+    return await axios.put(`${environment.backEndUrl}/v1/article/update/${id}`, article)
       .then((response: AxiosResponse) => response.data);
   }
 

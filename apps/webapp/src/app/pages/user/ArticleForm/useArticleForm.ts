@@ -69,7 +69,7 @@ export const useArticleForm = () => {
 
         if (!articleId) {
           const defaultFolder = predefinedFolder || response.data.find((folder) => folder.name === DEFAULT_FOLDER_NAME);
-          formik.setFieldValue('folder', defaultFolder?.id);
+          formik.setFieldValue('folder', defaultFolder.id);
           formik.validateForm();
 
           setPageState(CardStates.CONTENT);
@@ -85,8 +85,8 @@ export const useArticleForm = () => {
         formik.setValues({
           url: article.exactUrl,
           isRedirecting: article.isRedirecting,
-          folder: article.folder
         });
+        formik.setFieldValue('folder', article.folder.id);
 
         setPageState(CardStates.CONTENT);
       })
