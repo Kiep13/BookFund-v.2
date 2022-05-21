@@ -24,6 +24,12 @@ class FileService {
     return fileName;
   }
 
+  public async readFile(fileName): Promise<string> {
+    const filePath = `${path.resolve(__dirname, environment.articlesFolder, fileName)}`;
+
+    return fs.readFileSync(filePath).toString();
+  }
+
   public async deleteFile(fileUrl: string): Promise<void> {
     const fileParts = fileUrl.split('/');
     const fileName = fileParts[fileParts.length - 1];

@@ -73,7 +73,7 @@ export const useArticleForm = () => {
         }
 
         setEditMode(true);
-        return getArticle(articleId.toString());
+        return getArticle(articleId);
       })
       .then((article: IArticle | undefined) => {
         if(!article) return;

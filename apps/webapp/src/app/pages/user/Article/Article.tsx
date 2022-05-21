@@ -1,52 +1,33 @@
-import { useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import { useEffect } from 'react';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
-import { CardStates } from '@utils/enums';
-import { IArticle } from '@utils/interfaces';
-import { useApi } from '@utils/hooks';
+
+import { STYLES } from './constants';
+import { useArticle } from './useArticle';
 
 export const Article = () => {
-  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
-  const [article, setArticle] = useState<IArticle>();
-  const history = useHistory();
-
-  const {getArticle} = useApi();
-
-  const loadArticle = (): void => {
-    const url = 'https://minsk.diplo.de/by-be/service/01-KonsularserviceA-Z';
-
-    getArticle(url)
-      .then((response) => {
-        setArticle(response);
-        setPageState(CardStates.CONTENT);
-      })
-      .catch(() => {
-        setPageState(CardStates.ERROR);
-      })
-  }
-
-  const createMarkup = () => {
-    return {
-      __html: article?.content || ''
-    }
-  }
-
-  const goBack = (): void => {
-    history.goBack();
-  }
+  const {
+    article,
+    pageState,
+    initPage,
+    navigateBack,
+    createMarkup
+  } = useArticle();
 
   useEffect(() => {
-    loadArticle();
+    initPage();
   }, [])
 
   return (
     <StatefulCard state={pageState}>
       {article && (
         <>
-          <EntityPageHeader title={article?.title} handleBackClick={goBack}/>
-          <div dangerouslySetInnerHTML={createMarkup()} />
+          <EntityPageHeader title={article?.title} handleBackClick={navigateBack}/>
+          <Box sx={STYLES.content}>
+            <div dangerouslySetInnerHTML={createMarkup()} />
+          </Box>
         </>
       )}
 

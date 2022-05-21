@@ -240,7 +240,7 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
-  const getArticle = async (id: string): Promise<IArticle> => {
+  const getArticle = async (id: number): Promise<IArticle> => {
     return await axios.get<IArticle>(`${environment.backEndUrl}/v1/article/${id}`)
       .then((response: AxiosResponse) => response.data);
   }

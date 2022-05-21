@@ -3,9 +3,10 @@ import { URL } from 'url';
 const read  = require('node-readability');
 
 import { connection } from '@core/connection';
-import { URL_CONTENT_FILE_EXTENSION } from '@core/constants';
+import { ERROR_NO_ACCESS_FOLDER, URL_CONTENT_FILE_EXTENSION } from '@core/constants';
 import { ResponseStatuses, SortDirections } from '@core/enums';
 import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { ApiError } from '@exceptions/api-error';
 import { ParseError } from '@exceptions/parse-error';
 import { ArticleEntity } from '@entities/article.entity';
 import { fileService } from '@services/file.service';
@@ -36,6 +37,30 @@ class ArticleController {
 
         return response.status(ResponseStatuses.STATUS_CREATED).json(articleEntity);
       });
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async getArticle(request: Request, response: Response, next: Function): Response {
+    try {
+      const articleId = +request.params.id;
+      const accountId = +request.account.id;
+
+      const article = await connection.manager.getRepository(ArticleEntity).findOne({
+        relations: ['folder', 'folder.account'],
+        where: {
+          id: articleId
+        }
+      });
+
+      if(!article || +article.folder.account.id !== accountId) {
+        return next(ApiError.BadRequest(ERROR_NO_ACCESS_FOLDER));
+      }
+
+      article.content = await fileService.readFile(article.contentFileUrl);
+
+      return response.status(ResponseStatuses.STATUS_OK).json(article);
     } catch (error) {
       next(error)
     }
