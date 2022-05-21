@@ -1,7 +1,9 @@
 import { Box, TablePagination, TextField } from '@mui/material';
 import { useEffect } from 'react';
 
+import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { StatefulCard } from '@components/cards/StatefulCard';
+import { DELETE_ARTICLE_CONFIRMATION_POPUP } from '@utils/constants';
 import { IArticle } from '@utils/interfaces';
 
 import { NO_SAVED_ARTICLES, STYLES } from '../../constants';
@@ -23,7 +25,10 @@ export const ArticleList = ({ folderId }: IProps) => {
     loadCollections,
     handleTyping,
     handlePageChange,
-    handleRowsPerPageChanged
+    handleRowsPerPageChanged,
+    handleCardActionClick,
+    handleDeleteArticleConfirm,
+    closeModal
   } = useArticleList(folderId);
 
   useEffect(() => {
@@ -52,10 +57,22 @@ export const ArticleList = ({ folderId }: IProps) => {
 
         <Box sx={STYLES.cardsWrapper}>
           {data.map((article: IArticle) =>
-            <ArticleCard key={article.id} article={article} cardActions={cardActions}/>
+            <ArticleCard
+              key={article.id}
+              article={article}
+              cardActions={cardActions}
+              handleCardActionClick={handleCardActionClick}
+            />
           )}
         </Box>
       </StatefulCard>
+
+      <ConfirmationPopup
+        info={DELETE_ARTICLE_CONFIRMATION_POPUP}
+        isOpened={isModalOpened}
+        handleConfirm={handleDeleteArticleConfirm}
+        handleClose={closeModal}
+      />
     </>
   )
 }

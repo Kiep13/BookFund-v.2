@@ -30,11 +30,11 @@ class FileService {
     return fs.readFileSync(filePath).toString();
   }
 
-  public async deleteFile(fileUrl: string): Promise<void> {
+  public async deleteFile(fileUrl: string, folderName: string): Promise<void> {
     const fileParts = fileUrl.split('/');
     const fileName = fileParts[fileParts.length - 1];
 
-    const filePath = `${path.resolve(__dirname, environment.booksFolder, fileName)}`;
+    const filePath = `${path.resolve(__dirname, folderName, fileName)}`;
     await fs.unlinkSync(filePath);
   }
 }

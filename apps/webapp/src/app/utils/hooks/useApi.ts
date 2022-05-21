@@ -255,6 +255,10 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data);
   }
 
+  const deleteArticle = async (id: number): Promise<AxiosResponse<void>> => {
+    return axios.delete<void>(`${environment.backEndUrl}/v1/article/delete/${id}`);
+  }
+
   return {
     login,
     refresh,
@@ -299,6 +303,7 @@ export const useApi = () => {
     getArticles,
     getArticle,
     addArticle,
-    updateArticle
+    updateArticle,
+    deleteArticle
   }
 }

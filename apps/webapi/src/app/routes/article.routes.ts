@@ -8,6 +8,7 @@ const router = new Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, authMiddleware, articleController.getArticles);
 router.post(`/${ApiRoutesModifiers.NEW}`, authMiddleware, articleController.createArticle);
+router.delete(`/${ApiRoutesModifiers.DELETE}/:id`, authMiddleware, articleController.deleteArticle);
 router.get(`/:id`, authMiddleware, articleController.getArticle);
 
 export default router;

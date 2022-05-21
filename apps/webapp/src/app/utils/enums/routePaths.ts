@@ -3,6 +3,7 @@ export enum BaseRoutePaths {
   FAVORITES = '/favorites',
   ARTICLE = '/article',
   ARTICLE_NEW = '/article/new',
+  ARTICLE_EDIT = '/article/edit',
   ARTICLES = '/articles',
   FOLDER = '/folder',
   FOLDER_NEW = '/folder/new',

@@ -6,7 +6,7 @@ import { BaseRoutePaths, CardActions, CardStates } from '@utils/enums';
 import { IArticleFolder, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useFolderActions } from '@utils/hooks';
 
-import { SUCCESSFULLY_DELETED } from './constants';
+import { SUCCESSFULLY_DELETED_FOLDER } from './constants';
 
 export const useFolder = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
@@ -50,7 +50,7 @@ export const useFolder = () => {
 
   const handleDeleteSuccess = (): void => {
     history.push(`${BaseRoutePaths.ARTICLES}`);
-    addSuccess(SUCCESSFULLY_DELETED);
+    addSuccess(SUCCESSFULLY_DELETED_FOLDER);
   }
 
   const handleDeleteConfirm = (): void => {

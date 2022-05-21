@@ -2,11 +2,11 @@ import { debounce } from 'lodash';
 import { SyntheticEvent, useCallback, useState } from 'react';
 
 import { API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
-import { CardStates, DodecagonPageSizes } from '@utils/enums';
-import { useAlerts, useApi } from '@utils/hooks';
+import { CardActions, CardStates, DodecagonPageSizes } from '@utils/enums';
+import { useAlerts, useApi, useArticleActions } from '@utils/hooks';
 import { IArticle, ICardAction, IListApiView, ISearchOptions } from '@utils/interfaces';
 
-import { DELAY } from '../../constants';
+import { DELAY, SUCCESSFULLY_DELETED_ARTICLE } from '../../constants';
 
 export const useArticleList = (folderId: number) => {
   const [state, setState] = useState<CardStates>(CardStates.LOADING);
@@ -21,6 +21,7 @@ export const useArticleList = (folderId: number) => {
 
   const {getArticles} = useApi();
   const {addError, addSuccess} = useAlerts();
+  const {navigateToEditForm, handleArticleDelete} = useArticleActions();
 
   const rowsPerPageOptions = Object.values(DodecagonPageSizes).map(value => +value).filter((value) => value);
   const cardActions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
@@ -71,6 +72,41 @@ export const useArticleList = (folderId: number) => {
     setPage(newPage);
   };
 
+  const openModal = (): void => {
+    setIsModalOpened(true);
+  }
+
+  const closeModal = (): void => {
+    setIsModalOpened(false);
+  }
+
+  const handleSuccessArticleDeleting = () => {
+    addSuccess(SUCCESSFULLY_DELETED_ARTICLE);
+
+    if(data.length === 1 && page > 0) {
+      setPage(page - 1);
+      return;
+    }
+
+    loadCollections(searchTerm);
+  }
+
+  const handleDeleteArticleConfirm = (): void => {
+    if(!selectedId) return;
+
+    handleArticleDelete(selectedId, handleSuccessArticleDeleting);
+    closeModal();
+  }
+
+  const handleCardActionClick = (id: number, actionType: CardActions): void => {
+    setSelectedId(id);
+
+    switch (actionType) {
+      case CardActions.EDIT: navigateToEditForm(id); break;
+      case CardActions.DELETE: openModal(); break;
+    }
+  }
+
   return {
     state,
     data,
@@ -85,5 +121,8 @@ export const useArticleList = (folderId: number) => {
     handleTyping,
     handlePageChange,
     handleRowsPerPageChanged,
+    handleCardActionClick,
+    handleDeleteArticleConfirm,
+    closeModal
   }
 }

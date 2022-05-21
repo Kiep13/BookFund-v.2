@@ -6,6 +6,7 @@ import { connection } from '@core/connection';
 import { ERROR_NO_ACCESS_FOLDER, URL_CONTENT_FILE_EXTENSION } from '@core/constants';
 import { ResponseStatuses, SortDirections } from '@core/enums';
 import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { environment } from '@environments/environment';
 import { ApiError } from '@exceptions/api-error';
 import { ParseError } from '@exceptions/parse-error';
 import { ArticleEntity } from '@entities/article.entity';
@@ -96,6 +97,21 @@ class ArticleController {
       }
 
       return response.status(ResponseStatuses.STATUS_OK).json(result);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async deleteArticle(request: Request, response: Response, next: Function): Response {
+    try {
+      const articleId = +request.params.id;
+
+      const articleEntity = await connection.manager.findOne(ArticleEntity, articleId);
+      await fileService.deleteFile(articleEntity.contentFileUrl, environment.articlesFolder);
+
+      await connection.manager.remove(articleEntity);
+
+      return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
     } catch (error) {
       next(error)
     }

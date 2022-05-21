@@ -41,6 +41,9 @@ const App = () =>
       <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_NEW}`} exact>
         <ArticleForm/>
       </ProtectedRoute>
+      <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_EDIT}/:id`} exact>
+        <ArticleForm/>
+      </ProtectedRoute>
       <ProtectedRoute path={BaseRoutePaths.ARTICLES} exact>
         <Articles/>
       </ProtectedRoute>

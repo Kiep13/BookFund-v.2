@@ -1,5 +1,6 @@
 export * from './useAlerts';
 export * from './useApi';
+export * from './useArticleActions';
 export * from './useAuthHandlers';
 export * from './useAuthorActions';
 export * from './useAuthorLoad';

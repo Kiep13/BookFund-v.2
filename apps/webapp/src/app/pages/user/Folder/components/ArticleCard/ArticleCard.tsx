@@ -10,7 +10,7 @@ import { ICardAction } from '@utils/interfaces';
 import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
-export const ArticleCard = ({article, cardActions}: IProps) => {
+export const ArticleCard = ({article, cardActions, handleCardActionClick}: IProps) => {
   const history = useHistory();
   const displayedDate = moment(article.createdAt).format(DATE_CARD_CREATED_AT_FORMAT);
 
@@ -46,7 +46,11 @@ export const ArticleCard = ({article, cardActions}: IProps) => {
               {cardActions.map(({icon: Icon, ariLabel, actionType}: ICardAction) => {
                 return <IconButton
                   aria-label={ariLabel}
-                  key={actionType}>
+                  key={actionType}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handleCardActionClick(article.id, actionType)
+                  }}>
                   <Icon/>
                 </IconButton>
               })}
