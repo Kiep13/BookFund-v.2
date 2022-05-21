@@ -59,6 +59,7 @@ class ArticleController {
       }
 
       article.content = await fileService.readFile(article.contentFileUrl);
+      delete article.folder.account;
 
       return response.status(ResponseStatuses.STATUS_OK).json(article);
     } catch (error) {

@@ -15,6 +15,11 @@ export const ArticleCard = ({article, cardActions}: IProps) => {
   const displayedDate = moment(article.createdAt).format(DATE_CARD_CREATED_AT_FORMAT);
 
   const navigateToFolderPage = (): void => {
+    if(article.isRedirecting) {
+      window.open(article.exactUrl);
+      return;
+    }
+
     history.push(`${BaseRoutePaths.ARTICLE}/${article.id}`);
   }
 

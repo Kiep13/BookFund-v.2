@@ -19,6 +19,12 @@ export const useArticle = () => {
     getArticle(articleId)
       .then((response) => {
         setArticle(response);
+
+        if(response.isRedirecting) {
+          window.location.href = response.exactUrl;
+          return;
+        }
+
         setPageState(CardStates.CONTENT);
       })
       .catch(() => {
