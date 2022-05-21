@@ -1,8 +1,8 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
-import { API_TOOLTIP_ERROR } from '@utils/constants';
-import { BaseRoutePaths, CardStates } from '@utils/enums';
+import { ADD_CARD_ACTION, API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
+import { BaseRoutePaths, CardActions, CardStates } from '@utils/enums';
 import { IArticleFolder, IFormPageParams } from '@utils/interfaces';
 import { useAlerts, useApi, useFolderActions } from '@utils/hooks';
 
@@ -18,6 +18,9 @@ export const useFolder = () => {
   const {getFolder} = useApi();
   const {addSuccess, addError} = useAlerts();
   const {navigateToEditForm, handleDeleteFolder} = useFolderActions();
+
+  const simpleActions = [ADD_CARD_ACTION];
+  const expandedActions = [ADD_CARD_ACTION, EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateBack = (): void => {
     history.goBack();
@@ -57,6 +60,18 @@ export const useFolder = () => {
     setIsDeleteModalOpened(false);
   }
 
+  const navigateToNewArticleForm = (): void => {
+
+  }
+
+  const handleHeaderIconClick = (actionType: CardActions): void => {
+    switch(actionType) {
+      case CardActions.DELETE: openModal(); break;
+      case CardActions.EDIT: navigateToEditPage(); break;
+      case CardActions.ADD: navigateToNewArticleForm(); break;
+    }
+  }
+
   const handleModalClose = (): void => {
     setIsDeleteModalOpened(false);
   }
@@ -64,11 +79,12 @@ export const useFolder = () => {
   return {
     pageState,
     folder,
+    simpleActions,
+    expandedActions,
     isDeleteModalOpened,
     initPage,
     navigateBack,
-    navigateToEditPage,
-    openModal,
+    handleHeaderIconClick,
     handleDeleteConfirm,
     handleModalClose,
   }

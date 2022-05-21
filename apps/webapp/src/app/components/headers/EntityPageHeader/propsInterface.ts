@@ -1,7 +1,9 @@
+import { CardActions } from '@utils/enums';
+import { ICardAction } from '@utils/interfaces';
+
 export interface IProps {
   title: string;
   handleBackClick: () => void;
-  handleEditClick?: () => void;
-  handleDeleteClick?: () => void;
-  isActionsHidden?: boolean;
+  actions?: ICardAction[];
+  handleIconClick?: (actionType: CardActions) => void;
 }

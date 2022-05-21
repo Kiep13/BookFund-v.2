@@ -1,7 +1,10 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
+import { CardActions } from '@utils/enums';
 import { useAlerts, useBookActions, useCollectionActions, useCollectionLoad } from '@utils/hooks';
+import { ICardAction } from '@utils/interfaces';
 
 import { SUCCESSFULLY_DELETED } from './constants';
 
@@ -14,6 +17,8 @@ export const useCollection = () => {
   const {addSuccess} = useAlerts();
   const {getAdminBookPageUrlWithoutId} = useBookActions();
   const {navigateToEditForm, deleteCollection, navigateToAdminCollectionsPage} = useCollectionActions();
+
+  const headerActions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateToEditPage = (): void => {
     collection && navigateToEditForm(collection.id);
@@ -35,6 +40,13 @@ export const useCollection = () => {
     setIsModalOpened(true);
   }
 
+  const handleHeaderIconClick = (action: CardActions): void => {
+    switch (action) {
+      case CardActions.EDIT: navigateToEditPage(); break;
+      case CardActions.DELETE: openModal(); break;
+    }
+  }
+
   const closeModal = (): void => {
     setIsModalOpened(false);
   }
@@ -42,13 +54,13 @@ export const useCollection = () => {
   return {
     collection,
     pageState,
+    headerActions,
     isModalOpened,
     loadCollection,
     navigateBack,
-    navigateToEditPage,
+    handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
     handleConfirmDeletion,
-    openModal,
     closeModal
   }
 }

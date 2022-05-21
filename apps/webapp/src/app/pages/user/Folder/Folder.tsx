@@ -18,11 +18,12 @@ export const Folder = () => {
   const {
     pageState,
     folder,
+    simpleActions,
+    expandedActions,
     isDeleteModalOpened,
     initPage,
     navigateBack,
-    navigateToEditPage,
-    openModal,
+    handleHeaderIconClick,
     handleDeleteConfirm,
     handleModalClose,
   } = useFolder();
@@ -37,13 +38,12 @@ export const Folder = () => {
     <>
       <StatefulCard state={pageState}>
         <Box sx={STYLES.header}>
-        <EntityPageHeader
-          title={folder && !isDefaultFolder ?  folder.name : DEFAULT_FOLDER_DISPLAYED_NAME}
-          isActionsHidden={isDefaultFolder}
-          handleBackClick={navigateBack}
-          handleEditClick={navigateToEditPage}
-          handleDeleteClick={openModal}
-        />
+          <EntityPageHeader
+            title={folder && !isDefaultFolder ?  folder.name : DEFAULT_FOLDER_DISPLAYED_NAME}
+            actions={isDefaultFolder ? simpleActions : expandedActions}
+            handleBackClick={navigateBack}
+            handleIconClick={handleHeaderIconClick}
+          />
         </Box>
 
         <Box sx={STYLES.content}>

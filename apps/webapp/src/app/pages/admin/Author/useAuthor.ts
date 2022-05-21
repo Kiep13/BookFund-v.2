@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
+import { CardActions } from '@utils/enums';
 import { useAlerts, useAuthorActions, useAuthorLoad, useBookActions } from '@utils/hooks';
+import { ICardAction } from '@utils/interfaces';
 
 import { SUCCESSFULLY_DELETED } from './constants';
 
@@ -18,6 +21,8 @@ export const useAuthor = () => {
   const {addSuccess} = useAlerts();
   const {navigateToEditForm, navigateToAdminAuthorsPage, deleteAuthor} = useAuthorActions();
   const {getAdminBookPageUrlWithoutId} = useBookActions();
+
+  const headerActions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateToEditPage = (): void => {
     author && navigateToEditForm(author?.id);
@@ -40,6 +45,13 @@ export const useAuthor = () => {
     setIsModalOpened(true);
   }
 
+  const handleHeaderIconClick = (action: CardActions): void => {
+    switch (action) {
+      case CardActions.EDIT: navigateToEditPage(); break;
+      case CardActions.DELETE: openModal(); break;
+    }
+  }
+
   const closeModal = (): void => {
     setIsModalOpened(false);
   }
@@ -47,12 +59,12 @@ export const useAuthor = () => {
   return {
     author,
     pageState,
+    headerActions,
     isModalOpened,
     loadAuthor,
     navigateBack,
-    navigateToEditPage,
+    handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
-    openModal,
     closeModal,
     handleConfirmDeletion
   }

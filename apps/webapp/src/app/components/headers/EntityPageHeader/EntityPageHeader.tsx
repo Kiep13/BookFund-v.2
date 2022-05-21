@@ -1,14 +1,13 @@
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import KeyboardBackspaceTwoToneIcon from '@mui/icons-material/KeyboardBackspaceTwoTone';
 import { Box, IconButton, Typography } from '@mui/material';
 
 import { Card } from '@components/cards/Card';
+import { ICardAction } from '@utils/interfaces';
 
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const EntityPageHeader = ({title, isActionsHidden, handleBackClick, handleEditClick, handleDeleteClick}: IProps) =>
+export const EntityPageHeader = ({title, actions, handleBackClick, handleIconClick}: IProps) =>
   <Card styles={STYLES.card}>
     <Box sx={STYLES.content}>
 
@@ -29,26 +28,17 @@ export const EntityPageHeader = ({title, isActionsHidden, handleBackClick, handl
         </Typography>
       </Box>
 
-      {!isActionsHidden && (
-        <Box>
-          {handleEditClick &&
-          <IconButton
-            aria-label='Edit'
+      <Box>
+        {actions && handleIconClick && actions.map(({icon: Icon, ariLabel, actionType}: ICardAction) => {
+          return <IconButton
+            aria-label={ariLabel}
+            key={actionType}
             sx={STYLES.iconButton}
-            onClick={handleEditClick}>
-            <EditTwoToneIcon/>
-          </IconButton>}
-
-          {handleDeleteClick &&
-          <IconButton
-            aria-label='Delete'
-            sx={STYLES.iconButton}
-            onClick={handleDeleteClick}>
-            <DeleteTwoToneIcon/>
-          </IconButton>}
-
-        </Box>
-      )}
+            onClick={() => handleIconClick(actionType)}>
+            <Icon/>
+          </IconButton>
+        })}
+      </Box>
 
     </Box>
   </Card>

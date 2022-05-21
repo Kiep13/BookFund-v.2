@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
+import { CardActions } from '@utils/enums';
 import { useAlerts, useAuthorActions, useBookActions, useBookLoad } from '@utils/hooks';
+import { ICardAction } from '@utils/interfaces';
 
 import { SUCCESSFULLY_DELETED } from './constants';
 
@@ -18,6 +21,8 @@ export const useBook = () => {
   const {addSuccess} = useAlerts();
   const {deleteBook, navigateToAdminBooksPage, navigateToEditForm} = useBookActions();
   const {getAdminAuthorPageUrlWithoutId} = useAuthorActions();
+
+  const headerActions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateBack = (): void => {
     history.goBack();
@@ -40,6 +45,13 @@ export const useBook = () => {
     setIsModalOpened(true);
   }
 
+  const handleHeaderIconClick = (actionType: CardActions): void => {
+    switch(actionType) {
+      case CardActions.EDIT: navigateToEditPage(); break;
+      case CardActions.DELETE: openModal(); break;
+    }
+  }
+
   const closeModal = (): void => {
     setIsModalOpened(false);
   }
@@ -47,13 +59,13 @@ export const useBook = () => {
   return {
     book,
     pageState,
+    headerActions,
     isModalOpened,
     loadBook,
     navigateBack,
-    navigateToEditPage,
+    handleHeaderIconClick,
     getAdminAuthorPageUrlWithoutId,
     handleConfirmDeletion,
-    openModal,
     closeModal
   }
 }

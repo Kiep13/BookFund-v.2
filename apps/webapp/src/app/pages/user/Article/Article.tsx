@@ -24,7 +24,10 @@ export const Article = () => {
     <StatefulCard state={pageState}>
       {article && (
         <>
-          <EntityPageHeader title={article?.title} handleBackClick={navigateBack}/>
+          <EntityPageHeader
+            title={article?.title}
+            handleBackClick={navigateBack}
+          />
           <Box sx={STYLES.content}>
             <div dangerouslySetInnerHTML={createMarkup()} />
           </Box>
