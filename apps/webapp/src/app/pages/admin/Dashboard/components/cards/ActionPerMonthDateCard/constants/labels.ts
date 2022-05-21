@@ -1,5 +1,6 @@
 export const LABELS = {
   users: 'Users',
   favorites: 'Favorites',
-  comments: 'Comments'
+  comments: 'Comments',
+  articles: 'Articles'
 }

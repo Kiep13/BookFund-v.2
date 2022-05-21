@@ -32,6 +32,10 @@ export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
             {displayedFolderName}
           </Typography>
 
+          <Typography component='legend'>
+            {folder.articlesCount || 0} {folder.articlesCount === 1 ? 'article' : 'articles'}
+          </Typography>
+
           <Box sx={STYLES.folderCard.bottomBlock}>
             <Typography variant='body2' color='text.secondary'>
               {displayedDate}

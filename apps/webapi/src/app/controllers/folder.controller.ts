@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { ResponseStatuses, SortDirections } from '@core/enums';
+import { ResponseStatuses } from '@core/enums';
 import { connection } from '@core/connection';
 import { ERROR_NO_ACCESS_FOLDER } from '@core/constants';
 import { IListApiView } from '@core/interfaces';
@@ -60,21 +60,18 @@ class FolderController {
     try {
       const account = request.account;
 
-      const [folders, count] = await connection.createQueryBuilder(FolderEntity, 'folder')
-        .select([
-          'folder.id',
-          'folder.name',
-          'folder.createdAt',
-        ])
-        .orderBy({
-          'folder.id': SortDirections.DESC
-        })
-        .where({
-          account: {
-            id: account.id
-          }
-        })
-        .getManyAndCount();
+      const baseRequestConfigurations = () => connection.createQueryBuilder(FolderEntity, 'folder')
+        .leftJoinAndSelect('folder.account', 'account')
+        .leftJoinAndSelect('folder.articles', 'article')
+        .groupBy('folder.id')
+        .select('COUNT(article.id)', 'articlesCount')
+        .addSelect('folder.id', 'id')
+        .addSelect('folder.name', 'name')
+        .addSelect('folder.createdAt', 'createdAt')
+        .where(`\"account\".\"id\" = :accountId`, {accountId: +account.id});
+
+      const folders = await baseRequestConfigurations().getRawMany();
+      const count = await baseRequestConfigurations().getCount();
 
       const result: IListApiView<FolderEntity> = {
         data: folders,
