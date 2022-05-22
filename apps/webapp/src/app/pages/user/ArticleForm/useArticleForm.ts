@@ -2,7 +2,7 @@ import { SelectChangeEvent } from '@mui/material';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { API_TOOLTIP_ERROR, DEFAULT_FOLDER_NAME } from '@utils/constants';
 import { CardStates } from '@utils/enums';
@@ -44,8 +44,8 @@ export const useArticleForm = () => {
       .then(() => {
         navigateToPreviousPage();
       })
-      .catch(() => {
-        addError(API_TOOLTIP_ERROR);
+      .catch((error) => {
+        addError(error.response?.data?.message || API_TOOLTIP_ERROR);
       })
       .then(() => {
         setSubmitting(false);
@@ -101,6 +101,11 @@ export const useArticleForm = () => {
     formik.validateForm();
   }
 
+  const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    formik.setFieldValue('isRedirecting', event.target.checked);
+    formik.validateForm();
+  }
+
   return {
     pageState,
     formik,
@@ -108,6 +113,7 @@ export const useArticleForm = () => {
     editMode,
     initForm,
     handleFolderSelect,
-    navigateToPreviousPage
+    handleSwitchChange,
+    navigateToPreviousPage,
   }
 }

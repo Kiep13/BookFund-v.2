@@ -8,6 +8,7 @@ import { DELETE_ARTICLE_CONFIRMATION_POPUP } from '@utils/constants';
 
 import { STYLES } from './constants';
 import { useArticle } from './useArticle';
+import './Article.scss';
 
 export const Article = () => {
   const {
@@ -40,7 +41,7 @@ export const Article = () => {
               handleIconClick={handleHeaderActionClick}
             />
             <Box sx={STYLES.content}>
-              <div dangerouslySetInnerHTML={createMarkup()} />
+              <div className='content' dangerouslySetInnerHTML={createMarkup()}/>
             </Box>
           </>
         )}

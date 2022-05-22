@@ -49,6 +49,7 @@ class FolderController {
       if(!folder || +folder.account.id !== accountId) {
         return next(ApiError.BadRequest(ERROR_NO_ACCESS_FOLDER));
       }
+      delete folder.account;
 
       return response.status(ResponseStatuses.STATUS_OK).json(folder);
     } catch (error) {

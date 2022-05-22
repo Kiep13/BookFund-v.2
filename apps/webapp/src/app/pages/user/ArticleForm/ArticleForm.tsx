@@ -1,14 +1,25 @@
-import { Box, Button, FormControl, FormControlLabel, InputLabel, Link, MenuItem, Select, Switch, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Switch,
+  Typography
+} from '@mui/material';
 import { useEffect } from 'react';
 
 import { Card } from '@components/cards/Card';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { Input } from '@components/formСomponents/Input';
 
-import { STYLES, TITLE_ADD, TITLE_EDIT  } from './constants';
+import { STYLES, TITLE_ADD, TITLE_EDIT } from './constants';
 import { useArticleForm } from './useArticleForm';
-import { IArticleFolder } from "@utils/interfaces";
-import { DEFAULT_FOLDER_DISPLAYED_NAME, DEFAULT_FOLDER_NAME } from "@utils/constants";
+import { IArticleFolder } from '@utils/interfaces';
+import { DEFAULT_FOLDER_DISPLAYED_NAME, DEFAULT_FOLDER_NAME } from '@utils/constants';
 
 export const ArticleForm = () => {
   const {
@@ -18,6 +29,7 @@ export const ArticleForm = () => {
     editMode,
     initForm,
     handleFolderSelect,
+    handleSwitchChange,
     navigateToPreviousPage
   } = useArticleForm();
 
@@ -70,13 +82,17 @@ export const ArticleForm = () => {
             </FormControl>
 
             <FormControlLabel
-              control={<Switch id='isRedirecting' value={formik.values.isRedirecting}/>}
+              control={<Switch id='isRedirecting'
+                               checked={formik.values.isRedirecting}
+                               onChange={handleSwitchChange}
+              />}
               label='Is redirecting'
               sx={STYLES.redirectingSwitch}
             />
 
             <Typography variant='body2' gutterBottom sx={STYLES.redirectingHint}>
-              Sometimes we're unable to parse external source. In this case we can store link, and then redirect to this link whatever it's needed.
+              Sometimes we're unable to parse external source. In this case we can store link, and then redirect to this
+              link whatever it's needed.
               This option also enabled for good parsed articles.
             </Typography>
 
@@ -101,5 +117,5 @@ export const ArticleForm = () => {
         </StatefulCard>
       </Box>
     </Card>
-  )
-}
+  );
+};

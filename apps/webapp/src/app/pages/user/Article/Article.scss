@@ -1,0 +1,12 @@
+.content {
+  div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
+  img {
+    max-width: 500px;
+  }
+}
