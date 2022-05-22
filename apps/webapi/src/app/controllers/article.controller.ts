@@ -22,7 +22,7 @@ class ArticleController {
           return next(ParseError.ParseFailed());
         }
 
-        const fileName = await fileService.createFile(article.content, URL_CONTENT_FILE_EXTENSION);
+        const fileName = await fileService.createFile(article.content.replaceAll('data-cfsrc', 'src'), URL_CONTENT_FILE_EXTENSION);
 
         const articleEntity = new ArticleEntity();
         articleEntity.title = article.title;
