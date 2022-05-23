@@ -97,7 +97,7 @@ class ArticleController {
         .addSelect('article.exactUrl', 'exactUrl')
         .addSelect('article.hostUrl', 'hostUrl')
         .addSelect('article.createdAt', 'createdAt')
-        .orderBy(`\"${requestParams.orderBy || 'createdAt'}\"`, requestParams.order || SortDirections.ASC)
+        .orderBy(`\"${requestParams.orderBy || 'createdAt'}\"`, requestParams.order || SortDirections.DESC)
         .where(`\"title\" LIKE \'%${requestParams.searchTerm || ''}%\'`)
         .andWhere(`\"folder\".\"id\" = :accountId`, {accountId: +requestParams.keyId});
 

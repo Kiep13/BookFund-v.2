@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { ResponseStatuses } from '@core/enums';
+import { ResponseStatuses, SortDirections } from '@core/enums';
 import { connection } from '@core/connection';
 import { ERROR_NO_ACCESS_FOLDER } from '@core/constants';
 import { IListApiView } from '@core/interfaces';
@@ -69,6 +69,7 @@ class FolderController {
         .addSelect('folder.id', 'id')
         .addSelect('folder.name', 'name')
         .addSelect('folder.createdAt', 'createdAt')
+        .orderBy( `"articlesCount"`, SortDirections.DESC)
         .where(`\"account\".\"id\" = :accountId`, {accountId: +account.id});
 
       const folders = await baseRequestConfigurations().getRawMany();
