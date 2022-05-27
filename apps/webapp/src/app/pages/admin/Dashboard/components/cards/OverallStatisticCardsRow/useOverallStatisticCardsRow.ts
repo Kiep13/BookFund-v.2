@@ -29,7 +29,6 @@ export const useOverallStatisticCardsRow = (selectedMonth: Date) => {
     getOverallStatistic(searchOptions)
       .then((response: IOverallStatisticRaw) => {
         const data: IOverallStatistic[] = transformToOverallStatistic(response, LABELS);
-        data.push(OVERALL_STATISTIC_MOCK[3]);
         setOverallStatisticData(data);
 
         setCardState(CardStates.CONTENT)

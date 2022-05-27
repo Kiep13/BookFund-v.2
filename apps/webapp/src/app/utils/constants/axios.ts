@@ -9,14 +9,12 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
-    if (error.response.status !== ResponseStatuses.STATUS_NOT_AUTHORIZED) {
-      return;
-    }
-
-    if(!error.response.request.responseURL.includes('refresh')) {
+    if(error.response.status === ResponseStatuses.STATUS_NOT_AUTHORIZED && !error.response.request.responseURL.includes('refresh')) {
       window.location.href = AuthRoutePaths.REFRESH;
       return;
     }
+
+    throw error;
   });
 
 export {

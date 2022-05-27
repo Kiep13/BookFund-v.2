@@ -6,6 +6,8 @@ export * from './cardActions';
 export * from './colors';
 export * from './confirmationPopupInfos';
 export * from './dateFormats';
+export * from './default-folder-displayed-name';
+export * from './default-folder-name';
 export * from './delay';
 export * from './imageUploadValidationElement';
 export * from './lineСhartOptions';

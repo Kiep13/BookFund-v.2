@@ -11,6 +11,7 @@ import {
   ITypedRateStatistic
 } from '@core/interfaces';
 import { AccountEntity } from '@entities/account.entity';
+import { ArticleEntity } from '@entities/article.entity';
 import { BookEntity } from '@entities/book.entity';
 import { CommentEntity } from '@entities/comment.entity';
 import { FavoriteEntity } from '@entities/favorite.entity';
@@ -20,10 +21,9 @@ import { overallStatisticService } from '@services/overall-statistic.service';
 class StatisticsController {
   public async getOverallStatistics(request: Request, response: Response, next: Function): Response {
     const dateRange: IDateRange = dateService.transformFromApiToRangeDates(request.query.date);
-    const currentMonth: number = dateService.getMonthFromDbDate(dateRange.endDate);
 
     try {
-      const result = await overallStatisticService.getOverallStatistic(dateRange, currentMonth);
+      const result = await overallStatisticService.getOverallStatistic(dateRange);
 
       return response.status(ResponseStatuses.STATUS_OK).json(result);
     } catch (error) {
@@ -57,33 +57,42 @@ class StatisticsController {
 
     try {
       const users: IActionStatistic[] = await connection.createQueryBuilder(AccountEntity, 'account')
-        .groupBy('account.createdAt')
-        .select('COUNT(account.id)', 'amount')
-        .addSelect(`TO_CHAR(account.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .select(`TO_CHAR(account.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .groupBy('date')
+        .addSelect('COUNT(account.id)', 'amount')
         .orderBy('date', SortDirections.DESC)
         .where(`account.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
         .getRawMany();
 
       const favorites: IActionStatistic[]  = await connection.createQueryBuilder(FavoriteEntity, 'favorite')
-        .groupBy('favorite.createdAt')
-        .select('COUNT(favorite.id)', 'amount')
-        .addSelect(`TO_CHAR(favorite.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .select(`TO_CHAR(favorite.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .groupBy('date')
+        .addSelect('COUNT(favorite.id)', 'amount')
         .orderBy('date', SortDirections.DESC)
         .where(`favorite.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
         .getRawMany();
 
       const comments: IActionStatistic[]  = await connection.createQueryBuilder(CommentEntity, 'comment')
-        .groupBy('comment.createdAt')
-        .select('COUNT(comment.id)', 'amount')
-        .addSelect(`TO_CHAR(comment.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .select(`TO_CHAR(comment.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .groupBy('date')
+        .addSelect('COUNT(comment.id)', 'amount')
         .orderBy('date', SortDirections.DESC)
         .where(`comment.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
+        .getRawMany();
+
+      const articles: IActionStatistic[]  = await connection.createQueryBuilder(ArticleEntity, 'article')
+        .select(`TO_CHAR(article.createdAt,\'${DATE_API_FORMAT}\')`, 'date')
+        .groupBy('date')
+        .addSelect('COUNT(article.id)', 'amount')
+        .orderBy('date', SortDirections.DESC)
+        .where(`article.createdAt BETWEEN '${dateRange.startDate}' AND '${dateRange.endDate}'`)
         .getRawMany();
 
       const result: IActionsStatistic = {
         users,
         favorites,
-        comments
+        comments,
+        articles
       }
 
       return response.status(ResponseStatuses.STATUS_OK).json(result);

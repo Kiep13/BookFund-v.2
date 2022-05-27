@@ -6,5 +6,6 @@ export interface IActionStatistic {
 export interface IActionsStatistic {
   users: IActionStatistic[],
   favorites: IActionStatistic[],
-  comments: IActionStatistic[]
+  comments: IActionStatistic[],
+  articles: IActionStatistic[]
 }

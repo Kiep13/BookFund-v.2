@@ -36,7 +36,7 @@ class BookController {
       }
 
       if (currentBook.fileUrl !== request.body.fileUrl) {
-        await fileService.deleteFile(currentBook.fileUrl);
+        await fileService.deleteFile(currentBook.fileUrl, environment.booksFolder);
       }
 
       await connection.manager.createQueryBuilder(BookEntity, 'book')
@@ -99,6 +99,12 @@ class BookController {
       const bookId = +request.params.id;
 
       const book = await connection.manager.findOne(BookEntity, bookId);
+      await fileService.deleteFile(book.fileUrl, environment.booksFolder);
+
+      if(book.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
+        await imageService.deleteImage(book.image);
+      }
+
       await connection.manager.remove(book);
 
       return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});

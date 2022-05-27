@@ -58,6 +58,7 @@ export const useCollectionsContent = () => {
   )
 
   const handleRowsPerPageChanged = (event: any): void => {
+    setState(CardStates.LOADING);
     const newRowsPerPage = parseInt(event.target.value, 10);
 
     setRowsPerPage(newRowsPerPage);
@@ -65,6 +66,7 @@ export const useCollectionsContent = () => {
   };
 
   const handlePageChange = (event: any, newPage: number): void => {
+    setState(CardStates.LOADING);
     setPage(newPage);
   };
 
@@ -100,6 +102,7 @@ export const useCollectionsContent = () => {
   }
 
   const handleTyping = (event: SyntheticEvent): void => {
+    setState(CardStates.LOADING);
     const { value } = event.target as HTMLTextAreaElement;
     setSearchTerm(value);
   }

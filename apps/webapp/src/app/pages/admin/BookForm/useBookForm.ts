@@ -98,7 +98,7 @@ export const useBookForm = () => {
       .catch(() => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
-      })
+      });
   }
 
   return {

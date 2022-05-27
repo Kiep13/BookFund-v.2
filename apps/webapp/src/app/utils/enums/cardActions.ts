@@ -1,4 +1,5 @@
 export enum CardActions {
+  ADD = 'add',
   LIKE = 'like',
   SHARE = 'share',
   VIEW = 'view',

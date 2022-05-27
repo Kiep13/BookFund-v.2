@@ -1,4 +1,5 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { Card } from '@components/cards/Card';
 import { PageHeaderCard } from '@components/headers/PageHeaderCard';
@@ -10,9 +11,11 @@ import { STYLES } from './constants';
 export const Authors = () =>
   <>
     <Box sx={STYLES.box}>
-      <PageHeaderCard
-        title='Authors'
-        url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`}/>
+      <PageHeaderCard title='Authors'>
+        <Link to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`}>
+          <Button variant='contained'>Add new</Button>
+        </Link>
+      </PageHeaderCard>
     </Box>
 
     <Box sx={STYLES.box}>

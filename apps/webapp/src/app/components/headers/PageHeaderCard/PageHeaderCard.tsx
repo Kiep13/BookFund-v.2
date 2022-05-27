@@ -1,12 +1,11 @@
-import { Box, Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
 
 import { Card } from '@components/cards/Card';
 
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const PageHeaderCard = ({title, url}: IProps) =>
+export const PageHeaderCard = ({title, children}: IProps) =>
   <Card>
     <Box sx={STYLES.wrapper}>
       <Typography
@@ -16,8 +15,8 @@ export const PageHeaderCard = ({title, url}: IProps) =>
         sx={STYLES.title}>
         {title}
       </Typography>
-      <Link to={url}>
-        <Button variant='contained'>Add new</Button>
-      </Link>
+      {
+        children
+      }
     </Box>
   </Card>

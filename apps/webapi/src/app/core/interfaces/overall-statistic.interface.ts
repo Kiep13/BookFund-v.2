@@ -1,7 +1,3 @@
-export interface IOverallRaw {
-  amount: number
-}
-
 export interface IOverallItem {
   current: number,
   total: number
@@ -10,5 +6,6 @@ export interface IOverallItem {
 export interface IOverallStatistic {
   users: IOverallItem,
   favorites: IOverallItem,
-  comments: IOverallItem
+  comments: IOverallItem,
+  articles: IOverallItem
 }

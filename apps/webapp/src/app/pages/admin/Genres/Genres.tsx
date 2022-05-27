@@ -1,5 +1,6 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { Card } from '@components/cards/Card';
@@ -31,7 +32,11 @@ export const Genres = () => {
   return (
     <>
       <Box sx={STYLES.header}>
-        <PageHeaderCard title='Genres' url={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`}/>
+        <PageHeaderCard title='Genres'>
+          <Link to={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`}>
+            <Button variant='contained'>Add new</Button>
+          </Link>
+        </PageHeaderCard>
       </Box>
 
       <Box sx={STYLES.contentWrapper}>

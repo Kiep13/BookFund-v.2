@@ -1,5 +1,6 @@
 export * from './account.interface';
 export * from './actions-statistic.interface';
+export * from './article-folder.interface';
 export * from './auth-response.interface';
 export * from './author-form.interface';
 export * from './book-form.interface';

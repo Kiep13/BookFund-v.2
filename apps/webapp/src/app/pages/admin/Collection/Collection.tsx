@@ -14,13 +14,13 @@ export const Collection = () => {
   const {
     collection,
     pageState,
+    headerActions,
     isModalOpened,
     loadCollection,
     navigateBack,
-    navigateToEditPage,
+    handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
     handleConfirmDeletion,
-    openModal,
     closeModal
   } = useCollection();
 
@@ -32,9 +32,10 @@ export const Collection = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
+        actions={headerActions}
         handleBackClick={navigateBack}
-        handleEditClick={navigateToEditPage}
-        handleDeleteClick={openModal}/>
+        handleIconClick={handleHeaderIconClick}
+      />
 
       <Box sx={STYLES.page}>
         <StatefulCard state={pageState}>

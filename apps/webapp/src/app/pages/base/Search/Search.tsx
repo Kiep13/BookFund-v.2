@@ -24,7 +24,10 @@ export const Search = () => {
 
   return (
     <>
-      <EntityPageHeader title={PAGE_TITLE} handleBackClick={navigateBack}/>
+      <EntityPageHeader
+        title={PAGE_TITLE}
+        handleBackClick={navigateBack}
+      />
 
       <Box sx={STYLES.page}>
         <SearchInput searchTerm={searchTerm} handleSubmit={handleSearchTermChange}/>

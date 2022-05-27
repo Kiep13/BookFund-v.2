@@ -15,13 +15,13 @@ export const Book = () => {
   const {
     book,
     pageState,
+    headerActions,
     isModalOpened,
     loadBook,
     navigateBack,
-    navigateToEditPage,
+    handleHeaderIconClick,
     getAdminAuthorPageUrlWithoutId,
     handleConfirmDeletion,
-    openModal,
     closeModal
   } = useBook();
 
@@ -33,9 +33,9 @@ export const Book = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
+        actions={headerActions}
         handleBackClick={navigateBack}
-        handleEditClick={navigateToEditPage}
-        handleDeleteClick={openModal}
+        handleIconClick={handleHeaderIconClick}
       />
 
       <Card>

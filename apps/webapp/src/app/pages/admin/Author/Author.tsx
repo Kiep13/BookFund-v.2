@@ -15,12 +15,12 @@ export const Author = () => {
   const {
     author,
     pageState,
+    headerActions,
     isModalOpened,
     loadAuthor,
     navigateBack,
-    navigateToEditPage,
+    handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
-    openModal,
     closeModal,
     handleConfirmDeletion
   } = useAuthor();
@@ -33,9 +33,10 @@ export const Author = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
+        actions={headerActions}
         handleBackClick={navigateBack}
-        handleEditClick={navigateToEditPage}
-        handleDeleteClick={openModal}/>
+        handleIconClick={handleHeaderIconClick}
+      />
 
       <Card>
         <Box sx={STYLES.page}>

@@ -82,6 +82,10 @@ class AuthorController {
       const author = await connection.manager.findOne(AuthorEntity, authorId);
       await connection.manager.remove(author);
 
+      if(author.image.includes(`${environment.selfUrl}/v1/${ApiRoutes.IMAGE}`)) {
+        await imageService.deleteImage(author.image);
+      }
+
       return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
     } catch (error) {
       next(error)

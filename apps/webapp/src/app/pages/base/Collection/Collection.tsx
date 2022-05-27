@@ -30,7 +30,8 @@ export const Collection = () => {
     <>
       <EntityPageHeader
         title={PAGE_TITLE}
-        handleBackClick={navigateBack}/>
+        handleBackClick={navigateBack}
+      />
 
       <StatefulCard state={pageState}>
         <CollectionContent collection={collection} bookLink={getBookPageUrlWithoutId()}/>

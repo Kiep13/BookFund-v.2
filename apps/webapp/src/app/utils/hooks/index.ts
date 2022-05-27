@@ -1,5 +1,6 @@
 export * from './useAlerts';
 export * from './useApi';
+export * from './useArticleActions';
 export * from './useAuthHandlers';
 export * from './useAuthorActions';
 export * from './useAuthorLoad';
@@ -10,4 +11,5 @@ export * from './useCollectionActions';
 export * from './useCollectionLoad';
 export * from './useCommentList';
 export * from './useDates';
+export * from './useFolderActions';
 export * from './useStorage';

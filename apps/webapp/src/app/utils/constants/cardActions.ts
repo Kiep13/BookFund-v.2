@@ -1,3 +1,4 @@
+import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
@@ -17,6 +18,12 @@ export const SHARE_CARD_ACTION: ICardAction = {
   ariLabel: 'Share',
   actionType: CardActions.SHARE,
   icon: ShareTwoToneIcon
+}
+
+export const ADD_CARD_ACTION: ICardAction = {
+  ariLabel: 'Add',
+  actionType: CardActions.ADD,
+  icon: AddCircleOutlineTwoToneIcon
 }
 
 export const VIEW_CARD_ACTION: ICardAction = {
