@@ -53,8 +53,7 @@ export const useArticleList = (folderId: number) => {
         .catch(() => {
           setState(CardStates.ERROR);
           addError(API_TOOLTIP_ERROR);
-        })
-
+        });
     }, DELAY),
     [rowsPerPage, page]
   )

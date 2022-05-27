@@ -30,7 +30,6 @@ export const Article = () => {
 
   return (
     <>
-
       <StatefulCard state={pageState}>
         {article && (
           <>
