@@ -7,4 +7,5 @@ export * from './genre.service';
 export * from './github.service';
 export * from './google.service';
 export * from './author.service';
+export * from './social-auth.service';
 export * from './token.service';
