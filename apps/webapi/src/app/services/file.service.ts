@@ -5,6 +5,10 @@ import * as uuid from 'uuid';
 import { environment } from '@environments/environment';
 
 class FileService {
+  private articlesFolder = path.resolve(__dirname, environment.articlesFolder);
+  private booksFolder = path.resolve(__dirname, environment.booksFolder);
+  private imagesFolder = path.resolve(__dirname, environment.imagesFolder);
+
   public async createFile(content: string, extension: string): Promise<string> {
     const fileName = `${uuid.v4()}.${extension}`;
     const filePath = `${path.resolve(__dirname, environment.articlesFolder, fileName)}`;
@@ -36,6 +40,16 @@ class FileService {
 
     const filePath = `${path.resolve(__dirname, folderName, fileName)}`;
     await fs.unlinkSync(filePath);
+  }
+
+  public checkFileStorageFolders() {
+    const foldersForChecking: string[] = [this.articlesFolder, this.booksFolder, this.imagesFolder];
+
+    foldersForChecking.forEach((folderPath: string) => {
+      if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath);
+      }
+    });
   }
 }
 
