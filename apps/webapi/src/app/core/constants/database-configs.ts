@@ -10,7 +10,7 @@ import { GenreEntity } from '@entities/genre.entity';
 import { environment} from '@environments/environment';
 
 export const DATABASE_CONFIGS: any = {
-  ...(environment.DATABASE_URL ? {url: environment.DATABASE_URL} : {}),
+  ...(environment.databaseUrl ? {url: environment.databaseUrl} : {}),
   type: 'postgres',
   database: environment.databaseName,
   synchronize: true,
