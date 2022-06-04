@@ -5,12 +5,16 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/webapi",
         "main": "apps/webapi/src/main.ts",
         "tsConfig": "apps/webapi/tsconfig.app.json",
-        "assets": ["apps/webapi/src/assets"]
+        "assets": [
+          "apps/webapi/src/assets"
+        ]
       },
       "configurations": {
         "production": {
@@ -34,17 +38,29 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/webapi/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/webapi/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/webapi"],
+      "outputs": [
+        "coverage/apps/webapi"
+      ],
       "options": {
         "jestConfig": "apps/webapi/jest.config.js",
         "passWithNoTests": true
+      }
+    },
+    "dev": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "dotenv -e ./apps/webapi/src/environments/.env nx serve webapi"
       }
     }
   },

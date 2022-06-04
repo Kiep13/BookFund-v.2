@@ -1,9 +1,5 @@
-require('dotenv').config({
-  ...(process.env.MODE ? {path: `${__dirname}/.env.${process.env.MODE.trim()}`} : {})
-});
-
 export const environment = {
-  production: process.env.PRODUCTION,
+  production: true,
 
   port: process.env.PORT,
   databaseUrl: process.env.DATABASE_URL,

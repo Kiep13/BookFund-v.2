@@ -64,6 +64,12 @@
         "jestConfig": "apps/webapp/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "dev": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "dotenv -e ./apps/webapp/src/environments/.env nx serve webapp"
+      }
     }
   },
   "tags": []
