@@ -34,6 +34,6 @@ To add seed data:
 If you want to open project locally, not forget include dev mode environment variable in migrations and seeds commands. 
 For example: 
 ```
-cmd /V /C "set MODE=dev && npm run seed:run"
+npm run PROJECT_NANE:dev
 ```
 Start dev project already include this option. 
