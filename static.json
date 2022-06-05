@@ -1,6 +1,6 @@
 {
   "root": "dist/apps/webapp/",
   "routes": {
-    "/**/*.html": "index.html"
+    "/**": "index.html"
   }
 }
