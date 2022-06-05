@@ -17,6 +17,7 @@ export const DATABASE_CONFIGS: any = {
   logging: false,
   username: environment.databaseUsername,
   password: environment.databasePassword,
+  ...(environment.databaseUrl ? {extra: { ssl: true }} : {}),
   entities: [
     AccountEntity, ArticleEntity, AuthorEntity, GenreEntity, BookEntity, CollectionEntity, CommentEntity, FavoriteEntity, FolderEntity
   ]
