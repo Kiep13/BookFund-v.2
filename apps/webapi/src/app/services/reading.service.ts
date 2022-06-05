@@ -25,7 +25,7 @@ class ReadingService {
   }
 
   public async createFavorite(bookId: number, account: AccountEntity): Promise<FavoriteEntity> {
-    const book = await connection.createQueryBuilder(BookEntity, 'book')
+    const book: BookEntity = await connection.createQueryBuilder(BookEntity, 'book')
       .where({
         id: bookId
       })
