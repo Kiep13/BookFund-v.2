@@ -11,6 +11,7 @@ module.exports = {
   "migrationsTableName": "migrations",
   "migrations": ["migrations/*.ts"],
   "seeds": ["app/seeds/**/*.ts"],
+  ...(environment.databaseUrl ? {url: environment.databaseUrl} : {}),
   ...(environment.databaseUrl ? {extra: { ssl: true }} : {}),
   "cli": {
     "migrationsDir": "migrations"
