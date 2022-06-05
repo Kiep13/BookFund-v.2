@@ -42,7 +42,10 @@ class ReadingService {
 
     console.log(favorite);
 
-    await connection.manager.save(favorite);
+    await connection.manager.createQueryBuilder(FavoriteEntity, 'favorite')
+      .insert()
+      .values(favorite)
+      .execute();
 
     return favorite;
   }
