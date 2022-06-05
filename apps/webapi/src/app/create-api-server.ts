@@ -32,7 +32,8 @@ apiServer.use(cors({
 apiServer.use(express.json());
 apiServer.use(cookieParser());
 apiServer.use(express.static(`../${environment.imagesFolder}`));
-apiServer.use(express.static(`../assets/books`));
+apiServer.use(express.static(`../${environment.booksFolder}`));
+apiServer.use(express.static(`../${environment.articlesFolder}`));
 
 apiServer.use(`/v1/${ApiRoutes.ARTICLE}`, articleRoutes);
 apiServer.use(`/v1/${ApiRoutes.AUTH}`, authRoutes);

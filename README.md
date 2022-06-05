@@ -31,9 +31,12 @@ To add seed data:
 ```
   npm run seed:run
 ```
+
+### Start application
+
 If you want to open project locally, not forget include dev mode environment variable in migrations and seeds commands. 
 For example: 
 ```
-npm run PROJECT_NANE:dev
+nx run PROJECT_NANE:dev
 ```
-Start dev project already include this option. 
+

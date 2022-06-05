@@ -3,6 +3,7 @@ export const environment = {
 
   port: process.env.PORT,
   databaseUrl: process.env.DATABASE_URL,
+  databaseHost: process.env.DATABASE_HOST,
   databaseName: process.env.DATABASE_NAME,
   databaseUsername: process.env.DATABASE_USERNAME,
   databasePassword: process.env.DATABASE_PASSWORD,

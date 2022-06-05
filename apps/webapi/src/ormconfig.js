@@ -2,7 +2,7 @@ const {environment} = require("./environments/environment");
 
 module.exports = {
   "type": "postgres",
-  "host": environment.databaseUrl || "localhost",
+  "host": environment.databaseHost,
   "port": 5432,
   "username": environment.databaseUsername,
   "password": environment.databasePassword,
