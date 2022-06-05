@@ -37,6 +37,8 @@ class ReadingService {
     favorite.status = BookStatuses.IN_PROGRESS;
     favorite.bookmarkPage = 1;
 
+    console.log(favorite);
+
     await connection.manager.save(favorite);
 
     return favorite;
