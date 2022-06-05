@@ -20,7 +20,8 @@
          "@middlewares/*": ["apps/webapi/src/app/middlewares/*"],
          "@routes/*": ["apps/webapi/src/app/routes/*"],
          "@services/*": ["apps/webapi/src/app/services/*"],
-         "@environments/*": ["apps/webapi/src/environments/*"]
+         "@environments/*": ["apps/webapi/src/environments/*"],
+         "@utils": ["apps/webapi/src/app/utils"]
       }
    }
 }

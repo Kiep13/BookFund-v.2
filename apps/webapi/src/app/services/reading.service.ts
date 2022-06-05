@@ -3,6 +3,7 @@ import { BookStatuses } from '@core/enums';
 import { AccountEntity } from '@entities/account.entity';
 import { FavoriteEntity } from '@entities/favorite.entity';
 import { BookEntity } from '@entities/book.entity';
+import { cloneDeep } from '@utils';
 
 class ReadingService {
   public async getActualReadingInfo(bookId: number, accountId: number): Promise<FavoriteEntity> {
@@ -32,7 +33,9 @@ class ReadingService {
       .getOne();
 
     const favorite = new FavoriteEntity();
-    favorite.book = book;
+    favorite.book = cloneDeep({
+      ...book
+    });
     favorite.account = account;
     favorite.status = BookStatuses.IN_PROGRESS;
     favorite.bookmarkPage = 1;
