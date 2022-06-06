@@ -1,0 +1,9 @@
+[
+  {
+    "email": "main.bookfund@gmail.com",
+    "name": "Admin",
+    "surname": "Admin",
+    "provider": "google",
+    "role": "ROLE_ADMIN"
+  }
+]

@@ -62,6 +62,18 @@
       "options": {
         "command": "dotenv -e ./apps/webapi/src/environments/.env nx serve webapi"
       }
+    },
+    "migrations": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+            "command": "dotenv -e ./apps/webapi/src/environments/.env npm run migrations:run"
+      }
+    },
+    "seed": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "dotenv -e ./apps/webapi/src/environments/.env npm run seed:run"
+      }
     }
   },
   "tags": []
