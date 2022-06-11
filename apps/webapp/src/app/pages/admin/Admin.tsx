@@ -14,6 +14,8 @@ import { Collections } from './Collections';
 import { Genres } from './Genres';
 import { GenreForm } from './GenreForm';
 import { Dashboard } from './Dashboard';
+import { Users } from './Users';
+import { User } from './User';
 
 export const Admin = () =>
   <>
@@ -33,4 +35,6 @@ export const Admin = () =>
     <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`} component={Collections} exact/>
     <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`} component={CollectionForm}/>
     <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/:id`} component={CollectionForm}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USERS}`} component={Users} exact/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USER}/:id`} component={User}/>
   </>

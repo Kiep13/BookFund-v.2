@@ -22,7 +22,8 @@ import {
   IFavorite,
   IListApiView,
   ISearchOptions,
-  ISearchResults
+  ISearchResults,
+  IUser
 } from '@utils/interfaces';
 
 export const useApi = () => {
@@ -259,6 +260,13 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/article/delete/${id}`);
   }
 
+  const getUsers = async (searchOptions: ISearchOptions): Promise<IListApiView<IUser>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IUser[]>(`${environment.backEndUrl}/v1/user/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
   return {
     login,
     refresh,
@@ -304,6 +312,7 @@ export const useApi = () => {
     getArticle,
     addArticle,
     updateArticle,
-    deleteArticle
+    deleteArticle,
+    getUsers
   }
 }

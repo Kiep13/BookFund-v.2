@@ -19,6 +19,7 @@ import imageRoutes from '@routes/image.routes';
 import readRoutes from '@routes/read.routes';
 import searchRoutes from '@routes/search.routes';
 import statisticsRouter from '@routes/statistics.router';
+import userRoutes from '@routes/user.router';
 
 const apiServer = express();
 
@@ -48,6 +49,7 @@ apiServer.use(`/v1/${ApiRoutes.IMAGE}`, imageRoutes);
 apiServer.use(`/v1/${ApiRoutes.READ}`, readRoutes);
 apiServer.use(`/v1/${ApiRoutes.SEARCH}`, searchRoutes);
 apiServer.use(`/v1/${ApiRoutes.STATISTIC}`, statisticsRouter);
+apiServer.use(`/v1/${ApiRoutes.USER}`, userRoutes);
 
 apiServer.use(errorMiddleware);
 

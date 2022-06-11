@@ -27,3 +27,4 @@ export * from './searchOptionsInterface';
 export * from './searchResultsInterface';
 export * from './sortOptionsInterace';
 export * from './tableItemActionInterface';
+export * from './userInterface';
