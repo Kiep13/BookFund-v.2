@@ -21,8 +21,7 @@ class AuthController {
         httpOnly: true,
         ...(environment.production ? {
           sameSite: 'none',
-          secure: true,
-          domain: environment.clientUrl
+          secure: true
         } : {})
       });
 
