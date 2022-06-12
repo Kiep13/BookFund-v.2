@@ -19,7 +19,11 @@ class AuthController {
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {
         maxAge: TOKEN_DURATION,
         httpOnly: true,
-        ...(environment.production ? {sameSite: 'none'} : {})
+        ...(environment.production ? {
+          sameSite: 'none',
+          secure: true,
+          domain: environment.clientUrl
+        } : {})
       });
 
       return response.status(ResponseStatuses.STATUS_OK).json(authResponse);
