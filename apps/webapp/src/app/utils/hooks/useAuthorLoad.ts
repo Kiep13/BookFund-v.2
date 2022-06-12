@@ -12,14 +12,14 @@ export const useAuthorLoad = () => {
 
   const params = useParams();
 
-  const { getAuthor } = useApi();
-  const { addError } = useAlerts();
+  const {getAuthor} = useApi();
+  const {addError} = useAlerts();
 
   const loadAuthor = (): void => {
     const authorId = (params as IFormPageParams).id;
 
     getAuthor(authorId)
-      .then((response) => {
+      .then((response: IAuthor) => {
         setAuthor(response);
         setPageState(CardStates.CONTENT);
       })
@@ -27,11 +27,11 @@ export const useAuthorLoad = () => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       });
-  }
+  };
 
   return {
     author,
     pageState,
     loadAuthor
-  }
-}
+  };
+};

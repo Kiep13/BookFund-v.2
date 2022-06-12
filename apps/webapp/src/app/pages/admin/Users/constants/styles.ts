@@ -42,10 +42,6 @@ export const STYLES = {
       flexDirection: 'column',
       alignItems: 'flex-start'
     }
-  },
-  roleIndicator: {
-    backgroundImage: 'linear-gradient(315deg, rgb(185 220 255) 0%, rgb(99, 164, 255) 74%)',
-    color: 'white'
   }
 };
 

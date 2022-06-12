@@ -1,12 +1,17 @@
 import { Roles } from '@utils/enums';
 
 export interface IUser {
-  id: number;
+  createdAt: Date;
   fullName: string;
-  name: string;
-  surname: string;
+  id: number;
   image: string;
+  name: string;
   provider: string;
   role: Roles;
-  createdAt: string;
+  surname: string;
+  articlesAmount?: number;
+  commentsAmount?: number;
+  doneFavoritesAmount?: number;
+  favoritesAmount?: number;
+  inProgressFavoritesAmount?: number;
 }

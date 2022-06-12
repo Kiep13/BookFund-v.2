@@ -1,7 +1,8 @@
 import { Box, Button } from '@mui/material';
 
+import { Providers } from '@utils/enums';
+
 import { PROVIDER_COLOR, PROVIDER_NAME, PROVIDER_ICON, STYLES_LOGIN_BUTTONS } from '../../constants';
-import { Providers } from '../../enums';
 import { getProvidersUrls } from '../../helpers';
 
 export const LoginButtons = () => {

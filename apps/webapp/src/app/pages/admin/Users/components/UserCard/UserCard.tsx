@@ -1,10 +1,10 @@
 import { Avatar, Box, Card, CardActionArea, CardContent, Typography  } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
+import { RoleIndicator } from '@components/RoleIndicator';
 import { AdminRoutePaths, Roles } from '@utils/enums';
 
 import { STYLES } from '../../constants';
-import { RoleIndicator } from '../RoleIndicator';
 import { IProps } from './propsInterface';
 
 export const UserCard = ({user}: IProps) => {
@@ -24,7 +24,7 @@ export const UserCard = ({user}: IProps) => {
               {user.fullName}
             </Typography>
 
-            {user.role !== Roles.USER && <RoleIndicator roleName={user.role}/>}
+            {user.role !== Roles.User && <RoleIndicator roleName={user.role}/>}
           </Box>
         </CardContent>
       </CardActionArea>

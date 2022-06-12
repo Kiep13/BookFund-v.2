@@ -1,5 +1,5 @@
 import { IDataColumn } from '@utils/interfaces';
-import { AlignTypes, CellTypes } from '@utils/enums';
+import { AlignTypes, DataTypes } from '@utils/enums';
 
 export const COLUMNS: IDataColumn[] = [
   {
@@ -9,7 +9,7 @@ export const COLUMNS: IDataColumn[] = [
     name: 'fullName',
     width: '30%',
     align: AlignTypes.Left,
-    type: CellTypes.String,
+    type: DataTypes.String,
   },
   {
     id: 'amountBooks',
@@ -17,7 +17,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Amount of books',
     name: 'amountBooks',
     align: AlignTypes.Right,
-    type: CellTypes.Number,
+    type: DataTypes.Number,
   },
   {
     id: 'createdAt',
@@ -25,7 +25,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Created date',
     name: 'createdAt',
     align: AlignTypes.Right,
-    type: CellTypes.Date,
+    type: DataTypes.Date,
   },
   {
     id: 'updatedAt',
@@ -33,6 +33,6 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Updated date',
     name: 'updatedAt',
     align: AlignTypes.Right,
-    type: CellTypes.Date
+    type: DataTypes.Date
   },
 ];

@@ -267,6 +267,11 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data)
   }
 
+  const getUser = async (id: number): Promise<IUser> => {
+    return await axios.get<IUser>(`${environment.backEndUrl}/v1/user/${id}`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
   return {
     login,
     refresh,
@@ -313,6 +318,7 @@ export const useApi = () => {
     addArticle,
     updateArticle,
     deleteArticle,
-    getUsers
+    getUsers,
+    getUser
   }
 }

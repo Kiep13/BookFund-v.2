@@ -2,9 +2,9 @@ import queryString from 'query-string';
 
 import { FACEBOOK_AUTH_URL, FACEBOOK_SCOPE, GITHUB_AUTH_URL, GOOGLE_AUTH_URL, GOOGLE_SCOPE } from '@utils/constants';
 import { environment } from '@environments/environment';
+import { Providers } from '@utils/enums';
 
 import { IGoogleAuthUrlParams, IFacebookAuthUrlParams, IGitHubAuthUrl } from '../interfaces';
-import { Providers } from '../enums';
 
 const getUrlWithQueryParams = (baseUrl: string, params: IGoogleAuthUrlParams | IFacebookAuthUrlParams | IGitHubAuthUrl) => {
   const query = queryString.stringify(params);
@@ -12,7 +12,7 @@ const getUrlWithQueryParams = (baseUrl: string, params: IGoogleAuthUrlParams | I
 }
 
 export const getProvidersUrls = () => ({
-  [Providers.GOOGLE]: getUrlWithQueryParams(GOOGLE_AUTH_URL, {
+  [Providers.Google]: getUrlWithQueryParams(GOOGLE_AUTH_URL, {
     client_id: environment.googleClientId,
     redirect_uri: environment.googleRedirectUri,
     scope: GOOGLE_SCOPE,
@@ -20,12 +20,12 @@ export const getProvidersUrls = () => ({
     access_type: 'offline',
     prompt: 'consent'
   }),
-  [Providers.GITHUB]: getUrlWithQueryParams(GITHUB_AUTH_URL, {
+  [Providers.GitHub]: getUrlWithQueryParams(GITHUB_AUTH_URL, {
     client_id: environment.githubClientId,
     redirect_uri: environment.githubRedirectUri,
     state: environment.githubState
   }),
-  [Providers.FACEBOOK]: getUrlWithQueryParams(FACEBOOK_AUTH_URL, {
+  [Providers.Facebook]: getUrlWithQueryParams(FACEBOOK_AUTH_URL, {
     client_id: environment.facebookClientId,
     redirect_uri: environment.facebookRedirectUri,
     scope: FACEBOOK_SCOPE,
