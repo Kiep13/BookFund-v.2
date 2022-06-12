@@ -104,6 +104,17 @@ class UserController {
       next(error);
     }
   }
+
+  public async updateUser(request: Request, response: Response, next: Function): Response {
+    try {
+      const userId = +request.params.id;
+      await connection.manager.update(AccountEntity, userId, request.body);
+
+      return response.status(ResponseStatuses.STATUS_OK).json(request.body);
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export const userController = new UserController();

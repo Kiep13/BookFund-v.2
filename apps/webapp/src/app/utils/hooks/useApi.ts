@@ -23,7 +23,7 @@ import {
   IListApiView,
   ISearchOptions,
   ISearchResults,
-  IUser
+  IUser, IRoleChanges
 } from '@utils/interfaces';
 
 export const useApi = () => {
@@ -272,6 +272,11 @@ export const useApi = () => {
       .then((response: AxiosResponse) => response.data);
   }
 
+  const updateUser = async (id: number, roleChanges: IRoleChanges): Promise<void> => {
+    return await axios.put<void>(`${environment.backEndUrl}/v1/user/update/${id}`, roleChanges)
+      .then((response: AxiosResponse) => response.data);
+  }
+
   return {
     login,
     refresh,
@@ -319,6 +324,7 @@ export const useApi = () => {
     updateArticle,
     deleteArticle,
     getUsers,
-    getUser
+    getUser,
+    updateUser
   }
 }

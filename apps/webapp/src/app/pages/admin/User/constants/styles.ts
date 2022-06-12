@@ -5,6 +5,9 @@ export const STYLES = {
     minHeight: 'calc(100vh - 210px)',
     height: 'fit-content',
   },
+  actionButton: {
+    height: '32px'
+  },
   userContent: {
     wrapper: {
       p: 2,

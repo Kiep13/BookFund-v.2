@@ -23,6 +23,7 @@ export * from './genre.interface';
 export * from './listApiViewInterface';
 export * from './optionInterface';
 export * from './overallStatisticsInterface';
+export * from './roleChangesInterface';
 export * from './searchOptionsInterface';
 export * from './searchResultsInterface';
 export * from './sortOptionsInterace';
