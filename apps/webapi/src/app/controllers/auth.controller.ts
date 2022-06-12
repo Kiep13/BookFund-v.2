@@ -6,6 +6,7 @@ import { ResponseStatuses } from '@core/enums';
 import { IAuthResponse } from '@core/interfaces';
 import { AccountEntity } from '@entities/account.entity';
 import { ApiError } from '@exceptions/api-error';
+import { environment } from '@environments/environment';
 import { googleService, facebookService, githubService, tokenService } from '@services/index';
 
 class AuthController {
@@ -17,7 +18,8 @@ class AuthController {
 
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {
         maxAge: TOKEN_DURATION,
-        httpOnly: true
+        httpOnly: true,
+        ...(environment.production ? {sameSite: 'none'} : {})
       });
 
       return response.status(ResponseStatuses.STATUS_OK).json(authResponse);
