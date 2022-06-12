@@ -12,7 +12,8 @@ export enum ApiRoutes {
   COMMENT = 'comment',
   SEARCH = 'search',
   STATISTIC = 'statistic',
-  READ = 'read'
+  READ = 'read',
+  USER = 'user'
 }
 
 export enum ApiRoutesModifiers {

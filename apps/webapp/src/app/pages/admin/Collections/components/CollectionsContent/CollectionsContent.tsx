@@ -1,5 +1,5 @@
 import { Box, TablePagination, TextField } from '@mui/material';
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { CollectionCard } from '@components/cards/ColllectionCard';

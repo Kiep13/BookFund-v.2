@@ -37,7 +37,7 @@ export const getIsModerator = (store: IStore) => {
     return false;
   }
 
-  return store.auth.value.user?.role === Roles.MODERATOR;
+  return store.auth.value.user?.role === Roles.Moderator;
 }
 export const getIsAdmin = (store: IStore) => {
   const { isAuthorized } = store.auth.value;
@@ -46,7 +46,7 @@ export const getIsAdmin = (store: IStore) => {
     return false;
   }
 
-  return store.auth.value.user?.role === Roles.MODERATOR || store.auth.value.user?.role === Roles.ADMIN;
+  return store.auth.value.user?.role === Roles.Moderator || store.auth.value.user?.role === Roles.Admin;
 }
 
 export const { login, logout } = authSlice.actions;

@@ -2,22 +2,22 @@ import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
-import { Providers } from '../enums';
+import { Providers } from '@utils/enums';
 
 export const PROVIDER_COLOR = {
-  [Providers.GOOGLE]: '#4285F4',
-  [Providers.GITHUB]: '#333333',
-  [Providers.FACEBOOK]: '#4267b2'
+  [Providers.Google]: '#4285F4',
+  [Providers.GitHub]: '#333333',
+  [Providers.Facebook]: '#4267b2'
 }
 
 export const PROVIDER_ICON = {
-  [Providers.GOOGLE]: GoogleIcon,
-  [Providers.GITHUB]: GitHubIcon,
-  [Providers.FACEBOOK]: FacebookIcon
+  [Providers.Google]: GoogleIcon,
+  [Providers.GitHub]: GitHubIcon,
+  [Providers.Facebook]: FacebookIcon
 }
 
 export const PROVIDER_NAME = {
-  [Providers.GOOGLE]: 'Google',
-  [Providers.GITHUB]: 'GitHub',
-  [Providers.FACEBOOK]: 'Facebook'
+  [Providers.Google]: 'Google',
+  [Providers.GitHub]: 'GitHub',
+  [Providers.Facebook]: 'Facebook'
 }

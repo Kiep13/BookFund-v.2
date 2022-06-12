@@ -12,3 +12,4 @@ export * from './image.controller';
 export * from './read.controller';
 export * from './search.controller';
 export * from './statistics.controller';
+export * from './user.controller';

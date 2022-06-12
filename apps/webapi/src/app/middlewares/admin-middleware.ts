@@ -7,7 +7,7 @@ export const adminMiddleware = (request: Request, response: Response, next: Func
   try {
     const role = request.account.role;
 
-    if(role !== Roles.MODERATOR && role !== Roles.ADMIN) {
+    if(role !== Roles.ADMIN) {
       return next(ApiError.UnauthorizedError());
     }
 

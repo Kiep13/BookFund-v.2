@@ -1,5 +1,5 @@
 import { IDataColumn } from '@utils/interfaces';
-import { AlignTypes, CellTypes } from '@utils/enums';
+import { AlignTypes, DataTypes } from '@utils/enums';
 
 export const COLUMNS: IDataColumn[] = [
   {
@@ -9,7 +9,7 @@ export const COLUMNS: IDataColumn[] = [
     name: 'title',
     width: '40%',
     align: AlignTypes.Left,
-    type: CellTypes.String,
+    type: DataTypes.String,
   },
   {
     id: 'authorFullName',
@@ -18,7 +18,7 @@ export const COLUMNS: IDataColumn[] = [
     name: 'authorFullName',
     width: '10%',
     align: AlignTypes.Left,
-    type: CellTypes.String,
+    type: DataTypes.String,
   },
   {
     id: 'amountPages',
@@ -26,7 +26,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Amount of pages',
     name: 'amountPages',
     align: AlignTypes.Right,
-    type: CellTypes.Number,
+    type: DataTypes.Number,
   },
   {
     id: 'year',
@@ -34,7 +34,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Year',
     name: 'year',
     align: AlignTypes.Right,
-    type: CellTypes.Number,
+    type: DataTypes.Number,
   },
   {
     id: 'avgRate',
@@ -42,7 +42,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Average rate',
     name: 'avgRate',
     align: AlignTypes.Right,
-    type: CellTypes.Float,
+    type: DataTypes.Float,
   },
   {
     id: 'createdAt',
@@ -50,7 +50,7 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Created date',
     name: 'createdAt',
     align: AlignTypes.Right,
-    type: CellTypes.Date,
+    type: DataTypes.Date,
   },
   {
     id: 'updatedAt',
@@ -58,6 +58,6 @@ export const COLUMNS: IDataColumn[] = [
     label: 'Updated date',
     name: 'updatedAt',
     align: AlignTypes.Right,
-    type: CellTypes.Date
+    type: DataTypes.Date
   },
 ];

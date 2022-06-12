@@ -22,7 +22,8 @@ import {
   IFavorite,
   IListApiView,
   ISearchOptions,
-  ISearchResults
+  ISearchResults,
+  IUser, IRoleChanges
 } from '@utils/interfaces';
 
 export const useApi = () => {
@@ -259,6 +260,23 @@ export const useApi = () => {
     return axios.delete<void>(`${environment.backEndUrl}/v1/article/delete/${id}`);
   }
 
+  const getUsers = async (searchOptions: ISearchOptions): Promise<IListApiView<IUser>> => {
+    const requestParams = queryString.stringify(searchOptions);
+
+    return await axios.get<IUser[]>(`${environment.backEndUrl}/v1/user/list/?${requestParams}`)
+      .then((response: AxiosResponse) => response.data)
+  }
+
+  const getUser = async (id: number): Promise<IUser> => {
+    return await axios.get<IUser>(`${environment.backEndUrl}/v1/user/${id}`)
+      .then((response: AxiosResponse) => response.data);
+  }
+
+  const updateUser = async (id: number, roleChanges: IRoleChanges): Promise<void> => {
+    return await axios.put<void>(`${environment.backEndUrl}/v1/user/update/${id}`, roleChanges)
+      .then((response: AxiosResponse) => response.data);
+  }
+
   return {
     login,
     refresh,
@@ -304,6 +322,9 @@ export const useApi = () => {
     getArticle,
     addArticle,
     updateArticle,
-    deleteArticle
+    deleteArticle,
+    getUsers,
+    getUser,
+    updateUser
   }
 }

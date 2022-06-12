@@ -7,7 +7,7 @@ import { ICardAction } from '@utils/interfaces';
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const EntityPageHeader = ({title, actions, handleBackClick, handleIconClick}: IProps) =>
+export const EntityPageHeader = ({title, actions, handleBackClick, handleIconClick, children}: IProps) =>
   <Card styles={STYLES.card}>
     <Box sx={STYLES.content}>
 
@@ -38,6 +38,8 @@ export const EntityPageHeader = ({title, actions, handleBackClick, handleIconCli
             <Icon/>
           </IconButton>
         })}
+
+        {children && <Box>{children}</Box>}
       </Box>
 
     </Box>

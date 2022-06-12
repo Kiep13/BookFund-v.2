@@ -5,4 +5,5 @@ export interface IAccount {
   surname: string;
   image: string;
   role: Roles;
+  id?: string;
 }

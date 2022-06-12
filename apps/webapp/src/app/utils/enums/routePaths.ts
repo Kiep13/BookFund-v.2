@@ -39,5 +39,7 @@ export enum AdminRoutePaths {
   COLLECTION = '/collection',
   COLLECTIONS = '/collections',
   COLLECTION_NEW = '/collections/new',
-  COLLECTION_EDIT = '/collections/edit'
+  COLLECTION_EDIT = '/collections/edit',
+  USERS = '/users',
+  USER = '/user'
 }

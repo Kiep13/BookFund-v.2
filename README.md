@@ -49,3 +49,4 @@ For example:
 nx run PROJECT_NANE:dev
 ```
 
+Note: webapi requires node v.18.0.0 for work

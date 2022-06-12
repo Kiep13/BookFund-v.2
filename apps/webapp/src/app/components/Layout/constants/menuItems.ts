@@ -7,6 +7,7 @@ import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 import FolderTwoToneIcon from "@mui/icons-material/FolderTwoTone";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import KeyboardReturnTwoTone from '@mui/icons-material/KeyboardReturnTwoTone';
+import ManageAccountsTwoToneIcon from '@mui/icons-material/ManageAccountsTwoTone';
 import PeopleOutlineTwoToneIcon from '@mui/icons-material/PeopleOutlineTwoTone';
 
 import { AdminRoutePaths, BaseRoutePaths } from '@utils/enums';
@@ -38,6 +39,11 @@ export const ADMIN_MENU_ITEMS: IMenuItem[] = [
     title: 'Collections',
     icon: BurstModeTwoToneIcon,
     url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`
+  },
+  {
+    title: 'Users',
+    icon: ManageAccountsTwoToneIcon,
+    url: `${AdminRoutePaths.ADMIN}${AdminRoutePaths.USERS}`
   }
 ];
 

@@ -1,4 +1,4 @@
-import { CellTypes } from '@utils/enums';
+import { DataTypes } from '@utils/enums';
 
 import { IAlignType } from './alignTypeInterface';
 
@@ -8,6 +8,6 @@ export interface IDataColumn {
   numeric: boolean;
   label: string;
   align: IAlignType;
-  type: CellTypes;
+  type: DataTypes;
   width?: string;
 }

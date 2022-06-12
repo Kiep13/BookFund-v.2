@@ -1,22 +1,22 @@
 import moment from 'moment';
 
 import { DATE_TABLE_FORMAT } from '@utils/constants';
-import { CellTypes } from '@utils/enums';
+import { DataTypes } from '@utils/enums';
 
-export function formatData(data: string | number | Date, type: CellTypes): string {
-  if (!data && type !== CellTypes.Float) {
+export function formatData(data: string | number | Date, type: DataTypes): string {
+  if (!data && type !== DataTypes.Float) {
     return '---';
   }
 
   switch (type) {
-    case CellTypes.Date: {
+    case DataTypes.Date: {
       return moment(data).startOf('day').format(DATE_TABLE_FORMAT);
     }
-    case CellTypes.Float: {
+    case DataTypes.Float: {
       return Number(data).toFixed(1);
     }
-    case CellTypes.Number:
-    case CellTypes.String: {
+    case DataTypes.Number:
+    case DataTypes.String: {
       return data.toString();
     }
   }

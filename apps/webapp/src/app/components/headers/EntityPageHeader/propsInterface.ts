@@ -6,4 +6,5 @@ export interface IProps {
   handleBackClick: () => void;
   actions?: ICardAction[];
   handleIconClick?: (actionType: CardActions) => void;
+  children?: any;
 }
