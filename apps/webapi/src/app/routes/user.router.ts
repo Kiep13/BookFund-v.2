@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import {  ApiRoutesModifiers } from '@core/enums';
+import { ApiRoutesModifiers } from '@core/enums';
 import { userController } from '@controllers/user.controller';
 import { moderatorMiddleware, authMiddleware, adminMiddleware } from '@middlewares/index';
 

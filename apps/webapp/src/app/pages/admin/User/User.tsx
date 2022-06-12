@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { useEffect } from 'react';
 
 import { Card } from '@components/cards/Card';
@@ -8,7 +9,6 @@ import { CardStates, Roles } from '@utils/enums';
 import { UserContent } from './components';
 import { STYLES } from './constants';
 import { useUser } from './useUser';
-import { Button } from '@mui/material';
 
 export const User = () => {
   const {
