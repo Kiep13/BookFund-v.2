@@ -38,7 +38,11 @@ class AuthController {
 
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {
         maxAge: TOKEN_DURATION,
-        httpOnly: true
+        httpOnly: true,
+        ...(environment.production ? {
+          sameSite: 'none',
+          secure: true
+        } : {})
       });
 
       return response.status(ResponseStatuses.STATUS_OK).json(authResponse);
@@ -54,7 +58,11 @@ class AuthController {
 
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {
         maxAge: TOKEN_DURATION,
-        httpOnly: true
+        httpOnly: true,
+        ...(environment.production ? {
+          sameSite: 'none',
+          secure: true
+        } : {})
       });
 
       return response.status(ResponseStatuses.STATUS_OK).json(authResponse);
@@ -103,7 +111,11 @@ class AuthController {
 
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {
         maxAge: TOKEN_DURATION,
-        httpOnly: true
+        httpOnly: true,
+        ...(environment.production ? {
+          sameSite: 'none',
+          secure: true
+        } : {})
       });
 
       return response.status(ResponseStatuses.STATUS_OK).json(authResponse);
