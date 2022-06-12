@@ -61,11 +61,16 @@ export const useAuthorizing = () => {
         dispatch(setAuthData(authResponse));
         axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.accessToken}`;
 
+        if (doesStorageHave(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY) && getFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY)) {
+          deleteFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY);
+        }
+
         navigateBack();
       })
       .catch(() => {
 
         if (doesStorageHave(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY) && getFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY)) {
+          deleteFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY);
           saveToStorage(RELOAD_PUBLIC_FINISHED, true);
 
           navigateBack();
