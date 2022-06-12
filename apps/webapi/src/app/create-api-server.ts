@@ -23,6 +23,7 @@ import userRoutes from '@routes/user.router';
 
 const apiServer = express();
 
+apiServer.set('trust proxy', 1);
 apiServer.use(fileUpload({
   createParentPath: true
 }));
