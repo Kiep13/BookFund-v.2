@@ -2,7 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Layout } from '@components/Layout';
-import { getIsAuthorized } from '@store/reducers';
+import { getIsAuthorizeAttempted, getIsAuthorized } from '@store/reducers';
 import {
   RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY,
   RELOAD_PATHNAME_STORAGE_KEY,
@@ -13,14 +13,11 @@ import { useStorage } from '@utils/hooks';
 
 export const PublicRoute = ({children, ...rest}) => {
   const isAuthorized = useSelector(getIsAuthorized);
+  const IsAuthorizeAttempted = useSelector(getIsAuthorizeAttempted);
   const {doesStorageHave, deleteFromStorage, saveToStorage} = useStorage();
 
   const render = () => {
-    if (isAuthorized) {
-      return <Layout children={children}/>;
-    }
-
-    if (doesStorageHave(RELOAD_PUBLIC_FINISHED)) {
+    if (isAuthorized || IsAuthorizeAttempted) {
       deleteFromStorage(RELOAD_PUBLIC_FINISHED);
       return <Layout children={children}/>;
     }

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
-import { login as setAuthData } from '@store/reducers/authSlice';
+import { login as setAuthData, setAuthAttemptFlag } from '@store/reducers/authSlice';
 import {
   axiosInstance as axios,
   API_LOGIN_ERROR,
@@ -68,6 +68,7 @@ export const useAuthorizing = () => {
         navigateBack();
       })
       .catch(() => {
+        dispatch(setAuthAttemptFlag());
 
         if (doesStorageHave(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY) && getFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY)) {
           deleteFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY);
