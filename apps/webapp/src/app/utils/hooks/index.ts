@@ -4,6 +4,7 @@ export * from './useArticleActions';
 export * from './useAuthHandlers';
 export * from './useAuthorActions';
 export * from './useAuthorLoad';
+export * from './useBackNavigation';
 export * from './useBookActions';
 export * from './useBookLoad';
 export * from './useCharts';
