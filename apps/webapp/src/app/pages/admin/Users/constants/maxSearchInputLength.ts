@@ -1,0 +1,1 @@
+export const MAX_SEARCH_LENGTH_INPUT = 70;

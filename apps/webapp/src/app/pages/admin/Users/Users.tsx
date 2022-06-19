@@ -6,7 +6,7 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { IUser } from '@utils/interfaces';
 
 import { UserCard } from './components';
-import { STYLES } from './constants';
+import { MAX_SEARCH_LENGTH_INPUT, STYLES } from './constants';
 import { useUsers } from './useUsers';
 
 export const Users = () => {
@@ -40,6 +40,10 @@ export const Users = () => {
           placeholder='Type user name here...'
           sx={STYLES.searchInput}
           onChange={handleTyping}
+          helperText={<Box sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Box>}
+          inputProps={{
+            maxLength: MAX_SEARCH_LENGTH_INPUT
+          }}
         />
 
         <StatefulCard state={state}>

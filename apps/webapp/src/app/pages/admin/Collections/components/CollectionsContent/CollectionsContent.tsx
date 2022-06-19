@@ -7,7 +7,7 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { DELETE_COLLECTION_CONFIRMATION_POPUP } from '@utils/constants';
 import { ICollection } from '@utils/interfaces';
 
-import { NO_MATCHING_COLLECTIONS, STYLES } from '../../constants';
+import { MAX_SEARCH_LENGTH_INPUT, NO_MATCHING_COLLECTIONS, STYLES } from '../../constants';
 import { useCollectionsContent } from './useCollectionsContent';
 
 export const CollectionsContent = () => {
@@ -41,6 +41,10 @@ export const CollectionsContent = () => {
         placeholder='Type title here...'
         sx={STYLES.searchInput}
         onChange={handleTyping}
+        helperText={<Box sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Box>}
+        inputProps={{
+          maxLength: MAX_SEARCH_LENGTH_INPUT
+        }}
       />
 
       <StatefulCard state={state} noContentMessage={NO_MATCHING_COLLECTIONS}>

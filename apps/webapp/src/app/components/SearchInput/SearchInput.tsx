@@ -2,7 +2,7 @@ import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import { Autocomplete, AutocompleteRenderInputParams, InputAdornment, TextField } from '@mui/material';
 import { useEffect } from 'react';
 
-import { INPUT_LABEL, NO_OPTIONS_TEXT, STYLES } from './constants';
+import { INPUT_LABEL, MAX_SEARCH_LENGTH_INPUT, NO_OPTIONS_TEXT, STYLES } from './constants';
 import { useSearchInput } from './useSearchInput';
 
 export const SearchInput = () => {
@@ -33,6 +33,10 @@ export const SearchInput = () => {
                      <SearchTwoToneIcon/>
                    </InputAdornment>
                  )
+               }}
+               inputProps={{
+                 ...params.inputProps,
+                 maxLength: MAX_SEARCH_LENGTH_INPUT
                }}/>
 
   return (
