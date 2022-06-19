@@ -29,8 +29,6 @@ export const useBookContent = (
       const { avgRate = 0, ratesAmount = 0} = book;
       const newRate  = ((avgRate * ratesAmount) + comment.rate) / (ratesAmount + 1);
 
-      console.log(newRate);
-
       handleBookChange && handleBookChange({
         ...book,
         avgRate: newRate,
