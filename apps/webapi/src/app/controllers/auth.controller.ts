@@ -126,7 +126,14 @@ class AuthController {
 
   public async logout(request, response, next): Response {
     try {
-      response.clearCookie(REFRESH_TOKEN_COOKIE_NAME);
+      response.cookie(REFRESH_TOKEN_COOKIE_NAME, '', {
+        maxAge: 0,
+        httpOnly: true,
+        ...(environment.production ? {
+          sameSite: 'none',
+          secure: true
+        } : {})
+      });
 
       return response.status(ResponseStatuses.STATUS_OK).json();
     } catch (e) {
