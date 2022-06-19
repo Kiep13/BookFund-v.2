@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { AuthRoutePaths } from '@utils/enums';
 
-import {IProps} from './propsInterface';
+import { IProps } from './propsInterface';
 
 export const Router = ({children}: IProps) => {
   const history = useHistory();
@@ -15,12 +15,12 @@ export const Router = ({children}: IProps) => {
     let previousPath = '';
 
     history.listen((location) => {
-      if(location.pathname !== AuthRoutePaths.REFRESH && location.pathname !== previousPath) {
+      if (location.pathname !== AuthRoutePaths.REFRESH && location.pathname !== previousPath) {
         previousPath = location.pathname;
         dispatch(addRoute(location.pathname));
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return children;
 };
