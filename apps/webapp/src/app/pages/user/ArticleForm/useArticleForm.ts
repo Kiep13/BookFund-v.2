@@ -67,6 +67,11 @@ export const useArticleForm = () => {
       .then((response: IListApiView<IArticleFolder> ) => {
         setFolderOptions(response.data);
 
+        if(!response.data.length) {
+          setPageState(CardStates.NO_CONTENT);
+          return;
+        }
+
         if (!articleId) {
           const defaultFolder = predefinedFolder || response.data.find((folder) => folder.name === DEFAULT_FOLDER_NAME);
           formik.setFieldValue('folder', defaultFolder.id);

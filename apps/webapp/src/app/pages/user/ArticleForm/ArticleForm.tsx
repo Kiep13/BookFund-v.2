@@ -16,7 +16,7 @@ import { Card } from '@components/cards/Card';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { Input } from '@components/formСomponents/Input';
 
-import { STYLES, TITLE_ADD, TITLE_EDIT } from './constants';
+import { NO_ARTICLES, STYLES, TITLE_ADD, TITLE_EDIT } from './constants';
 import { useArticleForm } from './useArticleForm';
 import { IArticleFolder } from '@utils/interfaces';
 import { DEFAULT_FOLDER_DISPLAYED_NAME, DEFAULT_FOLDER_NAME } from '@utils/constants';
@@ -40,7 +40,7 @@ export const ArticleForm = () => {
   return (
     <Card>
       <Box sx={STYLES.page}>
-        <StatefulCard state={pageState}>
+        <StatefulCard state={pageState} noContentMessage={NO_ARTICLES}>
           <Typography
             variant='h5'
             gutterBottom
