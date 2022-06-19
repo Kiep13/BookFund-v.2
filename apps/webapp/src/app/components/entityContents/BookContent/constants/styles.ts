@@ -20,6 +20,13 @@ export const STYLES = {
   descriptionBlock: {
     mb: 1
   },
+  ratesBlock: {
+    display: 'flex',
+    alignContent: 'center',
+    gap: '10px',
+    fontSize: '14px',
+    alignItems: 'center'
+  },
   attributeLabel: {
     color: '#888888',
     display: 'inline-flex',

@@ -18,6 +18,7 @@ export interface IBook {
   fileUrl?: string;
   isCommented?: boolean;
   authorFullName?: string;
+  ratesAmount?: number;
   updatedAt?: Date;
   favorite?: IFavorite;
 }
