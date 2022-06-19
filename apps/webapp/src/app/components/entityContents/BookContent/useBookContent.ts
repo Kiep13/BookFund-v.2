@@ -24,7 +24,23 @@ export const useBookContent = (
 
   const handleCommentSave = (comment: IComment): void => {
     setIsCommentSaved(false);
-    addCreatedComment(comment);
+
+    if(book) {
+      const { avgRate = 0, ratesAmount = 0} = book;
+      const newRate  = ((avgRate * ratesAmount) + comment.rate) / (ratesAmount + 1);
+
+      console.log(newRate);
+
+      handleBookChange && handleBookChange({
+        ...book,
+        avgRate: newRate,
+        ratesAmount: ratesAmount + 1
+      });
+    }
+
+    if(comment.text) {
+      addCreatedComment(comment);
+    }
   }
 
   const handleAddToFavorite = (favorite: IFavorite): void => {
