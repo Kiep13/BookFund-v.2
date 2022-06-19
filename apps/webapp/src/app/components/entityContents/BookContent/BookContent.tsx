@@ -78,7 +78,11 @@ export const BookContent = ({book, authorLink, isCommentFormShown, isActionsShow
         </Typography>
 
         <Box sx={STYLES.descriptionBlock}>
-          {Boolean(book?.avgRate) && book?.avgRate && <Rating readOnly value={book.avgRate} precision={0.1}/>}
+          {book && <Box sx={STYLES.ratesBlock}>
+            <Rating readOnly value={book.avgRate} precision={0.1}/>
+            <span>({book.ratesAmount || 0} {book.ratesAmount === 1 ? 'rate' : 'rates'})</span>
+          </Box>}
+
           <Box>
             <Typography variant='body2' sx={STYLES.attributeLabel}>Author: </Typography>
             <Typography variant='body2' sx={STYLES.attributeValue}>

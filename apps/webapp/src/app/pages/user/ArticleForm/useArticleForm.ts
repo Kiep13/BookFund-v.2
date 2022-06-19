@@ -1,13 +1,13 @@
 import { SelectChangeEvent } from '@mui/material';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 import { useFormik } from 'formik';
 import { ChangeEvent, useState } from 'react';
 
 import { API_TOOLTIP_ERROR, DEFAULT_FOLDER_NAME } from '@utils/constants';
-import { CardStates } from '@utils/enums';
+import { BaseRoutePaths, CardStates } from '@utils/enums';
 import { IArticle, IArticleFolder, IFormPageParams, IListApiView } from '@utils/interfaces';
-import { useAlerts, useApi } from '@utils/hooks';
+import { useAlerts, useApi, useBackNavigation } from '@utils/hooks';
 
 import { FORM_INITIAL_VALUE, SUCCESSFULLY_ADDED, SUCCESSFULLY_UPDATED, VALIDATION_SCHEMA } from './constants';
 import { IArticleForm, IArticleFormPageState } from './interfaces';
@@ -17,12 +17,12 @@ export const useArticleForm = () => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [folderOptions, setFolderOptions] = useState<IArticleFolder[]>([]);
 
-  const history = useHistory();
   const location = useLocation();
   const params = useParams();
 
   const {getFolders, getArticle, addArticle, updateArticle} = useApi();
   const {addSuccess, addError} = useAlerts();
+  const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.ARTICLES);
 
   const callSubmitAction = (values: IArticleForm) => {
     const folderId = (params as IFormPageParams).id;
@@ -36,7 +36,7 @@ export const useArticleForm = () => {
   }
 
   const navigateToPreviousPage = (): void => {
-    history.goBack();
+    navigatePreviousPage();
   }
 
   const handleSubmit = async (values: IArticleForm, {setSubmitting}: FormikHelpers<IArticleForm>) => {
@@ -66,6 +66,11 @@ export const useArticleForm = () => {
     getFolders()
       .then((response: IListApiView<IArticleFolder> ) => {
         setFolderOptions(response.data);
+
+        if(!response.data.length) {
+          setPageState(CardStates.NO_CONTENT);
+          return;
+        }
 
         if (!articleId) {
           const defaultFolder = predefinedFolder || response.data.find((folder) => folder.name === DEFAULT_FOLDER_NAME);

@@ -23,7 +23,7 @@ export const useFolder = () => {
   const expandedActions = [ADD_CARD_ACTION, EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateBack = (): void => {
-    history.goBack();
+    history.push(BaseRoutePaths.ARTICLES);
   }
 
   const navigateToEditPage = (): void => {

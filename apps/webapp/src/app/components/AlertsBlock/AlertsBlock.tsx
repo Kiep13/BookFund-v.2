@@ -1,7 +1,7 @@
 import { Alert, Box } from '@mui/material'
 import { useSelector } from 'react-redux';
 
-import { getAlerts } from '@store/reducers/alertsStore';
+import { getAlerts } from '@store/reducers/alertsSlice';
 import { IAlert } from '@utils/interfaces';
 
 import { STYLES } from './constants';

@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { AlertsBlock } from '@components/AlertsBlock';
+import { Router } from '@components/Router';
 import { PrivateRoute, ProtectedRoute, PublicRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
@@ -15,64 +16,66 @@ const App = () =>
   <Provider store={store}>
     <CssBaseline/>
     <AlertsBlock/>
-    <Switch>
-      <PublicRoute path={BaseRoutePaths.HOME} exact>
-        <Home/>
-      </PublicRoute>
-      <PublicRoute path={`${BaseRoutePaths.AUTHOR}/:id`}>
-        <Author/>
-      </PublicRoute>
-      <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`} exact>
-        <Book/>
-      </PublicRoute>
-      <PublicRoute path={`${BaseRoutePaths.COLLECTION}/:id`}>
-        <Collection/>
-      </PublicRoute>
-      <PublicRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
-        <Search/>
-      </PublicRoute>
-      <PublicRoute path={BaseRoutePaths.NOT_FOUND}>
-        <NotFound/>
-      </PublicRoute>
+    <Router>
+      <Switch>
+        <PublicRoute path={BaseRoutePaths.HOME} exact>
+          <Home/>
+        </PublicRoute>
+        <PublicRoute path={`${BaseRoutePaths.AUTHOR}/:id`}>
+          <Author/>
+        </PublicRoute>
+        <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`} exact>
+          <Book/>
+        </PublicRoute>
+        <PublicRoute path={`${BaseRoutePaths.COLLECTION}/:id`}>
+          <Collection/>
+        </PublicRoute>
+        <PublicRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
+          <Search/>
+        </PublicRoute>
+        <PublicRoute path={BaseRoutePaths.NOT_FOUND}>
+          <NotFound/>
+        </PublicRoute>
 
-      <ProtectedRoute path={BaseRoutePaths.FAVORITES}>
-        <Favorites/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_NEW}`} exact>
-        <ArticleForm/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_EDIT}/:id`} exact>
-        <ArticleForm/>
-      </ProtectedRoute>
-      <ProtectedRoute path={BaseRoutePaths.ARTICLES} exact>
-        <Articles/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/:id`}>
-        <FolderForm/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`}>
-        <FolderForm/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/:id`} exact>
-        <Folder/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.ARTICLE}/:id`} exact>
-        <Article/>
-      </ProtectedRoute>
-      <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
-        <Reading/>
-      </ProtectedRoute>
+        <ProtectedRoute path={BaseRoutePaths.FAVORITES}>
+          <Favorites/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_NEW}`} exact>
+          <ArticleForm/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_EDIT}/:id`} exact>
+          <ArticleForm/>
+        </ProtectedRoute>
+        <ProtectedRoute path={BaseRoutePaths.ARTICLES} exact>
+          <Articles/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/:id`}>
+          <FolderForm/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`}>
+          <FolderForm/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/:id`} exact>
+          <Folder/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.ARTICLE}/:id`} exact>
+          <Article/>
+        </ProtectedRoute>
+        <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
+          <Reading/>
+        </ProtectedRoute>
 
-      <PrivateRoute path={AdminRoutePaths.ADMIN}>
-        <Admin/>
-      </PrivateRoute>
+        <PrivateRoute path={AdminRoutePaths.ADMIN}>
+          <Admin/>
+        </PrivateRoute>
 
-      <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>
-      <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
-      <Route path={AuthRoutePaths.LOGIN} component={Login}/>
+        <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>
+        <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
+        <Route path={AuthRoutePaths.LOGIN} component={Login}/>
 
-      <Route path='*' render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
-    </Switch>
+        <Route path='*' render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
+      </Switch>
+    </Router>
   </Provider>
 
 export default App;

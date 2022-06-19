@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
-import { login as setAuthData } from '@store/reducers/authSlice';
+import { login as setAuthData, setAuthAttemptFlag } from '@store/reducers/authSlice';
 import {
   axiosInstance as axios,
   API_LOGIN_ERROR,
@@ -10,7 +10,7 @@ import {
 } from '@utils/constants';
 import { BaseRoutePaths } from '@utils/enums';
 import { IAuthResponse } from '@utils/interfaces';
-import { useAlerts, useApi, useAuthHandlers, useStorage } from '@utils/hooks';
+import { useAlerts, useApi, useAuthHandlers, useBackNavigation, useStorage } from '@utils/hooks';
 
 import { IPageParams } from './interfaces';
 import { API_SESSION_EXPIRED_ERROR, SUCCESSFULLY_AUTHORIZED } from './constants';
@@ -25,6 +25,7 @@ export const useAuthorizing = () => {
   const {addSuccess} = useAlerts();
   const {handleLogOut} = useAuthHandlers();
   const {doesStorageHave, getFromStorage, deleteFromStorage, saveToStorage} = useStorage();
+  const {navigateLastPage} = useBackNavigation(BaseRoutePaths.HOME);
 
   const navigateBack = (): void => {
     if (doesStorageHave(RELOAD_PATHNAME_STORAGE_KEY)) {
@@ -35,7 +36,7 @@ export const useAuthorizing = () => {
       return;
     }
 
-    history.goBack();
+    navigateLastPage();
   }
 
   const sendLoginRequest = (): void => {
@@ -68,6 +69,7 @@ export const useAuthorizing = () => {
         navigateBack();
       })
       .catch(() => {
+        dispatch(setAuthAttemptFlag());
 
         if (doesStorageHave(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY) && getFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY)) {
           deleteFromStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY);

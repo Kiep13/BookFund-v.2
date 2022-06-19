@@ -102,6 +102,14 @@ export class BookEntity {
   public isCommented: boolean;
 
   @Column({
+    select: false,
+    nullable: true,
+    insert: false,
+    update: false
+  })
+  public ratesAmount: number;
+
+  @Column({
     name: 'createdAt',
     type: 'timestamp',
     nullable: true,

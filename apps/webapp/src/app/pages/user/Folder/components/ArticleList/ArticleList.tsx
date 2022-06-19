@@ -6,7 +6,7 @@ import { StatefulCard } from '@components/cards/StatefulCard';
 import { DELETE_ARTICLE_CONFIRMATION_POPUP } from '@utils/constants';
 import { IArticle } from '@utils/interfaces';
 
-import { NO_SAVED_ARTICLES, STYLES } from '../../constants';
+import { MAX_SEARCH_LENGTH_INPUT, NO_SAVED_ARTICLES, STYLES } from '../../constants';
 import { ArticleCard } from '../ArticleCard';
 import { useArticleList } from './useArticleList';
 import { IProps } from './propsInterface';
@@ -42,6 +42,10 @@ export const ArticleList = ({ folderId }: IProps) => {
         placeholder='Type title here...'
         sx={STYLES.searchInput}
         onChange={handleTyping}
+        helperText={<Box sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Box>}
+        inputProps={{
+          maxLength: MAX_SEARCH_LENGTH_INPUT
+        }}
       />
 
       <StatefulCard state={state} noContentMessage={NO_SAVED_ARTICLES}>

@@ -1,2 +1,3 @@
-export * from './alertsStore';
+export * from './alertsSlice';
 export * from './authSlice';
+export * from './routeSlice';

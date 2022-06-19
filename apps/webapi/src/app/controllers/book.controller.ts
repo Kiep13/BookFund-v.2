@@ -5,6 +5,7 @@ import { ApiRoutes, ResponseStatuses } from '@core/enums';
 import { connection } from '@core/connection';
 import { environment } from '@environments/environment';
 import { BookEntity } from '@entities/book.entity';
+import { CommentEntity } from '@entities/comment.entity';
 import { bookService } from '@services/book.service';
 import { imageService } from '@services/image.service';
 import { fileService } from '@services/file.service';
@@ -62,6 +63,14 @@ class BookController {
         relations: ['author', 'genres'],
         where: {
           id: bookId
+        }
+      });
+
+      book.ratesAmount = await connection.manager.getRepository(CommentEntity).count({
+        where: {
+          book: {
+            id: bookId
+          }
         }
       });
 

@@ -33,6 +33,10 @@ export const STYLES_SEARCH_INPUT = {
   input: {
     height: '45px',
   },
+  hint: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  }
 }
 
 export const STYLES_TAB_PANEL = {

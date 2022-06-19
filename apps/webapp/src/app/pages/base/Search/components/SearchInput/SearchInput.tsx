@@ -1,7 +1,7 @@
 import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 
-import { STYLES_SEARCH_INPUT } from '../../constants';
+import { MAX_SEARCH_LENGTH_INPUT, STYLES_SEARCH_INPUT } from '../../constants';
 import { IProps } from './propsInterface';
 import { useSearchInput } from './useSearchInput';
 
@@ -23,7 +23,11 @@ export const SearchInput = ({ searchTerm, handleSubmit }: IProps) => {
             </InputAdornment>
           ),
         }}
+        inputProps={{
+          maxLength: MAX_SEARCH_LENGTH_INPUT
+        }}
         value={value}
+        helperText={<Box sx={STYLES_SEARCH_INPUT.hint}>{value.length}/{MAX_SEARCH_LENGTH_INPUT}</Box>}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         sx={STYLES_SEARCH_INPUT.input}

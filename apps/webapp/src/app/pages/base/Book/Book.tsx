@@ -1,18 +1,17 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { BookContent } from '@components/entityContents/BookContent';
 import { getIsAuthorized } from '@store/reducers';
-import { useAuthorActions, useBookLoad } from '@utils/hooks';
+import { BaseRoutePaths } from '@utils/enums';
+import { useAuthorActions, useBackNavigation, useBookLoad } from '@utils/hooks';
 
 import { PAGE_TITLE, STYLES } from './constants';
 
 export const Book = () => {
-  const history = useHistory();
   const {
     book,
     pageState,
@@ -23,13 +22,14 @@ export const Book = () => {
   const isAuthorized = useSelector(getIsAuthorized);
 
   const {getAuthorPageUrlWithoutId} = useAuthorActions();
+  const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
 
   useEffect(() => {
     loadBook();
   }, []);
 
   const navigateBack = () => {
-    history.goBack();
+    navigatePreviousPage();
   }
 
   return (

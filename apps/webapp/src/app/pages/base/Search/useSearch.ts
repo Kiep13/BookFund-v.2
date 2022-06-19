@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BaseRoutePaths, CardStates } from '@utils/enums';
-import { useAlerts, useApi } from '@utils/hooks';
+ import { useAlerts, useApi, useBackNavigation } from '@utils/hooks';
 import { ISearchOptions, ISearchResults } from '@utils/interfaces';
 
 import { DEFAULT_SEARCH_OPTIONS } from './constants';
@@ -20,6 +20,7 @@ export const useSearch = () => {
 
   const {search} = useApi();
   const {addError} = useAlerts();
+  const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
 
   const handleSearchTermChange = (newSearchTerm): void => {
     setSearchTerm(newSearchTerm);
@@ -44,8 +45,8 @@ export const useSearch = () => {
       })
   }
 
-  const navigateBack = (): void => {
-    history.goBack();
+  const navigateBack = () => {
+    navigatePreviousPage();
   }
 
   return {

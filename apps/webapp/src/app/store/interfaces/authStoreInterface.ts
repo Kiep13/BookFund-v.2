@@ -4,6 +4,7 @@ export interface IAuthStore {
   value: {
     user: IAccount | null,
     token: string,
-    isAuthorized: boolean
+    isAuthorized: boolean,
+    isAuthorizeAttempted: boolean
   }
 }

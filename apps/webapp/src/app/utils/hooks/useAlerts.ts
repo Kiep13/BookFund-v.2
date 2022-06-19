@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
-import * as alertStore from '@store/reducers/alertsStore';
+import * as alertStore from '@store/reducers/alertsSlice';
 
 import { DELAY } from '@utils/constants';
 import { AlertTypes } from '@utils/enums';

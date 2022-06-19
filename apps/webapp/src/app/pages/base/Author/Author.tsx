@@ -1,30 +1,29 @@
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { AuthorContent } from '@components/entityContents/AuthorContent';
-import { useAuthorLoad, useBookActions } from '@utils/hooks';
+import { useAuthorLoad, useBackNavigation, useBookActions } from '@utils/hooks';
 import { StatefulCard } from '@components/cards/StatefulCard';
+import { BaseRoutePaths } from '@utils/enums';
 
 import { PAGE_TITLE, STYLES } from './constants';
 
 export const Author = () => {
-  const history = useHistory();
-
   const {
     author,
     pageState,
     loadAuthor
   } = useAuthorLoad();
   const {getBookPageUrlWithoutId} = useBookActions();
+  const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
 
   useEffect(() => {
     loadAuthor();
   }, []);
 
   const navigateBack = () => {
-    history.goBack();
+    navigatePreviousPage();
   }
 
   return (
