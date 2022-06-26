@@ -6,10 +6,10 @@ import { PageSizes } from '@utils/enums';
 import { IGenre, IOption, ISearchOptions } from '@utils/interfaces';
 import { useApi } from '@utils/hooks';
 
-import { DELAY } from '../../constants';
+import { DELAY } from './constants';
 import { IProps } from './propsInterface';
 
-export const GenreAutocomplete = ({form, fieldName}: IProps) => {
+export const GenreAutocomplete = ({form, fieldName, label, handleSelecting}: IProps) => {
   const {getGenres} = useApi();
 
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -45,12 +45,13 @@ export const GenreAutocomplete = ({form, fieldName}: IProps) => {
 
   return (
     <AutocompleteInput
-      label='Parent genre'
+      label={label}
       options={options}
       loading={loading}
       form={form}
       fieldName={fieldName}
       handleTyping={setSearchTerm}
+      handleSelecting={handleSelecting}
     />
   );
 }

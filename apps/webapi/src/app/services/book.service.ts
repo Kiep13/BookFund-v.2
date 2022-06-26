@@ -38,6 +38,7 @@ class BookService {
         'book.updatedAt'
       ])
       .leftJoinAndSelect('book.author', 'author')
+      .innerJoin('book.genres', 'genres')
       .orderBy({
         ...(
           requestParams.orderBy && requestParams.orderBy === 'authorFullName' ?
@@ -59,12 +60,13 @@ class BookService {
             id: +requestParams.keyId
           }} : {})
       })
+      .andWhere(requestParams.subKey ? `genres.id=${requestParams.subKey}` : {})
       .getManyAndCount();
 
     return {
       data: books,
       count: count
-    }
+    };
   }
 
   public async updateBookAverageRate(bookId: number): Promise<void> {

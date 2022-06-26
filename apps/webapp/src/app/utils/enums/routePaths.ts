@@ -11,6 +11,7 @@ export enum BaseRoutePaths {
   COLLECTION = '/collection',
   BOOK = '/book',
   AUTHOR = '/author',
+  GENRE = '/genre',
   SEARCH = '/search',
   NOT_FOUND='/not-found',
   READ='/read'

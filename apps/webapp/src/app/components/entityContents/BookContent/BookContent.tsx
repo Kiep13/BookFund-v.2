@@ -25,7 +25,8 @@ export const BookContent = ({book, authorLink, isCommentFormShown, isActionsShow
     handleReadClick,
     handleAddToFavorite,
     handleRemovedFromFavorite,
-    handleCommentSave
+    handleCommentSave,
+    navigateToGenrePage
   } = useBookContent(book, handleBookChange);
 
   useEffect(() => {
@@ -109,7 +110,8 @@ export const BookContent = ({book, authorLink, isCommentFormShown, isActionsShow
                        key={genre.id}
                        color='primary'
                        variant='outlined'
-                       sx={STYLES.chip}/>
+                       sx={STYLES.chip}
+                       onClick={() => navigateToGenrePage(genre)}/>
         })}
 
         {book?.description?.split('\n').map((text: string, index: number) => {

@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { Input } from '@components/formСomponents/Input';
 import { Card } from '@components/cards/Card';
+import { GenreAutocomplete } from '@components/entityFormElements';
 
-import { GenreAutocomplete } from './components/GenreAutocomplete';
 import {
+  PARENT_GENRE_LABEL,
   STYLES,
   TITLE_ADD,
   TITLE_EDIT
@@ -48,7 +49,7 @@ export const GenreForm = () => {
           />
 
           <Box sx={STYLES.parentInputWrapper}>
-            <GenreAutocomplete form={formik} fieldName='parent'/>
+            <GenreAutocomplete form={formik} fieldName='parent' label={PARENT_GENRE_LABEL}/>
           </Box>
 
           <Box sx={STYLES.formButtons}>

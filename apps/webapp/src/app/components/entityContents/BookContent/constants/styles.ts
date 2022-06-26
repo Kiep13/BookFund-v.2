@@ -2,7 +2,14 @@ export const STYLES = {
   content: {
     display: 'flex',
     gap: '20px',
-    alignItems: 'flex-start'
+    alignItems: {
+      lg: 'flex-start',
+      md: 'center'
+    },
+    flexDirection: {
+      lg: 'row',
+      xs: 'column',
+    }
   },
   image: {
     flex: 1,

@@ -1,7 +1,15 @@
 export const STYLES = {
   content: {
     display: 'flex',
-    gap: '20px'
+    gap: '20px',
+    alignItems: {
+      lg: 'flex-start',
+      md: 'center'
+    },
+    flexDirection: {
+      lg: 'row',
+      xs: 'column',
+    }
   },
   image: {
     flex: 1,

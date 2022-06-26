@@ -1,9 +1,10 @@
 export interface ISearchOptions {
-  pageSize: number;
+  pageSize?: number;
   keyId?: number;
   searchTerm?: string;
   page?: number;
   order?: string;
   orderBy?: string;
   skip?: number;
+  subKey?: number;
 }

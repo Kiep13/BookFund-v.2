@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import { BaseRoutePaths } from '@utils/enums';
 import { useBookActions, useCommentList } from '@utils/hooks';
-import { IBook, IComment, IFavorite } from '@utils/interfaces';
+import { IBook, IComment, IFavorite, IGenre } from '@utils/interfaces';
 
 export const useBookContent = (
   book: IBook | undefined,
@@ -17,6 +19,7 @@ export const useBookContent = (
     loadNextPage
   } = useCommentList();
   const {navigateToReadingPage} = useBookActions();
+  const history = useHistory();
 
   const handleReadClick = (): void => {
     book && navigateToReadingPage(book.id);
@@ -56,6 +59,10 @@ export const useBookContent = (
     });
   }
 
+  const navigateToGenrePage = (genre: IGenre) => {
+    history.push(`${BaseRoutePaths.GENRE}/${genre.name}`);
+  }
+
   return {
     comments,
     count,
@@ -66,6 +73,7 @@ export const useBookContent = (
     handleReadClick,
     handleAddToFavorite,
     handleRemovedFromFavorite,
-    handleCommentSave
+    handleCommentSave,
+    navigateToGenrePage
   }
 }

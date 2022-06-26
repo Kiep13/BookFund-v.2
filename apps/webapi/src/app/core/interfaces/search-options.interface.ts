@@ -7,5 +7,6 @@ export interface ISearchOptions {
   page?: number,
   order?: SortDirections,
   orderBy?: string,
-  skip?: number
+  skip?: number;
+  subKey?: number;
 }

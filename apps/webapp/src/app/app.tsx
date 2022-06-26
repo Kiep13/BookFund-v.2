@@ -7,7 +7,7 @@ import { Router } from '@components/Router';
 import { PrivateRoute, ProtectedRoute, PublicRoute } from '@components/routes';
 import { Authorizing, Login } from '@pages/auth';
 import { Admin } from '@pages/admin';
-import { Author, Book, Collection, Home, NotFound, Search } from '@pages/base';
+import { Author, Book, Collection, Genre, Home, NotFound, Search } from '@pages/base';
 import { Article, ArticleForm, Articles, Favorites, Folder, FolderForm, Reading } from '@pages/user';
 import { AdminRoutePaths, AuthRoutePaths, BaseRoutePaths } from '@utils/enums';
 import store from '@store/index';
@@ -32,6 +32,9 @@ const App = () =>
         </PublicRoute>
         <PublicRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
           <Search/>
+        </PublicRoute>
+        <PublicRoute path={`${BaseRoutePaths.GENRE}/:genreName`}>
+          <Genre/>
         </PublicRoute>
         <PublicRoute path={BaseRoutePaths.NOT_FOUND}>
           <NotFound/>
