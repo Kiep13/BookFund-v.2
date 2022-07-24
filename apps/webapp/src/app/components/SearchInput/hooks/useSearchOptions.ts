@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { IAuthor, IBook, ICollection, IOption, ISearchResults } from '@utils/interfaces';
 import { BaseRoutePaths } from '@utils/enums';
@@ -6,7 +6,7 @@ import { BaseRoutePaths } from '@utils/enums';
 import { GroupByOptions } from '../enums';
 
 export const useSearchOptions = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const transformSearchResultsToOptions = (results: ISearchResults): IOption[] => {
     return [
@@ -50,11 +50,11 @@ export const useSearchOptions = () => {
 
     const entityRoutePath = solveUrlBasedOnType(option.groupBy);
 
-    history.push(`${entityRoutePath}/${option.id}`);
+    navigate(`${entityRoutePath}/${option.id}`);
   }
 
   const navigateToSearchPage = (searchTerm: string): void => {
-    history.push(`${BaseRoutePaths.SEARCH}/${searchTerm}`);
+    navigate(`${BaseRoutePaths.SEARCH}/${searchTerm}`);
   }
 
   return {

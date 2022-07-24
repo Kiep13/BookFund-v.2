@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ARTICLES_FOLDERS_MOCK } from '@mocks/articlesFoldersMock';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -10,7 +10,7 @@ import { useAlerts, useApi, useFolderActions } from '@utils/hooks';
 import { SUCCESSFULLY_DELETED } from './constants';
 
 export const useArticles = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const {getFolders} = useApi();
   const {addSuccess, addError} = useAlerts();
   const {navigateToEditForm, handleDeleteFolder} = useFolderActions();
@@ -39,11 +39,11 @@ export const useArticles = () => {
   }
 
   const navigateToNewArticleForm = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLE_NEW}`);
+    navigate(`${BaseRoutePaths.ARTICLE_NEW}`);
   }
 
   const navigateToNewFolderForm = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`);
+    navigate(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`);
   }
 
   const handleFolderActionClick = (id: number, actionType: CardActions): void => {

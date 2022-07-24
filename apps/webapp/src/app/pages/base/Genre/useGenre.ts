@@ -17,7 +17,7 @@ export const useGenre = () => {
   const [count, setCount] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
 
-  const params = useParams();
+  const params = useParams<IGenrePageParams>();
 
   const {getGenres, getBooks} = useApi();
   const {addError} = useAlerts();
@@ -29,7 +29,7 @@ export const useGenre = () => {
   });
 
   const initPage = async () => {
-    const genreName = (params as IGenrePageParams).genreName;
+    const genreName = params.genreName;
 
     if (!genreName) {
       setPageState(CardStates.CONTENT);

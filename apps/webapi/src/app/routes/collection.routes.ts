@@ -4,7 +4,7 @@ import { ApiRoutesModifiers } from '@core/enums';
 import { collectionController } from '@controllers/colllection.controller';
 import { moderatorMiddleware,authMiddleware } from '@middlewares/index';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, collectionController.getCollections);
 router.post(`/${ApiRoutesModifiers.NEW}`, authMiddleware, moderatorMiddleware, collectionController.createCollection);

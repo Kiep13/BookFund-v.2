@@ -25,7 +25,7 @@ export enum AuthRoutePaths{
 
 export enum AdminRoutePaths {
   ADMIN = '/admin',
-  DASHBOARD = '/dashboard',
+  DASHBOARD = 'dashboard',
   BOOK = '/book',
   BOOKS = '/books',
   BOOKS_NEW = '/books/new',

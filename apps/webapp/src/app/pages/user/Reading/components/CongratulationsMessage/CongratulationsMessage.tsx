@@ -1,17 +1,17 @@
 import { Box, Link, Typography } from '@mui/material';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import { Image } from 'mui-image';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { BaseRoutePaths } from '@utils/enums';
 
 import { IMAGE_PROPERTIES, STYLES } from '../../constants';
 
 export const CongratulationsMessage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const goToHomePage = (): void => {
-    history.push(BaseRoutePaths.HOME);
+    navigate(BaseRoutePaths.HOME);
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import { login as setAuthData, setAuthAttemptFlag } from '@store/reducers/authSlice';
 import {
@@ -16,8 +16,8 @@ import { IPageParams } from './interfaces';
 import { API_SESSION_EXPIRED_ERROR, SUCCESSFULLY_AUTHORIZED } from './constants';
 
 export const useAuthorizing = () => {
-  const history = useHistory();
-  const params = useParams();
+  const navigate = useNavigate();
+  const params = useParams<IPageParams>();
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export const useAuthorizing = () => {
       const pathname = getFromStorage(RELOAD_PATHNAME_STORAGE_KEY);
       deleteFromStorage(RELOAD_PATHNAME_STORAGE_KEY);
 
-      history.push(pathname);
+      navigate(pathname);
       return;
     }
 
@@ -40,16 +40,16 @@ export const useAuthorizing = () => {
   }
 
   const sendLoginRequest = (): void => {
-    const provider = (params as IPageParams).provider;
+    const provider = params.provider;
     const code = new URLSearchParams(location.search).get('code') || '';
 
-    login(provider, code)
+    provider && login(provider, code)
       .then((authResponse: IAuthResponse) => {
         dispatch(setAuthData(authResponse));
         axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.accessToken}`;
 
         addSuccess(SUCCESSFULLY_AUTHORIZED);
-        history.push(BaseRoutePaths.HOME);
+        navigate(BaseRoutePaths.HOME);
       })
       .catch(() => {
         handleLogOut(API_LOGIN_ERROR);

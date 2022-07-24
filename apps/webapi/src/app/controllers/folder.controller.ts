@@ -3,13 +3,13 @@ import { Request, Response } from 'express';
 import { ResponseStatuses, SortDirections } from '@core/enums';
 import { connection } from '@core/connection';
 import { ERROR_NO_ACCESS_FOLDER } from '@core/constants';
-import { IListApiView } from '@core/interfaces';
+import { ICustomRequest, IListApiView } from '@core/interfaces';
 import { FolderEntity } from '@entities/folder.entity';
 import { ApiError } from '@exceptions/api-error';
 import { folderService } from '@services/folder.service';
 
 class FolderController {
-  public async createFolder(request: Request, response: Response, next: Function): Response {
+  public async createFolder(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const folder = folderService.buildFolderFromBody(request.body);
       folder.account = request.account;
@@ -21,7 +21,7 @@ class FolderController {
     }
   }
 
-  public async updateFolder(request: Request, response: Response, next: Function): Response {
+  public async updateFolder(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const folderId = +request.params.id;
 
@@ -34,7 +34,7 @@ class FolderController {
     }
   }
 
-  public async getFolder(request: Request, response: Response, next: Function): Response {
+  public async getFolder(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const folderId = +request.params.id;
       const accountId = +request.account.id;
@@ -57,7 +57,7 @@ class FolderController {
     }
   }
 
-  public async getFolders(request: Request, response: Response, next: Function): Response {
+  public async getFolders(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const account = request.account;
 
@@ -86,7 +86,7 @@ class FolderController {
     }
   }
 
-  public async deleteFolder(request: Request, response: Response, next: Function): Response {
+  public async deleteFolder(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const folderId = +request.params.id;
 

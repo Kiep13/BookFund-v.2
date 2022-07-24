@@ -10,15 +10,15 @@ export const useCollectionLoad = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [collection, setCollection] = useState<ICollection>();
 
-  const params = useParams();
+  const params = useParams<IFormPageParams>();
 
   const { addError } = useAlerts();
   const { getCollection } = useApi();
 
   const loadCollection = () => {
-    const collectionId = (params as IFormPageParams).id;
+    const collectionId = params.id;
 
-    getCollection(collectionId)
+    collectionId && getCollection(collectionId)
       .then((response: ICollection) => {
         setCollection(response);
         setPageState(CardStates.CONTENT);

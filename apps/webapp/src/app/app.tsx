@@ -1,6 +1,7 @@
 import { CssBaseline } from '@mui/material';
 import { Provider } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
+import * as React from 'react';
 
 import { AlertsBlock } from '@components/AlertsBlock';
 import { Router } from '@components/Router';
@@ -17,68 +18,103 @@ const App = () =>
     <CssBaseline/>
     <AlertsBlock/>
     <Router>
-      <Switch>
-        <PublicRoute path={BaseRoutePaths.HOME} exact>
-          <Home/>
-        </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.AUTHOR}/:id`}>
-          <Author/>
-        </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.BOOK}/:id`} exact>
-          <Book/>
-        </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.COLLECTION}/:id`}>
-          <Collection/>
-        </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.SEARCH}/:searchTerm`}>
-          <Search/>
-        </PublicRoute>
-        <PublicRoute path={`${BaseRoutePaths.GENRE}/:genreName`}>
-          <Genre/>
-        </PublicRoute>
-        <PublicRoute path={BaseRoutePaths.NOT_FOUND}>
-          <NotFound/>
-        </PublicRoute>
+      <Routes>
+        <Route path={BaseRoutePaths.HOME} element={
+          <PublicRoute>
+            <Home/>
+          </PublicRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.AUTHOR}/:id`} element={
+          <PublicRoute>
+            <Author/>
+          </PublicRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.BOOK}/:id`} element={
+          <PublicRoute>
+            <Book/>
+          </PublicRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.COLLECTION}/:id`} element={
+          <PublicRoute>
+            <Collection/>
+          </PublicRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.SEARCH}/:searchTerm`} element={
+          <PublicRoute>
+            <Search/>
+          </PublicRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.GENRE}/:genreName`} element={
+          <PublicRoute>
+            <Genre/>
+          </PublicRoute>
+        }/>
+        <Route path={BaseRoutePaths.NOT_FOUND} element={
+          <PublicRoute>
+            <NotFound/>
+          </PublicRoute>
+        }/>
 
-        <ProtectedRoute path={BaseRoutePaths.FAVORITES}>
-          <Favorites/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_NEW}`} exact>
-          <ArticleForm/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.ARTICLE_EDIT}/:id`} exact>
-          <ArticleForm/>
-        </ProtectedRoute>
-        <ProtectedRoute path={BaseRoutePaths.ARTICLES} exact>
-          <Articles/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/:id`}>
-          <FolderForm/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`}>
-          <FolderForm/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/:id`} exact>
-          <Folder/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.ARTICLE}/:id`} exact>
-          <Article/>
-        </ProtectedRoute>
-        <ProtectedRoute path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} isFullScreen={true}>
-          <Reading/>
-        </ProtectedRoute>
+        <Route path={BaseRoutePaths.FAVORITES} element={
+          <ProtectedRoute>
+            <Favorites/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.ARTICLE_NEW}`} element={
+          <ProtectedRoute>
+            <ArticleForm/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.ARTICLE_EDIT}/:id`} element={
+          <ProtectedRoute>
+            <ArticleForm/>
+          </ProtectedRoute>
+        }/>
+        <Route path={BaseRoutePaths.ARTICLES} element={
+          <ProtectedRoute>
+            <Articles/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/:id`} element={
+          <ProtectedRoute>
+            <FolderForm/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_NEW}`} element={
+          <ProtectedRoute>
+            <FolderForm/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/:id`} element={
+          <ProtectedRoute>
+            <Folder/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.ARTICLE}/:id`} element={
+          <ProtectedRoute>
+            <Article/>
+          </ProtectedRoute>
+        }/>
+        <Route path={`${BaseRoutePaths.BOOK}/:id${BaseRoutePaths.READ}`} element={
+          <ProtectedRoute isFullScreen={true}>
+            <Reading/>
+          </ProtectedRoute>
+        }/>
 
-        <PrivateRoute path={AdminRoutePaths.ADMIN}>
-          <Admin/>
-        </PrivateRoute>
 
-        <Route path={`${AuthRoutePaths.REFRESH}`} component={Authorizing}/>
-        <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} component={Authorizing}/>
-        <Route path={AuthRoutePaths.LOGIN} component={Login}/>
+        <Route path={AdminRoutePaths.ADMIN} element={
+          <PrivateRoute>
+            <Admin/>
+          </PrivateRoute>
+        }/>
 
-        <Route path='*' render={() => <Redirect to={BaseRoutePaths.NOT_FOUND}/>}/>
-      </Switch>
+        <Route path={`${AuthRoutePaths.REFRESH}`} element={<Authorizing/>}/>
+        <Route path={`${AuthRoutePaths.AUTHORIZING}/:provider`} element={<Authorizing/>}/>
+        <Route path={AuthRoutePaths.LOGIN} element={<Login/>}/>
+
+        <Route path='*' element={<Navigate to={BaseRoutePaths.NOT_FOUND} replace/>}/>
+      </Routes>
     </Router>
-  </Provider>
+  </Provider>;
 
 export default App;

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { ApiRoutes, ResponseStatuses } from '@core/enums';
-import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { IListApiView, ICustomRequest, ISearchOptions } from '@core/interfaces';
 import { connection } from '@core/connection';
 import { environment } from '@environments/environment';
 import { AuthorEntity } from '@entities/author.entity';
@@ -9,7 +9,7 @@ import { authorService } from '@services/author.service';
 import { imageService } from '@services/image.service';
 
 class AuthorController {
-  public async createAuthor(request: Request, response: Response, next: Function): Response {
+  public async createAuthor(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const author: AuthorEntity = authorService.buildAuthorFromBody(request.body);
 
@@ -20,7 +20,7 @@ class AuthorController {
     }
   }
 
-  public async updateAuthor(request: Request, response: Response, next: Function): Response {
+  public async updateAuthor(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const authorId = +request.params.id;
 
@@ -38,7 +38,7 @@ class AuthorController {
     }
   }
 
-  public async getAuthor(request: Request, response: Response, next: Function): Response {
+  public async getAuthor(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const authorId = +request.params.id;
 
@@ -63,7 +63,7 @@ class AuthorController {
     }
   }
 
-  public async getAuthors(request: Request, response: Response, next: Function): Response {
+  public async getAuthors(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams: ISearchOptions = request.query;
 
@@ -75,7 +75,7 @@ class AuthorController {
     }
   }
 
-  public async deleteAuthor(request: Request, response: Response, next: Function): Response {
+  public async deleteAuthor(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const authorId = +request.params.id;
 

@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Layout } from '@components/Layout';
@@ -16,14 +16,9 @@ export const ProtectedRoute = ({isFullScreen = false, children, ...rest}) => {
       return !isFullScreen ? <Layout children={children}/> : children;
     }
 
-    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);
-    return <Redirect to={`${AuthRoutePaths.REFRESH}`}/>;
+    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, window.location.href);
+    return <Navigate to={`${AuthRoutePaths.REFRESH}`} replace/>;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={render}
-    />
-  );
+  return render();
 }

@@ -3,12 +3,12 @@ import { Request, Response } from 'express';
 
 import { connection } from '@core/connection';
 import { ResponseStatuses, SortDirections } from '@core/enums';
-import { IListApiView } from '@core/interfaces';
+import { IListApiView, ICustomRequest, ISearchOptions } from '@core/interfaces';
 import { CommentEntity } from '@entities/comment.entity'
 import { bookService } from '@services/book.service';
 
 class CommentController {
-  public async createComment(request: Request, response: Response, next: Function): Response {
+  public async createComment(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const comment: CommentEntity = new CommentEntity();
       comment.account = request.account;
@@ -26,9 +26,9 @@ class CommentController {
     }
   }
 
-  public async getComments(request: Request, response: Response, next: Function): Response {
+  public async getComments(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
-      const requestParams = request.query;
+      const requestParams: ISearchOptions = request.query;
 
       requestParams.orderBy = requestParams.orderBy ? `comment.${requestParams.orderBy}` : requestParams.orderBy;
 

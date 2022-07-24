@@ -43,7 +43,7 @@ export const AutocompleteInput = (props: IProps) => {
       onBlur={handleBlur}
       value={values[fieldName]}
       label={props.label}
-      helperText={errors[fieldName] && touched[fieldName] && errors[fieldName]}
+      helperText={errors[fieldName] && touched[fieldName] && errors[fieldName]?.toString()}
       {...params}
     />
   }

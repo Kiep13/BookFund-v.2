@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
 import { CardActions } from '@utils/enums';
@@ -11,7 +11,7 @@ import { SUCCESSFULLY_DELETED } from './constants';
 export const useCollection = () => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {collection, pageState, loadCollection} = useCollectionLoad();
   const {addSuccess} = useAlerts();
@@ -33,7 +33,7 @@ export const useCollection = () => {
     setIsModalOpened(false);
   }
   const navigateBack = (): void => {
-    history.goBack();
+    navigate(-1);
   }
 
   const openModal = (): void => {

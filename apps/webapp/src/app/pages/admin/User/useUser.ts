@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
@@ -15,7 +15,7 @@ export const useUser = () => {
   const [userId, serUserId] = useState<number>();
   const [user, serUser] = useState<IUser>();
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const params = useParams();
 
   const {getUser, updateUser} = useApi();
@@ -42,7 +42,7 @@ export const useUser = () => {
   };
 
   const navigateBack = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USERS}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USERS}`);
   }
 
   const isRoleActionsShown = (): boolean => {

@@ -4,7 +4,7 @@ import { AuthProviders } from '@core/enums';
 import { authController } from '@controllers/auth.controller';
 import { authMiddleware } from '@middlewares/auth-middleware';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${AuthProviders.GOOGLE}`, authController.signInViaGoogle);
 router.get(`/${AuthProviders.FACEBOOK}`, authController.signInViaFacebook);

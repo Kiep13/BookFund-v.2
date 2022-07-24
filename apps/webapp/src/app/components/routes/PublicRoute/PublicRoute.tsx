@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Layout } from '@components/Layout';
@@ -14,7 +14,7 @@ import { useStorage } from '@utils/hooks';
 export const PublicRoute = ({children, ...rest}) => {
   const isAuthorized = useSelector(getIsAuthorized);
   const IsAuthorizeAttempted = useSelector(getIsAuthorizeAttempted);
-  const {doesStorageHave, deleteFromStorage, saveToStorage} = useStorage();
+  const {deleteFromStorage, saveToStorage} = useStorage();
 
   const render = () => {
     if (isAuthorized || IsAuthorizeAttempted) {
@@ -22,15 +22,10 @@ export const PublicRoute = ({children, ...rest}) => {
       return <Layout children={children}/>;
     }
 
-    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);
+    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, window.location.href);
     saveToStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY, true);
-    return <Redirect to={`${AuthRoutePaths.REFRESH}`}/>;
+    return <Navigate to={`${AuthRoutePaths.REFRESH}`} replace/>;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={render}
-    />
-  );
+  return render();
 }

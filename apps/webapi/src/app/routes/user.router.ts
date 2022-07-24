@@ -4,7 +4,7 @@ import { ApiRoutesModifiers } from '@core/enums';
 import { userController } from '@controllers/user.controller';
 import { moderatorMiddleware, authMiddleware, adminMiddleware } from '@middlewares/index';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, authMiddleware, moderatorMiddleware, userController.getUsers);
 router.get(`/:id`, authMiddleware, moderatorMiddleware, userController.getUser);

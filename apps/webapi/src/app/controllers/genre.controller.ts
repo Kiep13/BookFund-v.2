@@ -7,7 +7,7 @@ import { GenreEntity } from '@entities/genre.entity';
 import { genreService } from '@services/genre.service';
 
 class GenreController {
-  public async createGenre(request: Request, response: Response, next: Function): Response {
+  public async createGenre(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const genre: GenreEntity = genreService.buildGenreFromBody(request.body);
 
@@ -18,7 +18,7 @@ class GenreController {
     }
   }
 
-  public async updateGenre(request: Request, response: Response, next: Function): Response {
+  public async updateGenre(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const genreId = +request.params.id;
 
@@ -31,7 +31,7 @@ class GenreController {
     }
   }
 
-  public async getGenre(request: Request, response: Response, next: Function): Response {
+  public async getGenre(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const genreId = +request.params.id;
       const genre = await connection.manager.findOne(GenreEntity, genreId, {
@@ -44,7 +44,7 @@ class GenreController {
     }
   }
 
-  public async getGenres(request: Request, response: Response, next: Function): Response {
+  public async getGenres(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams = request.query;
 
@@ -65,7 +65,7 @@ class GenreController {
     }
   }
 
-  public async getGenresTree(request: Request, response: Response, next: Function): Response {
+  public async getGenresTree(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
       return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
@@ -74,7 +74,7 @@ class GenreController {
     }
   }
 
-  public async deleteGenre(request: Request, response: Response, next: Function): Response {
+  public async deleteGenre(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const genreId = +request.params.id;
 

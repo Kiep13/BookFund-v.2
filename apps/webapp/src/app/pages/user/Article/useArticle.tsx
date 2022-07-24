@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 import { API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
@@ -12,7 +12,7 @@ export const useArticle = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [article, setArticle] = useState<IArticle>();
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const params = useParams();
 
   const {getArticle} = useApi();
@@ -48,7 +48,7 @@ export const useArticle = () => {
   }
 
   const navigateBack = (): void => {
-    article && history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${article.folder.id}`);
+    article && navigate(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${article.folder.id}`);
   }
 
   const openModal = (): void => {
@@ -63,7 +63,7 @@ export const useArticle = () => {
     if(!article) return;
 
     addSuccess(SUCCESSFULLY_DELETED);
-    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${article.folder.id}`);
+    navigate(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${article.folder.id}`);
   }
 
   const handleDeleteArticleConfirm = (): void => {

@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 
 import { connection } from '@core/connection';
-import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { ICustomRequest, IListApiView, ISearchOptions } from '@core/interfaces';
 import { BookStatuses, ResponseStatuses, SortDirections } from '@core/enums';
 import { AccountEntity } from '@entities/account.entity';
 
 class UserController {
-  public async getUser(request: Request, response: Response, next: Function): Response {
+  public async getUser(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const userId = +request.params.id;
 
@@ -69,7 +69,7 @@ class UserController {
     }
   }
 
-  public async getUsers(request: Request, response: Response, next: Function): Response {
+  public async getUsers(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams: ISearchOptions = request.query;
 
@@ -105,7 +105,7 @@ class UserController {
     }
   }
 
-  public async updateUser(request: Request, response: Response, next: Function): Response {
+  public async updateUser(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const userId = +request.params.id;
       await connection.manager.update(AccountEntity, userId, request.body);

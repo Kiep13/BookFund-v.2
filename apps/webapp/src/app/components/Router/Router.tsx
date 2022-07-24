@@ -1,5 +1,5 @@
 import { addRoute } from '@store/reducers/routeSlice';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -8,19 +8,18 @@ import { AuthRoutePaths } from '@utils/enums';
 import { IProps } from './propsInterface';
 
 export const Router = ({children}: IProps) => {
-  const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    let previousPath = '';
+  let previousPath = '';
 
-    history.listen((location) => {
-      if (location.pathname !== AuthRoutePaths.REFRESH && location.pathname !== previousPath) {
-        previousPath = location.pathname;
-        dispatch(addRoute(location.pathname));
-      }
-    });
-  }, []);
+  useEffect(() => {
+
+    if (location.pathname !== AuthRoutePaths.REFRESH && location.pathname !== previousPath) {
+      previousPath = location.pathname;
+      dispatch(addRoute(location.pathname));
+    }
+  }, [location]);
 
   return children;
 };

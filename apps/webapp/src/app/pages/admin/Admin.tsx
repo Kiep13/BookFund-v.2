@@ -19,22 +19,22 @@ import { User } from './User';
 
 export const Admin = () =>
   <>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`} component={Dashboard}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR}/:id`} component={Author}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`} component={AuthorForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/:id`} component={AuthorForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`} component={Authors} exact/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/:id`} component={Book}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_NEW}`} component={BookForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/:id`} component={BookForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`} component={Books} exact/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`} component={GenreForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_EDIT}/:id`} component={GenreForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`} component={Genres} exact/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION}/:id`} component={Collection} exact/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`} component={Collections} exact/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`} component={CollectionForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/:id`} component={CollectionForm}/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USERS}`} component={Users} exact/>
-    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USER}/:id`} component={User}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.DASHBOARD}`} element={<Dashboard/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR}/:id`} element={<Author/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_NEW}`} element={<AuthorForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/:id`} element={<AuthorForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`} element={<Authors/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOK}/:id`} element={<Book/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_NEW}`} element={<BookForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS_EDIT}/:id`} element={<BookForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.BOOKS}`} element={<Books/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`} element={<GenreForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_EDIT}/:id`} element={<GenreForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`} element={<Genres/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION}/:id`} element={<Collection/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`} element={<Collections/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`} element={<CollectionForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/:id`} element={<CollectionForm/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USERS}`} element={<Users/>}/>
+    <Route path={`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USER}/:id`} element={<User/>}/>
   </>

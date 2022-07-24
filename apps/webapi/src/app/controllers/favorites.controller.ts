@@ -3,10 +3,10 @@ import { Request, Response } from 'express';
 import { FavoriteEntity } from '@entities/favorite.entity';
 import { connection } from '@core/connection';
 import { BookStatuses, ResponseStatuses, SortDirections } from '@core/enums';
-import { IListApiView } from '@core/interfaces';
+import { IListApiView, ICustomRequest } from '@core/interfaces';
 
 class FavoritesController {
-  public async createFavorite(request: Request, response: Response, next: Function): Response {
+  public async createFavorite(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const favorite = new FavoriteEntity();
       favorite.book = request.body;
@@ -24,7 +24,7 @@ class FavoritesController {
     }
   }
 
-  public async getFavorites(request: Request, response: Response, next: Function): Response {
+  public async getFavorites(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const account = request.account;
       const requestParams = request.query;
@@ -68,7 +68,7 @@ class FavoritesController {
     }
   }
 
-  public async deleteFavorite(request: Request, response: Response, next: Function): Response {
+  public async deleteFavorite(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const favoriteId = +request.params.id;
 

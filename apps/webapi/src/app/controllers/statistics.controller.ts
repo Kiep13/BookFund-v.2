@@ -5,7 +5,7 @@ import { DATE_API_FORMAT } from '@core/constants';
 import { RateTypes, ResponseStatuses, SortDirections } from '@core/enums';
 import {
   IActionsStatistic,
-  IActionStatistic,
+  IActionStatistic, ICustomRequest,
   IDateRange,
   IRateStatisticResponse,
   ITypedRateStatistic
@@ -19,7 +19,7 @@ import { dateService } from '@services/date.service';
 import { overallStatisticService } from '@services/overall-statistic.service';
 
 class StatisticsController {
-  public async getOverallStatistics(request: Request, response: Response, next: Function): Response {
+  public async getOverallStatistics(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     const dateRange: IDateRange = dateService.transformFromApiToRangeDates(request.query.date);
 
     try {
@@ -31,7 +31,7 @@ class StatisticsController {
     }
   }
 
-  public async getGenresStatistics(request: Request, response: Response, next: Function): Response {
+  public async getGenresStatistics(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
 
     try {
@@ -52,7 +52,7 @@ class StatisticsController {
     }
   }
 
-  public async getActionsStatistics(request: Request, response: Response, next: Function): Response {
+  public async getActionsStatistics(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
 
     try {
@@ -101,7 +101,7 @@ class StatisticsController {
     }
   }
 
-  public async getPopularBook(request: Request, response: Response, next: Function): Response {
+  public async getPopularBook(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
 
     try {
@@ -131,7 +131,7 @@ class StatisticsController {
     }
   }
 
-  public async getProvidersStatistic(request: Request, response: Response, next: Function): Response {
+  public async getProvidersStatistic(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
 
     try {
@@ -149,7 +149,7 @@ class StatisticsController {
     }
   }
 
-  public async getRatesStatistic (request: Request, response: Response, next: Function): Response {
+  public async getRatesStatistic (request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     const dateRange = dateService.transformFromApiToRangeDates(request.query.date);
 
     try {

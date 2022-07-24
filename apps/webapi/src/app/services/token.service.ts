@@ -1,3 +1,4 @@
+import { AccountEntity } from '@entities/account.entity';
 import * as jwt from'jsonwebtoken';
 
 import { IAccount, ITokens } from '@core/interfaces';
@@ -14,7 +15,7 @@ class TokenService {
     }
   }
 
-  public async validateAccessToken(token: string): Promise<IAccount> {
+  public async validateAccessToken(token: string): Promise<AccountEntity> {
     return jwt.verify(token, environment.jwtAccessSecret);
   }
 

@@ -4,7 +4,7 @@ import { ApiRoutesModifiers } from '@core/enums';
 import { commentController } from '@controllers/comment.controller';
 import { authMiddleware } from '@middlewares/index';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, commentController.getComments);
 router.post(`/${ApiRoutesModifiers.NEW}`, authMiddleware, commentController.createComment);

@@ -1,5 +1,5 @@
 import { Avatar, Box, Card, CardActionArea, CardContent, Typography  } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { RoleIndicator } from '@components/RoleIndicator';
 import { AdminRoutePaths, Roles } from '@utils/enums';
@@ -8,10 +8,10 @@ import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const UserCard = ({user}: IProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const navigateToUserPage = () => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USER}/${user.id}`)
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.USER}/${user.id}`)
   }
 
   return (

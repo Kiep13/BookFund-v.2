@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 import { Roles} from '@core/enums';
+import { ICustomRequest } from '@core/interfaces';
 import { ApiError } from '@exceptions/api-error';
 
-export const adminMiddleware = (request: Request, response: Response, next: Function): Response => {
+export const adminMiddleware = (request: ICustomRequest, response: Response, next: Function): Response => {
   try {
     const role = request.account.role;
 

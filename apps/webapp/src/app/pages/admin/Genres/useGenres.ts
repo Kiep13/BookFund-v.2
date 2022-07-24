@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { GENRES_MOCK } from '@mocks/genresMock';
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -11,7 +11,7 @@ import { useAlerts, useApi } from '@utils/hooks';
 import { SUCCESSFULLY_DELETED } from './constants';
 
 export const useGenres = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const {getGenresTree, getGenre, deleteGenre} = useApi();
   const {addSuccess, addError} = useAlerts();
 
@@ -60,16 +60,18 @@ export const useGenres = () => {
   }
 
   const handleAddSubgenre = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`, {
-      parent: {
-        id: selectedGenre.id,
-        name: selectedGenre.name
-      },
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_NEW}`, {
+      state: {
+        parent: {
+          id: selectedGenre.id,
+          name: selectedGenre.name
+        },
+      }
     });
   }
 
   const handleGenreEdit = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_EDIT}/${selectedGenre.id}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRE_EDIT}/${selectedGenre.id}`);
   }
 
   const handleGenreDelete = async () => {

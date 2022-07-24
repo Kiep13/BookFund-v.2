@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -10,13 +10,13 @@ import { DEFAULT_SEARCH_OPTIONS } from './constants';
 import { ISearchPageParams } from './interfaces';
 
 export const useSearch = () => {
-  const params = useParams();
+  const params = useParams<ISearchPageParams>();
 
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
-  const [searchTerm, setSearchTerm] = useState<string>((params as ISearchPageParams).searchTerm || '');
+  const [searchTerm, setSearchTerm] = useState<string>(params.searchTerm || '');
   const [searchResults, setSearchResults] = useState<ISearchResults>();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {search} = useApi();
   const {addError} = useAlerts();
@@ -24,7 +24,9 @@ export const useSearch = () => {
 
   const handleSearchTermChange = (newSearchTerm): void => {
     setSearchTerm(newSearchTerm);
-    history.replace(`${BaseRoutePaths.SEARCH}/${newSearchTerm}`);
+    navigate(`${BaseRoutePaths.SEARCH}/${newSearchTerm}`, {
+      replace: true
+    });
   }
 
   const loadSearchResult = (): void => {

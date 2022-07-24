@@ -1,20 +1,15 @@
 {
-  "root": "apps/webapi",
   "sourceRoot": "apps/webapi/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/webapi",
         "main": "apps/webapi/src/main.ts",
         "tsConfig": "apps/webapi/tsconfig.app.json",
-        "assets": [
-          "apps/webapi/src/assets"
-        ]
+        "assets": ["apps/webapi/src/assets"]
       },
       "configurations": {
         "production": {
@@ -31,29 +26,23 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/node:execute",
+      "executor": "@nrwl/node:node",
       "options": {
         "buildTarget": "webapi:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/webapi/**/*.ts"
-        ]
+        "lintFilePatterns": ["apps/webapi/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/webapi"
-      ],
+      "outputs": ["coverage/apps/webapi"],
       "options": {
-        "jestConfig": "apps/webapi/jest.config.js",
+        "jestConfig": "apps/webapi/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -66,7 +55,7 @@
     "migrations": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-            "command": "dotenv -e ./apps/webapi/src/environments/.env npm run migrations:run"
+        "command": "dotenv -e ./apps/webapi/src/environments/.env npm run migrations:run"
       }
     },
     "seed": {

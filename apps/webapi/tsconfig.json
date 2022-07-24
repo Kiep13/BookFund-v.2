@@ -1,27 +1,26 @@
 {
-   "compilerOptions": {
-      "lib": [
-         "es2021"
-      ],
-      "target": "es2021",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "resolveJsonModule": true,
-      "sourceMap": true,
-      "baseUrl": "../../.",
-      "paths": {
-         "@controllers/*": ["apps/webapi/src/app/controllers/*"],
-         "@core/*": ["apps/webapi/src/app/core/*"],
-         "@entities/*": ["apps/webapi/src/app/entities/*"],
-         "@exceptions/*": ["apps/webapi/src/app/exceptions/*"],
-         "@middlewares/*": ["apps/webapi/src/app/middlewares/*"],
-         "@routes/*": ["apps/webapi/src/app/routes/*"],
-         "@services/*": ["apps/webapi/src/app/services/*"],
-         "@environments/*": ["apps/webapi/src/environments/*"],
-         "@utils": ["apps/webapi/src/app/utils"]
-      }
-   }
+  "compilerOptions": {
+    "lib": ["es2021"],
+    "target": "es2021",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "baseUrl": "../../.",
+    "paths": {
+      "@controllers/*": ["apps/webapi/src/app/controllers/*"],
+      "@core/*": ["apps/webapi/src/app/core/*"],
+      "@entities/*": ["apps/webapi/src/app/entities/*"],
+      "@exceptions/*": ["apps/webapi/src/app/exceptions/*"],
+      "@middlewares/*": ["apps/webapi/src/app/middlewares/*"],
+      "@routes/*": ["apps/webapi/src/app/routes/*"],
+      "@services/*": ["apps/webapi/src/app/services/*"],
+      "@environments/*": ["apps/webapi/src/environments/*"],
+      "@utils": ["apps/webapi/src/app/utils"]
+    }
+  },
+  "exclude": ["jest.config.ts"]
 }

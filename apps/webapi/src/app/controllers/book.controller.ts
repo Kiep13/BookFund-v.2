@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { IListApiView, ICustomRequest, ISearchOptions } from '@core/interfaces';
 import { ApiRoutes, ResponseStatuses } from '@core/enums';
 import { connection } from '@core/connection';
 import { environment } from '@environments/environment';
@@ -12,7 +12,7 @@ import { fileService } from '@services/file.service';
 import { tokenService } from '@services/token.service';
 
 class BookController {
-  public async createBook(request: Request, response: Response, next: Function): Response {
+  public async createBook(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const book: BookEntity = bookService.buildBookFromBody(request.body);
       book.genres = request.body.genres;
@@ -24,7 +24,7 @@ class BookController {
     }
   }
 
-  public async updateBook(request: Request, response: Response, next: Function): Response {
+  public async updateBook(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const bookId = +request.params.id;
 
@@ -56,7 +56,7 @@ class BookController {
     }
   }
 
-  public async getBook(request: Request, response: Response, next: Function): Response {
+  public async getBook(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const bookId = +request.params.id;
       const book = await connection.manager.getRepository(BookEntity).findOne({
@@ -88,7 +88,7 @@ class BookController {
     }
   }
 
-  public async getBooks(request: Request, response: Response, next: Function): Response {
+  public async getBooks(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams: ISearchOptions = request.query;
 
@@ -103,7 +103,7 @@ class BookController {
     }
   }
 
-  public async deleteBook(request: Request, response: Response, next: Function): Response {
+  public async deleteBook(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const bookId = +request.params.id;
 
