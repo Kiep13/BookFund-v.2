@@ -11,12 +11,8 @@ export const Router = ({children}: IProps) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  let previousPath = '';
-
   useEffect(() => {
-
-    if (location.pathname !== AuthRoutePaths.REFRESH && location.pathname !== previousPath) {
-      previousPath = location.pathname;
+    if (location.pathname !== AuthRoutePaths.REFRESH) {
       dispatch(addRoute(location.pathname));
     }
   }, [location]);

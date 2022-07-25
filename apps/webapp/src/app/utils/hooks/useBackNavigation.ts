@@ -10,7 +10,7 @@ export const useBackNavigation = (defaultPreviousRoute: string) => {
 
   const navigateBack = (comparableRoute) => {
     if(comparableRoute) {
-      navigate(-1);
+      navigate(comparableRoute);
       return;
     }
 

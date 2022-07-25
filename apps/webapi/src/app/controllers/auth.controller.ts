@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 import { connection } from '@core/connection';
 import { REFRESH_TOKEN_COOKIE_NAME, TOKEN_DURATION } from '@core/constants';
@@ -10,9 +10,9 @@ import { environment } from '@environments/environment';
 import { googleService, facebookService, githubService, tokenService } from '@services/index';
 
 class AuthController {
-  public async signInViaGoogle(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
+  public async signInViaGoogle(request: ICustomRequest, response: Response, next: Function): Promise<void> {
     try {
-      const code = request.query.code;
+      const code: string = request.query.code.toString();
 
       const authResponse: IAuthResponse = await googleService.login(code);
 
@@ -25,15 +25,15 @@ class AuthController {
         } : {})
       });
 
-      return response.status(ResponseStatuses.STATUS_OK).json(authResponse);
+      response.status(ResponseStatuses.STATUS_OK).json(authResponse);
     } catch (error) {
       next(error);
     }
   }
 
-  public async signInViaFacebook(request: Request, response: Response, next: Function): Promise<Response> {
+  public async signInViaFacebook(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
-      const code = (request.query as any).code;
+      const code: string = request.query.code;
       const authResponse: IAuthResponse = await facebookService.login(code);
 
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {
@@ -51,9 +51,9 @@ class AuthController {
     }
   }
 
-  public async singInViaGitHub(request: Request, response: Response, next: Function): Promise<Response> {
+  public async singInViaGitHub(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
-      const code = (request.query as any).code;
+      const code: string = request.query.code;
       const authResponse: IAuthResponse = await githubService.login(code);
 
       response.cookie(REFRESH_TOKEN_COOKIE_NAME, authResponse.refreshToken, {

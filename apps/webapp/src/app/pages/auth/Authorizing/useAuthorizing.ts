@@ -49,10 +49,11 @@ export const useAuthorizing = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.accessToken}`;
 
         addSuccess(SUCCESSFULLY_AUTHORIZED);
+
         navigate(BaseRoutePaths.HOME);
       })
       .catch(() => {
-        handleLogOut(API_LOGIN_ERROR);
+        // handleLogOut(API_LOGIN_ERROR);
       });
   }
 

@@ -1,4 +1,4 @@
-import { Box, TablePagination, TextField } from '@mui/material';
+import { Box, TablePagination, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 
 import { PageHeaderCard } from '@components/headers/PageHeaderCard';
@@ -40,7 +40,7 @@ export const Users = () => {
           placeholder='Type user name here...'
           sx={STYLES.searchInput}
           onChange={handleTyping}
-          helperText={<Box sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Box>}
+          helperText={<Typography variant='caption' sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Typography>}
           inputProps={{
             maxLength: MAX_SEARCH_LENGTH_INPUT
           }}

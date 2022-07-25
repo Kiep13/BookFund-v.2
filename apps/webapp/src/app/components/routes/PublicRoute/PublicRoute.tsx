@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Layout } from '@components/Layout';
@@ -11,18 +11,19 @@ import {
 import { AuthRoutePaths } from '@utils/enums';
 import { useStorage } from '@utils/hooks';
 
-export const PublicRoute = ({children, ...rest}) => {
+export const PublicRoute = () => {
+  const location = useLocation();
   const isAuthorized = useSelector(getIsAuthorized);
-  const IsAuthorizeAttempted = useSelector(getIsAuthorizeAttempted);
+  const isAuthorizeAttempted = useSelector(getIsAuthorizeAttempted);
   const {deleteFromStorage, saveToStorage} = useStorage();
 
   const render = () => {
-    if (isAuthorized || IsAuthorizeAttempted) {
+    if (isAuthorized || isAuthorizeAttempted) {
       deleteFromStorage(RELOAD_PUBLIC_FINISHED);
-      return <Layout children={children}/>;
+      return <Layout><Outlet/></Layout>;
     }
 
-    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, window.location.href);
+    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, location.pathname);
     saveToStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY, true);
     return <Navigate to={`${AuthRoutePaths.REFRESH}`} replace/>;
   }

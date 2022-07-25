@@ -24,7 +24,7 @@
     "@mui/styled-engine": "^5.2.6",
     "@mui/styled-engine-sc": "^5.1.0",
     "@reduxjs/toolkit": "1.8.2",
-    "axios": "^0.25.0",
+    "axios": "^0.21.4",
     "chart.js": "^3.7.0",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.6.5",
