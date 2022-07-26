@@ -10,7 +10,9 @@ export const useBackNavigation = (defaultPreviousRoute: string) => {
 
   const navigateBack = (comparableRoute) => {
     if(comparableRoute) {
-      navigate(comparableRoute);
+      navigate(comparableRoute, {
+        replace: true
+      });
       return;
     }
 
@@ -18,7 +20,7 @@ export const useBackNavigation = (defaultPreviousRoute: string) => {
   }
 
   const navigatePreviousPage = () => {
-    navigateBack(previousRoute);
+    navigateBack(previousRoute ? -1 : null);
   }
 
   const navigateLastPage = () => {

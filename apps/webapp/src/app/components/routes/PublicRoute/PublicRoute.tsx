@@ -20,7 +20,7 @@ export const PublicRoute = () => {
   const render = () => {
     if (isAuthorized || isAuthorizeAttempted) {
       deleteFromStorage(RELOAD_PUBLIC_FINISHED);
-      return <Layout><Outlet/></Layout>;
+      return <Layout><Outlet/></Layout>
     }
 
     saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, location.pathname);

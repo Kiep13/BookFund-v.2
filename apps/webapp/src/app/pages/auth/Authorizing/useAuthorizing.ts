@@ -53,7 +53,7 @@ export const useAuthorizing = () => {
         navigate(BaseRoutePaths.HOME);
       })
       .catch(() => {
-        // handleLogOut(API_LOGIN_ERROR);
+        handleLogOut(API_LOGIN_ERROR);
       });
   }
 
