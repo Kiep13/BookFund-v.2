@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
 
 import { Card } from '@components/cards/Card';
 import { AuthorContent } from '@components/entityContents/AuthorContent';
@@ -17,17 +16,12 @@ export const Author = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadAuthor,
     navigateBack,
     handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
     closeModal,
     handleConfirmDeletion
   } = useAuthor();
-
-  useEffect(() => {
-    loadAuthor();
-  }, []);
 
   return (
     <>

@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
@@ -17,17 +16,12 @@ export const Book = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadBook,
     navigateBack,
     handleHeaderIconClick,
     getAdminAuthorPageUrlWithoutId,
     handleConfirmDeletion,
     closeModal
   } = useBook();
-
-  useEffect(() => {
-    loadBook();
-  }, []);
 
   return (
     <>

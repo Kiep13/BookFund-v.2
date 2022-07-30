@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
 import { StatefulCard } from '@components/cards/StatefulCard';
@@ -16,17 +15,12 @@ export const Collection = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadCollection,
     navigateBack,
     handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
     handleConfirmDeletion,
     closeModal
   } = useCollection();
-
-  useEffect(() => {
-    loadCollection();
-  }, []);
 
   return (
     <>

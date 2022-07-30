@@ -11,7 +11,7 @@ export const useBookActions = () => {
 
   const getBookPageUrlWithoutId = (): string => {
     return `${BaseRoutePaths.BOOK}`;
-  }
+  };
 
   const getBookPageUrl = (id: number): string => {
     return `${BaseRoutePaths.BOOK}/${id}`;

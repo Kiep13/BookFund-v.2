@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -15,7 +15,7 @@ export const useBookLoad = () => {
   const {getBook} = useApi();
   const {addError} = useAlerts();
 
-  const loadBook = (): void => {
+  const loadBook = useCallback((): void => {
     const bookId = (params as IFormPageParams).id;
 
     getBook(bookId)
@@ -27,14 +27,18 @@ export const useBookLoad = () => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       })
-  }
+  }, []);
 
-  const handleBookChange = (updatedBook: IBook) => {
+  const handleBookChange = useCallback((updatedBook: IBook) => {
     setBook({
       ...book,
       ...updatedBook
     })
-  }
+  }, [book]);
+
+  useEffect(() => {
+    loadBook();
+  }, []);
 
   return {
     pageState,
@@ -43,3 +47,4 @@ export const useBookLoad = () => {
     handleBookChange
   }
 }
+

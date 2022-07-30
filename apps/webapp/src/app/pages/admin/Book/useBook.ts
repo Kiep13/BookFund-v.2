@@ -61,7 +61,6 @@ export const useBook = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadBook,
     navigateBack,
     handleHeaderIconClick,
     getAdminAuthorPageUrlWithoutId,

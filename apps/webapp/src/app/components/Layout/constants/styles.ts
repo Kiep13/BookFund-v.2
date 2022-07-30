@@ -4,11 +4,15 @@ export const STYLES_PAGE_WRAPPER = {
     display: 'flex'
   },
   pageWithoutSidebar: {
-    maxWidth: 'calc(100% - 350px)',
+    maxWidth: {
+      lg: 'calc(100% - 350px)',
+      md: '100%'
+    },
     width: '100%',
     m: 'auto'
   },
   box: {
+    width: 'calc(100% - 200px)',
     flexGrow: 1,
     p: 3,
     height: 'fit-content'

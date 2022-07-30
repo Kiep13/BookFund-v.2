@@ -13,7 +13,7 @@ export const useCollection = () => {
 
   const navigate = useNavigate();
 
-  const {collection, pageState, loadCollection} = useCollectionLoad();
+  const {collection, pageState} = useCollectionLoad();
   const {addSuccess} = useAlerts();
   const {getAdminBookPageUrlWithoutId} = useBookActions();
   const {navigateToEditForm, deleteCollection, navigateToAdminCollectionsPage} = useCollectionActions();
@@ -32,6 +32,7 @@ export const useCollection = () => {
 
     setIsModalOpened(false);
   }
+
   const navigateBack = (): void => {
     navigate(-1);
   }
@@ -56,7 +57,6 @@ export const useCollection = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadCollection,
     navigateBack,
     handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,

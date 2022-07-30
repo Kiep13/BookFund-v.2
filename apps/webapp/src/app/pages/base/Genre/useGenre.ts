@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { useAlerts, useApi } from '@utils/hooks';
@@ -28,7 +28,7 @@ export const useGenre = () => {
     }
   });
 
-  const initPage = async () => {
+  const initPage = useCallback(() => {
     const genreName = params.genreName;
 
     if (!genreName) {
@@ -56,9 +56,9 @@ export const useGenre = () => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       });
-  };
+  }, []);
 
-  const handleSelecting = (value?: IOption): void => {
+  const handleSelecting = useCallback((value?: IOption): void => {
     if (!value) {
       return;
     }
@@ -72,9 +72,9 @@ export const useGenre = () => {
       subKey: value?.id,
       page: 0
     });
-  };
+  }, []);
 
-  const loadBooks = (options?: ISearchOptions): void => {
+  const loadBooks = useCallback((options?: ISearchOptions): void => {
     const searchOptions: ISearchOptions = {
       pageSize: PageSizes.Ten,
       page: options?.page || page,
@@ -97,9 +97,9 @@ export const useGenre = () => {
       .catch(() => {
         addError(API_TOOLTIP_ERROR);
       });
-  };
+  }, [page]);
 
-  const handleLoadMore = (): void => {
+  const handleLoadMore = useCallback((): void => {
     setPage(page + 1);
     setLoadingBooks(true);
 
@@ -108,7 +108,11 @@ export const useGenre = () => {
     }
 
     loadBooks(searchOptions);
-  };
+  }, [page]);
+
+  useEffect(() => {
+    initPage();
+  }, []);
 
   return {
     pageState,
@@ -116,7 +120,6 @@ export const useGenre = () => {
     books,
     loadingBooks,
     count,
-    initPage,
     handleSelecting,
     handleLoadMore
   };

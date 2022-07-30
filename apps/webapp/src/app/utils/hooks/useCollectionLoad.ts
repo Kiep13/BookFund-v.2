@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -15,7 +15,7 @@ export const useCollectionLoad = () => {
   const { addError } = useAlerts();
   const { getCollection } = useApi();
 
-  const loadCollection = () => {
+  const loadCollection = useCallback(() => {
     const collectionId = params.id;
 
     collectionId && getCollection(collectionId)
@@ -27,11 +27,14 @@ export const useCollectionLoad = () => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       })
-  }
+  }, []);
+
+  useEffect(() => {
+    loadCollection();
+  }, []);
 
   return {
     collection,
-    pageState,
-    loadCollection
+    pageState
   }
 }

@@ -16,7 +16,6 @@ export const useAuthor = () => {
   const {
     author,
     pageState,
-    loadAuthor
   } = useAuthorLoad();
   const {addSuccess} = useAlerts();
   const {navigateToEditForm, navigateToAdminAuthorsPage, deleteAuthor} = useAuthorActions();
@@ -61,7 +60,6 @@ export const useAuthor = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadAuthor,
     navigateBack,
     handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,
