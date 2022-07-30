@@ -1,1 +1,3 @@
-export * from './Book';
+import { Book } from './Book';
+
+export default Book;

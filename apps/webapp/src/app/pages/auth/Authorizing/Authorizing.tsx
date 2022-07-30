@@ -1,9 +1,8 @@
-import { Box, CircularProgress, Typography } from '@mui/material'
 import { useEffect } from 'react';
 
+import { Loading } from '@components/Loading';
 import { AuthRoutePaths } from '@utils/enums';
 
-import { STYLES } from './constants';
 import { useAuthorizing } from './useAuthorizing';
 
 export const Authorizing = () => {
@@ -17,14 +16,5 @@ export const Authorizing = () => {
     }
   }, []);
 
-  return (
-    <Box sx={STYLES.page}>
-      <Box sx={STYLES.content}>
-        <CircularProgress size={150}/>
-        <Typography variant='h2' gutterBottom component='div'>
-          Loading
-        </Typography>
-      </Box>
-    </Box>
-  )
+  return <Loading/>
 }

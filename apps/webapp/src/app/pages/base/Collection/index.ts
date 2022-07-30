@@ -1,1 +1,3 @@
-export * from './Collection';
+import { Collection } from './Collection';
+
+export default Collection;

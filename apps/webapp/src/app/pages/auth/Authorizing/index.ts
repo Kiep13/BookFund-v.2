@@ -1,1 +1,3 @@
-export * from './Authorizing';
+import { Authorizing } from './Authorizing';
+
+export default Authorizing;

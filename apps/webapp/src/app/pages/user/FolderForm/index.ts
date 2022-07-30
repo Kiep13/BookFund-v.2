@@ -1,1 +1,3 @@
-export * from './FolderForm';
+import { FolderForm } from './FolderForm';
+
+export default FolderForm;

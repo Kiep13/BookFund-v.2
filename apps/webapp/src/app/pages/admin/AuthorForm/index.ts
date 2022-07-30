@@ -1,1 +1,3 @@
-export * from './AuthorForm';
+import { AuthorForm } from './AuthorForm';
+
+export default AuthorForm;
