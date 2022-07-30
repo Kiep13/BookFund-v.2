@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate, useLocation  } from 'react-router-dom';
 
 import { getLastRoute, getPreviousRoute } from '@store/reducers';
 
 export const useBackNavigation = (defaultPreviousRoute: string) => {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
+  const location = useLocation();
   const previousRoute = useSelector(getPreviousRoute);
   const lastRoute = useSelector(getLastRoute);
 
@@ -20,7 +21,7 @@ export const useBackNavigation = (defaultPreviousRoute: string) => {
   }
 
   const navigatePreviousPage = () => {
-    navigateBack(previousRoute ? -1 : null);
+    navigateBack(previousRoute && location.pathname !== previousRoute ? -1 : null);
   }
 
   const navigateLastPage = () => {
