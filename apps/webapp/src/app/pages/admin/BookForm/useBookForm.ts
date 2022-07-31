@@ -1,3 +1,4 @@
+import worker from 'pdfjs-dist/build/pdf.worker.entry';
 import { useFormik } from 'formik';
 import { FormikHelpers } from 'formik/dist/types';
 import { useState } from 'react';
@@ -17,6 +18,8 @@ import {
   SUCCESSFULLY_UPDATED
 } from './constants';
 import { IBookForm } from './interfaces';
+
+pdfjs.GlobalWorkerOptions.workerSrc = worker;
 
 export const useBookForm = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
@@ -61,6 +64,7 @@ export const useBookForm = () => {
       await callSubmitAction(values);
       navigateToAdminBooksPage();
     } catch (e) {
+      console.log(e)
       addError(API_TOOLTIP_ERROR);
     } finally {
       setSubmitting(false);

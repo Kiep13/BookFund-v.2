@@ -13,7 +13,7 @@ export const useAuthHandlers = () => {
   const { addError } = useAlerts();
 
   const handleLogOut = (message: string = '') => {
-    dispatch(logout);
+    dispatch(logout());
     delete axios.defaults.headers.common['Authorization'];
 
     if(message) {

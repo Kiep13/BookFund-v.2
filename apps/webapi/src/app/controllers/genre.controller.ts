@@ -14,7 +14,7 @@ class GenreController {
       await connection.manager.save(genre);
       return response.status(ResponseStatuses.STATUS_CREATED).json(genre);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
@@ -27,7 +27,7 @@ class GenreController {
       await connection.manager.update(GenreEntity, genreId, genre);
       return response.status(ResponseStatuses.STATUS_OK).json(genre);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
@@ -40,7 +40,7 @@ class GenreController {
 
       return response.status(ResponseStatuses.STATUS_OK).json(genre);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
@@ -61,7 +61,7 @@ class GenreController {
 
       return response.status(ResponseStatuses.STATUS_OK).json(genres);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
@@ -70,7 +70,7 @@ class GenreController {
       const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
       return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 
@@ -84,7 +84,7 @@ class GenreController {
 
       return response.status(ResponseStatuses.STATUS_NO_CONTENT).json({});
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }

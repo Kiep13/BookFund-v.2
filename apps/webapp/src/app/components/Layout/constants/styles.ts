@@ -12,6 +12,12 @@ export const STYLES_PAGE_WRAPPER = {
     m: 'auto'
   },
   box: {
+    width: '100%',
+    flexGrow: 1,
+    p: 3,
+    height: 'fit-content'
+  },
+  boxWithSidebar: {
     width: 'calc(100% - 200px)',
     flexGrow: 1,
     p: 3,

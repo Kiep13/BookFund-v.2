@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { AuthorContent } from '@components/entityContents/AuthorContent';
@@ -14,8 +14,8 @@ export const Author = () => {
     author,
     pageState
   } = useAuthorLoad();
-  const {getBookPageUrlWithoutId} = useMemo(useBookActions, []);
-  const {navigatePreviousPage} = useMemo(() => useBackNavigation(BaseRoutePaths.HOME), []);
+  const {getBookPageUrlWithoutId} = useBookActions();
+  const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
 
   const navigateBack = useCallback(() => {
     navigatePreviousPage();
