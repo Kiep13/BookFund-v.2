@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { HorizontalBookCard } from '@components/cards/HorizontalBookCard';
@@ -21,15 +20,10 @@ export const Genre = () => {
     loadingBooks,
     books,
     count,
-    initPage,
     handleSelecting,
     handleLoadMore
   } = useGenre();
   const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
-
-  useEffect(() => {
-    initPage();
-  }, []);
 
   return (
     <>

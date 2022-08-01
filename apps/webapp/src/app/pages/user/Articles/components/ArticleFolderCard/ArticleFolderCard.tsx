@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, CardActionArea, CardActions, Box, IconButton } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 import {
@@ -16,7 +16,7 @@ import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const isDefaultFolder = folder.name === DEFAULT_FOLDER_NAME;
   const displayedFolderName = !isDefaultFolder ? folder.name : DEFAULT_FOLDER_DISPLAYED_NAME;
@@ -24,7 +24,7 @@ export const ArticleFolderCard = ({folder, handleActionClick}: IProps) => {
   const actions: ICardAction[] = [EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateToFolderPage = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${folder.id}`);
+    navigate(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER}/${folder.id}`);
   }
 
   return (

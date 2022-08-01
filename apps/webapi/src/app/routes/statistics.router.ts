@@ -4,7 +4,7 @@ import { statisticsController } from '@controllers/statistics.controller';
 import { authMiddleware } from '@middlewares/auth-middleware';
 import { moderatorMiddleware } from '@middlewares/moderator-middleware';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/overall`, authMiddleware, moderatorMiddleware, statisticsController.getOverallStatistics);
 router.get(`/genres`, authMiddleware, moderatorMiddleware, statisticsController.getGenresStatistics);

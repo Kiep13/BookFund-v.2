@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -15,7 +15,7 @@ export const useAuthorLoad = () => {
   const {getAuthor} = useApi();
   const {addError} = useAlerts();
 
-  const loadAuthor = (): void => {
+  const loadAuthor = useCallback((): void => {
     const authorId = (params as IFormPageParams).id;
 
     getAuthor(authorId)
@@ -27,7 +27,11 @@ export const useAuthorLoad = () => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       });
-  };
+  }, []);
+
+  useEffect(() => {
+    loadAuthor();
+  }, []);
 
   return {
     author,

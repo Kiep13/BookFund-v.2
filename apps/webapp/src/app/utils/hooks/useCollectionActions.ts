@@ -1,11 +1,11 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { AdminRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 
 export const useCollectionActions = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const alerts = useAlerts();
   const api = useApi();
 
@@ -26,23 +26,23 @@ export const useCollectionActions = () => {
   }
 
   const navigateToCollectionPage = (id: number): void => {
-    history.push(getCollectionPageUrl(id));
+    navigate(getCollectionPageUrl(id));
   }
 
   const navigateToAdminCollectionPage = (id: number): void => {
-    history.push(getAdminCollectionPageUrl(id));
+    navigate(getAdminCollectionPageUrl(id));
   }
 
   const navigateToAdminCollectionsPage = () => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTIONS}`);
   }
 
   const navigateToAddForm = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_NEW}`);
   }
 
   const navigateToEditForm = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/${id}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.COLLECTION_EDIT}/${id}`);
   }
 
   const deleteCollection = (id: number, successFallback: () => void) => {

@@ -47,7 +47,7 @@ class FileService {
 
     foldersForChecking.forEach((folderPath: string) => {
       if (!fs.existsSync(folderPath)) {
-        fs.mkdirSync(folderPath);
+        fs.mkdirSync(folderPath, {recursive: true});
       }
     });
   }

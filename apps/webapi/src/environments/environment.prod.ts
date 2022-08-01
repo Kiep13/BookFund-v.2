@@ -10,9 +10,9 @@ export const environment = {
 
   clientUrl: process.env.CLIENT_URL,
   selfUrl: process.env.SELF_URL,
-  imagesFolder: 'assets/images',
-  booksFolder: 'assets/books',
-  articlesFolder: 'assets/articles',
+  imagesFolder: '../assets/images',
+  booksFolder: '../assets/books',
+  articlesFolder: '../assets/articles',
 
   jwtAccessSecret: process.env.JWT_ACCESS_SECRET,
   jwtRefreshSecret: process.env.JWT_REFRESH_SECRET,

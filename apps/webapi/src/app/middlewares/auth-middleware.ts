@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 import { ApiError } from '@exceptions/api-error';
+import { ICustomRequest } from '@core/interfaces';
 import { tokenService } from '@services/token.service';
 
-export const authMiddleware = async (request: Request, response: Response, next: Function): Response => {
+export const authMiddleware = async (request: ICustomRequest, response: Response, next: Function): Promise<Response> => {
   try {
     const authorizationHeader = request.headers.authorization;
 

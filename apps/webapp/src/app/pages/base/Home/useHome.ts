@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getIsAuthorized, getUser } from '@store/reducers';
@@ -24,7 +24,7 @@ export const useHome = () => {
   const isAuthorized = useSelector(getIsAuthorized);
   const user = useSelector(getUser);
 
-  const loadBooks = (): void => {
+  const loadBooks = useCallback((): void => {
     const searchOptions: ISearchOptions = {
       pageSize: 10,
       page: 0,
@@ -41,9 +41,9 @@ export const useHome = () => {
         addError(API_TOOLTIP_ERROR);
         setState(CardStates.ERROR);
       })
-  };
+  }, []);
 
-  const loadCollections = (page: number = pageCollections): void => {
+  const loadCollections =  useCallback((page: number = pageCollections): void => {
     setLoadingCollections(true);
     setPageCollections(page);
 
@@ -68,11 +68,15 @@ export const useHome = () => {
         addError(API_TOOLTIP_ERROR);
         setState(CardStates.ERROR);
       })
-  }
+  }, [collections, pageCollections]);
 
-  const loadMoreCollections = (): void => {
+  const loadMoreCollections = useCallback((): void => {
     loadCollections(pageCollections + 1);
-  }
+  }, [pageCollections]);
+
+  useEffect(() => {
+    loadBooks();
+  }, []);
 
   return {
     books,
@@ -83,10 +87,10 @@ export const useHome = () => {
     pageCollections,
     countCollections,
     loadingCollections,
-    loadBooks,
     loadCollections,
     loadMoreCollections,
     navigateToBookPage,
     navigateToCollectionPage
   }
 }
+

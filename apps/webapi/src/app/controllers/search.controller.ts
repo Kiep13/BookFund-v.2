@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 
 import { ResponseStatuses } from '@core/enums';
-import { ISearchOptions, ISearchResults } from '@core/interfaces';
+import { ICustomRequest, ISearchOptions, ISearchResults } from '@core/interfaces';
 import { authorService } from '@services/author.service';
 import { bookService } from '@services/book.service';
 import { collectionService } from '@services/collection.service';
 
 class SearchController {
-  public async search(request: Request, response: Response, next: Function): Response {
+  public async search(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams: ISearchOptions = request.query;
 

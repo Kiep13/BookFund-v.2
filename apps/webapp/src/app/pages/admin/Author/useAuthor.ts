@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
 import { CardActions } from '@utils/enums';
@@ -11,12 +11,11 @@ import { SUCCESSFULLY_DELETED } from './constants';
 export const useAuthor = () => {
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     author,
     pageState,
-    loadAuthor
   } = useAuthorLoad();
   const {addSuccess} = useAlerts();
   const {navigateToEditForm, navigateToAdminAuthorsPage, deleteAuthor} = useAuthorActions();
@@ -38,7 +37,7 @@ export const useAuthor = () => {
   }
 
   const navigateBack = (): void => {
-    history.goBack();
+    navigate(-1);
   }
 
   const openModal = (): void => {
@@ -61,7 +60,6 @@ export const useAuthor = () => {
     pageState,
     headerActions,
     isModalOpened,
-    loadAuthor,
     navigateBack,
     handleHeaderIconClick,
     getAdminBookPageUrlWithoutId,

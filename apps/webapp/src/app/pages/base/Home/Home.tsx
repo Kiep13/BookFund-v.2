@@ -1,6 +1,5 @@
 import { Box, CardActionArea, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { useEffect } from 'react';
 
 import { BookPromoCard } from '@components/cards/BookPromoCard';
 import { CollectionCard } from '@components/cards/ColllectionCard';
@@ -20,14 +19,9 @@ export const Home = () => {
     countCollections,
     loadMoreCollections,
     loadingCollections,
-    loadBooks,
     navigateToBookPage,
     navigateToCollectionPage
   } = useHome();
-
-  useEffect(() => {
-    loadBooks();
-  }, []);
 
   return (
     <Box sx={STYLES.page}>

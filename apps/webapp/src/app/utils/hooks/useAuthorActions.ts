@@ -1,11 +1,11 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { AdminRoutePaths, BaseRoutePaths } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 
 export const useAuthorActions = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const alerts = useAlerts();
   const api = useApi();
 
@@ -26,19 +26,19 @@ export const useAuthorActions = () => {
   }
 
   const navigateToAuthorPage = (id: number): void => {
-    history.push(getAuthorPageUrl(id));
+    navigate(getAuthorPageUrl(id));
   }
 
   const navigateToAdminAuthorPage = (id: number): void => {
-    history.push(getAdminAuthorPageUrl(id));
+    navigate(getAdminAuthorPageUrl(id));
   }
 
   const navigateToAdminAuthorsPage = (): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHORS}`);
   }
 
   const navigateToEditForm = (id: number): void => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.AUTHOR_EDIT}/${id}`);
   }
 
   const deleteAuthor = (id: number, successFallback: () => void) => {

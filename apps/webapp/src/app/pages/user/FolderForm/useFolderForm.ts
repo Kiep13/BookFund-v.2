@@ -1,7 +1,7 @@
 import { FormikHelpers } from 'formik/dist/types';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BaseRoutePaths, CardStates } from '@utils/enums';
@@ -12,7 +12,7 @@ import { FORM_INITIAL_VALUE, SUCCESSFULLY_ADDED, SUCCESSFULLY_UPDATED, VALIDATIO
 import { IArticleFolderForm } from './interfaces';
 
 export const useFolderForm = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params = useParams();
   const {getFolder, addFolder, updateFolder} = useApi();
   const {addSuccess, addError} = useAlerts();
@@ -45,7 +45,7 @@ export const useFolderForm = () => {
   }
 
   const navigateToArticlesPage = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}`);
+    navigate(`${BaseRoutePaths.ARTICLES}`);
   }
 
   const handleCancelClick = (): void => {

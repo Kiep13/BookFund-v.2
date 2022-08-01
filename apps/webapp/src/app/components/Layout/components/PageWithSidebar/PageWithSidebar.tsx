@@ -30,7 +30,7 @@ export const PageWithSidebar = (props: IProps) => {
   return (
     <Box sx={STYLES_PAGE_WRAPPER.pageWithSidebar}>
       <Sidenav menuItems={menuItems}/>
-      <Box component='main' sx={STYLES_PAGE_WRAPPER.box}>
+      <Box component='main' sx={STYLES_PAGE_WRAPPER.boxWithSidebar}>
         <Box sx={STYLES_PAGE_WRAPPER.header}>
           <Header/>
         </Box>

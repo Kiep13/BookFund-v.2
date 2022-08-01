@@ -4,7 +4,7 @@ import { ApiRoutesModifiers } from '@core/enums';
 import { genreController } from '@controllers/genre.controller';
 import { moderatorMiddleware,authMiddleware } from '@middlewares/index';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, genreController.getGenres);
 router.get(`/${ApiRoutesModifiers.TREE}`, genreController.getGenresTree);

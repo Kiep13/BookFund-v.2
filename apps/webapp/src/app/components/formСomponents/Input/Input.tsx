@@ -16,7 +16,7 @@ export const Input = ({id, name, label, type, fieldName, form, styles, multiline
             onChange={handleChange}
             onBlur={handleBlur}
             value={values[fieldName]}
-            helperText={errors[fieldName] && touched[fieldName] && errors[fieldName]}
+            helperText={errors[fieldName] && touched[fieldName] && errors[fieldName]?.toString()}
             sx={styles}/>
 }
 

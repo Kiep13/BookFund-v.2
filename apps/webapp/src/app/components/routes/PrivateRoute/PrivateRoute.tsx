@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Layout } from '@components/Layout';
@@ -7,7 +7,8 @@ import { RELOAD_PATHNAME_STORAGE_KEY } from '@utils/constants';
 import { AuthRoutePaths } from '@utils/enums';
 import { useAuthHandlers, useStorage } from '@utils/hooks';
 
-export const PrivateRoute = ({children, ...rest}) => {
+export const PrivateRoute = () => {
+  const location = useLocation();
   const isAuthorized = useSelector(getIsAuthorized);
   const isAdmin = useSelector(getIsAdmin);
 
@@ -16,23 +17,18 @@ export const PrivateRoute = ({children, ...rest}) => {
 
   const render = () => {
     if (!isAuthorized) {
-      saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);
-      return <Redirect to={`${AuthRoutePaths.REFRESH}`}/>;
+      saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, location.pathname);
+      return <Navigate to={`${AuthRoutePaths.REFRESH}`} replace/>;
     }
 
     if (!isAdmin) {
-      saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);
+      saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, location.pathname);
       handleLogOut(`You don't have access to this page`);
-      return <Redirect to={`${AuthRoutePaths.LOGIN}`}/>;
+      return <Navigate to={`${AuthRoutePaths.LOGIN}`} replace/>;
     }
 
-    return <Layout children={children}/>;
+    return <Layout><Outlet/></Layout>;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={render}
-    />
-  );
+  return render();
 }

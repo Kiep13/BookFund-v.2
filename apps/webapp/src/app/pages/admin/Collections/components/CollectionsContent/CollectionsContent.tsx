@@ -1,4 +1,4 @@
-import { Box, TablePagination, TextField } from '@mui/material';
+import { Box, TablePagination, TextField, Typography } from '@mui/material';
 import { useEffect } from 'react';
 
 import { ConfirmationPopup } from '@components/ConfirmationPopup';
@@ -41,7 +41,8 @@ export const CollectionsContent = () => {
         placeholder='Type title here...'
         sx={STYLES.searchInput}
         onChange={handleTyping}
-        helperText={<Box sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Box>}
+        helperText={<Typography variant='caption'
+                                sx={STYLES.hint}>{searchTerm.length}/{MAX_SEARCH_LENGTH_INPUT}</Typography>}
         inputProps={{
           maxLength: MAX_SEARCH_LENGTH_INPUT
         }}
@@ -66,7 +67,7 @@ export const CollectionsContent = () => {
               isActionsAvailable={true}
               actions={cardActions}
               onActionClick={handleCardAction}
-            />
+            />;
           })}
         </Box>
 
@@ -79,5 +80,5 @@ export const CollectionsContent = () => {
         handleClose={handleCancel}
       />
     </>
-  )
-}
+  );
+};

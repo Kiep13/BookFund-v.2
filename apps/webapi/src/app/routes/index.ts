@@ -16,7 +16,7 @@ import searchRoutes from './search.routes';
 import statisticsRouter from './statistics.router';
 import userRoutes from './user.router';
 
-const router = new Router();
+const router = Router();
 
 router.use(`/v1/${ApiRoutes.ARTICLE}`, articleRoutes);
 router.use(`/v1/${ApiRoutes.AUTH}`, authRoutes);

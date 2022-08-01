@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { BaseRoutePaths } from '@utils/enums';
 import { useBookActions, useCommentList } from '@utils/hooks';
@@ -19,7 +19,7 @@ export const useBookContent = (
     loadNextPage
   } = useCommentList();
   const {navigateToReadingPage} = useBookActions();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleReadClick = (): void => {
     book && navigateToReadingPage(book.id);
@@ -60,7 +60,7 @@ export const useBookContent = (
   }
 
   const navigateToGenrePage = (genre: IGenre) => {
-    history.push(`${BaseRoutePaths.GENRE}/${genre.name}`);
+    navigate(`${BaseRoutePaths.GENRE}/${genre.name}`);
   }
 
   return {

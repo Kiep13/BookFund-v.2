@@ -5,6 +5,7 @@ export * from './auth-response.interface';
 export * from './author-form.interface';
 export * from './book-form.interface';
 export * from './collection-form.interface';
+export * from './custom-request';
 export * from './date-range.interface';
 export * from './facebook-auth-tokens';
 export * from './facebook-user.interface';

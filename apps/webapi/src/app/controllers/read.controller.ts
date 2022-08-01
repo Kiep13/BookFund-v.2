@@ -1,3 +1,4 @@
+import { ICustomRequest } from '@core/interfaces';
 import { Request, Response } from 'express';
 
 import { connection } from '@core/connection';
@@ -6,7 +7,7 @@ import { FavoriteEntity } from '@entities/favorite.entity';
 import { readingService } from '@services/reading.service';
 
 class ReadController {
-  public async getInfo(request: Request, response: Response, next: Function): Response {
+  public async getInfo(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const bookId = +request.params.id;
       const accountId = request.account.id;
@@ -25,7 +26,7 @@ class ReadController {
     }
   }
 
-  public async updateReadingInfo(request: Request, response: Response, next: Function): Response {
+  public async updateReadingInfo(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const favoriteId = +request.body.id;
 

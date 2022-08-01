@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 import { ADD_CARD_ACTION, API_TOOLTIP_ERROR, DELETE_CARD_ACTION, EDIT_CARD_ACTION } from '@utils/constants';
@@ -12,7 +12,7 @@ export const useFolder = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [folder, setFolder] = useState<IArticleFolder>();
   const [isDeleteModalOpened, setIsDeleteModalOpened] = useState<boolean>(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const params = useParams();
 
   const {getFolder} = useApi();
@@ -23,7 +23,7 @@ export const useFolder = () => {
   const expandedActions = [ADD_CARD_ACTION, EDIT_CARD_ACTION, DELETE_CARD_ACTION];
 
   const navigateBack = (): void => {
-    history.push(BaseRoutePaths.ARTICLES);
+    navigate(BaseRoutePaths.ARTICLES);
   }
 
   const navigateToEditPage = (): void => {
@@ -49,7 +49,7 @@ export const useFolder = () => {
   }
 
   const handleDeleteSuccess = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}`);
+    navigate(`${BaseRoutePaths.ARTICLES}`);
     addSuccess(SUCCESSFULLY_DELETED_FOLDER);
   }
 
@@ -61,8 +61,10 @@ export const useFolder = () => {
   }
 
   const navigateToNewArticleForm = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLE_NEW}`, {
-      defaultFolder: folder,
+    navigate(`${BaseRoutePaths.ARTICLE_NEW}`, {
+      state: {
+        defaultFolder: folder,
+      }
     });
   }
 

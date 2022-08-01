@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Layout } from '@components/Layout';
@@ -11,26 +11,22 @@ import {
 import { AuthRoutePaths } from '@utils/enums';
 import { useStorage } from '@utils/hooks';
 
-export const PublicRoute = ({children, ...rest}) => {
+export const PublicRoute = () => {
+  const location = useLocation();
   const isAuthorized = useSelector(getIsAuthorized);
-  const IsAuthorizeAttempted = useSelector(getIsAuthorizeAttempted);
-  const {doesStorageHave, deleteFromStorage, saveToStorage} = useStorage();
+  const isAuthorizeAttempted = useSelector(getIsAuthorizeAttempted);
+  const {deleteFromStorage, saveToStorage} = useStorage();
 
   const render = () => {
-    if (isAuthorized || IsAuthorizeAttempted) {
+    if (isAuthorized || isAuthorizeAttempted) {
       deleteFromStorage(RELOAD_PUBLIC_FINISHED);
-      return <Layout children={children}/>;
+      return <Layout><Outlet/></Layout>
     }
 
-    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, rest['location'].pathname);
+    saveToStorage(RELOAD_PATHNAME_STORAGE_KEY, location.pathname);
     saveToStorage(RELOAD_IS_PUBLIC_FLAG_STORAGE_KEY, true);
-    return <Redirect to={`${AuthRoutePaths.REFRESH}`}/>;
+    return <Navigate to={`${AuthRoutePaths.REFRESH}`} replace/>;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={render}
-    />
-  );
+  return render();
 }

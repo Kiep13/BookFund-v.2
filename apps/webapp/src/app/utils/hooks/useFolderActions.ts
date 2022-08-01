@@ -1,20 +1,20 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
 import { BaseRoutePaths } from '@utils/enums';
 import { useAlerts, useApi } from '@utils/hooks';
 
 export const useFolderActions = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const {addError} = useAlerts();
   const {deleteFolder} = useApi();
 
   const navigateToFoldersBooksPage = (): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}`);
+    navigate(`${BaseRoutePaths.ARTICLES}`);
   }
 
   const navigateToEditForm = (id: number): void => {
-    history.push(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/${id}`);
+    navigate(`${BaseRoutePaths.ARTICLES}${BaseRoutePaths.FOLDER_EDIT}/${id}`);
   }
 
   const handleDeleteFolder = (id: number, successFallback: () => void) => {

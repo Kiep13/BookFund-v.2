@@ -4,8 +4,8 @@ const read  = require('node-readability');
 
 import { connection } from '@core/connection';
 import { ERROR_NO_ACCESS_FOLDER, URL_CONTENT_FILE_EXTENSION } from '@core/constants';
-import { ApiRoutes, ResponseStatuses, SortDirections } from '@core/enums';
-import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { ResponseStatuses, SortDirections } from '@core/enums';
+import { IListApiView, ICustomRequest, ISearchOptions } from '@core/interfaces';
 import { environment } from '@environments/environment';
 import { ApiError } from '@exceptions/api-error';
 import { ParseError } from '@exceptions/parse-error';
@@ -13,7 +13,7 @@ import { ArticleEntity } from '@entities/article.entity';
 import { fileService } from '@services/file.service';
 
 class ArticleController {
-  public async createArticle(request: Request, response: Response, next: Function): Response {
+  public async createArticle(request: Request, response: Response, next: Function): Promise<Response | void> {
     try {
       const url = new URL(request.body.url);
 
@@ -43,7 +43,7 @@ class ArticleController {
     }
   }
 
-  public async updateArticle(request: Request, response: Response, next: Function): Response {
+  public async updateArticle(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const articleId = +request.params.id;
 
@@ -60,7 +60,7 @@ class ArticleController {
     }
   }
 
-  public async getArticle(request: Request, response: Response, next: Function): Response {
+  public async getArticle(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const articleId = +request.params.id;
       const accountId = +request.account.id;
@@ -85,7 +85,7 @@ class ArticleController {
     }
   }
 
-  public async getArticles(request: Request, response: Response, next: Function): Response {
+  public async getArticles(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams: ISearchOptions = request.query;
 
@@ -119,7 +119,7 @@ class ArticleController {
     }
   }
 
-  public async deleteArticle(request: Request, response: Response, next: Function): Response {
+  public async deleteArticle(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const articleId = +request.params.id;
 

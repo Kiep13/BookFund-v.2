@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { logout } from '@store/reducers';
 import { axiosInstance as axios } from '@utils/constants';
@@ -7,20 +7,20 @@ import { AuthRoutePaths } from '@utils/enums';
 import { useAlerts } from '@utils/hooks';
 
 export const useAuthHandlers = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { addError } = useAlerts();
 
   const handleLogOut = (message: string = '') => {
-    dispatch(logout);
+    dispatch(logout());
     delete axios.defaults.headers.common['Authorization'];
 
     if(message) {
       addError(message);
     }
 
-    history.push(AuthRoutePaths.LOGIN);
+    navigate(AuthRoutePaths.LOGIN);
   }
 
   return {

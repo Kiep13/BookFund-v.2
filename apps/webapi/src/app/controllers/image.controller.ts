@@ -1,3 +1,4 @@
+import { ICustomRequest } from '@core/interfaces';
 import { Request, Response } from 'express';
 import * as path from 'path';
 
@@ -6,7 +7,7 @@ import { environment } from '@environments/environment';
 import { imageService } from '@services/image.service';
 
 class ImageController {
-  public async saveImage(request: Request, response: Response, next: Function) {
+  public async saveImage(request: ICustomRequest, response: Response, next: Function) {
     try {
       const imageName = await imageService.saveImage(request.files.image);
 

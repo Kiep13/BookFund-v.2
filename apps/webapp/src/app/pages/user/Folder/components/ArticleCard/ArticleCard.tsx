@@ -1,6 +1,6 @@
 import { Box, Card, CardActionArea, CardActions, CardContent, IconButton, Typography } from '@mui/material';
 import InsertLinkTwoToneIcon from '@mui/icons-material/InsertLinkTwoTone';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 import { DATE_CARD_CREATED_AT_FORMAT } from '@utils/constants';
@@ -11,7 +11,7 @@ import { STYLES } from '../../constants';
 import { IProps } from './propsInterface';
 
 export const ArticleCard = ({article, cardActions, handleCardActionClick}: IProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const displayedDate = moment(article.createdAt).format(DATE_CARD_CREATED_AT_FORMAT);
 
   const navigateToFolderPage = (): void => {
@@ -20,7 +20,7 @@ export const ArticleCard = ({article, cardActions, handleCardActionClick}: IProp
       return;
     }
 
-    history.push(`${BaseRoutePaths.ARTICLE}/${article.id}`);
+    navigate(`${BaseRoutePaths.ARTICLE}/${article.id}`);
   }
 
   return (

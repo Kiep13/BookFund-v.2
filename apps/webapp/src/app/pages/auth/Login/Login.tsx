@@ -5,8 +5,10 @@ import {
   Grid,
   Typography
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { Logo } from '@components/Logo';
+import { BaseRoutePaths } from '@utils/enums';
 
 import { Copyright, LoginButtons } from './components';
 import { STYLES_LOGIN_PAGE } from './constants';
@@ -26,7 +28,9 @@ export const Login = () =>
         sx={STYLES_LOGIN_PAGE.signInForm}
       >
         <Box sx={STYLES_LOGIN_PAGE.logo}>
-          <Logo/>
+          <Link to={BaseRoutePaths.HOME}>
+            <Logo/>
+          </Link>
         </Box>
 
         <Typography component='h1' variant='h5' sx={STYLES_LOGIN_PAGE.signInLabel}>

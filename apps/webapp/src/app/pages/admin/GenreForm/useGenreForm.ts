@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { FormikHelpers } from 'formik/dist/types';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -17,9 +17,9 @@ import {
 import { IGenreForm } from './interfaces';
 
 export const useGenreForm = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
-  const params = useParams();
+  const params = useParams<IFormPageParams>();
 
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -28,8 +28,8 @@ export const useGenreForm = () => {
   const {addSuccess, addError} = useAlerts();
 
   const callSubmitAction = (values: IGenreForm) => {
-    const genreId = (params as IFormPageParams).id;
-    return editMode ?
+    const genreId = params.id;
+    return editMode && genreId ?
       updateGenre(genreId, values).then(() => {
         return addSuccess(SUCCESSFULLY_UPDATED);
       }) :
@@ -58,7 +58,7 @@ export const useGenreForm = () => {
   });
 
   const navigateToGenresPage = () => {
-    history.push(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`);
+    navigate(`${AdminRoutePaths.ADMIN}${AdminRoutePaths.GENRES}`);
   }
 
   const initForm = async () => {

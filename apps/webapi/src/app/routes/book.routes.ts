@@ -5,7 +5,7 @@ import { bookController } from '@controllers/book.controller';
 import { fileController } from '@controllers/file.controller';
 import { moderatorMiddleware, authMiddleware } from '@middlewares/index';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, bookController.getBooks);
 router.post(`/${ApiRoutesModifiers.NEW}`,  authMiddleware, moderatorMiddleware, bookController.createBook);

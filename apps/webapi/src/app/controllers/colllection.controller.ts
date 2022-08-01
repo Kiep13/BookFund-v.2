@@ -2,14 +2,14 @@ import { Request, Response } from 'express';
 
 import { connection } from '@core/connection';
 import { ApiRoutes, ResponseStatuses } from '@core/enums';
-import { IListApiView, ISearchOptions } from '@core/interfaces';
+import { IListApiView, ICustomRequest, ISearchOptions } from '@core/interfaces';
 import { CollectionEntity } from '@entities/collection.entity';
 import { environment } from '@environments/environment';
 import { imageService } from '@services/image.service';
 import { collectionService } from '@services/collection.service';
 
 class CollectionController {
-  public async createCollection(request: Request, response: Response, next: Function): Response {
+  public async createCollection(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const collection: CollectionEntity = collectionService.buildBookFromBody(request.body);
       collection.books = request.body.books;
@@ -21,7 +21,7 @@ class CollectionController {
     }
   }
 
-  public async updateCollection(request: Request, response: Response, next: Function): Response {
+  public async updateCollection(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const collectionId = +request.params.id;
       const currentCollection = await connection.manager.findOne(CollectionEntity, collectionId, {
@@ -46,7 +46,7 @@ class CollectionController {
     }
   }
 
-  public async getCollection(request: Request, response: Response, next: Function): Response {
+  public async getCollection(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const collectionId = +request.params.id;
       const collection = await connection.manager.findOne(CollectionEntity, collectionId, {
@@ -59,7 +59,7 @@ class CollectionController {
     }
   }
 
-  public async getCollections(request: Request, response: Response, next: Function): Response {
+  public async getCollections(request: ICustomRequest, response: Response, next: Function): Promise<Response> {
     try {
       const requestParams: ISearchOptions = request.query;
 
@@ -71,7 +71,7 @@ class CollectionController {
     }
   }
 
-  public async deleteCollection(request: Request, response: Response, next: Function): Response {
+  public async deleteCollection(request: Request, response: Response, next: Function): Promise<Response> {
     try {
       const collectionId = +request.params.id;
 

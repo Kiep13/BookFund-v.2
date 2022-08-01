@@ -4,7 +4,7 @@ import { favoriteController } from '@controllers/favorites.controller';
 import { ApiRoutesModifiers } from '@core/enums';
 import { authMiddleware } from '@middlewares/index';
 
-const router = new Router();
+const router = Router();
 
 router.get(`/${ApiRoutesModifiers.LIST}`, authMiddleware, favoriteController.getFavorites);
 router.post(`/${ApiRoutesModifiers.NEW}`, authMiddleware, favoriteController.createFavorite);

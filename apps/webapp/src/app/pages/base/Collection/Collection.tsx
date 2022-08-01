@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
@@ -9,21 +9,13 @@ import { BaseRoutePaths } from '@utils/enums';
 import { PAGE_TITLE } from './constants';
 
 export const Collection = () => {
-  const {
-    collection,
-    pageState,
-    loadCollection
-  } = useCollectionLoad();
+  const {collection, pageState} = useCollectionLoad();
   const {getBookPageUrlWithoutId} = useBookActions();
   const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
 
-  useEffect(() => {
-    loadCollection();
-  }, []);
-
-  const navigateBack = () => {
+  const navigateBack = useCallback(() => {
     navigatePreviousPage();
-  }
+  }, []);
 
   return (
     <>

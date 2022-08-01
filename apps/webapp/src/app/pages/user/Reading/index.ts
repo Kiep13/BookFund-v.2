@@ -1,1 +1,3 @@
-export * from './Reading';
+import { Reading } from './Reading';
+
+export default Reading;

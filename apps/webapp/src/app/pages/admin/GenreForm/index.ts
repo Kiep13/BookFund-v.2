@@ -1,1 +1,3 @@
-export * from './GenreForm';
+import { GenreForm } from './GenreForm';
+
+export default GenreForm;

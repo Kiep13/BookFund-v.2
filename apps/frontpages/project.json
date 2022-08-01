@@ -1,5 +1,4 @@
 {
-  "root": "apps/frontpages",
   "sourceRoot": "apps/frontpages/src",
   "projectType": "application",
   "targets": {
@@ -37,6 +36,12 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         }
       }
     },
@@ -50,8 +55,12 @@
         "production": {
           "buildTarget": "frontpages:build:production",
           "hmr": false
+        },
+        "development": {
+          "buildTarget": "frontpages:build:development"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -64,7 +73,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/frontpages"],
       "options": {
-        "jestConfig": "apps/frontpages/jest.config.js",
+        "jestConfig": "apps/frontpages/jest.config.ts",
         "passWithNoTests": true
       }
     }

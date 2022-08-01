@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { EntityPageHeader } from '@components/headers/EntityPageHeader';
 import { StatefulCard } from '@components/cards/StatefulCard';
@@ -15,7 +15,6 @@ export const Book = () => {
   const {
     book,
     pageState,
-    loadBook,
     handleBookChange
   } = useBookLoad();
 
@@ -24,13 +23,9 @@ export const Book = () => {
   const {getAuthorPageUrlWithoutId} = useAuthorActions();
   const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
 
-  useEffect(() => {
-    loadBook();
-  }, []);
-
-  const navigateBack = () => {
+  const navigateBack = useCallback(() => {
     navigatePreviousPage();
-  }
+  }, []);
 
   return (
     <>

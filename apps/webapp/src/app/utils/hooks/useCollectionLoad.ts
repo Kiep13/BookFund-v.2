@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { API_TOOLTIP_ERROR } from '@utils/constants';
@@ -10,15 +10,15 @@ export const useCollectionLoad = () => {
   const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
   const [collection, setCollection] = useState<ICollection>();
 
-  const params = useParams();
+  const params = useParams<IFormPageParams>();
 
   const { addError } = useAlerts();
   const { getCollection } = useApi();
 
-  const loadCollection = () => {
-    const collectionId = (params as IFormPageParams).id;
+  const loadCollection = useCallback(() => {
+    const collectionId = params.id;
 
-    getCollection(collectionId)
+    collectionId && getCollection(collectionId)
       .then((response: ICollection) => {
         setCollection(response);
         setPageState(CardStates.CONTENT);
@@ -27,11 +27,14 @@ export const useCollectionLoad = () => {
         addError(API_TOOLTIP_ERROR);
         setPageState(CardStates.ERROR);
       })
-  }
+  }, []);
+
+  useEffect(() => {
+    loadCollection();
+  }, []);
 
   return {
     collection,
-    pageState,
-    loadCollection
+    pageState
   }
 }

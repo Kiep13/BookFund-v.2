@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import KeyboardBackspaceTwoToneIcon from '@mui/icons-material/KeyboardBackspaceTwoTone';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { BaseRoutePaths } from '@utils/enums';
 
@@ -9,10 +9,10 @@ import { PageViewSelector } from '../PageViewSelector';
 import { IProps } from './propsInterface';
 
 export const Header = ({book, pageView, isLastPageOpened, handlePageViewChange, handleMarkAsDone}: IProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const goToBookPage = (): void => {
-    history.push(`${BaseRoutePaths.BOOK}/${book.id}`);
+    navigate(`${BaseRoutePaths.BOOK}/${book.id}`);
   }
 
   const handleMarkAsDoneClick = (): void => {
