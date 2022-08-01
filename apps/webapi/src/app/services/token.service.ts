@@ -1,7 +1,7 @@
-import { AccountEntity } from '@entities/account.entity';
 import * as jwt from'jsonwebtoken';
 
 import { IAccount, ITokens } from '@core/interfaces';
+import { AccountEntity } from '@entities/account.entity';
 import { environment } from '@environments/environment';
 
 class TokenService {

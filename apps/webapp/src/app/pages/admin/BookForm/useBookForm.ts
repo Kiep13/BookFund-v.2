@@ -64,7 +64,6 @@ export const useBookForm = () => {
       await callSubmitAction(values);
       navigateToAdminBooksPage();
     } catch (e) {
-      console.log(e)
       addError(API_TOOLTIP_ERROR);
     } finally {
       setSubmitting(false);

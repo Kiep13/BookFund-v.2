@@ -67,7 +67,7 @@ class GenreController {
 
   public async getGenresTree(request: Request, response: Response, next: Function): Promise<Response> {
     try {
-      const genresTree = await connection.getTreeRepository(GenreEntity).findTrees();
+      const genresTree = await connection.manager.getTreeRepository(GenreEntity).findTrees();
       return response.status(ResponseStatuses.STATUS_OK).json(genresTree);
     } catch (error) {
       next(error);

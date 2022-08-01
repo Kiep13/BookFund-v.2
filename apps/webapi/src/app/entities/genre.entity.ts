@@ -29,7 +29,7 @@ export class GenreEntity {
   @TreeParent({
     onDelete: 'SET NULL'
   })
-  parent: GenreEntity;
+  parent: GenreEntity | undefined;
 
   @TreeChildren()
   subGenres: GenreEntity[];
