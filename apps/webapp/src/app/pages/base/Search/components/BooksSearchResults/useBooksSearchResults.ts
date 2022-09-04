@@ -27,10 +27,12 @@ export const useBooksSearchResults = (searchResults: IListApiView<IBook>, search
 
     getBooks(searchOptions)
       .then((response: IListApiView<IBook>) => {
-        setBooks([
-          ...books,
-          ...response.data
-        ]);
+        setBooks((books) => {
+          return [
+            ...books,
+            ...response.data
+          ];
+        });
         setCount(response.count);
       })
       .catch(() => {

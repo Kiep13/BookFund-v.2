@@ -31,10 +31,12 @@ export const useCommentList = () => {
     getComments(searchOptions)
       .then((response: IListApiView<IComment>) => {
         setCount(response.count);
-        setComments([
-          ...comments,
-          ...response.data
-        ]);
+        setComments((comments) => {
+          return [
+            ...comments,
+            ...response.data
+          ]
+        });
 
         setLoadingComments(false);
       })

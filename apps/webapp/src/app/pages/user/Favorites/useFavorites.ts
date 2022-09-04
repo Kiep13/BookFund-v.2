@@ -52,10 +52,12 @@ export const useFavorites = () => {
         }
 
         if (page) {
-          setFavorites([
-            ...favorites,
-            ...response.data
-          ]);
+          setFavorites((favorites) => {
+            return [
+              ...favorites,
+              ...response.data
+            ];
+          });
         } else {
           setFavorites([
             ...response.data

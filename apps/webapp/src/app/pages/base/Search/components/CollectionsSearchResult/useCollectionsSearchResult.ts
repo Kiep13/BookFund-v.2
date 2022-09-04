@@ -27,10 +27,12 @@ export const useCollectionsSearchResult = (searchResults: IListApiView<ICollecti
 
     getCollections(searchOptions)
       .then((response: IListApiView<ICollection>) => {
-        setCollections([
-          ...collections,
-          ...response.data
-        ]);
+        setCollections((collections) => {
+          return [
+            ...collections,
+            ...response.data
+          ];
+        });
         setCount(response.count);
       })
       .catch(() => {
