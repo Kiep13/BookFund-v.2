@@ -56,10 +56,13 @@ export const useHome = () => {
 
     getCollections(searchOptions)
       .then((response: IListApiView<ICollection>) => {
-        setCollections([
-          ...collections,
-          ...response.data
-        ]);
+        setCollections((collections) => {
+          return [
+            ...collections,
+            ...response.data
+          ];
+        });
+
         setCountCollections(response.count);
         setLoadingCollections(false);
         setState(CardStates.CONTENT);

@@ -29,10 +29,12 @@ export const useAuthorContent = () => {
     getBooks(searchOptions)
       .then((response: IListApiView<IBook>) => {
         setCount(response.count);
-        setBooks([
-          ...books,
-          ...response.data
-        ]);
+        setBooks((books) => {
+          return [
+            ...books,
+            ...response.data
+          ]
+        });
 
         setLoadingBooks(false);
       })

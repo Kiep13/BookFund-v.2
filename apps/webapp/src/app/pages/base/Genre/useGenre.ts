@@ -86,10 +86,12 @@ export const useGenre = () => {
     getBooks(searchOptions)
       .then((response: IListApiView<IBook>) => {
         setCount(response.count);
-        setBooks([
-          ...(!options?.subKey ? books : []),
-          ...response.data
-        ]);
+        setBooks((books) => {
+          return [
+            ...(!options?.subKey ? books : []),
+            ...response.data
+          ];
+        });
 
         setLoadingBooks(false);
         setPageState(CardStates.CONTENT);
