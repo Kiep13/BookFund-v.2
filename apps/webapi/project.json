@@ -49,7 +49,7 @@
     "dev": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "dotenv -e ./apps/webapi/src/environments/.env nx serve webapi"
+        "command": "nx serve webapi"
       }
     },
     "migrations": {
