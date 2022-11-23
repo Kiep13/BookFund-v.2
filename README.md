@@ -49,4 +49,16 @@ For example:
 nx run PROJECT_NANE:dev
 ```
 
+### Build
+
+To build project run the following commands
+```
+nx build webapi
+nx build webapp --stats-json
+```
+To check webapp bundle size after build run:
+```
+npm run analyze:webapp
+```
+
 Note: webapi requires node v.18.0.0 for work
