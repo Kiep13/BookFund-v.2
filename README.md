@@ -23,20 +23,11 @@ And then to create docker container, run second command:
 
 ### Database
 
-To simply run migrations use command in deployed environment:
-```
-  npm run migrations:run
-```
-To add seed data  in deployed environment:
-```
-  npm run seed:run
-```
-
-To run migrations use command locally:
+To run migrations use command:
 ```
   nx run webapi:migrations
 ```
-To add seed data locally:
+To add seed data:
 ```
   nx run webapi:seed
 ```
