@@ -30,13 +30,18 @@ To run application you must run follow command:
 
 ### 💾 Database
 
-To run migrations use command:
+To run migrations in production mode use command:
 ```
   nx run webapi:migrations
 ```
 To add seed data:
 ```
   nx run webapi:seed
+```
+To do the same in local environment 
+```
+  npm run migrations:run
+  npm run seed:run
 ```
 
 ### 🚀 Start application
