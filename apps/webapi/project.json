@@ -13,13 +13,16 @@
         "tsConfig": "apps/webapi/tsconfig.app.json",
         "assets": [
           "apps/webapi/src/assets"
-        ]
+        ],
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
           "optimization": true,
-          "extractLicenses": true,
+          "extractLicenses": false,
           "inspect": false,
+          "externalDependencies": "all",
           "generatePackageJson": true,
           "fileReplacements": [
             {
@@ -28,7 +31,8 @@
             }
           ]
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@nrwl/node:node",
