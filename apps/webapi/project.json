@@ -16,6 +16,7 @@
           "optimization": true,
           "extractLicenses": true,
           "inspect": false,
+          "generatePackageJson": true,
           "fileReplacements": [
             {
               "replace": "apps/webapi/src/environments/environment.ts",
