@@ -13,6 +13,7 @@ export const DATABASE_CONFIGS: any = {
   ...(environment.databaseUrl ? {url: environment.databaseUrl} : {}),
   type: 'postgres',
   database: environment.databaseName,
+  port: environment.databasePort,
   synchronize: true,
   logging: false,
   username: environment.databaseUsername,
