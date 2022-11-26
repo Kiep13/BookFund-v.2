@@ -26,7 +26,7 @@ export const STYLES_LOGIN_PAGE = {
     height: '100vh'
   },
   imageBlock: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: 'url(assets/choose.avif)',
     backgroundRepeat: 'no-repeat',
     backgroundColor: (t) =>
       t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

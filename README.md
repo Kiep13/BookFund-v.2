@@ -46,10 +46,14 @@ To do the same in local environment
 
 ### 🚀 Start application
 
-If you want to open project locally, not forget include dev mode environment variable in migrations and seeds commands. 
-For example: 
+If you want to open project locally, not forget include dev mode environment variable in migrations and seeds commands.
 ```
 nx run PROJECT_NANE:dev
+```
+For example:
+```
+nx run webapi:dev
+nx run webapp:dev
 ```
 
 ### 🏛️ Build
