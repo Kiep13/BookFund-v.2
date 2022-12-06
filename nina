@@ -1,0 +1,135 @@
+#!/bin/bash
+set -eE
+
+
+function _clean_folder_if_exist_or_create {
+    if [ -d "$1" ]; then
+        rm -rf "$1"
+    fi
+    mkdir "$1" -p
+}
+
+function _build {
+    echo 'loading nvm module'
+    . ~/.nvm/nvm.sh
+
+    echo 'setting current node.js version to 16'
+    nvm use 18.0
+
+    echo 'installing nx library'
+    #rm -f package-lock.json    
+    npm install nx -g
+
+    echo 'installing project dependencies'
+    npm install
+
+    echo 'building backend'
+    nx build webapi
+    
+    echo 'building frontend'
+    nx build webapp
+
+    if [ -n "$1" ]; then
+        echo 'copying builded files to destination folder'
+        _clean_folder_if_exist_or_create "$1"
+        cp -rf dist/apps/* "$1"
+    fi
+    return 0
+}
+
+function _deploy {
+    echo 'deleting deploy folder if exist'
+    _clean_folder_if_exist_or_create "$DEPLOY_FOLDER" 
+
+    echo 'going into deploy folder'
+    cd "$DEPLOY_FOLDER"
+    
+    echo 'cloning  project repository'
+    git clone "$REMOTE_REPO_SSH_URL"
+
+    echo 'going into repository folder'
+    cd "$REPO_NAME"
+
+    if [ -n "$1" ];
+    then
+        pattern="[A-Z-]*$1[A-Za-z/-]*"
+        branch_name=$(git fetch -v 2>&1 | grep -o "$pattern" | head -1)
+        echo "switching to branch $branch_name"
+        git checkout "$branch_name"
+    fi
+    git pull
+
+    echo 'revealing secrets'
+    git secret reveal -f -p "$GIT_SECRET_KEY"
+
+    echo 'building project'
+    _build "$DEPLOY_FOLDER/build"
+
+    backend_folder="$DEPLOY_FOLDER/build/webapi"
+    release_folder="$DEPLOY_FOLDER/build"
+
+    echo 'copying key and sertificate'
+    cp -f "$SSL_CERT_FOLDER/fullchain.pem" "$backend_folder/server.crt"
+    cp -f "$SSL_CERT_FOLDER/privkey.pem" "$backend_folder/server.key"
+    
+    echo 'copying project to production folder'
+    _clean_folder_if_exist_or_create "$PRODUCTION_FOLDER"
+    cp -rf "$release_folder"/* "$PRODUCTION_FOLDER"
+
+    echo 'restarting nginx service'
+    sudo service nginx restart
+
+    active_container=$(sudo docker ps | grep -o -m 1 goaldiary-postgres | head -1)
+    container_name="bookfund-postgres"
+    echo 'getting up database'
+    if [ "$active_container" = '' ];
+    then
+        sudo docker start $container_name
+    else
+        sudo docker stop $container_name
+        sudo docker start $container_name
+    fi
+
+    echo 'moving to production backend folder'
+    cd "$PRODUCTION_FOLDER"/webapi
+
+    echo 'installing backend execution dependencies'
+    npm install
+    npm install pg
+
+    echo 'activating backend'
+    active_screen=$(screen -ls 2>&1 | grep -o [0-9]*[.]goal_diary || true)
+    screen_name="goal_diary"
+    if [ "$active_screen" != '' ]; 
+    then
+        screen -S $screen_name -X quit
+    fi
+    screen -S $screen_name -dm node main.js
+    echo 'deployed successfully'
+    return 0
+}
+
+
+if [ $# -eq 0 ]
+  then
+    echo "Nina can:"
+    echo "  " "Build [Folder]"
+    echo "  " "Deploy [Branch Code]"
+    exit 2
+fi
+
+if [ "$1" = "deploy" ];
+then
+    shift 1
+    _deploy "$@"
+elif [ "$1" = "build" ];
+then
+    shift 1
+    _build "$@"
+elif [ "$1" = "activate" ];
+then
+    absolute_path_to_script="${BASH_SOURCE:-$0}"
+    script_name=$(basename "$absolute_path_to_script")
+    cp "$absolute_path_to_script" "/usr/local/bin/$script_name" 
+    echo "Nina production builder ready"
+fi
