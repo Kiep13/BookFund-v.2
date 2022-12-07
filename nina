@@ -130,6 +130,6 @@ elif [ "$1" = "activate" ];
 then
     absolute_path_to_script="${BASH_SOURCE:-$0}"
     script_name=$(basename "$absolute_path_to_script")
-    cp "$absolute_path_to_script" "/usr/local/bin/$script_name"
+    cp "$absolute_path_to_script" "$USER_LOCAL_BIN/$script_name"
     echo "Nina production builder ready"
 fi
