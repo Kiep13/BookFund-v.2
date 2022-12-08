@@ -42,3 +42,6 @@ Thumbs.db
 /dist/assets/images
 apps/webapi/src/environments/*
 apps/webapp/src/environments/*
+.gitsecret/keys/random_seed
+!*.secret
+apps/webapi/src/ormconfig.js

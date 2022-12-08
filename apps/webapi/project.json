@@ -4,18 +4,26 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/webapi",
         "main": "apps/webapi/src/main.ts",
         "tsConfig": "apps/webapi/tsconfig.app.json",
-        "assets": ["apps/webapi/src/assets"]
+        "assets": [
+          "apps/webapi/src/assets"
+        ],
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
           "optimization": true,
-          "extractLicenses": true,
+          "extractLicenses": false,
           "inspect": false,
+          "externalDependencies": "all",
+          "generatePackageJson": true,
           "fileReplacements": [
             {
               "replace": "apps/webapi/src/environments/environment.ts",
@@ -23,7 +31,8 @@
             }
           ]
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@nrwl/node:node",
@@ -33,14 +42,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/webapi/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/webapi/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/webapi"],
+      "outputs": [
+        "coverage/apps/webapi"
+      ],
       "options": {
         "jestConfig": "apps/webapi/jest.config.ts",
         "passWithNoTests": true
@@ -49,19 +64,19 @@
     "dev": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "dotenv -e ./apps/webapi/src/environments/.env nx serve webapi"
+        "command": "nx serve webapi"
       }
     },
     "migrations": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "dotenv -e ./apps/webapi/src/environments/.env npm run migrations:run"
+        "command": "dotenv -e ./apps/webapi/src/environments/.env.prod  npm run migrations:run"
       }
     },
     "seed": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "dotenv -e ./apps/webapi/src/environments/.env npm run seed:run"
+        "command": "dotenv -e ./apps/webapi/src/environments/.env.prod  npm run seed:run"
       }
     }
   },
