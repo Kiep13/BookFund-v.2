@@ -11,14 +11,16 @@ import { STYLES } from './constants';
 
 export const Home = () => {
   const {
-    books,
-    collections,
+    booksData,
+    isBooksLoading,
+    isCollectionLoading,
+    isBooksError,
+    isCollectionsError,
+    collectionsData,
     isAuthorized,
     user,
-    state,
-    countCollections,
+    isFetchingNextPage,
     loadMoreCollections,
-    loadingCollections,
     navigateToBookPage,
     navigateToCollectionPage
   } = useHome();
@@ -26,17 +28,18 @@ export const Home = () => {
   return (
     <Box sx={STYLES.page}>
       {isAuthorized &&
-      <Typography variant='h3' gutterBottom component='div' sx={STYLES.greeting}>
-        Welcome back, {user?.name}
-      </Typography>}
+        <Typography variant='h3' gutterBottom component='div' sx={STYLES.greeting}>
+          Welcome back, {user?.name}
+        </Typography>}
 
-      <StatefulCard state={state}>
+      <StatefulCard isNoContent={!(booksData && collectionsData)} isLoading={isBooksLoading && isCollectionLoading}
+                    isError={isBooksError && isCollectionsError}>
         <Typography variant='h4' gutterBottom component='div' sx={STYLES.booksHeading}>
           Top 10 new books
         </Typography>
 
         <Box sx={STYLES.booksWrapper}>
-          {books.map((book: IBook) =>
+          {booksData?.data.map((book: IBook) =>
             <Box key={book.id} sx={STYLES.book} onClick={() => navigateToBookPage(book.id)}>
               <BookPromoCard book={book}/>
             </Box>
@@ -48,19 +51,20 @@ export const Home = () => {
         </Typography>
 
         <Box sx={STYLES.collectionsWrapper}>
-          {collections.map((collection: ICollection) =>
-            <CardActionArea key={collection.id} onClick={() => navigateToCollectionPage(collection.id)}>
-              <CollectionCard
-                collection={collection}
-                isActionsAvailable={true}/>
-            </CardActionArea>
-          )}
+          {collectionsData?.pages.map((item) => {
+            return item.data.map((collection: ICollection) => {
+              return (<CardActionArea key={collection.id} onClick={() => navigateToCollectionPage(collection.id)}>
+                <CollectionCard collection={collection} isActionsAvailable={true}/>
+                </CardActionArea>)
+              })
+            })
+          }
         </Box>
 
-        {countCollections > collections.length && (
+        {collectionsData && (collectionsData?.pages[0].count > collectionsData?.pages.length * 12) && (
           <Box sx={STYLES.loadMoreWrapper}>
             <LoadingButton
-              loading={loadingCollections}
+              loading={isFetchingNextPage}
               sx={STYLES.loadMoreButton}
               variant='contained'
               onClick={loadMoreCollections}>

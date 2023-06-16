@@ -5,29 +5,25 @@ import { CardStates } from '@utils/enums';
 import { STYLES } from './constants';
 import { IProps } from './propsInterface';
 
-export const StatefulCard = ({ state, noContentMessage, children }: IProps) => {
-  let content;
+export const StatefulCard = ({ state, isNoContent, isLoading, isError, noContentMessage, children }: IProps) => {
 
-  switch (state) {
-    case CardStates.LOADING: {
-      content = (<Box sx={STYLES.wrapper}>
-        <CircularProgress size={80}/>
-      </Box>);
-    } break;
-    case CardStates.CONTENT: {
-      content = children;
-    } break;
-    case CardStates.ERROR: {
-      content = (<Box sx={STYLES.wrapper}>
-        Loading error. Please reload page.
-      </Box>);
-    } break;
-    case CardStates.NO_CONTENT: {
-      content = (<Box sx={STYLES.wrapper}>
-        { noContentMessage }
-      </Box>);
-    } break;
+  if(state === CardStates.LOADING || isLoading) {
+    return <Box sx={STYLES.wrapper}>
+      <CircularProgress size={80}/>
+    </Box>
   }
 
-  return content;
+  if(state === CardStates.ERROR || isError) {
+    return <Box sx={STYLES.wrapper}>
+      Loading error. Please reload page.
+    </Box>;
+  }
+
+  if(state === CardStates.NO_CONTENT || isNoContent) {
+    return <Box sx={STYLES.wrapper}>
+      { noContentMessage }
+    </Box>;
+  }
+
+  return children;
 }
