@@ -6,7 +6,7 @@ import { CollectionCard } from '@components/cards/ColllectionCard';
 import { StatefulCard } from '@components/cards/StatefulCard';
 import { IBook, ICollection } from '@utils/interfaces';
 import { useHome } from './useHome';
-
+import { Greeting } from './components';
 import { STYLES } from './constants';
 
 export const Home = () => {
@@ -17,8 +17,6 @@ export const Home = () => {
     isBooksError,
     isCollectionsError,
     collectionsData,
-    isAuthorized,
-    user,
     isFetchingNextPage,
     loadMoreCollections,
     navigateToBookPage,
@@ -27,10 +25,7 @@ export const Home = () => {
 
   return (
     <Box sx={STYLES.page}>
-      {isAuthorized &&
-        <Typography variant='h3' gutterBottom component='div' sx={STYLES.greeting}>
-          Welcome back, {user?.name}
-        </Typography>}
+      <Greeting/>
 
       <StatefulCard isNoContent={!(booksData && collectionsData)} isLoading={isBooksLoading && isCollectionLoading}
                     isError={isBooksError && isCollectionsError}>

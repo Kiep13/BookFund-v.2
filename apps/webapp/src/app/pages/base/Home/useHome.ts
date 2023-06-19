@@ -1,15 +1,13 @@
 import { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 
-import { getIsAuthorized, getUser } from '@store/reducers';
 import { SortDirections } from '@utils/enums';
 import { IBook, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
 import { useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 import { useInfiniteQuery, useQuery } from 'react-query';
 
 export const useHome = () => {
-  const isAuthorized = useSelector(getIsAuthorized);
-  const user = useSelector(getUser);
+  // Теперь тут надо навести красоту
+  // И вытянуть апи функции
 
   const [pageCollections, setPageCollections] = useState<number>(0);
 
@@ -63,8 +61,6 @@ export const useHome = () => {
     isBooksError,
     isCollectionsError,
     collectionsData,
-    isAuthorized,
-    user,
     pageCollections,
     isFetchingNextPage,
     loadMoreCollections,
