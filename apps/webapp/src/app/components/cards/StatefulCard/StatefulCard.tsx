@@ -2,7 +2,7 @@ import { Box, CircularProgress } from '@mui/material';
 
 import { CardStates } from '@utils/enums';
 
-import { STYLES } from './constants';
+import { NO_CONTENT_MESSAGE, STYLES } from './constants';
 import { IProps } from './propsInterface';
 
 export const StatefulCard = ({ state, isNoContent, isLoading, isError, noContentMessage, children }: IProps) => {
@@ -21,7 +21,7 @@ export const StatefulCard = ({ state, isNoContent, isLoading, isError, noContent
 
   if(state === CardStates.NO_CONTENT || isNoContent) {
     return <Box sx={STYLES.wrapper}>
-      { noContentMessage }
+      { noContentMessage || NO_CONTENT_MESSAGE }
     </Box>;
   }
 

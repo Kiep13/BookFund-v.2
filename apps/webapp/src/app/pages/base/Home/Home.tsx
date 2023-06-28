@@ -17,7 +17,7 @@ export const Home = () => {
     isBooksError,
     isCollectionsError,
     collectionsData,
-    isFetchingNextPage,
+    isFetchingCollectionsNextPage,
     loadMoreCollections,
     navigateToBookPage,
     navigateToCollectionPage
@@ -59,7 +59,7 @@ export const Home = () => {
         {collectionsData && (collectionsData?.pages[0].count > collectionsData?.pages.length * 12) && (
           <Box sx={STYLES.loadMoreWrapper}>
             <LoadingButton
-              loading={isFetchingNextPage}
+              loading={isFetchingCollectionsNextPage}
               sx={STYLES.loadMoreButton}
               variant='contained'
               onClick={loadMoreCollections}>

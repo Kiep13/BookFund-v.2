@@ -6,9 +6,6 @@ import { useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 import { useInfiniteQuery, useQuery } from 'react-query';
 
 export const useHome = () => {
-  // Теперь тут надо навести красоту
-  // И вытянуть апи функции
-
   const [pageCollections, setPageCollections] = useState<number>(0);
 
   const {navigateToBookPage} = useBookActions();
@@ -34,8 +31,8 @@ export const useHome = () => {
     data: collectionsData,
     isLoading: isCollectionLoading,
     isError: isCollectionsError,
-    fetchNextPage,
-    isFetchingNextPage
+    fetchNextPage: fetchNextCollectionsPage,
+    isFetchingNextPage: isFetchingCollectionsNextPage
   } = useInfiniteQuery<IListApiView<ICollection>>(['collections'], ({ pageParam }) => {
     const searchOptions: ISearchOptions = {
       pageSize: 12,
@@ -49,10 +46,10 @@ export const useHome = () => {
 
   const loadMoreCollections = useCallback((): void => {
     setPageCollections((currentValue: number) => {
-      fetchNextPage({ pageParam: currentValue + 1 });
+      fetchNextCollectionsPage({ pageParam: currentValue + 1 });
       return currentValue + 1;
     });
-  }, [fetchNextPage]);
+  }, [fetchNextCollectionsPage]);
 
   return {
     booksData,
@@ -62,7 +59,7 @@ export const useHome = () => {
     isCollectionsError,
     collectionsData,
     pageCollections,
-    isFetchingNextPage,
+    isFetchingCollectionsNextPage,
     loadMoreCollections,
     navigateToBookPage,
     navigateToCollectionPage

@@ -13,7 +13,8 @@ import { useAuthor } from './useAuthor';
 export const Author = () => {
   const {
     author,
-    pageState,
+    isLoading,
+    isError,
     headerActions,
     isModalOpened,
     navigateBack,
@@ -34,7 +35,7 @@ export const Author = () => {
 
       <Card>
         <Box sx={STYLES.page}>
-          <StatefulCard state={pageState}>
+          <StatefulCard isNoContent={!author} isLoading={isLoading} isError={isError}>
             <AuthorContent author={author} bookLink={getAdminBookPageUrlWithoutId()}/>
           </StatefulCard>
         </Box>
