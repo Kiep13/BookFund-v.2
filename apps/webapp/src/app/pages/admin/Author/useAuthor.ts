@@ -15,8 +15,7 @@ export const useAuthor = () => {
 
   const {
     author,
-    isLoading,
-    isError
+    pageState,
   } = useAuthorLoad();
   const {addSuccess} = useAlerts();
   const {navigateToEditForm, navigateToAdminAuthorsPage, deleteAuthor} = useAuthorActions();
@@ -58,8 +57,7 @@ export const useAuthor = () => {
 
   return {
     author,
-    isLoading,
-    isError,
+    pageState,
     headerActions,
     isModalOpened,
     navigateBack,
