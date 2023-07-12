@@ -2,6 +2,9 @@ import { CardStates } from '@utils/enums';
 
 export interface IProps {
   children: any;
-  state: CardStates;
+  state?: CardStates;
   noContentMessage?: string;
+  isNoContent?: boolean;
+  isLoading?: boolean;
+  isError?: boolean;
 }

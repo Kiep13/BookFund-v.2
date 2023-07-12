@@ -12,7 +12,8 @@ import { PAGE_TITLE, STYLES } from './constants';
 export const Author = () => {
   const {
     author,
-    pageState
+    isLoading,
+    isError
   } = useAuthorLoad();
   const {getBookPageUrlWithoutId} = useBookActions();
   const {navigatePreviousPage} = useBackNavigation(BaseRoutePaths.HOME);
@@ -29,7 +30,7 @@ export const Author = () => {
       />
 
       <Box sx={STYLES.page}>
-        <StatefulCard state={pageState}>
+        <StatefulCard isNoContent={!author} isLoading={isLoading} isError={isError}>
           <AuthorContent author={author} bookLink={getBookPageUrlWithoutId()}/>
         </StatefulCard>
       </Box>
