@@ -1,23 +1,41 @@
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
 
-import { useApi } from '@utils/hooks';
+import { API_TOOLTIP_ERROR } from '@utils/constants';
+import { CardStates } from '@utils/enums';
+import { useAlerts, useApi } from '@utils/hooks';
 import { IAuthor, IFormPageParams } from '@utils/interfaces';
 
 export const useAuthorLoad = () => {
+  const [pageState, setPageState] = useState<CardStates>(CardStates.LOADING);
+  const [author, setAuthor] = useState<IAuthor>();
+
   const params = useParams();
 
   const {getAuthor} = useApi();
+  const {addError} = useAlerts();
 
-  const { data, isLoading, isError } = useQuery<IAuthor>(['author'], () => {
+  const loadAuthor = useCallback((): void => {
     const authorId = (params as IFormPageParams).id;
 
-    return getAuthor(authorId)
-  });
+    getAuthor(authorId)
+      .then((response: IAuthor) => {
+        setAuthor(response);
+        setPageState(CardStates.CONTENT);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+        setPageState(CardStates.ERROR);
+      });
+  }, []);
+
+  useEffect(() => {
+    loadAuthor();
+  }, []);
 
   return {
-    author: data,
-    isLoading,
-    isError
+    author,
+    pageState,
+    loadAuthor
   };
 };

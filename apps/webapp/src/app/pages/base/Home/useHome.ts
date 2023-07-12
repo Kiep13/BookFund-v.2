@@ -1,22 +1,30 @@
-import { useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
-import { SortDirections } from '@utils/enums';
+import { getIsAuthorized, getUser } from '@store/reducers';
+import { API_TOOLTIP_ERROR } from '@utils/constants';
+import { CardStates, SortDirections } from '@utils/enums';
 import { IBook, ICollection, IListApiView, ISearchOptions } from '@utils/interfaces';
-import { useApi, useBookActions, useCollectionActions } from '@utils/hooks';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useAlerts, useApi, useBookActions, useCollectionActions } from '@utils/hooks';
 
 export const useHome = () => {
+  const [state, setState] = useState<CardStates>(CardStates.LOADING);
+  const [books, setBooks] = useState<IBook[]>([]);
+
+  const [collections, setCollections] = useState<ICollection[]>([]);
+  const [countCollections, setCountCollections] = useState<number>(0);
   const [pageCollections, setPageCollections] = useState<number>(0);
+  const [loadingCollections, setLoadingCollections] = useState<boolean>(true);
 
   const {navigateToBookPage} = useBookActions();
   const {navigateToCollectionPage} = useCollectionActions();
   const {getBooks, getCollections} = useApi();
+  const {addError} = useAlerts();
 
-  const {
-    data: booksData,
-    isLoading: isBooksLoading,
-    isError: isBooksError
-  } = useQuery<IListApiView<IBook>>(['books'], () => {
+  const isAuthorized = useSelector(getIsAuthorized);
+  const user = useSelector(getUser);
+
+  const loadBooks = useCallback((): void => {
     const searchOptions: ISearchOptions = {
       pageSize: 10,
       page: 0,
@@ -24,42 +32,65 @@ export const useHome = () => {
       orderBy: 'createdAt'
     }
 
-    return getBooks(searchOptions);
-  });
+    getBooks(searchOptions)
+      .then((response: IListApiView<IBook>) => {
+        setBooks(response.data);
+        loadCollections();
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+        setState(CardStates.ERROR);
+      })
+  }, []);
 
-  const {
-    data: collectionsData,
-    isLoading: isCollectionLoading,
-    isError: isCollectionsError,
-    fetchNextPage: fetchNextCollectionsPage,
-    isFetchingNextPage: isFetchingCollectionsNextPage
-  } = useInfiniteQuery<IListApiView<ICollection>>(['collections'], ({ pageParam }) => {
+  const loadCollections =  useCallback((page: number = pageCollections): void => {
+    setLoadingCollections(true);
+    setPageCollections(page);
+
     const searchOptions: ISearchOptions = {
       pageSize: 12,
-      page: pageParam,
+      page: page,
       order: SortDirections.Asc,
       orderBy: 'createdAt'
     }
 
-    return getCollections(searchOptions);
-  });
+    getCollections(searchOptions)
+      .then((response: IListApiView<ICollection>) => {
+        setCollections((collections) => {
+          return [
+            ...collections,
+            ...response.data
+          ];
+        });
+
+        setCountCollections(response.count);
+        setLoadingCollections(false);
+        setState(CardStates.CONTENT);
+      })
+      .catch(() => {
+        addError(API_TOOLTIP_ERROR);
+        setState(CardStates.ERROR);
+      })
+  }, [collections, pageCollections]);
 
   const loadMoreCollections = useCallback((): void => {
-    setPageCollections((currentValue: number) => {
-      fetchNextCollectionsPage({ pageParam: currentValue + 1 });
-      return currentValue + 1;
-    });
-  }, [fetchNextCollectionsPage]);
+    loadCollections(pageCollections + 1);
+  }, [pageCollections]);
+
+  useEffect(() => {
+    loadBooks();
+  }, []);
 
   return {
-    booksData,
-    isBooksLoading,
-    isCollectionLoading,
-    isBooksError,
-    isCollectionsError,
-    collectionsData,
+    books,
+    collections,
+    isAuthorized,
+    user,
+    state,
     pageCollections,
-    isFetchingCollectionsNextPage,
+    countCollections,
+    loadingCollections,
+    loadCollections,
     loadMoreCollections,
     navigateToBookPage,
     navigateToCollectionPage
